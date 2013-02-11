@@ -1,8 +1,0 @@
-<Modules>
-  <Module PersistentId="20869018-EB0E-4F42-8570-2CAF18CB06DC" ModuleId="SmallTuba" />
-  <Module PersistentId="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" ModuleId="ServerApplication" />
-  <Module PersistentId="99D9F2CA-71C6-45AB-8583-130F70F2B953" ModuleId="ClientApplication" />
-  <Module PersistentId="457E7437-41F1-46A1-AC69-50CF37B5706C" ModuleId="GeneratorApplication" />
-  <Module PersistentId="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6" ModuleId="AdminApplication" />
-  <Module PersistentId="5972E424-3638-4894-9396-0EC264EF67E4" ModuleId="SmallTubaTestSuite" />
-</Modules>
