@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="6999ad44-2864-4a20-9712-6d516304e3f1" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="ab73b0c4-d734-4a08-b489-16a868cbb8cf" name="Model.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="d5db31e5-085a-4c5f-b797-469ca82347af" direction="Forward">
+          <layerMoniker Id="ae29e70a-b728-4396-a878-6345ae2c952b" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="fdfc7f00-92bd-4204-a4ba-27acc7a69105" direction="Forward">
+          <layerMoniker Id="64108adb-da20-4439-b5cb-72dcabfb3fcc" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="bf6159db-2395-4607-811e-675df0c20860" direction="Forward">
+          <layerMoniker Id="e65be5e2-a3c6-4159-b7c1-174b99d8f339" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="15fc0ba7-38e9-4b0b-9f44-4e94515976ad" name="Model.cs">
+          <ArtifactNode Label="Model.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/models/model.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=(Name=ChangeType ParentType=Model))" Label="Model.ChangeType" Category="CodeSchema_Enum">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=(Name=ModelChangedHandler ParentType=Model))" Label="Model.ModelChangedHandler" Category="CodeSchema_Delegate">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=Model)" Label="Model" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="ae29e70a-b728-4396-a878-6345ae2c952b" name="VoterBoxManager.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="69ae2765-daf9-4c81-a45a-f4e8e6efc3ad" direction="Forward">
+          <layerMoniker Id="a8e19a82-d8e3-46d9-834f-d07fa46da92b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="17996999-314d-44de-8271-f93cb11604e3" name="VoterBoxManager.cs">
+          <ArtifactNode Label="VoterBoxManager.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/models/voterboxmanager.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=VoterBoxManager)" Label="VoterBoxManager" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="64108adb-da20-4439-b5cb-72dcabfb3fcc" name="VoterCardGenerator.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e42ee4c3-4ede-4473-a854-89d267440c65" direction="Forward">
+          <layerMoniker Id="a8e19a82-d8e3-46d9-834f-d07fa46da92b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="1d83362d-7cd0-461d-8905-b48cf3908495" name="VoterCardGenerator.cs">
+          <ArtifactNode Label="VoterCardGenerator.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/models/votercardgenerator.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=VoterCardGenerator)" Label="VoterCardGenerator" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="e65be5e2-a3c6-4159-b7c1-174b99d8f339" name="VoterSelection.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="1d078f7c-abc9-4706-884d-5629607c10a1" direction="Forward">
+          <layerMoniker Id="a8e19a82-d8e3-46d9-834f-d07fa46da92b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="0322ecab-e267-4acb-936d-fb0d240fc5eb" name="VoterSelection.cs">
+          <ArtifactNode Label="VoterSelection.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/models/voterselection.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=(Name=PollingStationsHandler ParentType=VoterSelection))" Label="VoterSelection.PollingStationsHandler" Category="CodeSchema_Delegate">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=(Name=VoterCountHandler ParentType=VoterSelection))" Label="VoterSelection.VoterCountHandler" Category="CodeSchema_Delegate">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=VoterSelection)" Label="VoterSelection" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="7ac070ba-1853-43fc-9348-33f0fca83a9e" name="Controller.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="1b8385be-31be-435d-a448-afe9920ea0c4" direction="Forward">
+          <layerMoniker Id="ab73b0c4-d734-4a08-b489-16a868cbb8cf" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="cf42d100-29fc-463b-906b-9f4ce0c907dd" direction="Forward">
+          <layerMoniker Id="723ed86b-8e9b-49e0-b0f8-2ce4061b70d3" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="07cfc372-d7a0-4629-aa7b-2bf9235d702c" direction="Forward">
+          <layerMoniker Id="c735bbef-d479-4ee8-908a-7e9bfc901728" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="7867f6e5-bcfb-415c-8e7b-b2b14cff5674" direction="Forward">
+          <layerMoniker Id="e3b4a5c0-3602-47cd-a054-1c3ea1b7ccc8" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="749344aa-476c-46d4-8605-a28ef67153d0" direction="Forward">
+          <layerMoniker Id="566588b5-a3e5-4fbc-9325-9e53f56ff6d1" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="f32f4618-aeea-4627-afd6-da5e89438827" name="Controller.cs">
+          <ArtifactNode Label="Controller.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../DigitalVoterList/Central/Controllers/Controller.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Controllers Type=Controller)" Label="Controller" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="723ed86b-8e9b-49e0-b0f8-2ce4061b70d3" name="VoterBoxManagerController.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="b7f895da-2a65-4949-a627-083635f7f684" direction="Forward">
+          <layerMoniker Id="ae29e70a-b728-4396-a878-6345ae2c952b" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="809b27d0-ecd4-413e-ac28-0bd487596f67" direction="Forward">
+          <layerMoniker Id="4c34ce25-7fce-493f-b2e2-786914c77662" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="3ec99bae-b9ce-403b-b46c-3da1369954f2" name="VoterBoxManagerController.cs">
+          <ArtifactNode Label="VoterBoxManagerController.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../DigitalVoterList/Central/Controllers/VoterBoxManagerController.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Controllers Type=VoterBoxManagerController)" Label="VoterBoxManagerController" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="c735bbef-d479-4ee8-908a-7e9bfc901728" name="VoterCardGeneratorController.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="30b31642-4402-4d22-9fd2-dce87a2c326f" direction="Forward">
+          <layerMoniker Id="64108adb-da20-4439-b5cb-72dcabfb3fcc" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="ee6da165-a65e-4fc7-ab71-e97f3214c4dd" direction="Forward">
+          <layerMoniker Id="c273a88b-fbb0-4cdb-a0da-547e93acb044" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="b39be173-3cbe-4916-8451-3b1500b559f3" name="VoterCardGeneratorController.cs">
+          <ArtifactNode Label="VoterCardGeneratorController.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../DigitalVoterList/Central/Controllers/VoterCardGeneratorController.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Controllers Type=VoterCardGeneratorController)" Label="VoterCardGeneratorController" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="e3b4a5c0-3602-47cd-a054-1c3ea1b7ccc8" name="VoterSelectionController.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="48581cac-b2fc-4631-afe8-20daa07e8f3a" direction="Forward">
+          <layerMoniker Id="e65be5e2-a3c6-4159-b7c1-174b99d8f339" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="21da5473-5f06-4cc7-a4cb-91b32d54efa1" direction="Forward">
+          <layerMoniker Id="3a098b98-313b-45ea-a6ec-4ed666df4884" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="328df414-ef86-4f7e-87b8-bf0310826433" name="VoterSelectionController.cs">
+          <ArtifactNode Label="VoterSelectionController.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../DigitalVoterList/Central/Controllers/VoterSelectionController.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Controllers Type=VoterSelectionController)" Label="VoterSelectionController" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="566588b5-a3e5-4fbc-9325-9e53f56ff6d1" name="View.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="15e47195-1c2a-40c5-bbcc-308347ccca20" direction="Forward">
+          <layerMoniker Id="ab73b0c4-d734-4a08-b489-16a868cbb8cf" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="e511f739-7c61-4359-b932-bd36648458f9" direction="Forward">
+          <layerMoniker Id="4c34ce25-7fce-493f-b2e2-786914c77662" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="ac3f5e4a-de3c-4d25-8dac-725f810935b6" direction="Forward">
+          <layerMoniker Id="c273a88b-fbb0-4cdb-a0da-547e93acb044" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="f97db9c8-8cc1-4528-af13-5418d443b6ea" direction="Forward">
+          <layerMoniker Id="3a098b98-313b-45ea-a6ec-4ed666df4884" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="d164eac2-c7f2-4a7b-97fc-a4a2ee584317" name="View.cs">
+          <ArtifactNode Label="View.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/view.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=(Name=ViewChangedHandler ParentType=View))" Label="View.ViewChangedHandler" Category="CodeSchema_Delegate">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=View)" Label="View" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="4c34ce25-7fce-493f-b2e2-786914c77662" name="VoterBoxManagerWindow.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="85744de0-cae9-4026-a35d-53fe9bfe8e39" direction="Forward">
+          <layerMoniker Id="ae29e70a-b728-4396-a878-6345ae2c952b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="2d56d5a9-6ddd-4fcb-8bb4-2a3a53ed5eb0" name="VoterBoxManagerWindow.cs">
+          <ArtifactNode Label="VoterBoxManagerWindow.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/voterboxmanagerwindow.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=VoterBoxManagerWindow)" Label="VoterBoxManagerWindow" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="e1f8e6e9-d025-46d6-8d2e-0b31dfdf8aaf" name="VoterBoxManagerWindow.Designer.cs">
+          <ArtifactNode Label="VoterBoxManagerWindow.Designer.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/voterboxmanagerwindow.designer.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=VoterBoxManagerWindow)" Label="VoterBoxManagerWindow" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="3756d812-0e59-4fe3-bf97-16e8ce7ec092" name="VoterBoxManagerWindow.resx">
+          <ArtifactNode Label="VoterBoxManagerWindow.resx" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/voterboxmanagerwindow.resx)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="c273a88b-fbb0-4cdb-a0da-547e93acb044" name="VoterCardGeneratorWindow.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="67317953-8db0-4e2c-95cb-2a9dbefd6528" direction="Forward">
+          <layerMoniker Id="64108adb-da20-4439-b5cb-72dcabfb3fcc" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="1474abc3-2849-4d5d-a831-a4a3e1a9a11f" name="VoterCardGeneratorWindow.cs">
+          <ArtifactNode Label="VoterCardGeneratorWindow.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/votercardgeneratorwindow.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=VoterCardGeneratorWindow)" Label="VoterCardGeneratorWindow" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="fbebb440-ba21-473e-945e-2ace2f9d9c9c" name="VoterCardGeneratorWindow.Designer.cs">
+          <ArtifactNode Label="VoterCardGeneratorWindow.Designer.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/votercardgeneratorwindow.designer.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=VoterCardGeneratorWindow)" Label="VoterCardGeneratorWindow" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="9dc08075-c30b-4c96-a79a-9dcb2238f3b0" name="VoterCardGeneratorWindow.resx">
+          <ArtifactNode Label="VoterCardGeneratorWindow.resx" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/votercardgeneratorwindow.resx)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="3a098b98-313b-45ea-a6ec-4ed666df4884" name="VoterSelectionWindow.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="9492ee3b-4abf-4853-8bca-38bc828a8c29" direction="Forward">
+          <layerMoniker Id="e65be5e2-a3c6-4159-b7c1-174b99d8f339" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="8e619a87-c546-4049-b4c7-f81baef1ba09" name="VoterSelectionWindow.cs">
+          <ArtifactNode Label="VoterSelectionWindow.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/voterselectionwindow.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=(Name=InputChangedHandler ParentType=VoterSelectionWindow))" Label="VoterSelectionWindow.InputChangedHandler" Category="CodeSchema_Delegate">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=VoterSelectionWindow)" Label="VoterSelectionWindow" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="54fdad36-2caf-451e-ba28-13e4417f5172" name="VoterSelectionWindow.Designer.cs">
+          <ArtifactNode Label="VoterSelectionWindow.Designer.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/voterselectionwindow.designer.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Views Type=VoterSelectionWindow)" Label="VoterSelectionWindow" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+        <reference Id="72eaefa5-5713-4673-a3cf-52526f1c44ab" name="VoterSelectionWindow.resx">
+          <ArtifactNode Label="VoterSelectionWindow.resx" Category="CodeSchema_ProjectItem" Id="(Assembly=../digitalvoterlist/central/views/voterselectionwindow.resx)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="98e6efb9-d425-439b-a0f9-a417bc6df313" name="Main.cs">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="60524898-c00d-4f64-9605-2aa3a18e8ca8" direction="Forward">
+          <layerMoniker Id="7ac070ba-1853-43fc-9348-33f0fca83a9e" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="4c408e44-ae67-4fd8-bafe-94c8e5912d11" direction="Forward">
+          <layerMoniker Id="ab73b0c4-d734-4a08-b489-16a868cbb8cf" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="aa125fa7-4af9-4021-b4e5-99cacfb8d265" direction="Forward">
+          <layerMoniker Id="566588b5-a3e5-4fbc-9325-9e53f56ff6d1" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="e9a6e464-47f6-4ee0-bb3e-ec2bd23cde88" name="Main.cs">
+          <ArtifactNode Label="Main.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../DigitalVoterList/Central/Main.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central Type=Main)" Label="Main" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="a8e19a82-d8e3-46d9-834f-d07fa46da92b" name="VoterFilter.cs">
+      <references>
+        <reference Id="6b18716d-2b07-45eb-9c51-e4f84ac43a3b" name="VoterFilter.cs">
+          <ArtifactNode Label="VoterFilter.cs" Category="CodeSchema_ProjectItem" Id="(Assembly=../DigitalVoterList/Central/Models/VoterFilter.cs)">
+            <Category Ref="CodeSchema_SourceFile" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=DigitalVoterList Namespace=DigitalVoterList.Central.Models Type=VoterFilter)" Label="VoterFilter" Category="CodeSchema_Class">
+            <LinkCategory Ref="Contains" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

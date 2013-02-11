@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D70896C6-BA83-4B3B-9B86-56E869A97A30}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PollingTable</RootNamespace>
+    <AssemblyName>PollingTable</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PollingTable\Log\LogController.cs" />
+    <Compile Include="PollingTable\Log\LogFilter.cs" />
+    <Compile Include="PollingTable\Log\LogModel.cs" />
+    <Compile Include="PollingTable\Log\LogWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PollingTable\SetupInfo.cs" />
+    <Compile Include="PollingTable\View\NormVW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\NormVW.Designer.cs">
+      <DependentUpon>NormVW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\Log\LogWindow.Designer.cs">
+      <DependentUpon>LogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\PollingMain.cs" />
+    <Compile Include="PollingTable\Controller.cs" />
+    <Compile Include="PollingTable\Model.cs" />
+    <Compile Include="PollingTable\View\Root_elements\CancelBtn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\Root_elements\CancelBtn.Designer.cs">
+      <DependentUpon>CancelBtn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\View\Root_elements\WarningMsg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\Root_elements\WarningMsg.Designer.cs">
+      <DependentUpon>WarningMsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\View\PtView.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PollingTable\View\ScannerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\ScannerWindow.Designer.cs">
+      <DependentUpon>ScannerWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\View\SetupWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\SetupWindow.Designer.cs">
+      <DependentUpon>SetupWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\View\WarningVW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\WarningVW.Designer.cs">
+      <DependentUpon>WarningVW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PollingTable\View\UnRegVW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PollingTable\View\UnRegVW.Designer.cs">
+      <DependentUpon>UnRegVW.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="PollingTable\Log\LogWindow.resx">
+      <DependentUpon>LogWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PollingTable\View\NormVW.resx">
+      <DependentUpon>NormVW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PollingTable\View\Root_elements\CancelBtn.resx">
+      <DependentUpon>CancelBtn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PollingTable\View\Root_elements\WarningMsg.resx">
+      <DependentUpon>WarningMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PollingTable\View\UnRegVW.resx">
+      <DependentUpon>UnRegVW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="PollingTable\View\ScannerWindow.resx">
+      <DependentUpon>ScannerWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PollingTable\View\SetupWindow.resx">
+      <DependentUpon>SetupWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\DigitalVoterList.PollingTable.Log.LogModel.datasource" />
+    <EmbeddedResource Include="PollingTable\View\WarningVW.resx">
+      <DependentUpon>WarningVW.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBComm\DBComm.csproj">
+      <Project>{49A4B100-B97C-4064-A06C-BD09D06F61D5}</Project>
+      <Name>DBComm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DigitalVoterList\Central.csproj">
+      <Project>{AFE39FCC-8482-499F-A180-C25B8BAA921F}</Project>
+      <Name>Central</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\lock_open.png" />
+    <Content Include="Ressources\emblem_work.ico" />
+    <Content Include="Ressources\info.ico" />
+    <Content Include="Ressources\mail_message_new.ico" />
+    <Content Include="Ressources\network_server_database.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,198 @@
+﻿<documents created="2011-12-13 13:51:53Z"><document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\IDataObjectContracts.cs" renderPrefix="s0"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="IDataObjectContracts.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System.Diagnostics.Contracts;
+
+    [ContractClassFor(typeof(IDataObject))]
+    abstract class IDataObjectContracts : IDataObject
+    {
+        #region Implementation of IDataObject
+
+        public uint? PrimaryKey
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        [Pure]
+        bool IDataObject.FullyInitialized()
+        {
+            return false;
+        }
+
+        void IDataObject.UpdateValues(IDataObject dummy)
+        {
+            ]]></source>
+</chunk>
+<method name="UpdateValues" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.LogDO" typeName="LogDO" token="6000037" module="DBComm.exe"><hits/>
+<tags><tag offset="006e">This assertion has not been reached</tag>
+</tags>
+<coverage domain="usercodeundertest" unit="block" covered="0" total="41" coveredRatio="0"/>
+<coverage domain="usercodeundertest" unit="asserts" covered="0" total="1" coveredRatio="0"/>
+</method>
+<chunk hits="0" offset="0000" domain="usercodeundertest"><source><![CDATA[Contract.Requires(dummy != null);]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="002a" domain="usercodeundertest" tag="true"><tooltip><![CDATA[This assertion has not been reached]]></tooltip>
+<source><![CDATA[Contract.Requires(dummy.GetType() == this.GetType());]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        }
+
+        void IDataObject.ResetAssociations()
+        {
+        }
+
+        #endregion
+    }
+}
+]]></source>
+</chunk>
+</document>
+<document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\LogDO.cs" renderPrefix="s1"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="LogDO.cs" company="DVL">
+// <author>Jan Meier</author>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
+    /// The class representing a Log entry entity
+    /// </summary>
+    [Table(Name = "log")]
+    public class LogDO : IDataObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+        /// </summary>
+        public LogDO(uint? table, uint? cpr, ActivityEnum? activity)
+        {
+            this.Table = table;
+            this.Cpr = cpr;
+            this.Activity = activity;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogDO"/> class.
+        /// </summary>
+        public LogDO()
+        {
+
+        }
+
+        ///// <summary>
+        ///// Gets the primary key of this data object.
+        ///// </summary>
+        [Column(Name = "id")]
+        public uint? PrimaryKey { get; private set; }
+
+        /// <summary>
+        /// Gets Time.
+        /// </summary>
+        [Column(IsPrimaryKey = true)]
+        public DateTime? Time { get; private set; }
+
+        /// <summary>
+        /// Gets Table.
+        /// </summary>
+        [Column(Name = "tableNo", IsPrimaryKey = true)]
+        public uint? Table { get; set; }
+
+        /// <summary>
+        /// Gets Cpr.
+        /// </summary>
+        [Column]
+        public uint? Cpr { get; set; }
+
+        /// <summary>
+        /// Gets Activity.
+        /// </summary>
+        [Column(IsPrimaryKey = true)]
+        public ActivityEnum? Activity { get; set; }
+
+        /// <summary>
+        /// Has all the fields of the object been initialized?
+        /// </summary>
+        /// <returns>
+        /// True if all fields are non-null.
+        /// </returns>
+        public bool FullyInitialized()
+        {
+            return Table != null && Cpr != null && Activity != null;
+        }
+
+        /// <summary>
+        /// Set the values of this object to the values of the dummy object, if the dummys value is non-null.
+        /// </summary>
+        /// <param name="dummy">
+        /// The dummy object, representing new values.
+        /// </param>
+        public void UpdateValues(IDataObject dummy)
+        ]]></source>
+</chunk>
+<chunk hits="0" offset="0059" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="005a" domain="usercodeundertest"><source><![CDATA[LogDO logDummy = dummy as LogDO;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0061" domain="usercodeundertest"><source><![CDATA[Contract.Assert(logDummy != null);]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0074" domain="usercodeundertest"><source><![CDATA[this.Time = logDummy.Time ?? this.Time;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="00a5" domain="usercodeundertest"><source><![CDATA[this.Table = logDummy.Table ?? this.Table;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="00d6" domain="usercodeundertest"><source><![CDATA[this.Cpr = logDummy.Cpr ?? this.Cpr;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0107" domain="usercodeundertest"><source><![CDATA[this.Activity = logDummy.Activity ?? this.Activity;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="0" offset="0138" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        /// <summary>
+        /// Reset all associations.
+        /// </summary>
+        public void ResetAssociations()
+        {
+            // No associations, so nothing to reset here.
+        }
+    }
+}]]></source>
+</chunk>
+</document>
+</documents>

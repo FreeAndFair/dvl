@@ -1,0 +1,1 @@
+Copy this folder (Executable) to you computer to be able to run the program

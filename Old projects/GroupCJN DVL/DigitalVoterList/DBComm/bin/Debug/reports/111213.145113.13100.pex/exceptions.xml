@@ -1,0 +1,23 @@
+﻿<frameTree version="0.94.51006.1"><frameException type="System.Diagnostics.Contracts.__ContractsRuntime+ContractException"><tag exceptionState="expected"><generatedTestRef idref="407618de-5cba-458c-bb0a-10a79c12eac4"/>
+</tag>
+<frameNode><frame value="  at MunicipalityDO.UpdateValues(IDataObject) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\IDataObjectContracts.cs(32)" method="MunicipalityDO.UpdateValues(IDataObject)" offset="36" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\IDataObjectContracts.cs" line="32"><method assemblyName="DBComm" name="UpdateValues" token="600008c"><declaringType assemblyName="DBComm" name="MunicipalityDO" token="2000012" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="MunicipalityDO" token="2000012" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DBComm" name="IDataObject" token="2000005" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[
+        void IDataObject.UpdateValues(IDataObject dummy)
+        {]]></beforeSource>
+<source><![CDATA[            Contract.Requires(dummy != null);]]></source>
+<afterSource><![CDATA[            Contract.Requires(dummy.GetType() == this.GetType());
+        }
+]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="407618de-5cba-458c-bb0a-10a79c12eac4"/>
+</tag>
+</frameNode>
+</frameException>
+</frameTree>

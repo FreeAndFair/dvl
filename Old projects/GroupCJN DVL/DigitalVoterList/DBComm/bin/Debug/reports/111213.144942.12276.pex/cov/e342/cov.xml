@@ -1,0 +1,317 @@
+﻿<documents created="2011-12-13 13:49:47Z"><document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" renderPrefix="s0"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="VoterDO.cs" company="DVL">
+// <author>Jan Meier</author>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics.Contracts;
+
+
+    /// <summary>
+    /// The class representing a Voter entity
+    /// </summary>
+    [Table(Name = "voter")]
+    public class VoterDO : IDataObject
+    {
+        private uint? primaryKey;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VoterDO"/> class.
+        /// </summary>
+        /// <param name="pollingStationId">
+        /// The polling station id.
+        /// </param>
+        /// <param name="cpr">
+        /// The cpr no.
+        /// </param>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <param name="address">
+        /// The address.
+        /// </param>
+        /// <param name="city">
+        /// The city.
+        /// </param>
+        /// <param name="cardPrinted">
+        /// The card printed status.
+        /// </param>
+        /// <param name="voted">
+        /// The voted status.
+        /// </param>
+        public VoterDO(uint? pollingStationId, uint? cpr, string name, string address, string city, bool? cardPrinted, bool? voted)
+        {
+            Contract.Requires(cpr == null || (cpr >= 101000001 && cpr <= 3112999999));
+
+            this.PollingStationId = pollingStationId;
+            this.primaryKey = cpr;
+            this.Name = name;
+            this.Address = address;
+            this.City = city;
+            this.CardPrinted = cardPrinted;
+            this.Voted = voted;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VoterDO"/> class. 
+        /// Parameter-less constructor required for entity mapping. No field-
+        /// initialization is done, i.e. all fields are null.
+        /// </summary>
+        public VoterDO()
+        {
+        }
+
+        /// <summary>
+        /// Gets PrimaryKey.
+        /// </summary>
+        [Column(IsPrimaryKey = true, Name = "cpr")]
+        public uint? PrimaryKey
+        {
+            get
+            ]]></source>
+</chunk>
+<method name="get_PrimaryKey" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.VoterDO" typeName="VoterDO" token="6000040" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="0" total="1" coveredRatio="0"/>
+</method>
+<chunk hits="0" offset="0000" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+                ]]></source>
+</chunk>
+<chunk hits="0" offset="0001" domain="usercodeundertest"><source><![CDATA[return this.primaryKey;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="000d" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+            private set
+            {
+                Contract.Requires(value >= 101000001 && value <= 3112999999);
+                this.primaryKey = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets Cpr as a string.
+        /// </summary>
+        [Pure]
+        public string CprString
+        {
+            get
+            {
+                Contract.Requires(PrimaryKey != null);
+                Contract.Ensures(Contract.Result<string>().Length == 10);
+
+                string result = this.PrimaryKey.ToString();
+
+                if (result.Length < 10)
+                {
+                    return "0" + result;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Gets the id of the polling station this voter is associated with.
+        /// </summary>
+        [Column]
+        public uint? PollingStationId { get; private set; }
+
+        /// <summary>
+        /// Gets Name.
+        /// </summary>
+        [Column]
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets Address.
+        /// </summary>
+        [Column]
+        public string Address { get; private set; }
+
+        /// <summary>
+        /// Gets City.
+        /// </summary>
+        [Column]
+        public string City { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether a card has been printed for this voter.
+        /// </summary>
+        [Column]
+        public bool? CardPrinted { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether this voter has voted.
+        /// </summary>
+        [Column]
+        public bool? Voted { get; set; }
+
+        private EntityRef<PollingStationDO> _pollingStation;
+
+        /// <summary>
+        /// Gets or sets PollingStation associated with this voter..
+        /// </summary>
+        [Association(Name = "FK_V_PS", Storage = "_pollingStation", ThisKey = "PollingStationId")]
+        public PollingStationDO PollingStation
+        {
+            get
+            {
+                return _pollingStation.Entity;
+            }
+
+            private set
+            {
+                Contract.Requires(value != null);
+                _pollingStation.Entity = value;
+            }
+        }
+
+        /// <summary>
+        /// Reset all associations.
+        /// </summary>
+        public void ResetAssociations()
+        {
+            this._pollingStation = new EntityRef<PollingStationDO>();
+        }
+
+        /// <summary>
+        /// Is the object fully initialized, i.e. do all fields have non-null values?
+        /// </summary>
+        /// <returns>True if no fields are null.</returns>
+        public bool FullyInitialized()
+        {
+            return PollingStationId != null && PrimaryKey != null && Name != null && Address != null && CardPrinted != null
+                   && Voted != null;
+        }
+
+        /// <summary>
+        /// Set the values of this object to the values of the dummy object, if the dummys value is non-null.
+        /// </summary>
+        /// <param name="dummy">
+        /// The dummy object, representing new values.
+        /// </param>
+        public void UpdateValues(IDataObject dummy)
+        {
+            Contract.Requires(dummy != null); // Re-stipulate this contract, since it must be checked before the added contracts.
+            Contract.Requires(dummy.GetType() == this.GetType());
+            Contract.Requires(dummy.PrimaryKey == null || (((VoterDO)dummy).PrimaryKey >= 101000001 && ((VoterDO)dummy).PrimaryKey <= 3012999999));
+
+            VoterDO voterDummy = dummy as VoterDO;
+            Contract.Assert(voterDummy != null);
+
+            this.PollingStationId = voterDummy.PollingStationId ?? this.PollingStationId;
+            this.PrimaryKey = voterDummy.PrimaryKey ?? this.PrimaryKey;
+            this.Name = voterDummy.Name ?? this.Name;
+            this.City = voterDummy.City ?? this.City;
+            this.Address = voterDummy.Address ?? this.Address;
+            this.CardPrinted = voterDummy.CardPrinted ?? this.CardPrinted;
+            this.Voted = voterDummy.Voted ?? this.Voted;
+        }
+
+        [ContractInvariantMethod]
+        private void Invariant()
+        ]]></source>
+</chunk>
+<method name="$InvariantMethod$" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.VoterDO" typeName="VoterDO" token="6000056" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="0" total="19" coveredRatio="0"/>
+</method>
+<chunk hits="0" offset="0000" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0013" domain="usercodeundertest"><source><![CDATA[Contract.Invariant((this.PrimaryKey >= 101000001 && this.PrimaryKey <= 3112999999) || this.PrimaryKey == null);]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        }
+
+        public override bool Equals(object obj)
+        ]]></source>
+</chunk>
+<method name="Equals" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.VoterDO" typeName="VoterDO" token="6000054" module="DBComm.exe"><hits><hit index="0" value="1"/>
+<hit index="1" value="1"/>
+<hit index="2" value="1"/>
+<hit index="3" value="1"/>
+<hit index="4" value="1"/>
+<hit index="5" value="1"/>
+<hit index="6" value="1"/>
+<hit index="7" value="2"/>
+<hit index="8" value="1"/>
+<hit index="9" value="1"/>
+<hit index="10" value="1"/>
+<hit index="101" value="1"/>
+</hits>
+<coverage domain="usercodeundertest" unit="block" covered="7" total="56" coveredRatio="0.125"/>
+</method>
+<chunk hits="1" offset="0000" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0001" domain="usercodeundertest"><source><![CDATA[if (obj == null || GetType() != obj.GetType())]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0028" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+                ]]></source>
+</chunk>
+<chunk hits="1" offset="0029" domain="usercodeundertest"><source><![CDATA[return false;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            }
+
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0030" domain="usercodeundertest"><source><![CDATA[var other = obj as VoterDO;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0037" domain="usercodeundertest"><source><![CDATA[return other.PrimaryKey == this.PrimaryKey && other.Name == this.Name && other.PollingStationId == this.PollingStationId
+                   && other.Address == this.Address && other.City == this.City && other.Voted == this.Voted && other.CardPrinted == this.CardPrinted;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="0176" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            var result = 0;
+            if (this.Name != null) result += this.Name.GetHashCode();
+
+            return result;
+        }
+    }
+}
+]]></source>
+</chunk>
+</document>
+<document src="(no sources available for some parts of DBComm.Explorables, DBComm, DBComm.Tests)" missing="true"><method name="Create" type="DBComm.DBComm.DO.VoterDOFactory" token="6000002" module="&lt;In Memory Module&gt;"><hits/>
+<coverage domain="userortestcode" unit="block" covered="0" total="11" coveredRatio="0"/>
+</method>
+<method name="Invariant" type="System.Diagnostics.Contracts.__ContractsRuntime" token="60000a4" module="DBComm.exe"><hits/>
+<coverage domain="userortestcode" unit="block" covered="0" total="3" coveredRatio="0"/>
+</method>
+<method name="Equals01" type="DBComm.DBComm.DO.VoterDOTest" token="6000003" module="&lt;In Memory Module&gt;"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+</document>
+</documents>

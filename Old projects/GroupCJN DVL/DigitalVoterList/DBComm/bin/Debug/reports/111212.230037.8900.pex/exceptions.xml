@@ -1,0 +1,45 @@
+﻿<frameTree version="0.94.51006.1"><frameException type="System.Diagnostics.Contracts.__ContractsRuntime+ContractException"><tag exceptionState="expected"><generatedTestRef idref="de6e2bfb-2440-4719-abd7-dabfea0ef62f"/>
+</tag>
+<frameNode><frame value="  at MunicipalityDO.set_PollingStations(ICollection`1&lt;PollingStationDO&gt;) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\MunicipalityDO.cs(78)" method="MunicipalityDO.set_PollingStations(ICollection`1&lt;PollingStationDO&gt;)" offset="13" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\MunicipalityDO.cs" line="78"><method assemblyName="DBComm" name="set_PollingStations" token="6000081"><declaringType assemblyName="DBComm" name="MunicipalityDO" token="2000012" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="MunicipalityDO" token="2000012" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="value" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="ICollection`1" token="2000352" namespace="System.Collections.Generic"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DBComm" name="PollingStationDO" token="2000011" namespace="DBComm.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[
+            set
+            {]]></beforeSource>
+<source><![CDATA[                Contract.Requires(value != null);]]></source>
+<afterSource><![CDATA[                _pStations.AddRange(value);
+            }
+        }]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="de6e2bfb-2440-4719-abd7-dabfea0ef62f"/>
+</tag>
+</frameNode>
+<frameNode><frame value="  at MunicipalityDO.UpdateValues(IDataObject) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\IDataObjectContracts.cs(32)" method="MunicipalityDO.UpdateValues(IDataObject)" offset="36" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\IDataObjectContracts.cs" line="32"><method assemblyName="DBComm" name="UpdateValues" token="600008c"><declaringType assemblyName="DBComm" name="MunicipalityDO" token="2000012" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="MunicipalityDO" token="2000012" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DBComm" name="IDataObject" token="2000005" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[
+        void IDataObject.UpdateValues(IDataObject dummy)
+        {]]></beforeSource>
+<source><![CDATA[            Contract.Requires(dummy != null);]]></source>
+<afterSource><![CDATA[            Contract.Requires(dummy.GetType() == this.GetType());
+        }
+]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="fee9ef8a-af8e-4349-bd11-fd64157f34d1"/>
+</tag>
+</frameNode>
+</frameException>
+</frameTree>

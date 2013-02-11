@@ -1,0 +1,9 @@
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\b\DBComm.Moles.xml
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\b\DBComm.Moles.dll
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\b\DBComm.Moles.pdb
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\b\DBComm.exe
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\b\DBComm.pdb
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\o\ResolveAssemblyReference.cache
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\o\DBComm.Moles.rewritten
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\o\DBComm.Moles.dll
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.PexTests\obj\Debug\Moles\dbc\o\DBComm.Moles.pdb

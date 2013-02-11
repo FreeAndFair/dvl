@@ -1,0 +1,174 @@
+﻿<frameTree version="0.94.51006.1"><frameException type="System.Diagnostics.Contracts.__ContractsRuntime+ContractException"><tag exceptionState="expected"><generatedTestRef idref="5c19ea0b-bfb9-41c1-b0fa-7aa3a7910bdd"/>
+</tag>
+<frameNode><frame value="  at VoterDO..ctor(Nullable`1&lt;UInt32&gt;, Nullable`1&lt;UInt32&gt;, String, String, String, Nullable`1&lt;Boolean&gt;, Nullable`1&lt;Boolean&gt;) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(48)" method="VoterDO..ctor(Nullable`1&lt;UInt32&gt;, Nullable`1&lt;UInt32&gt;, String, String, String, Nullable`1&lt;Boolean&gt;, Nullable`1&lt;Boolean&gt;)" offset="99" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="48"><method assemblyName="DBComm" name=".ctor" token="600003e"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="pollingStationId" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="cpr" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="name" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="address" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="city" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="cardPrinted" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="voted" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[        /// </param>
+        public VoterDO(uint? pollingStationId, uint? cpr, string name, string address, string city, bool? cardPrinted, bool? voted)
+        {]]></beforeSource>
+<source><![CDATA[            Contract.Requires(cpr == null || (cpr >= 101000001 && cpr <= 3112999999));]]></source>
+<afterSource><![CDATA[
+            this.PollingStationId = pollingStationId;
+            this.primaryKey = cpr;]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="5c19ea0b-bfb9-41c1-b0fa-7aa3a7910bdd"/>
+<generatedTestRef idref="de2812b7-09c8-4e45-b52e-5687b37bd960"/>
+</tag>
+</frameNode>
+<frameNode><frame value="  at VoterDO.get_CprString() in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(94)" method="VoterDO.get_CprString()" offset="44" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="94"><method assemblyName="DBComm" name="get_CprString" token="6000042"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</resultType>
+</method>
+<beforeSource><![CDATA[        {
+            get
+            {]]></beforeSource>
+<source><![CDATA[                Contract.Requires(PrimaryKey != null);]]></source>
+<afterSource><![CDATA[                Contract.Ensures(Contract.Result<string>().Length == 10);
+
+                string result = this.PrimaryKey.ToString();]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="341dee00-d2bb-4d4b-98a6-20b3030f1048"/>
+</tag>
+</frameNode>
+<frameNode><frame value="  at VoterDO.UpdateValues(IDataObject) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(190)" method="VoterDO.UpdateValues(IDataObject)" offset="36" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="190"><method assemblyName="DBComm" name="UpdateValues" token="6000053"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DBComm" name="IDataObject" token="2000005" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[        /// </param>
+        public void UpdateValues(IDataObject dummy)
+        {]]></beforeSource>
+<source><![CDATA[            Contract.Requires(dummy != null); // Re-stipulate this contract, since it must be checked before the added contracts.]]></source>
+<afterSource><![CDATA[            Contract.Requires(dummy.GetType() == this.GetType());
+            Contract.Requires(dummy.PrimaryKey == null || (((VoterDO)dummy).PrimaryKey >= 101000001 && ((VoterDO)dummy).PrimaryKey <= 3012999999));
+]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="90400b46-5cbe-4f75-959b-6c077e445083"/>
+</tag>
+</frameNode>
+<frameNode><frame value="  at VoterDO.set_PrimaryKey(Nullable`1&lt;UInt32&gt;) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(81)" method="VoterDO.set_PrimaryKey(Nullable`1&lt;UInt32&gt;)" offset="104" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="81"><method assemblyName="DBComm" name="set_PrimaryKey" token="6000041"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="value" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[
+            private set
+            {]]></beforeSource>
+<source><![CDATA[                Contract.Requires(value >= 101000001 && value <= 3112999999);]]></source>
+<afterSource><![CDATA[                this.primaryKey = value;
+            }
+        }]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="c435b91a-2e0a-4e7c-ab23-f3d55dee10cf"/>
+<generatedTestRef idref="14a55fd8-83d0-42f3-8e93-5cc767ea804b"/>
+<generatedTestRef idref="7625ddbd-f9c7-435f-943e-147337facf5c"/>
+</tag>
+<frameNode><frame value="  at VoterDO.UpdateValues(IDataObject) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(198)" method="VoterDO.UpdateValues(IDataObject)" offset="403" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="198"><method assemblyName="DBComm" name="UpdateValues" token="6000053"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DBComm" name="IDataObject" token="2000005" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[            Contract.Assert(voterDummy != null);
+
+            this.PollingStationId = voterDummy.PollingStationId ?? this.PollingStationId;]]></beforeSource>
+<source><![CDATA[            this.PrimaryKey = voterDummy.PrimaryKey ?? this.PrimaryKey;]]></source>
+<afterSource><![CDATA[            this.Name = voterDummy.Name ?? this.Name;
+            this.City = voterDummy.City ?? this.City;
+            this.Address = voterDummy.Address ?? this.Address;]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="c435b91a-2e0a-4e7c-ab23-f3d55dee10cf"/>
+<generatedTestRef idref="14a55fd8-83d0-42f3-8e93-5cc767ea804b"/>
+<generatedTestRef idref="7625ddbd-f9c7-435f-943e-147337facf5c"/>
+</tag>
+</frameNode>
+</frameNode>
+<frameNode><frame value="  at VoterDO.UpdateValues(IDataObject) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(191)" method="VoterDO.UpdateValues(IDataObject)" offset="65" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="191"><method assemblyName="DBComm" name="UpdateValues" token="6000053"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DBComm" name="IDataObject" token="2000005" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[        public void UpdateValues(IDataObject dummy)
+        {
+            Contract.Requires(dummy != null); // Re-stipulate this contract, since it must be checked before the added contracts.]]></beforeSource>
+<source><![CDATA[            Contract.Requires(dummy.GetType() == this.GetType());]]></source>
+<afterSource><![CDATA[            Contract.Requires(dummy.PrimaryKey == null || (((VoterDO)dummy).PrimaryKey >= 101000001 && ((VoterDO)dummy).PrimaryKey <= 3012999999));
+
+            VoterDO voterDummy = dummy as VoterDO;]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="baad3b73-462d-4ceb-91ba-fd2c9278bdeb"/>
+</tag>
+</frameNode>
+<frameNode><frame value="  at VoterDO.UpdateValues(IDataObject) in C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs(192)" method="VoterDO.UpdateValues(IDataObject)" offset="197" file="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\VoterDO.cs" line="192"><method assemblyName="DBComm" name="UpdateValues" token="6000053"><declaringType assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DBComm" name="VoterDO" token="200000d" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DBComm" name="IDataObject" token="2000005" namespace="DBComm.DBComm.DO"/>
+</type>
+</parameter>
+</method>
+<beforeSource><![CDATA[        {
+            Contract.Requires(dummy != null); // Re-stipulate this contract, since it must be checked before the added contracts.
+            Contract.Requires(dummy.GetType() == this.GetType());]]></beforeSource>
+<source><![CDATA[            Contract.Requires(dummy.PrimaryKey == null || (((VoterDO)dummy).PrimaryKey >= 101000001 && ((VoterDO)dummy).PrimaryKey <= 3012999999));]]></source>
+<afterSource><![CDATA[
+            VoterDO voterDummy = dummy as VoterDO;
+            Contract.Assert(voterDummy != null);]]></afterSource>
+</frame>
+<tag exceptionState="expected"><generatedTestRef idref="8977653b-0907-4640-a6b0-89505b33d5de"/>
+</tag>
+</frameNode>
+</frameException>
+</frameTree>

@@ -1,0 +1,427 @@
+﻿<documents created="2011-12-13 13:50:49Z"><document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\PollingStationDO.cs" renderPrefix="s0"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="PollingStationDO.cs" company="DVL">
+// <author>Jan Meier</author>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System.Collections.Generic;
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
+    /// The class representing a Polling station entity
+    /// </summary>
+    [Table(Name = "pollingstation")]
+    public class PollingStationDO : IDataObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PollingStationDO"/> class.
+        /// </summary>
+        /// <param name="municipalityId">
+        /// The municipality Id.
+        /// </param>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <param name="address">
+        /// The address.
+        /// </param>
+        ]]></source>
+</chunk>
+<chunk hits="0" offset="0017" domain="usercodeundertest"><source><![CDATA[public PollingStationDO(uint? municipalityId, uint? id, string name, string address)]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="0" offset="001e" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="001f" domain="usercodeundertest"><source><![CDATA[this.MunicipalityId = municipalityId;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0027" domain="usercodeundertest"><source><![CDATA[this.PrimaryKey = id;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="002f" domain="usercodeundertest"><source><![CDATA[this.Name = name;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="0" offset="0037" domain="usercodeundertest"><source><![CDATA[this.Address = address;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="0" offset="0040" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PollingStationDO"/> class. 
+        /// Parameter-less constructor required for entity mapping. No field-
+        /// initialization is done, i.e. all fields are null.
+        /// </summary>
+        public PollingStationDO()
+        {
+        }
+
+        /// <summary>
+        /// Gets Primary Key.
+        /// </summary>
+        [Column(Name = "id", IsPrimaryKey = true)]
+        public uint? PrimaryKey { get; private set; }
+
+        /// <summary>
+        /// Gets the foreign key referencing a municipality.
+        /// </summary>
+        [Column]
+        public uint? MunicipalityId { get; private set; }
+
+        /// <summary>
+        /// Gets Name.
+        /// </summary>
+        [Column(Name = "name")]
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets Address.
+        /// </summary>
+        [Column]
+        public string Address { get; private set; }
+
+        ]]></source>
+</chunk>
+<method name=".ctor" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.PollingStationDO" typeName="PollingStationDO" token="6000068" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="0" total="7" coveredRatio="0"/>
+</method>
+<chunk hits="0" offset="0000" domain="usercodeundertest"><source><![CDATA[private EntityRef<MunicipalityDO> _municipality = new EntityRef<MunicipalityDO>();]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        /// <summary>
+        /// Gets or sets Municipality associated with tihs polling station.
+        /// </summary>
+        [Association(Name = "FK_PT_M", IsForeignKey = true, Storage = "_municipality", ThisKey = "MunicipalityId")]
+        public MunicipalityDO Municipality
+        {
+            get
+            {
+                return _municipality.Entity;
+            }
+
+            private set
+            {
+                Contract.Requires(value != null);
+                _municipality.Entity = value;
+            }
+        }
+
+        ]]></source>
+</chunk>
+<chunk hits="0" offset="000c" domain="usercodeundertest"><source><![CDATA[private EntitySet<VoterDO> _voters = new EntitySet<VoterDO>();]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        /// <summary>
+        /// Gets or sets Voters associated with this polling station.
+        /// </summary>
+        [Association(Name = "FK_V_PS", Storage = "_voters", ThisKey = "PrimaryKey", OtherKey = "PollingStationId")]
+        public ICollection<VoterDO> Voters
+        {
+            get
+            {
+                return _voters;
+            }
+
+            private set
+            {
+                Contract.Requires(value != null);
+                _voters.AddRange(value);
+            }
+        }
+
+        /// <summary>
+        /// Has all the fields of the object been initialized?
+        /// </summary>
+        /// <returns>
+        /// True if all fields are non-null.
+        /// </returns>
+        public bool FullyInitialized()
+        {
+            return this.Address != null && this.PrimaryKey != null && this.MunicipalityId != null && this.Name != null;
+        }
+
+        /// <summary>
+        /// Set the values of this object to the values of the dummy object, if the dummys value is non-null.
+        /// </summary>
+        /// <param name="dummy">
+        /// The dummy object, representing new values.
+        /// </param>
+        public void UpdateValues(IDataObject dummy)
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="0059" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="005a" domain="usercodeundertest"><source><![CDATA[PollingStationDO pollingDummy = dummy as PollingStationDO;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0061" domain="usercodeundertest"><source><![CDATA[Contract.Assert(pollingDummy != null);]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0074" domain="usercodeundertest"><source><![CDATA[this.Address = pollingDummy.Address ?? this.Address;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="008e" domain="usercodeundertest"><source><![CDATA[this.PrimaryKey = pollingDummy.PrimaryKey ?? this.PrimaryKey;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="00bf" domain="usercodeundertest"><source><![CDATA[this.MunicipalityId = pollingDummy.MunicipalityId ?? this.MunicipalityId;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="00f0" domain="usercodeundertest"><source><![CDATA[this.Name = pollingDummy.Name ?? this.Name;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="010a" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        public void ResetAssociations()
+        {
+            this._municipality = new EntityRef<MunicipalityDO>();
+            this._voters = new EntitySet<VoterDO>();
+        }
+
+        public override string ToString()
+        {
+            return this.Name ?? string.Empty;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var other = obj as PollingStationDO;
+
+            return other.PrimaryKey == this.PrimaryKey && other.Address == this.Address && other.MunicipalityId == this.MunicipalityId
+                   && other.Name == this.Name;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            if (Name != null)
+                return this.Name.GetHashCode();
+
+            return 0;
+        }
+    }
+}]]></source>
+</chunk>
+</document>
+<document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\IDataObjectContracts.cs" renderPrefix="s1"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="IDataObjectContracts.cs" company="">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System.Diagnostics.Contracts;
+
+    [ContractClassFor(typeof(IDataObject))]
+    abstract class IDataObjectContracts : IDataObject
+    {
+        #region Implementation of IDataObject
+
+        public uint? PrimaryKey
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        [Pure]
+        bool IDataObject.FullyInitialized()
+        {
+            return false;
+        }
+
+        void IDataObject.UpdateValues(IDataObject dummy)
+        {
+            ]]></source>
+</chunk>
+<method name="UpdateValues" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.PollingStationDO" typeName="PollingStationDO" token="6000077" module="DBComm.exe"><hits><hit index="0" value="1"/>
+<hit index="1" value="1"/>
+<hit index="2" value="1"/>
+<hit index="3" value="1"/>
+<hit index="4" value="1"/>
+<hit index="5" value="1"/>
+<hit index="6" value="1"/>
+<hit index="7" value="2"/>
+<hit index="8" value="1"/>
+<hit index="9" value="1"/>
+<hit index="10" value="1"/>
+<hit index="11" value="1"/>
+<hit index="12" value="1"/>
+<hit index="13" value="1"/>
+<hit index="15" value="1"/>
+<hit index="17" value="1"/>
+<hit index="18" value="1"/>
+<hit index="19" value="1"/>
+<hit index="20" value="1"/>
+<hit index="21" value="1"/>
+<hit index="22" value="2"/>
+<hit index="23" value="1"/>
+<hit index="24" value="1"/>
+<hit index="25" value="1"/>
+<hit index="26" value="1"/>
+<hit index="27" value="1"/>
+<hit index="28" value="1"/>
+<hit index="29" value="1"/>
+<hit index="30" value="1"/>
+<hit index="31" value="2"/>
+<hit index="32" value="1"/>
+<hit index="33" value="1"/>
+<hit index="34" value="1"/>
+<hit index="35" value="1"/>
+<hit index="36" value="1"/>
+<hit index="37" value="1"/>
+<hit index="38" value="1"/>
+<hit index="39" value="1"/>
+<hit index="41" value="1"/>
+<hit index="42" value="1"/>
+<hit index="43" value="1"/>
+<hit index="44" value="1"/>
+<hit index="45" value="1"/>
+<hit index="46" value="1"/>
+<hit index="47" value="2"/>
+<hit index="48" value="1"/>
+<hit index="49" value="1"/>
+<hit index="50" value="1"/>
+<hit index="51" value="1"/>
+<hit index="52" value="1"/>
+<hit index="53" value="1"/>
+<hit index="54" value="1"/>
+<hit index="55" value="1"/>
+<hit index="57" value="1"/>
+<hit index="58" value="1"/>
+<hit index="59" value="1"/>
+<hit index="60" value="1"/>
+<hit index="61" value="1"/>
+<hit index="62" value="1"/>
+<hit index="63" value="2"/>
+<hit index="64" value="1"/>
+<hit index="65" value="1"/>
+<hit index="66" value="1"/>
+<hit index="67" value="1"/>
+<hit index="68" value="1"/>
+<hit index="70" value="1"/>
+<hit index="71" value="1"/>
+<hit index="72" value="1"/>
+<hit index="73" value="1"/>
+<hit index="75" value="1"/>
+</hits>
+<coverage domain="usercodeundertest" unit="block" covered="33" total="33" coveredRatio="1"/>
+<coverage domain="usercodeundertest" unit="asserts" covered="1" total="1" coveredRatio="1"/>
+</method>
+<chunk hits="1" offset="0000" domain="usercodeundertest"><source><![CDATA[Contract.Requires(dummy != null);]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="002a" domain="usercodeundertest"><source><![CDATA[Contract.Requires(dummy.GetType() == this.GetType());]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        }
+
+        void IDataObject.ResetAssociations()
+        {
+        }
+
+        #endregion
+    }
+}
+]]></source>
+</chunk>
+</document>
+<document src="(no sources available for some parts of DBComm.Explorables, System.Data.Linq, DBComm, DBComm.PexTests)" missing="true"><method name="Create" type="DBComm.DBComm.DO.PollingStationDOFactory" token="6000002" module="&lt;In Memory Module&gt;"><hits/>
+<coverage domain="userortestcode" unit="block" covered="0" total="2" coveredRatio="0"/>
+</method>
+<method name=".ctor" type="System.Data.Linq.EntitySet`1" token="6000d03" module="System.Data.Linq.dll"><hits/>
+<coverage domain="userortestcode" unit="block" covered="0" total="2" coveredRatio="0"/>
+</method>
+<method name="set_MunicipalityId" type="DBComm.DBComm.DO.PollingStationDO" token="600006d" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_PrimaryKey" type="DBComm.DBComm.DO.PollingStationDO" token="600006b" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_Name" type="DBComm.DBComm.DO.PollingStationDO" token="600006f" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_Address" type="DBComm.DBComm.DO.PollingStationDO" token="6000071" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="UpdateValues" type="DBComm.DBComm.DO.PollingStationDOTest" token="6000008" module="&lt;In Memory Module&gt;"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+<method name="Requires" type="System.Diagnostics.Contracts.__ContractsRuntime" token="60000a1" module="DBComm.exe"><hits/>
+<coverage domain="userortestcode" unit="block" covered="3" total="3" coveredRatio="1"/>
+</method>
+<method name="ReportFailure" type="System.Diagnostics.Contracts.__ContractsRuntime" token="600009f" module="DBComm.exe"><hits/>
+<coverage domain="userortestcode" unit="block" covered="3" total="4" coveredRatio="0.75"/>
+</method>
+<method name="TriggerFailure" type="System.Diagnostics.Contracts.__ContractsRuntime" token="60000a0" module="DBComm.exe"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+<method name=".ctor" type="System.Diagnostics.Contracts.__ContractsRuntime+ContractException" token="60000b0" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+<method name="Assert" type="System.Diagnostics.Contracts.__ContractsRuntime" token="60000a3" module="DBComm.exe"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="3" coveredRatio="0.66666666666666663"/>
+</method>
+<method name="get_Address" type="DBComm.DBComm.DO.PollingStationDO" token="6000070" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="get_PrimaryKey" type="DBComm.DBComm.DO.PollingStationDO" token="600006a" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="get_MunicipalityId" type="DBComm.DBComm.DO.PollingStationDO" token="600006c" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="get_Name" type="DBComm.DBComm.DO.PollingStationDO" token="600006e" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+</document>
+</documents>

@@ -1,0 +1,1407 @@
+﻿<?xml version="1.0" encoding="utf-8"?><pex id="{0832f165-7785-4853-a711-1f14d8cc86be}" creationTime="2011-12-07 12:31:23Z" configuration="DigitalVoterList.DBComm.DO!\VoterDO!\*" created="2011-12-07 12:31:23Z" pexVersion="0.94.51006.1" xml="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\reports\111207.133123.9856.pex\report.per" html="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\reports\111207.133123.9856.pex\report.html"><environment commandLine="&quot;C:\Program Files (x86)\Microsoft Pex\bin\Microsoft.Pex.x86.exe&quot; &quot;C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe&quot; /namespacefilter:DigitalVoterList.DBComm.DO! /typefilter:MunicipalityDO! /assemblyresolutiondirectories:&quot;c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies&quot; /explorationreflectionmode:LazyWizard /instrumentedassemblies:Microsoft.VisualBasic.PowerPacks.Vs;MySql.Data;System.Deployment;System.Drawing;System.Windows.Forms /targetx86 /x64failsilently /clrversion:v4.0.30319 /donotopenreport /reportlevel:Xml /reportrootpath:&quot;C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\reports&quot; /testassemblyname:DigitalVoterList.Tests /testframework:VisualStudioUnitTest /testlanguage:cs /testprojectfile:&quot;C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\DigitalVoterList.csproj&quot; /testprojectnotupdate /testprojectskip" machineName="JMEI-THINK" osVersion="Microsoft Windows NT 6.1.7601 Service Pack 1" processorCount="4" clrVersion="4.0.30319.239" bitness="x86" user="jmei"><envVars><envVar name="HOMEPATH" value="\Users\jmei"/>
+<envVar name="PUBLIC" value="C:\Users\Public"/>
+<envVar name="COMPUTERNAME" value="JMEI-THINK"/>
+<envVar name="CLRMONITOR_INJECT_TYPES" value=""/>
+<envVar name="COMPLUS_ProfAPI_ProfilerCompatibilitySetting" value="EnableV2Profiler"/>
+<envVar name="CommonProgramFiles(x86)" value="C:\Program Files (x86)\Common Files"/>
+<envVar name="configsetroot" value="C:\Windows\ConfigSetRoot"/>
+<envVar name="PROCESSOR_IDENTIFIER" value="Intel64 Family 6 Model 42 Stepping 7, GenuineIntel"/>
+<envVar name="APPDATA" value="C:\Users\jmei\AppData\Roaming"/>
+<envVar name="TFS_DIR" value="C:\Program Files\ThinkVantage Fingerprint Software\"/>
+<envVar name="TMP" value="C:\Users\jmei\AppData\Local\Temp"/>
+<envVar name="MOZ_PLUGIN_PATH" value="C:\Program Files (x86)\Foxit Software\Foxit Reader\plugins\"/>
+<envVar name="SWSHARE" value="C:\SWSHARE"/>
+<envVar name="PROCESSOR_REVISION" value="2a07"/>
+<envVar name="CLRMONITOR_INSTRUMENT_TYPES_EXCLUSIONS" value=""/>
+<envVar name="PATHEXT" value=".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW"/>
+<envVar name="TRACKER_ATTACHED" value="1"/>
+<envVar name="COMPLUS_DEFAULTVERSION" value="v4.0.30319"/>
+<envVar name="CLRMONITOR_CLSID" value="{21bbb412-71ac-41f9-a377-48529a4859cf}"/>
+<envVar name="COMMPath" value="C:\Program Files\Lenovo\Communications Utility"/>
+<envVar name="TEMP" value="C:\Users\jmei\AppData\Local\Temp"/>
+<envVar name="LOCALAPPDATA" value="C:\Users\jmei\AppData\Local"/>
+<envVar name="CLRMONITOR_INSTRUMENT_NAMESPACES_EXCLUSIONS" value=""/>
+<envVar name="CLRMONITOR_PROTECT_TYPES" value="Microsoft.FSharp.Text.Printf,Microsoft.FSharp.Text.PrintfImpl"/>
+<envVar name="READYAPPS" value="C:\SWTOOLS\ReadyApps"/>
+<envVar name="CLRMONITOR_INJECT_ASSEMBLIES" value=""/>
+<envVar name="ProgramData" value="C:\ProgramData"/>
+<envVar name="CLRMONITOR_INITIALIZED" value="0x10"/>
+<envVar name="USERDOMAIN" value="jmei-THINK"/>
+<envVar name="windir" value="C:\Windows"/>
+<envVar name="CLRMONITOR_ERASE_FINALIZER_TYPES" value=""/>
+<envVar name="CLRMONITOR_INJECT_NAMESPACES" value=""/>
+<envVar name="NUMBER_OF_PROCESSORS" value="4"/>
+<envVar name="Path" value="C:\Ruby193\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\ThinkPad\Bluetooth Software\;C:\Program Files\ThinkPad\Bluetooth Software\syswow64;C:\Program Files\Broadcom\WHL\;C:\Program Files\Broadcom\WHL\syswow64;C:\Program Files\Broadcom\WHL\SysWow64\;C:\Program Files\Broadcom\WHL\SysWow64\syswow64;C:\Program Files (x86)\Common Files\Lenovo;C:\Program Files (x86)\Lenovo\Access Connections\;C:\SWTOOLS\ReadyApps;c:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Intel\Services\IPT\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\"/>
+<envVar name="ALCKPath" value="C:\Program Files\Lenovo\AutoLock"/>
+<envVar name="TVT" value="C:\Program Files (x86)\Lenovo"/>
+<envVar name="pex_wait_for_server_channel" value="1"/>
+<envVar name="ProgramFiles(x86)" value="C:\Program Files (x86)"/>
+<envVar name="PROCESSOR_LEVEL" value="6"/>
+<envVar name="PROCESSOR_ARCHITEW6432" value="AMD64"/>
+<envVar name="CommonProgramFiles" value="C:\Program Files (x86)\Common Files"/>
+<envVar name="CLRMONITOR_FLAGS" value=""/>
+<envVar name="pex_instrumentation" value="1"/>
+<envVar name="SESSIONNAME" value="Console"/>
+<envVar name="asl.log" value="Destination=file"/>
+<envVar name="CLRMONITOR_INSTRUMENT_TYPES" value="System.Array,System.Array+ArrayEnumerator,System.Array+FunctorComparer`1,System.Array+SZArrayEnumerator,System.Array+SorterGenericArray,System.Array+SorterObjectArray,System.Boolean,System.Byte,System.Char,System.CharEnumerator,System.ComponentModel.Component,System.ComponentModel.Container,System.ComponentModel.Container+Site,System.Convert,System.Currency,System.DateTime,System.Decimal,System.Diagnostics.Assert,System.Double,System.Globalization.CharUnicodeInfo,System.Globalization.CultureTableRecord,System.Globalization.TextInfo,System.Guid,System.IO.MemoryStream,System.IO.Stream,System.IO.StreamReader,System.IO.StreamWriter,System.IO.StringReader,System.IO.StringWriter,System.Int16,System.Int32,System.Int64,System.Lazy`1,System.Lazy`1+Boxed,System.Lazy`1+LazyInternalExceptionHolder,System.Math,System.Nullable,System.Nullable`1,System.OrdinalComparer,System.SByte,System.SZArrayHelper,System.SZArrayHelper+SZGenericArrayEnumerator`1,System.Single,System.String,System.StringComparer,System.Text.ASCIIEncoding,System.Text.DecoderNLS,System.Text.Encoding,System.Text.UTF8Encoding,System.TimeSpan,System.Tuple,System.Tuple`1,System.Tuple`2,System.Tuple`3,System.Tuple`4,System.Tuple`5,System.Tuple`6,System.Tuple`7,System.Tuple`8,System.UInt16,System.UInt32,System.UInt64,System.Xml.XmlTextWriter,System.Xml.XmlTextWriter+Namespace,System.Xml.XmlTextWriter+NamespaceState,System.Xml.XmlTextWriter+SpecialAttr,System.Xml.XmlTextWriter+State,System.Xml.XmlTextWriter+TagInfo,System.Xml.XmlTextWriter+Token,System.Xml.XmlWriter,__Box`1,__SzArrayHelper`1"/>
+<envVar name="PSModulePath" value="C:\Windows\system32\WindowsPowerShell\v1.0\Modules\"/>
+<envVar name="ACPath" value="C:\Program Files (x86)\Lenovo\Access Connections\"/>
+<envVar name="ProgramW6432" value="C:\Program Files"/>
+<envVar name="ProgramFiles" value="C:\Program Files (x86)"/>
+<envVar name="CLRMONITOR_ERASE_CCTOR_TYPES" value=""/>
+<envVar name="FP_NO_HOST_CHECK" value="NO"/>
+<envVar name="pex_clientid" value="pex11860_1"/>
+<envVar name="CodedUITestCurrentBrowser" value="IE"/>
+<envVar name="SystemRoot" value="C:\Windows"/>
+<envVar name="CLRMONITOR_INSTRUMENT_ATTRIBUTE" value="Microsoft.Moles.Framework.Moles.MolesInstrumentAttribute"/>
+<envVar name="CLRMONITOR_PROTECT_ALL_CCTORS" value="1"/>
+<envVar name="CommonProgramW6432" value="C:\Program Files\Common Files"/>
+<envVar name="LOGONSERVER" value="\\JMEI-THINK"/>
+<envVar name="FugueRepository" value="C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 10.0\TEAM TOOLS\STATIC ANALYSIS TOOLS\FxCop\Repository"/>
+<envVar name="USERPROFILE" value="C:\Users\jmei"/>
+<envVar name="VisualStudioDir" value="C:\Users\jmei\Documents\Visual Studio 2010"/>
+<envVar name="CLRMONITOR_SUBSTITUTIONS" value="C:\Windows\assembly\GAC_MSIL\Microsoft.ExtendedReflection\0.94.0.0__31bf3856ad364e35\Microsoft.ExtendedReflection.dll"/>
+<envVar name="CLRMONITOR_INSTRUMENT_ASSEMBLIES_EXCLUSIONS" value=""/>
+<envVar name="CodeContractsInstallDir" value="C:\Program Files (x86)\Microsoft\Contracts\"/>
+<envVar name="HOMEDRIVE" value="C:"/>
+<envVar name="TVTCOMMON" value="C:\Program Files (x86)\Common Files\Lenovo"/>
+<envVar name="ComSpec" value="C:\Windows\system32\cmd.exe"/>
+<envVar name="VS100COMNTOOLS" value="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\Tools\"/>
+<envVar name="USERNAME" value="jmei"/>
+<envVar name="COR_PROFILER" value="{21bbb412-71ac-41f9-a377-48529a4859cf}"/>
+<envVar name="PROCESSOR_ARCHITECTURE" value="x86"/>
+<envVar name="pex_server_channel" value="pex11860"/>
+<envVar name="OS" value="Windows_NT"/>
+<envVar name="CLRMONITOR_INSTRUMENT_NAMESPACES" value="System.Collections,System.Collections.Generic,System.Collections.ObjectModel,System.Collections.Specialized,System.Diagnostics.Contracts"/>
+<envVar name="SystemDrive" value="C:"/>
+<envVar name="CLRMONITOR_INSTRUMENT_ASSEMBLIES" value="DigitalVoterList,DigitalVoterList.Tests,FSharp.Core,FSharp.PowerPack,Microsoft.Contracts,Microsoft.VisualBasic,Microsoft.VisualBasic.PowerPacks.Vs,Microsoft.VisualStudio.QualityTools.UnitTestFramework,MySql.Data,System,System.Core,System.Data,System.Data.Linq,System.Deployment,System.Drawing,System.Web,System.Windows.Forms"/>
+<envVar name="ALLUSERSPROFILE" value="C:\ProgramData"/>
+</envVars>
+</environment>
+<settings/>
+<reflection/>
+<assembly name="DigitalVoterList" version="1.0.0.0" fileVersion="1.0.0.0" fullName="DigitalVoterList, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe" fileName="DigitalVoterList.exe"><settings testFramework="VisualStudioUnitTest" testLanguage="cs"/>
+<fixture name="VoterDOTest" type="DigitalVoterList.DBComm.DO.VoterDOTest" typeName="VoterDOTest" token="2000002" href="fix\DigitalVoterList.Tests.988.html"><type spec="Class"><definition assemblyName="DigitalVoterList.Tests" name="VoterDOTest" token="2000002" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+<settings typeUnderTest="DigitalVoterList.DBComm.DO.VoterDO"/>
+<exploration shortName="Constructor(UInt32, UInt32, String, String, String, Boolean, Boolean)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.Constructor(UInt32, UInt32, String, String, String, Boolean, Boolean)" isDynamicCode="true"><target><methodDefinition assemblyName="DigitalVoterList" name=".ctor" token="600001e"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="pollingStationId" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</type>
+</parameter>
+<parameter name="cpr" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</type>
+</parameter>
+<parameter name="name" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="address" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="city" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="cardPrinted" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</type>
+</parameter>
+<parameter name="voted" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</type>
+</parameter>
+</methodDefinition>
+</target>
+<log level="message" time="2011-12-07 12:31:24Z" category="progress" message="    0 runs"/>
+<log level="message" time="2011-12-07 12:31:24Z" category="symbols" message="could not load symbols for C:\Windows\assembly\GAC_MSIL\Microsoft.Pex\0.94.0.0__31bf3856ad364e35\Microsoft.Pex.exe"/>
+<log level="message" time="2011-12-07 12:31:24Z" category="symbols" message="search path: ;"/>
+<generatedTest id="b77ebd1c-99f1-4d50-bbba-35ab73fd6c62" index="1" run="1" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="ConstructorThrowsContractException712"/>
+<log level="message" time="2011-12-07 12:31:24Z" category="coverage" message="coverage increased from 0 to 2 blocks (+2) after flipping DigitalVoterList.DBComm.DO.VoterDO..ctor at 0x0006"/>
+<generatedTest id="92449775-a8d4-4904-9d47-b5b3f3b84d7a" index="2" run="2" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="Constructor324"/>
+<log level="message" time="2011-12-07 12:31:24Z" category="coverage" message="coverage increased from 2 to 49 blocks (+47) after flipping DigitalVoterList.DBComm.DO.VoterDO..ctor at 0x0006"/>
+<coverage domain="usercodeundertest" unit="block" covered="49" total="54" coveredRatio="0.90740740740740744"/>
+<sourceCoverage xml="cov\e329\cov.xml" html="cov\e329\cov.html"/>
+<result name="Constructor(UInt32, UInt32, String, String, String, Boolean, Boolean)" state="success" duration="0,46"/>
+<duration start="2011-12-07 12:31:24Z" end="2011-12-07 12:31:25Z" seconds="0,47"/>
+</exploration>
+<exploration shortName="Constructor01()" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.Constructor01()" isDynamicCode="true"><target><methodDefinition assemblyName="DigitalVoterList" name=".ctor" token="600001f"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</methodDefinition>
+</target>
+<generatedTest id="4b45f577-aeca-4691-86c4-aa32c4ab3a8e" index="1" run="1" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="Constructor0179"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 0 to 17 blocks (+17) after flipping &lt;unknown method&gt; at 0x&lt;unknown offset&gt;"/>
+<coverage domain="usercodeundertest" unit="block" covered="17" total="26" coveredRatio="0.65384615384615385"/>
+<sourceCoverage xml="cov\e355\cov.xml" html="cov\e355\cov.html"/>
+<result name="Constructor01()" state="success" duration="0,04"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:25Z" seconds="0,05"/>
+</exploration>
+<exploration shortName="CprGet(VoterDO)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.CprGet(VoterDO)" isDynamicCode="true"><target><propertyDefinition assemblyName="DigitalVoterList" name="Cpr" token="17000004"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<propertyType spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</propertyType>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</propertyDefinition>
+</target>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="591a6a52-b135-498b-abf3-98aea5f382a2" index="1" run="2" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="CprGet796"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 0 to 4 blocks (+4) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<coverage domain="usercodeundertest" unit="block" covered="4" total="23" coveredRatio="0.17391304347826087"/>
+<sourceCoverage xml="cov\e357\cov.xml" html="cov\e357\cov.html"/>
+<result name="CprGet(VoterDO)" state="success" duration="0,18"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:25Z" seconds="0,19"/>
+</exploration>
+<exploration shortName="CprSet(VoterDO, Nullable`1&lt;UInt32&gt;)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.CprSet(VoterDO, Nullable`1&lt;UInt32&gt;)" isDynamicCode="true"><target><propertyDefinition assemblyName="DigitalVoterList" name="Cpr" token="17000004"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<propertyType spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</propertyType>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</propertyDefinition>
+</target>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="45bbddde-45df-42db-9dd6-f76507c39fb5" index="1" run="2" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="CprSetThrowsContractException333"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 0 to 5 blocks (+5) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<generatedTest id="cbdeacb1-1454-48b4-8ba9-ca59e1a6d02b" index="2" run="3" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="CprSetThrowsContractException844"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 5 to 7 blocks (+2) after flipping DigitalVoterList.DBComm.DO.VoterDO.set_Cpr at 0x0025"/>
+<generatedTest id="2536fa11-bb41-4533-81bf-3729970cf8d8" index="3" run="4" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="CprSet54"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 7 to 35 blocks (+28) after flipping DigitalVoterList.DBComm.DO.VoterDO.set_Cpr at 0x0037"/>
+<generatedTest id="0a81c00b-640c-4fb2-88c3-287db5f8b65f" index="4" run="6" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="CprSetThrowsContractException644"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 35 to 36 blocks (+1) after flipping DigitalVoterList.DBComm.DO.VoterDO.set_Cpr at 0x004a"/>
+<coverage domain="usercodeundertest" unit="block" covered="36" total="41" coveredRatio="0.87804878048780488"/>
+<sourceCoverage xml="cov\e371\cov.xml" html="cov\e371\cov.html"/>
+<result name="CprSet(VoterDO, Nullable`1&lt;UInt32&gt;)" state="success" duration="0,22"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:25Z" seconds="0,23"/>
+</exploration>
+<exploration shortName="CprStringGet(VoterDO)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.CprStringGet(VoterDO)" isDynamicCode="true"><target><propertyDefinition assemblyName="DigitalVoterList" name="CprString" token="17000005"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<propertyType spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</propertyType>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</propertyDefinition>
+</target>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="3e1824d5-6285-4a54-a193-7a82dfc5c951" index="1" run="2" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="CprStringGetThrowsContractException709"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 0 to 8 blocks (+8) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<coverage domain="usercodeundertest" unit="block" covered="8" total="35" coveredRatio="0.22857142857142856"/>
+<sourceCoverage xml="cov\e374\cov.xml" html="cov\e374\cov.html"/>
+<result name="CprStringGet(VoterDO)" state="success" duration="0,15"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:25Z" seconds="0,16"/>
+</exploration>
+<exploration shortName="FullyInitialized(VoterDO)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.FullyInitialized(VoterDO)" isDynamicCode="true"><target><methodDefinition assemblyName="DigitalVoterList" name="FullyInitialized" token="6000033"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+<resultType spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</resultType>
+</methodDefinition>
+</target>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="223c1ba0-6211-45ad-a65c-e6e7ea9ecab3" index="1" run="2" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="FullyInitialized931"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 0 to 6 blocks (+6) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<generatedTest id="de645a99-b358-4801-bc86-5973757b2b9f" index="2" run="3" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="FullyInitialized205"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 6 to 13 blocks (+7) after flipping DigitalVoterList.DBComm.DO.VoterDO.FullyInitialized at 0x000f"/>
+<coverage domain="usercodeundertest" unit="block" covered="13" total="42" coveredRatio="0.30952380952380953"/>
+<sourceCoverage xml="cov\e376\cov.xml" html="cov\e376\cov.html"/>
+<result name="FullyInitialized(VoterDO)" state="success" duration="0,20"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:25Z" seconds="0,20"/>
+</exploration>
+<exploration shortName="PollingStationGet(VoterDO)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.PollingStationGet(VoterDO)" isDynamicCode="true"><target><propertyDefinition assemblyName="DigitalVoterList" name="PollingStation" token="1700000c"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<propertyType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</propertyType>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</propertyDefinition>
+</target>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="18d4cc06-a501-4ba6-a206-5adabd5e259e" index="1" run="2" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="PollingStationGet796"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="coverage" message="coverage increased from 0 to 2 blocks (+2) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<coverage domain="usercodeundertest" unit="block" covered="2" total="25" coveredRatio="0.08"/>
+<log level="message" time="2011-12-07 12:31:25Z" category="symbols" message="could not load symbols for C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Data.Linq\v4.0_4.0.0.0__b77a5c561934e089\System.Data.Linq.dll"/>
+<sourceCoverage xml="cov\e380\cov.xml" html="cov\e380\cov.html"/>
+<result name="PollingStationGet(VoterDO)" state="success" duration="0,13"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:25Z" seconds="0,12"/>
+</exploration>
+<exploration shortName="PollingStationSet(VoterDO, PollingStationDO)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.PollingStationSet(VoterDO, PollingStationDO)" isDynamicCode="true"><target><propertyDefinition assemblyName="DigitalVoterList" name="PollingStation" token="1700000c"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<propertyType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</propertyType>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</propertyDefinition>
+</target>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="03e39dec-eb41-4ca3-ad23-5ebb3ef75bf9" index="1" run="2" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="PollingStationSetThrowsContractException28"/>
+<log level="message" time="2011-12-07 12:31:26Z" category="coverage" message="coverage increased from 0 to 1 blocks (+1) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.PollingStationDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\PollingStationDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.PollingStationDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.PollingStationDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="municipalityId_nullu" position="0"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="id_nullu1" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="name_s" position="2"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="address_s1" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="municipalityId_nullu" position="0"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="id_nullu1" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="name_s" position="2"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="address_s1" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="1b67aaac-b548-4535-be1a-02f72570e868" index="2" run="6" status="normaltermination" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="PollingStationSet349"/>
+<log level="message" time="2011-12-07 12:31:26Z" category="coverage" message="coverage increased from 1 to 18 blocks (+17) after flipping DigitalVoterList.DBComm.DO.VoterDO.$InvariantMethod$ at 0x0026"/>
+<coverage domain="usercodeundertest" unit="block" covered="18" total="27" coveredRatio="0.66666666666666663"/>
+<sourceCoverage xml="cov\e385\cov.xml" html="cov\e385\cov.html"/>
+<result name="PollingStationSet(VoterDO, PollingStationDO)" state="success" duration="0,35"/>
+<duration start="2011-12-07 12:31:25Z" end="2011-12-07 12:31:26Z" seconds="0,36"/>
+</exploration>
+<exploration shortName="UpdateValues(VoterDO, IDataObject)" fullName="DigitalVoterList.DBComm.DO.VoterDOTest.UpdateValues(VoterDO, IDataObject)" isDynamicCode="true"><target><methodDefinition assemblyName="DigitalVoterList" name="UpdateValues" token="6000034"><declaringType assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+<parameter name="dummy" position="1"><type spec="Class"><definition assemblyName="DigitalVoterList" name="IDataObject" token="200000b" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</parameter>
+</methodDefinition>
+</target>
+<log level="warning" time="2011-12-07 12:31:26Z" wikiTopic="Usable Type Guessed" category="domains" message="will use DigitalVoterList.DBComm.DO.VoterDO as IDataObject"><codeUpdate kind="AddOrUpdateAttributeCodeUpdate" name="Add [PexUseType]" fileNameHint="PexAssemblyInfo"><attributeCtor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000b67"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+</type>
+</parameter>
+<parameter name="targetType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</attributeCtor>
+<argument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</argument>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+</log>
+<log level="warning" time="2011-12-07 12:31:26Z" wikiTopic="Usable Type Guessed" category="domains" message="will use DigitalVoterList.DBComm.DO.PollingStationDO as IDataObject"><codeUpdate kind="AddOrUpdateAttributeCodeUpdate" name="Add [PexUseType]" fileNameHint="PexAssemblyInfo"><attributeCtor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000b67"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+</type>
+</parameter>
+<parameter name="targetType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</attributeCtor>
+<argument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</argument>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+</log>
+<log level="warning" time="2011-12-07 12:31:26Z" wikiTopic="Usable Type Guessed" category="domains" message="will use DigitalVoterList.DBComm.DO.MunicipalityDO as IDataObject"><codeUpdate kind="AddOrUpdateAttributeCodeUpdate" name="Add [PexUseType]" fileNameHint="PexAssemblyInfo"><attributeCtor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000b67"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+</type>
+</parameter>
+<parameter name="targetType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</attributeCtor>
+<argument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="MunicipalityDO" token="200002f" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</argument>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+</log>
+<log level="warning" time="2011-12-07 12:31:26Z" wikiTopic="Usable Type Guessed" category="domains" message="will use DigitalVoterList.DBComm.DO.LogDO as IDataObject"><codeUpdate kind="AddOrUpdateAttributeCodeUpdate" name="Add [PexUseType]" fileNameHint="PexAssemblyInfo"><attributeCtor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000b67"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexUseTypeAttribute" token="200023e" namespace="Microsoft.Pex.Framework.Using"/>
+</type>
+</parameter>
+<parameter name="targetType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</attributeCtor>
+<argument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="LogDO" token="2000030" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</argument>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+</log>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.VoterDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\VoterDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="System.Data.Linq"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.VoterDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<reference name="Microsoft.Pex.Framework"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="VoterDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="_pollingStation_entityRef" position="0"><type spec="ValueType"><definition assemblyName="System.Data.Linq" valueType="true" name="EntityRef`1" token="200014e" namespace="System.Data.Linq"><genericParameter value="TEntity"/>
+</definition>
+<genericTypeArgument spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PrimaryKey&gt;k__BackingField_nullu" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;PollingStationId&gt;k__BackingField_nullu1" position="2"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Name&gt;k__BackingField_s" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;Address&gt;k__BackingField_s1" position="4"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;City&gt;k__BackingField_s2" position="5"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="&lt;CardPrinted&gt;k__BackingField_nullb" position="6"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="&lt;Voted&gt;k__BackingField_nullb1" position="7"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Boolean" token="200009d" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="VoterDO" token="200000c" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="13be64e5-2a84-4519-8561-3961e8f5bc34" index="1" run="2" exceptionState="unexpected" status="exception" explorationIsDynamicCode="true" failed="true" failureText="Exception not validated by PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentException), AcceptExceptionSubtypes), PexAllowedExceptionFromTypeUnderTest(typeof(InvalidOperationException)), documented, contract requires failure at type-under-test surface." generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="UpdateValuesThrowsNullReferenceException249"/>
+<explorable title="guessed how to create DigitalVoterList.DBComm.DO.PollingStationDO" kind="guessedclass" isExplorableTypeExported="true"><explorableType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</explorableType>
+<testAssemblyName name="DigitalVoterList.Tests"/>
+<update kind="CollectionCodeUpdate" name="Accept/Edit Factory"><codeUpdate kind="AddTypeCodeUpdate" name="Add type" fileNameHint="Factories\PollingStationDOFactory" abstract="true" sealed="true" visibility="Public"><doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.PollingStationDO instances</summary>
+]]></doc>
+<reference name="mscorlib"/>
+<reference name="Microsoft.Pex.Framework"/>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<typeDefinition assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<baseType spec="Class"><definition assemblyName="mscorlib" name="Object" token="2000002" namespace="System"/>
+</baseType>
+<target><assembly name="DigitalVoterList.Tests"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="AddMethodCodeUpdate" name="Add method" visibility="Public"><attribute><ctor><definition assemblyName="Microsoft.Pex.Framework" name=".ctor" token="6000e46"><declaringType assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+<parameter this="true" name="this" position="0"><type spec="Class"><definition assemblyName="Microsoft.Pex.Framework" name="PexFactoryMethodAttribute" token="200027d" namespace="Microsoft.Pex.Framework"/>
+</type>
+</parameter>
+<parameter name="factoredType" position="1"><type spec="Class"><definition assemblyName="mscorlib" name="Type" token="2000130" namespace="System"/>
+</type>
+</parameter>
+</definition>
+</ctor>
+<ctorArgument><value kind="TypeOfExpression"><type spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</type>
+</value>
+</ctorArgument>
+</attribute>
+<doc><![CDATA[<summary>A factory for DigitalVoterList.DBComm.DO.PollingStationDO instances</summary>
+]]></doc>
+<reference name="DigitalVoterList" location="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\bin\Debug\DigitalVoterList.exe"/>
+<reference name="mscorlib"/>
+<reference name="System.Data.Linq"/>
+<methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="municipalityId_nullu" position="0"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="id_nullu1" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="name_s" position="2"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="address_s1" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+<target><typeDefinition assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+</target>
+</codeUpdate>
+<codeUpdate kind="SelectCodeUpdate" name="Select" selectKind="Body"><target><methodDefinition assemblyName="DigitalVoterList.Tests" name="Create" static="true"><declaringType assemblyName="DigitalVoterList.Tests" name="PollingStationDOFactory" token="ffffffff" namespace="DigitalVoterList.DBComm.DO"/>
+<parameter name="municipalityId_nullu" position="0"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="id_nullu1" position="1"><type spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="Nullable`1" token="200034c" namespace="System"><genericParameter value="T"/>
+</definition>
+<genericTypeArgument spec="ValueType"><definition assemblyName="mscorlib" valueType="true" name="UInt32" token="2000181" namespace="System"/>
+</genericTypeArgument>
+</type>
+</parameter>
+<parameter name="name_s" position="2"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<parameter name="address_s1" position="3"><type spec="Class"><definition assemblyName="mscorlib" name="String" token="200004e" namespace="System"/>
+</type>
+</parameter>
+<resultType spec="Class"><definition assemblyName="DigitalVoterList" name="PollingStationDO" token="2000026" namespace="DigitalVoterList.DBComm.DO"/>
+</resultType>
+</methodDefinition>
+</target>
+</codeUpdate>
+</update>
+</explorable>
+<generatedTest id="7a5df9a8-bd88-4177-b32b-5fc57240daf3" index="2" run="4" exceptionState="expected" status="expectedexception" explorationIsDynamicCode="true" generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="UpdateValuesThrowsContractException890"/>
+<log level="message" time="2011-12-07 12:31:26Z" category="coverage" message="coverage increased from 2 to 10 blocks (+8) after flipping DigitalVoterList.DBComm.DO.VoterDO.UpdateValues at 0x001d"/>
+<generatedTest id="5a35b25b-b188-41e0-ba52-5a06b92a3de7" index="3" run="7" exceptionState="unexpected" status="exception" explorationIsDynamicCode="true" failed="true" failureText="Exception not validated by PexAllowedExceptionFromTypeUnderTest(typeof(ArgumentException), AcceptExceptionSubtypes), PexAllowedExceptionFromTypeUnderTest(typeof(InvalidOperationException)), documented, contract requires failure at type-under-test surface." generated="true" new="true" assemblyName="DigitalVoterList.Tests" name="UpdateValuesThrowsInvalidCastException286"/>
+<coverage domain="usercodeundertest" unit="block" covered="10" total="86" coveredRatio="0.11627906976744186"/>
+<sourceCoverage xml="cov\e406\cov.xml" html="cov\e406\cov.html"/>
+<result name="UpdateValues(VoterDO, IDataObject)" state="success" duration="0,59"/>
+<duration start="2011-12-07 12:31:26Z" end="2011-12-07 12:31:26Z" seconds="0,59"/>
+</exploration>
+<coverage domain="usercodeundertest" unit="block" covered="97" total="173" coveredRatio="0.56069364161849711"/>
+<sourceCoverage xml="cov\t988\cov.xml" html="cov\t988\cov.html"/>
+<duration start="2011-12-07 12:31:24Z" end="2011-12-07 12:31:26Z" seconds="2.4254185"/>
+</fixture>
+<coverage domain="usercodeundertest" unit="block" covered="97" total="173" coveredRatio="0.56069364161849711"/>
+<sourceCoverage xml="cov\a36302961\cov.xml" html="cov\a36302961\cov.html"/>
+<duration start="2011-12-07 12:31:24Z" end="2011-12-07 12:31:26Z" seconds="2.5034187"/>
+<frameTreeRef exceptionCount="3"/>
+</assembly>
+<duration start="2011-12-07 12:31:23Z" end="2011-12-07 12:31:27Z" seconds="3.0494196"/>
+<background/>
+</pex>

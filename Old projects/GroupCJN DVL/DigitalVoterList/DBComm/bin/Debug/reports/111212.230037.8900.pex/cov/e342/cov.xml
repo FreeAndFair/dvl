@@ -1,0 +1,242 @@
+﻿<documents created="2011-12-12 22:00:38Z"><document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\MunicipalityDO.cs" renderPrefix="s0"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="MunicipalityDO.cs" company="DVL">
+// <author>Jan Meier</author>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System.Collections.Generic;
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
+    /// The entity representing a Municipality entity
+    /// </summary>
+    [Table(Name = "municipality")]
+    public class MunicipalityDO : IDataObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MunicipalityDO"/> class.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="address">
+        /// The address.
+        /// </param>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        ]]></source>
+</chunk>
+<chunk hits="2" offset="000b" domain="usercodeundertest"><source><![CDATA[public MunicipalityDO(uint? id, string address, string city, string name)]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="0012" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0013" domain="usercodeundertest"><source><![CDATA[this.Id = id;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="001b" domain="usercodeundertest"><source><![CDATA[this.Address = address;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0023" domain="usercodeundertest"><source><![CDATA[this.City = city;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="002b" domain="usercodeundertest"><source><![CDATA[this.Name = name;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="0034" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MunicipalityDO"/> class. 
+        /// Parameter-less constructor required for entity mapping. No field-
+        /// initialization is done, i.e. all fields are null.
+        /// </summary>
+        public MunicipalityDO()
+        {
+        }
+
+        /// <summary>
+        /// Gets PrimaryKey.
+        /// </summary>
+        [Column(IsPrimaryKey = true, Name = "id")]
+        public uint? PrimaryKey
+        {
+            get
+            {
+                return this.Id;
+            }
+
+            private set
+            {
+                this.Id = value;
+            }
+        }
+
+        ]]></source>
+</chunk>
+<method name=".ctor" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.MunicipalityDO" typeName="MunicipalityDO" token="600007c" module="DBComm.exe"><hits><hit index="0" value="1"/>
+<hit index="1" value="1"/>
+<hit index="3" value="1"/>
+<hit index="4" value="1"/>
+<hit index="5" value="1"/>
+<hit index="6" value="1"/>
+<hit index="7" value="1"/>
+<hit index="8" value="1"/>
+<hit index="9" value="1"/>
+<hit index="10" value="1"/>
+<hit index="11" value="1"/>
+<hit index="12" value="1"/>
+<hit index="13" value="1"/>
+<hit index="14" value="1"/>
+<hit index="15" value="1"/>
+</hits>
+<coverage domain="usercodeundertest" unit="block" covered="7" total="7" coveredRatio="1"/>
+</method>
+<chunk hits="1" offset="0000" domain="usercodeundertest"><source><![CDATA[private EntitySet<PollingStationDO> _pStations = new EntitySet<PollingStationDO>();]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        [Association(Name = "FK_PT_M", Storage = "_pStations", ThisKey = "PrimaryKey", OtherKey = "MunicipalityId")]
+        public ICollection<PollingStationDO> PollingStations
+        {
+            get
+            {
+                return _pStations;
+            }
+
+            set
+            {
+                Contract.Requires(value != null);
+                _pStations.AddRange(value);
+            }
+        }
+
+        /// <summary>
+        /// Gets Id.
+        /// </summary>
+        public uint? Id { get; private set; }
+
+        /// <summary>
+        /// Gets Address.
+        /// </summary>
+        [Column]
+        public string Address { get; private set; }
+
+        /// <summary>
+        /// Gets City.
+        /// </summary>
+        [Column]
+        public string City { get; private set; }
+
+        /// <summary>
+        /// Gets Name.
+        /// </summary>
+        [Column]
+        public string Name { get; private set; }
+
+        public void ResetAssociations()
+        {
+            _pStations = new EntitySet<PollingStationDO>();
+        }
+
+        #region Implementation of IDataObject
+
+        /// <summary>
+        /// Has all the fields of the object been initialized?
+        /// </summary>
+        /// <returns>
+        /// True if all fields are non-null.
+        /// </returns>
+        public bool FullyInitialized()
+        {
+            return Id != null && Address != null && Name != null && City != null;
+        }
+
+        /// <summary>
+        /// Set the values of this object to the values of the dummy object, if the dummys value is non-null.
+        /// </summary>
+        /// <param name="dummy">
+        /// The dummy object, representing new values.
+        /// </param>
+        public void UpdateValues(IDataObject dummy)
+        {
+            MunicipalityDO municipalityDummy = dummy as MunicipalityDO;
+            Contract.Assert(municipalityDummy != null);
+
+            this.Address = municipalityDummy.Address ?? this.Address;
+            this.City = municipalityDummy.City ?? this.City;
+            this.Id = municipalityDummy.Id ?? this.Id;
+            this.Name = municipalityDummy.Name ?? this.Name;
+        }
+
+        #endregion
+
+        public override string ToString()
+        {
+            return this.Name ?? string.Empty;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            var other = obj as MunicipalityDO;
+
+            return other.PrimaryKey == this.PrimaryKey && other.Address == this.Address && other.City == this.City && other.Id == this.Id
+                   && other.Name == this.Name;
+        }
+
+        // override object.GetHashCode
+        public override int GetHashCode()
+        {
+            if (Name != null)
+                return this.Name.GetHashCode();
+
+            return 0;
+        }
+    }
+}]]></source>
+</chunk>
+</document>
+<document src="(no sources available for some parts of DBComm.PexTests, System.Data.Linq, DBComm)" missing="true"><method name="Constructor" type="DBComm.DBComm.DO.MunicipalityDOTest" token="6000001" module="&lt;In Memory Module&gt;"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+<method name=".ctor" type="System.Data.Linq.EntitySet`1" token="6000d03" module="System.Data.Linq.dll"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+<method name="set_Id" type="DBComm.DBComm.DO.MunicipalityDO" token="6000083" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_Address" type="DBComm.DBComm.DO.MunicipalityDO" token="6000085" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_City" type="DBComm.DBComm.DO.MunicipalityDO" token="6000087" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_Name" type="DBComm.DBComm.DO.MunicipalityDO" token="6000089" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+</document>
+</documents>

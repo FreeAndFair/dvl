@@ -1,0 +1,86 @@
+system_chart VOTER_MATERIAL_IO
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    course: "BDSA";
+    university: "ITU";
+    created: "2011-11-30";
+  explanation
+    "Input/Output for the election data."
+    
+  cluster IO description "Imports and exports raw voter data, polling cards, voter lists and polling venue data."
+end
+
+cluster_chart IO
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Imports and exports raw voter data, polling cards, voter lists and polling venue data."
+    
+  class FILE_LOADER description "Loads a xml file, and parse the content to polling venues."
+  class FILE_SAVER description "Saves polling cards, voter lists and local polling venue data."
+end
+
+class_chart FILE_LOADER
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Loads a xml file, and parse the content to polling venues."
+  query
+    "Can you load this xml file, and parse it to a list of polling venues?"
+  constraint
+    "The path must not be 'nothing'.",
+    "The file must exists."
+end
+
+class_chart FILE_SAVER
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Saves polling cards, voter lists and local polling venue data."
+  query
+    "May I have a new file saver for this polling venue and this path?",
+    "Can you devide these voters into voter lists, and save them to this location on the harddrive?",
+    "Can you save the polling cards for this polling venue on the harddrive?",
+    "Can you save these voters to a csv file seperated with a ';'?"
+  constraint
+    "The path must not be 'nothing'",
+    "The polling venue name must not be 'nothing'",
+    "The file must exists on the harddrive after it has been saved",
+    "The name of the polling venue must be more than 0 characters"
+end
+
+static_diagram VOTER_MATERIAL_IO
+component
+  cluster IO
+  component 
+    class FILE_LOADER
+      feature
+        GetPollingVenues : LIST[POLLINCARDS] -> path : STRING -> notifier : VALIDATIONEVENTHANDLER 
+           require  path /= void and notifier /= void and "file.exist(path)" and "file extension = .xml"
+          end
+    end
+    
+    class FILE_SAVER
+      feature
+        make: FILE_SAVER -> path : String -> pollingVenueName : STRING
+          require path /= void and pollingVenueName /= void and pollingVenueNane.lenght > 0
+          ensure "DIRECTORY.exists(path + pollingVenueName)"
+          end
+        SaveVoterList -> persons : LIST[PERSONS] -> electionName : STRING ->electionDate : STRING
+          require persons /= void
+          ensure "DIRECTORY.GetFiles(path).Length > 0"
+          end
+        SavePollingCards -> pollingVenue : POLLINGVENUE -> electionName : STRING ->electionDate : STRING
+          require pollingVenue /= void
+          ensure "FILE.exist(path)"
+          end
+        SaveVoters -> pollingVenue : POLLINGVENUE
+          require pollingVenue /= void
+          ensure "FILE.exist(path)"
+          end
+    end
+  end
+end

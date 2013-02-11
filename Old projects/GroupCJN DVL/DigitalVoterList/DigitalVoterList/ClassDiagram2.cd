@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DigitalVoterList.Central.Models.Model" Collapsed="true">
+    <Position X="11" Y="3" Width="2" />
+    <NestedTypes>
+      <Delegate Name="DigitalVoterList.Central.Models.Model.ModelChangedHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Central\Models\Model.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Enum Name="DigitalVoterList.Central.Models.Model.ChangeType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Central\Models\Model.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <AssociationLine Name="voterBoxManagers" Type="DigitalVoterList.Central.Models.VoterBoxManager">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.387" Y="-0.25" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="voterCardGenerators" Type="DigitalVoterList.Central.Models.VoterCardGenerator">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.354" Y="-0.217" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAQCBAAAAAAAAQhAAAAAAAAAAAAAAAAICAAAAAAAAg=</HashCode>
+      <FileName>Central\Models\Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="voterSelection" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="voterBoxManagers" />
+      <Field Name="voterCardGenerators" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DigitalVoterList.Central.Models.VoterBoxManager" Collapsed="true">
+    <Position X="6.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAEQAAAAgAEAAAAABBAIBCACAAAABAACAA=</HashCode>
+      <FileName>Central\Models\VoterBoxManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DigitalVoterList.Central.Models.VoterCardGenerator" Collapsed="true">
+    <Position X="8.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QABEEEDACAEAQAABANAAEAIAICAAACAAAIgABEACRAA=</HashCode>
+      <FileName>Central\Models\VoterCardGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DigitalVoterList.Central.Models.VoterSelection" Collapsed="true">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAEAARAAAAEAAAAAIAAgEDAEKBCABCAAAAAQAAABEA=</HashCode>
+      <FileName>Central\Models\VoterSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

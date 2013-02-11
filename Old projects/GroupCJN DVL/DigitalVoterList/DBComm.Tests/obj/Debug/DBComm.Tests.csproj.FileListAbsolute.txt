@@ -1,0 +1,7 @@
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\bin\Debug\DBComm.Tests.dll
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\bin\Debug\DBComm.Tests.pdb
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\bin\Debug\DBComm.exe
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\bin\Debug\DBComm.pdb
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\obj\Debug\DBComm.Tests.dll
+C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm.Tests\obj\Debug\DBComm.Tests.pdb

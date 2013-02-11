@@ -1,0 +1,1624 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Municipalities>
+  <Municipality>
+    <Name>Hvidovre Kommune</Name>
+    <Street>Bedfordvej 138</Street>
+    <City>2650 Hvidovre</City>
+    <PollingVenues>
+      <PollingVenue>
+        <Name>Vigerslev Alles Skole</Name>
+        <Street>Spangbergsgade 108</Street>
+        <City>2650 Hvidovre</City>
+        <Voters>
+          <Voter>
+            <FirstName>Signe</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Rosenborggade 63</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2601441990</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Ella</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Overdrevsvej 58</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1602801884</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Magnus</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Nøddebogade 120</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2006492027</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Liva</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Horsekildevej 7</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1602671922</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Karla</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Helleborg 16</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1310732014</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Carl</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Romsøgade 26</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0907922023</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Amalie</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Bogholder Allé 147</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0108241958</CprNo>
+            <PollingTable>9</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Marius</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>Havneholmen 23</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1403201889</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mathias</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>J.E. Ohlsens Gade 145</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0404181861</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Katrine</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Hejrevej 44</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1706311994</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Silas</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Oliemøllegade 84</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0411271995</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nikolaj</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Åvendingen 115</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1805361971</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Isabella</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Vedbækgade 115</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1105342020</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Freja</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Utterslev Torv 196</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0601581956</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sara</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Vigerslev Godsvej 15</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1205481912</CprNo>
+            <PollingTable>4</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>August</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Spanagervej 53</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0402381917</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Filippa</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Emdrup Engvej 19</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0108601942</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Selma</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Reventlowsgade 83</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1902431928</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jonathan</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Oldfuxvej 54</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2509172019</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Philip</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Småkær 133</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1309491915</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>August</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Harald Jensens Gade 166</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1109321991</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Malou</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Prinsessegade 119</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2304481860</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Felix</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Skindergade 199</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2301761987</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jacob</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Hallandsgade 3</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0508522013</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Christian</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Henrik Pontoppidans Vej 100</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1201482023</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Selma</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Tietgensgade 154</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0309411964</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Filippa</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>P-Vej 31</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1001661894</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Carl</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Persillevej 122</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2410301953</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Clara</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Peter Vedels Gade 124</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1610501992</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Rasmus</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Sundkaj 189</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0511502019</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nanna</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Rasmus Rasks Vej 109</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0802272008</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Signe</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Karensgade 83</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2406351868</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emilie</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Åvendingen 74</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2502651946</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nikolaj</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Tingbjerg Ås 125</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1009362023</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nicoline</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Krokodillegade 164</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2406471874</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Cecilie</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Irmingersgade 111</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2304751900</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emma</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Yderlandsvej 150</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2602171950</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Daniel</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Poul Hartlings Gade 194</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2609901901</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Selma</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Galionsvej 100</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0804142046</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Marie</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Kirstinedalsvej 104</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2705561954</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Elias</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Jeppes Allé 114</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1502351889</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mathilde</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Nysøvej 82</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1203152026</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Lærke</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Gråspurvevej 18</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0503251968</CprNo>
+            <PollingTable>9</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Rosa</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Knivholtvej 38</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2503531990</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Tobias</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Balders Plads 24</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1809552051</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Rosa</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Ved Volden 117</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1907121864</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Silje</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Cumberlandsgade 78</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2510141982</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Katrine</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Oscar Pettifords Vej 39</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1805251884</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Laura</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Engdals Allé 122</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0303551978</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jonathan</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Møllerlodden 123</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0311411939</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jonas</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Rugagervej 70</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2609571863</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Malthe</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Tornestykket 3</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1910822029</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Noah</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Lyrskovgade 50</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2802741981</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nicoline</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Eriksholmvej 109</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1803502028</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mathias</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Perlestikkervej 52</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2403821961</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Christoffer</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Lyongade 6</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1410831869</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Julie</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Hallandsgade 122</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0810641996</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Clara</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Emdrup Vænge 66</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2905131888</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Julie</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Kantorparken 193</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1606162052</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nanna</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Bryggervangen 22</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1207451976</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Asta</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Ungarnsgade 198</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2505271998</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Astrid</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Kansasvej 39</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1409771906</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Isabella</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Lundgærdet 55</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2905542042</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sofia</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Højlandsvangen 41</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0608221894</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Johanne</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Tyrolsgade 71</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2508751862</CprNo>
+            <PollingTable>11</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jeppe</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Center Boulevard 180</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0804331999</CprNo>
+            <PollingTable>9</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nicklas</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Tjørnegade 17</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0111621947</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Malou</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Javavej 6</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1307791988</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Amalie</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Sangfuglestien 19</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1811121862</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mathilde</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Sydhavnsgade 184</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0807572046</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Benjamin</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Torpstien 184</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2704782037</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Thea</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Ved Vigen 195</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2403562042</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Storm</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>Kirsten Kimers Vej 157</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1108911863</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sara</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Nebbegårdsbakken 160</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0808811890</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Lucas</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Tudsemindevej 194</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1306861989</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Tobias</FirstName>
+            <LastName>Møller</LastName>
+            <Street>O-Vej 46</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0102261939</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emilie</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Hf. Borgervænget 64</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2005472056</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Astrid</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Hornemansgade 148</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2509221882</CprNo>
+            <PollingTable>16</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Cecilie</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Mosedalvej 19</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2404261908</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Freja</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Serridslevvej 145</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2809182042</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Christoffer</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Dampfærgevej 13</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2101552027</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Oliver</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Holsteinsgade 49</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1503892035</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Felix</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>Moselgade 152</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2002651943</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Philip</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Ottiliavej 6</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2309571867</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Andrea</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Willemoesgade 13</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0607422008</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Julie</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Johan Kellers Vej 37</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2202132056</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Katrine</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Christian II's Allé 125</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1707301928</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Tilde</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Birkagervej 195</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1603442000</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Johanne</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Følfodvej 197</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0811881896</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Frida</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Lillevang 52</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1209651910</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Silje</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Alsgade 166</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0206462050</CprNo>
+            <PollingTable>11</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mille</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Hindustanvej 148</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2708521860</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nanna</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>U-Vej 14</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2706872042</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jacob</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Brønshøjvej 1</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1905432045</CprNo>
+            <PollingTable>16</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sofia</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Gulkløvervej 104</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2409741924</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Carl</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Haldagervej 96</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0205211967</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Alexander</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Blåmejsevej 102</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2910251939</CprNo>
+            <PollingTable>9</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Naja</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Rævegade 44</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0608601988</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Liva</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Fensmarkgade 58</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1303251880</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Valdemar</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Hedemannsgade 90</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0811921999</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+        </Voters>
+      </PollingVenue>
+      <PollingVenue>
+        <Name>Ålholm Skole</Name>
+        <Street>Blommehaven 92</Street>
+        <City>2650 Hvidovre</City>
+        <Voters>
+          <Voter>
+            <FirstName>Rasmus</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Stenhuggervej 87</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2405432035</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Oliver</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>Rosengang 194</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1808751883</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Josefine</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Rentemestervej 60</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2708311944</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Bertram</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Flensborggade 76</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0910561955</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Felix</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Sognefjordsgade 77</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0706421917</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Oscar</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Børsgade 22</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1611352003</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Maja</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>Fredens Ark 175</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2411841974</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Liva</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>B-Vej 109</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2609301956</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Signe</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Bissensgade 75</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1711731944</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nicoline</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Rømersgade 48</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1902111936</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>August</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Lille Strandstræde 9</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1701921897</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emil</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Tjørnelunds Allé 125</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2308482025</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Marius</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Amager Strand Promenaden 112</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0508501967</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Christoffer</FirstName>
+            <LastName>Larsen</LastName>
+            <Street>Pommernsgade 12</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2211611913</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Tilde</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Højbro Plads 99</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1905811890</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mille</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Højbro Plads 95</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0309742054</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Magnus</FirstName>
+            <LastName>Sørensen</LastName>
+            <Street>Harespringet 3</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2902372021</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Alfred</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Hf. Bryggen 172</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2611771881</CprNo>
+            <PollingTable>16</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Oscar</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Ledagervej 39</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2907491909</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mathilde</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Rønningsvej 124</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2611391970</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Rosa</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Vermlandsgade 101</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2710412014</CprNo>
+            <PollingTable>4</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Naja</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Hjulmagerstien 66</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0406492028</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Signe</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Prøvestensbroen 56</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2109651882</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Alberte</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Ulrik Birchs Allé 135</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2203741968</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Silas</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Lautrupskaj 3</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2804731861</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Laura</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Grønnegade 184</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2403482004</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Daniel</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Christian II's Allé 187</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1810441975</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Lucas</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Bjerregårdsvej 29</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0602821897</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Marius</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Drejøgade 111</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1207721959</CprNo>
+            <PollingTable>11</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Albert</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Jernbane Allé 89</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2606851985</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Christian</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Donaugade 10</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2011401937</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sofie</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Slejpnersgade 37</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0401191910</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Gustav</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Bækkeskovvej 67</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0403611957</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emil</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Løgstørgade 48</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1205641977</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Frida</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Jyllingevej 86</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0705421890</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sofia</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Drogdensgade 195</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2808161906</CprNo>
+            <PollingTable>9</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Elias</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Balders Plads 35</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1410741975</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sander</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Rødbyvej 32</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2506231903</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Christian</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Fragtvej 28</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0901351957</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Villads</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Skjalm Hvides Gade 85</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0611751927</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nanna</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Lobeliavej 113</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1409641934</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Carl</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Hjørringgade 18</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1901561969</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jonathan</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Sejrøgade 106</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1310141941</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Frida</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Fredens Ark 2</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0506112016</CprNo>
+            <PollingTable>9</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Rasmus</FirstName>
+            <LastName>Thomsen</LastName>
+            <Street>Herbergvejen 32</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0511521947</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Marius</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Snertingevej 57</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2601472045</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mikkel</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Gadstrupvej 11</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2002201971</CprNo>
+            <PollingTable>4</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Julie</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Emdrupvej 61</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2909852002</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Lucas</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Gammel Vartov Vej 177</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1504741909</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sander</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Åhaven 11</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2106791911</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sofie</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Antoinettevej 7</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0210211912</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Victoria</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Milosvej 34</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0701422032</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Thea</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Ved Amagerbanen 183</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0409822042</CprNo>
+            <PollingTable>11</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sara</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Mysundegade 78</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2002482008</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Freja</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Vardegade 41</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2909771916</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Albert</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Holmestien 173</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2111861901</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Ella</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Eskildstrupvej 29</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0703232024</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Isabella</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Nørre Søgade 187</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0607652050</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mads</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Krimsvej 112</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1407201883</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Villads</FirstName>
+            <LastName>Andersen</LastName>
+            <Street>Sankt Jakobs Plads 104</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2211641981</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Malthe</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Herman Bangs Plads 94</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0303221925</CprNo>
+            <PollingTable>3</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Maja</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Tranehavevej 9</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0711531998</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Johan</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Hf. Elmebo 152</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2705222047</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Cecilie</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Omøgade 31</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2305272016</CprNo>
+            <PollingTable>5</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Jonas</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Fiolstræde 185</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1210702015</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Victor</FirstName>
+            <LastName>Møller</LastName>
+            <Street>Helsingborggade 34</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2110911887</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Alfred</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Gislingevej 142</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0604322041</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Daniel</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Engvej 7</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0504702045</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Frida</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Elsdyrsgade 89</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2402342034</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Ella</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Sokkelundsvej 54</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0404301952</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sara</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Thorupgård Allé 151</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2806172018</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mathilde</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Mirabellevej 79</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2702171876</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Magnus</FirstName>
+            <LastName>Poulsen</LastName>
+            <Street>Fenrisgade 145</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1410502051</CprNo>
+            <PollingTable>16</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Mikkel</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Sydområdet 13</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1503471947</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Josefine</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Horsebakken 120</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2107601996</CprNo>
+            <PollingTable>18</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Anna</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Rantzausgade 126</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0106652034</CprNo>
+            <PollingTable>2</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Frederikke</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Henrik Harpestrengs Vej 121</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1103831876</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sofia</FirstName>
+            <LastName>Hansen</LastName>
+            <Street>Stenkløvervej 30</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2907651886</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Villads</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Rudolph Berghs Gade 190</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1605612017</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Tilde</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Langdraget 133</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0802381914</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Sander</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Grønvangen 53</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0702282035</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Villads</FirstName>
+            <LastName>Christiansen</LastName>
+            <Street>Hjalmar Bergstrøms Vej 81</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2310341899</CprNo>
+            <PollingTable>19</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Clara</FirstName>
+            <LastName>Kristensen</LastName>
+            <Street>Laplandsgade 164</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0211711898</CprNo>
+            <PollingTable>16</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emma</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Ragnagade 111</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0501441926</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Lea</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Nordre Toldbod 48</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0508351860</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Alma</FirstName>
+            <LastName>Olsen</LastName>
+            <Street>Byvangen 179</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2606862004</CprNo>
+            <PollingTable>6</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Karla</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Tingskrivervej 128</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0507741984</CprNo>
+            <PollingTable>15</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nikolaj</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Sørupvej 95</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2503751889</CprNo>
+            <PollingTable>7</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Maja</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Kongsdalvej 154</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2603221916</CprNo>
+            <PollingTable>12</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Johan</FirstName>
+            <LastName>Christensen</LastName>
+            <Street>Vindebrogade 80</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2805841947</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Daniel</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Augustagade 167</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2603301877</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Silas</FirstName>
+            <LastName>Madsen</LastName>
+            <Street>Agerbo 115</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2004521927</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Emilie</FirstName>
+            <LastName>Nielsen</LastName>
+            <Street>Manøgade 20</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2003832024</CprNo>
+            <PollingTable>8</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Anna</FirstName>
+            <LastName>Knudsen</LastName>
+            <Street>Sneppevej 111</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1302291878</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Bertram</FirstName>
+            <LastName>Pedersen</LastName>
+            <Street>Florensvej 113</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2711642037</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Julie</FirstName>
+            <LastName>Petersen</LastName>
+            <Street>Vesterbrogade 161</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0107412000</CprNo>
+            <PollingTable>14</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Magnus</FirstName>
+            <LastName>Rasmussen</LastName>
+            <Street>Rosenstykket 24</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0910652007</CprNo>
+            <PollingTable>10</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Nanna</FirstName>
+            <LastName>Møller</LastName>
+            <Street>William Wains Gade 22</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>2505711992</CprNo>
+            <PollingTable>13</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Philip</FirstName>
+            <LastName>Jørgensen</LastName>
+            <Street>Vangs Allé 189</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>1506491917</CprNo>
+            <PollingTable>17</PollingTable>
+          </Voter>
+          <Voter>
+            <FirstName>Marcus</FirstName>
+            <LastName>Johansen</LastName>
+            <Street>Eriksgade 168</Street>
+            <City>2650 Hvidovre</City>
+            <CprNo>0804242053</CprNo>
+            <PollingTable>1</PollingTable>
+          </Voter>
+        </Voters>
+      </PollingVenue>
+    </PollingVenues>
+  </Municipality>
+</Municipalities>

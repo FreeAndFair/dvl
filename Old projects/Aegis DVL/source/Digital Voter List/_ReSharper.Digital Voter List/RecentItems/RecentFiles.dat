@@ -1,0 +1,66 @@
+﻿<RecentFiles>
+  <RecentFiles>
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Database/f:SqLiteDatabase.cs" caret="5731" fromTop="21" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:TheOnlyException.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:PublicKeyWrapper.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:LogEntry.cs" caret="365" fromTop="4" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Level.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="8286" fromTop="22" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Cryptography/f:Crypto.cs" caret="4366" fromTop="23" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Cryptography/f:ICrypto.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Communication/f:Communicator.cs" caret="151" fromTop="6" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Communication/f:ICommunicator.cs" caret="2521" fromTop="38" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:ICommand.cs" caret="92" fromTop="5" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:SyncCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:StartElectionCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:ShutDownElectionCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:RevokeBallotCPROnlyCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:RevokeBallotCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:RequestBallotCPROnlyCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:RequestBallotCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:RemovePeerCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:PublicKeyExchangeCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:PromoteNewManagerCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:IsAliveCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:EndElectionCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:ElectNewManagerCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:CryptoCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:BallotRequestDeniedCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:BallotReceivedCPROnlyCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:BallotReceivedCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Commands/f:AddPeerCommand.cs" caret="0" fromTop="0" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:Station.cs" caret="25391" fromTop="22" />
+  </RecentFiles>
+  <RecentEdits>
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="4562" fromTop="3" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="4916" fromTop="13" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="7578" fromTop="32" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="8528" fromTop="35" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="7931" fromTop="5" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="7720" fromTop="3" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="1935" fromTop="9" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="2954" fromTop="30" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="2785" fromTop="24" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="3770" fromTop="32" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:Core.cs" caret="3619" fromTop="26" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:LogEntry.cs" caret="1547" fromTop="31" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="3232" fromTop="28" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="652" fromTop="10" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="1242" fromTop="22" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="325" fromTop="8" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="909" fromTop="17" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="1641" fromTop="30" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="1376" fromTop="26" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="2053" fromTop="38" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="1774" fromTop="34" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="2208" fromTop="34" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="2889" fromTop="41" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="3268" fromTop="36" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="3588" fromTop="35" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="3846" fromTop="41" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="2496" fromTop="25" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/f:IDvlUi.cs" caret="217" fromTop="4" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:LogEntry.cs" caret="586" fromTop="17" />
+    <File id="10D0DF95-0552-43AB-B540-8CAD1F631E38/d:Data Types/f:LogEntry.cs" caret="452" fromTop="14" />
+  </RecentEdits>
+</RecentFiles>

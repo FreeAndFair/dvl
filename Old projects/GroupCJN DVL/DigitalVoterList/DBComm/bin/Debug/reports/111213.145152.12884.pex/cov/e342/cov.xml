@@ -1,0 +1,155 @@
+﻿<documents created="2011-12-13 13:51:53Z"><document src="C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\DBComm\DO\LogDO.cs" renderPrefix="s0"><chunk hits="-1" domain="unknown"><source><![CDATA[// -----------------------------------------------------------------------
+// <copyright file="LogDO.cs" company="DVL">
+// <author>Jan Meier</author>
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace DBComm.DBComm.DO
+{
+    using System;
+    using System.Data.Linq.Mapping;
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
+    /// The class representing a Log entry entity
+    /// </summary>
+    [Table(Name = "log")]
+    public class LogDO : IDataObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+        /// </summary>
+        ]]></source>
+</chunk>
+<method name=".ctor" namespace="DBComm.DBComm.DO" type="DBComm.DBComm.DO.LogDO" typeName="LogDO" token="600002a" module="DBComm.exe"><hits><hit index="0" value="1"/>
+<hit index="1" value="1"/>
+<hit index="2" value="1"/>
+<hit index="3" value="1"/>
+<hit index="4" value="1"/>
+<hit index="5" value="1"/>
+<hit index="6" value="1"/>
+<hit index="7" value="1"/>
+<hit index="8" value="1"/>
+</hits>
+<coverage domain="usercodeundertest" unit="block" covered="5" total="5" coveredRatio="1"/>
+</method>
+<chunk hits="1" offset="0000" domain="usercodeundertest"><source><![CDATA[public LogDO(uint? table, uint? cpr, ActivityEnum? activity)]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="0007" domain="usercodeundertest"><source><![CDATA[{]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0008" domain="usercodeundertest"><source><![CDATA[this.Table = table;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0010" domain="usercodeundertest"><source><![CDATA[this.Cpr = cpr;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+            ]]></source>
+</chunk>
+<chunk hits="1" offset="0018" domain="usercodeundertest"><source><![CDATA[this.Activity = activity;]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+        ]]></source>
+</chunk>
+<chunk hits="1" offset="0020" domain="usercodeundertest"><source><![CDATA[}]]></source>
+</chunk>
+<chunk hits="-1" domain="unknown"><source><![CDATA[
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogDO"/> class.
+        /// </summary>
+        public LogDO()
+        {
+
+        }
+
+        ///// <summary>
+        ///// Gets the primary key of this data object.
+        ///// </summary>
+        [Column(Name = "id")]
+        public uint? PrimaryKey { get; private set; }
+
+        /// <summary>
+        /// Gets Time.
+        /// </summary>
+        [Column(IsPrimaryKey = true)]
+        public DateTime? Time { get; private set; }
+
+        /// <summary>
+        /// Gets Table.
+        /// </summary>
+        [Column(Name = "tableNo", IsPrimaryKey = true)]
+        public uint? Table { get; set; }
+
+        /// <summary>
+        /// Gets Cpr.
+        /// </summary>
+        [Column]
+        public uint? Cpr { get; set; }
+
+        /// <summary>
+        /// Gets Activity.
+        /// </summary>
+        [Column(IsPrimaryKey = true)]
+        public ActivityEnum? Activity { get; set; }
+
+        /// <summary>
+        /// Has all the fields of the object been initialized?
+        /// </summary>
+        /// <returns>
+        /// True if all fields are non-null.
+        /// </returns>
+        public bool FullyInitialized()
+        {
+            return Table != null && Cpr != null && Activity != null;
+        }
+
+        /// <summary>
+        /// Set the values of this object to the values of the dummy object, if the dummys value is non-null.
+        /// </summary>
+        /// <param name="dummy">
+        /// The dummy object, representing new values.
+        /// </param>
+        public void UpdateValues(IDataObject dummy)
+        {
+            LogDO logDummy = dummy as LogDO;
+            Contract.Assert(logDummy != null);
+
+            this.Time = logDummy.Time ?? this.Time;
+            this.Table = logDummy.Table ?? this.Table;
+            this.Cpr = logDummy.Cpr ?? this.Cpr;
+            this.Activity = logDummy.Activity ?? this.Activity;
+        }
+
+        /// <summary>
+        /// Reset all associations.
+        /// </summary>
+        public void ResetAssociations()
+        {
+            // No associations, so nothing to reset here.
+        }
+    }
+}]]></source>
+</chunk>
+</document>
+<document src="(no sources available for some parts of DBComm.PexTests, DBComm)" missing="true"><method name="Constructor" type="DBComm.DBComm.DO.LogDOTest" token="6000001" module="&lt;In Memory Module&gt;"><hits/>
+<coverage domain="userortestcode" unit="block" covered="2" total="2" coveredRatio="1"/>
+</method>
+<method name="set_Table" type="DBComm.DBComm.DO.LogDO" token="6000031" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_Cpr" type="DBComm.DBComm.DO.LogDO" token="6000033" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+<method name="set_Activity" type="DBComm.DBComm.DO.LogDO" token="6000035" module="DBComm.exe"><hits/>
+<coverage domain="usercodeundertest" unit="block" covered="1" total="1" coveredRatio="1"/>
+</method>
+</document>
+</documents>

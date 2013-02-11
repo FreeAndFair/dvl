@@ -1,0 +1,766 @@
+<Configuration>
+  <UnitTestSessions>
+    <Session>
+      <Name>Session #1</Name>
+      <Elements>
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.ConnectorTestSuite" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.IO.IOTest" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Generator.PdfGeneratorTest" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.QueryBuilderTestSuite" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Network.RPCTestSuite" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite" type="NUnitTestFixtureElement" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Generator.VoterIdTest" type="NUnitTestFixtureElement" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.IO.IOTest.FileLoaderTest" ParentId="SmallTubaTestSuite.IO.IOTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.IO.IOTest" MethodName="FileLoaderTest" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.IO.IOTest.FileSaverPollingCardTest" ParentId="SmallTubaTestSuite.IO.IOTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.IO.IOTest" MethodName="FileSaverPollingCardTest" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.IO.IOTest.FileSaverVoterDataTest" ParentId="SmallTubaTestSuite.IO.IOTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.IO.IOTest" MethodName="FileSaverVoterDataTest" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.IO.IOTest.FileSaverVoterListsTest" ParentId="SmallTubaTestSuite.IO.IOTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.IO.IOTest" MethodName="FileSaverVoterListsTest" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestAbstractResourceGroupBy" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestAbstractResourceGroupBy" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestAbstractResourceLimitAndOffset" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestAbstractResourceLimitAndOffset" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestAbstractResourceOrderAndLimit" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestAbstractResourceOrderAndLimit" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestCprToPersonRequestHandlerWithExistingPerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestCprToPersonRequestHandlerWithExistingPerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestCprToPersonRequestHandlerWithUnexistingPerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestCprToPersonRequestHandlerWithUnexistingPerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.QueryBuilderTestSuite.TestDelete" ParentId="SmallTubaTestSuite.Database.QueryBuilderTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.QueryBuilderTestSuite" MethodName="TestDelete" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.ConnectorTestSuite.TestExecuteNoneQuery" ParentId="SmallTubaTestSuite.Database.ConnectorTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.ConnectorTestSuite" MethodName="TestExecuteNoneQuery" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.ConnectorTestSuite.TestExecuteQuery" ParentId="SmallTubaTestSuite.Database.ConnectorTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.ConnectorTestSuite" MethodName="TestExecuteQuery" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.QueryBuilderTestSuite.TestInsert" ParentId="SmallTubaTestSuite.Database.QueryBuilderTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.QueryBuilderTestSuite" MethodName="TestInsert" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestLogCreationUpdatingAndDeletion" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestLogCreationUpdatingAndDeletion" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestLogResource" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestLogResource" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestPersonAndLogInteractivity" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestPersonAndLogInteractivity" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestPersonCreationUpdatingAndDeletion" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestPersonCreationUpdatingAndDeletion" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestPersonObject" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestPersonObject" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Entities.EntityTestSuite.TestPersonResource" ParentId="SmallTubaTestSuite.Entities.EntityTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Entities.EntityTestSuite" MethodName="TestPersonResource" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Generator.PdfGeneratorTest.TestPollingCards" ParentId="SmallTubaTestSuite.Generator.PdfGeneratorTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Generator.PdfGeneratorTest" MethodName="TestPollingCards" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestRegisterVoteRequestHandlerWithExistingNonVotePerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestRegisterVoteRequestHandlerWithExistingNonVotePerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestRegisterVoteRequestHandlerWithExistingVotePerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestRegisterVoteRequestHandlerWithExistingVotePerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestRegisterVoteRequestHandlerWithUnexistingPerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestRegisterVoteRequestHandlerWithUnexistingPerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Network.RPCTestSuite.TestRpc" ParentId="SmallTubaTestSuite.Network.RPCTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Network.RPCTestSuite" MethodName="TestRpc" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.QueryBuilderTestSuite.TestSelect" ParentId="SmallTubaTestSuite.Database.QueryBuilderTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.QueryBuilderTestSuite" MethodName="TestSelect" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.QueryBuilderTestSuite.TestTruncate" ParentId="SmallTubaTestSuite.Database.QueryBuilderTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.QueryBuilderTestSuite" MethodName="TestTruncate" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestUnregisterVoteRequestHandlerWithExistingNonVotePerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestUnregisterVoteRequestHandlerWithExistingNonVotePerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestUnregisterVoteRequestHandlerWithExistingVotePerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestUnregisterVoteRequestHandlerWithExistingVotePerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestUnregisterVoteRequestHandlerWitUnexistingPerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestUnregisterVoteRequestHandlerWitUnexistingPerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Database.QueryBuilderTestSuite.TestUpdate" ParentId="SmallTubaTestSuite.Database.QueryBuilderTestSuite" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Database.QueryBuilderTestSuite" MethodName="TestUpdate" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestValidTableRequestHandler" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestValidTableRequestHandler" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Generator.VoterIdTest.TestVoterID" ParentId="SmallTubaTestSuite.Generator.VoterIdTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Generator.VoterIdTest" MethodName="TestVoterID" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestVoterIdToPersonRequestHandlerWithExistingPerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestVoterIdToPersonRequestHandlerWithExistingPerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="ServerApplication.ServerTestSuite.TestVoterIdToPersonRequestHandlerWithUnexistingPerson" ParentId="ServerApplication.ServerTestSuite" type="NUnitTestElement" TypeName="ServerApplication.ServerTestSuite" MethodName="TestVoterIdToPersonRequestHandlerWithUnexistingPerson" Project="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9" />
+        <UnitTestElement Provider="nUnit" Id="SmallTubaTestSuite.Generator.PdfGeneratorTest.TestVoterList" ParentId="SmallTubaTestSuite.Generator.PdfGeneratorTest" type="NUnitTestElement" TypeName="SmallTubaTestSuite.Generator.PdfGeneratorTest" MethodName="TestVoterList" Project="5972E424-3638-4894-9396-0EC264EF67E4" />
+      </Elements>
+    </Session>
+  </UnitTestSessions>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="457E7437-41F1-46A1-AC69-50CF37B5706C/f:Form1.Designer.cs" caret="211" fromTop="0" />
+      <File id="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9/f:ServerTestSuite.cs" caret="0" fromTop="0" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Program.cs" caret="573" fromTop="15" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Controller.cs" caret="359" fromTop="13" />
+      <File id="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9/f:ServerData.cs" caret="2300" fromTop="41" />
+      <File id="DBE6DB47-42C3-460B-B525-A2D7CC08E2B9/f:Server.cs" caret="0" fromTop="0" />
+      <File id="20869018-EB0E-4F42-8570-2CAF18CB06DC/d:Network/d:RequestReply/f:ServerFrontEnd.cs" caret="0" fromTop="0" />
+      <File id="20869018-EB0E-4F42-8570-2CAF18CB06DC/d:Network/d:RequestReply/f:ClientFrontEnd.cs" caret="0" fromTop="0" />
+      <File id="20869018-EB0E-4F42-8570-2CAF18CB06DC/d:Network/d:RPC/f:VoterServer.cs" caret="0" fromTop="0" />
+      <File id="20869018-EB0E-4F42-8570-2CAF18CB06DC/d:Utility/f:Debug.cs" caret="0" fromTop="0" />
+      <File id="99D9F2CA-71C6-45AB-8583-130F70F2B953/f:Program.cs" caret="0" fromTop="0" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Controller.cs" caret="244" fromTop="10" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Controller.cs" caret="466" fromTop="15" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Program.cs" caret="663" fromTop="6" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Program.cs" caret="663" fromTop="15" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Program.cs" caret="302" fromTop="11" />
+      <File id="0CB2A275-4A69-4D45-A388-44A8EF4ACFC6/f:Program.cs" caret="666" fromTop="4" />
+    </RecentEdits>
+  </RecentFiles>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="CSharpCodeCompletionContext">
+      <Item value="using" priority="1333" />
+      <Item value="MySql" priority="30" />
+      <Item value="MySql.Data" priority="61" />
+      <Item value="MySqlClient" priority="26" />
+      <Item value="public" priority="2367" />
+      <Item value="Connector`0" priority="218" />
+      <Item value="const" priority="447" />
+      <Item value="System" priority="775" />
+      <Item value="Console`0" priority="1663" />
+      <Item value="er" priority="31" />
+      <Item value="new" priority="2847" />
+      <Item value="Database" priority="152" />
+      <Item value="Connector" priority="141" />
+      <Item value="Data" priority="26" />
+      <Item value="ResolveEventArgs`0" priority="31" />
+      <Item value="private" priority="991" />
+      <Item value="_AppDomain`0" priority="31" />
+      <Item value="MySqlConnection`0" priority="31" />
+      <Item value="string" priority="1785" />
+      <Item value="sealed" priority="31" />
+      <Item value="static" priority="255" />
+      <Item value="readonly" priority="255" />
+      <Item value="void" priority="1151" />
+      <Item value="_connection" priority="224" />
+      <Item value="MySqlConnection" priority="29" />
+      <Item value="_server" priority="127" />
+      <Item value="_port" priority="31" />
+      <Item value="_database" priority="31" />
+      <Item value="_uid" priority="31" />
+      <Item value="_password" priority="31" />
+      <Item value="try" priority="63" />
+      <Item value="else" priority="287" />
+      <Item value="catch" priority="95" />
+      <Item value="e" priority="63" />
+      <Item value="finally" priority="31" />
+      <Item value="&lt;!----&gt;" priority="51" />
+      <Item value="if" priority="1023" />
+      <Item value="null" priority="1439" />
+      <Item value="HelloWorld`0" priority="63" />
+      <Item value="Collections" priority="134" />
+      <Item value="Hashtable`0" priority="194" />
+      <Item value="return" priority="2015" />
+      <Item value="var" priority="3455" />
+      <Item value="MySqlCommand" priority="29" />
+      <Item value="command" priority="415" />
+      <Item value="query" priority="127" />
+      <Item value="reader" priority="319" />
+      <Item value="ArrayList" priority="89" />
+      <Item value="while" priority="223" />
+      <Item value="results" priority="543" />
+      <Item value="Hashtable" priority="479" />
+      <Item value="for" priority="191" />
+      <Item value="i" priority="575" />
+      <Item value="row" priority="293" />
+      <Item value="nguid" priority="62" />
+      <Item value="NUnit" priority="93" />
+      <Item value="Framework" priority="26" />
+      <Item value="Test" priority="31" />
+      <Item value="_connector" priority="319" />
+      <Item value="foreach" priority="255" />
+      <Item value="Assert`0" priority="1407" />
+      <Item value="TearDown" priority="63" />
+      <Item value="OrderedDictionary" priority="29" />
+      <Item value="enumerator" priority="287" />
+      <Item value="Boolean`0" priority="31" />
+      <Item value="Diagnostics" priority="242" />
+      <Item value="Contracts" priority="242" />
+      <Item value="Contract`0" priority="671" />
+      <Item value="IsConnected`0" priority="95" />
+      <Item value="ArrayList`0" priority="159" />
+      <Item value="ReferenceEquals`0" priority="63" />
+      <Item value="Assemble`0" priority="63" />
+      <Item value="_type" priority="31" />
+      <Item value="Clear`0" priority="31" />
+      <Item value="last" priority="31" />
+      <Item value="int" priority="834" />
+      <Item value="lastID" priority="31" />
+      <Item value="LoaderOptimization`0" priority="31" />
+      <Item value="ValueObject" priority="159" />
+      <Item value="DataAccessObject" priority="95" />
+      <Item value="parameters" priority="159" />
+      <Item value="Queue`0" priority="63" />
+      <Item value="QueryBuilder" priority="984" />
+      <Item value="IDictionary`0" priority="63" />
+      <Item value="ID" priority="63" />
+      <Item value="Person" priority="359" />
+      <Item value="p" priority="255" />
+      <Item value="object" priority="129" />
+      <Item value="value" priority="31" />
+      <Item value="b" priority="223" />
+      <Item value="values" priority="607" />
+      <Item value="_values" priority="159" />
+      <Item value="CopyTo`0" priority="108" />
+      <Item value="Length" priority="136" />
+      <Item value="_columns" priority="159" />
+      <Item value="in" priority="191" />
+      <Item value="column" priority="95" />
+      <Item value="protected" priority="127" />
+      <Item value="Columns" priority="223" />
+      <Item value="a" priority="351" />
+      <Item value="Table" priority="31" />
+      <Item value="SmallTuba" priority="372" />
+      <Item value="QueryBuilder`0" priority="31" />
+      <Item value="order" priority="95" />
+      <Item value="direction" priority="127" />
+      <Item value="limit" priority="191" />
+      <Item value="offset" priority="127" />
+      <Item value="PersonDataAccessObject`0" priority="95" />
+      <Item value="Person`0" priority="287" />
+      <Item value="this" priority="895" />
+      <Item value="entities" priority="63" />
+      <Item value="result" priority="255" />
+      <Item value="resource" priority="767" />
+      <Item value="persons" priority="31" />
+      <Item value="person" priority="1537" />
+      <Item value="long" priority="63" />
+      <Item value="Entities" priority="108" />
+      <Item value="Abstracts" priority="90" />
+      <Item value="base" priority="63" />
+      <Item value="CollectionBase`0" priority="31" />
+      <Item value="Entities.Abstracts" priority="80" />
+      <Item value="_count" priority="127" />
+      <Item value="Log`0" priority="127" />
+      <Item value="logs" priority="223" />
+      <Item value="countTotal" priority="192" />
+      <Item value="Convert`0" priority="31" />
+      <Item value="_query" priority="31" />
+      <Item value="type" priority="63" />
+      <Item value="bind" priority="63" />
+      <Item value="dir" priority="63" />
+      <Item value="Lastname" priority="164" />
+      <Item value="ConnectorTestSuite`0" priority="31" />
+      <Item value="id" priority="63" />
+      <Item value="&lt;value&gt;&lt;/value&gt;" priority="103" />
+      <Item value="Predicate" priority="95" />
+      <Item value="Predicate&lt;string&gt;" priority="29" />
+      <Item value="key" priority="63" />
+      <Item value="bool" priority="286" />
+      <Item value="Delegate`0" priority="127" />
+      <Item value="SetValues`0" priority="31" />
+      <Item value="s" priority="159" />
+      <Item value="ctx" priority="27" />
+      <Item value="Array`0" priority="31" />
+      <Item value="AbstractResource`0" priority="31" />
+      <Item value="Equals`0" priority="63" />
+      <Item value="Id" priority="256" />
+      <Item value="PersonResource`0" priority="63" />
+      <Item value="firstname" priority="31" />
+      <Item value="gender" priority="63" />
+      <Item value="cpr" priority="223" />
+      <Item value="Network" priority="53" />
+      <Item value="Voter" priority="53" />
+      <Item value="server" priority="96" />
+      <Item value="Server" priority="59" />
+      <Item value="Void`0" priority="63" />
+      <Item value="VoterNetworkClient`0" priority="31" />
+      <Item value="Server`0" priority="159" />
+      <Item value="voterNetWorkServer" priority="127" />
+      <Item value="VoterNetworkServer" priority="29" />
+      <Item value="TypedReference`0" priority="31" />
+      <Item value="delegate" priority="31" />
+      <Item value="CprToPersonRequest" priority="59" />
+      <Item value="PersonState`0" priority="127" />
+      <Item value="CprToPersonRequestHandler`0" priority="32" />
+      <Item value="false" priority="320" />
+      <Item value="PersonState" priority="29" />
+      <Item value="Firstname" priority="130" />
+      <Item value="Cpr" priority="197" />
+      <Item value="Barcode" priority="98" />
+      <Item value="PollingVenue" priority="131" />
+      <Item value="PollingTable" priority="361" />
+      <Item value="Voted" priority="32" />
+      <Item value="VotedTime" priority="98" />
+      <Item value="GetHashCode`0" priority="31" />
+      <Item value="Exists" priority="64" />
+      <Item value="Exists`0" priority="128" />
+      <Item value="personState" priority="95" />
+      <Item value="true" priority="448" />
+      <Item value="LogResource`0" priority="63" />
+      <Item value="ToString`0" priority="31" />
+      <Item value="Generic" priority="26" />
+      <Item value="List" priority="61" />
+      <Item value="GetLogs`0" priority="63" />
+      <Item value="GetMostRecentLog`0" priority="31" />
+      <Item value="log" priority="607" />
+      <Item value="Log" priority="59" />
+      <Item value="PersonId" priority="31" />
+      <Item value="Client" priority="65" />
+      <Item value="Action" priority="65" />
+      <Item value="Timestamp" priority="65" />
+      <Item value="DateTime`0" priority="32" />
+      <Item value="decimal" priority="31" />
+      <Item value="DateTime" priority="29" />
+      <Item value="Load`0" priority="63" />
+      <Item value="IdToPersonRequestHandler`0" priority="31" />
+      <Item value="ValueType`0" priority="32" />
+      <Item value="default" priority="127" />
+      <Item value="_groupBy" priority="63" />
+      <Item value="groupBy" priority="63" />
+      <Item value="Queue" priority="29" />
+      <Item value="queryBuilder" priority="255" />
+      <Item value="tables" priority="223" />
+      <Item value="typeof" priority="31" />
+      <Item value="_result" priority="31" />
+      <Item value="Debug`0" priority="63" />
+      <Item value="table" priority="31" />
+      <Item value="DescriptionAttribute`0" priority="31" />
+      <Item value="VotedPollingTable" priority="65" />
+      <Item value="PersonDbId" priority="63" />
+      <Item value="personEntity" priority="224" />
+      <Item value="Utility" priority="26" />
+      <Item value="Dns`0" priority="26" />
+      <Item value="currentVoter" priority="95" />
+      <Item value="networkClient" priority="31" />
+      <Item value="firstNamesMen" priority="31" />
+      <Item value="line" priority="96" />
+      <Item value="firstNamesWomen" priority="31" />
+      <Item value="municipalities" priority="127" />
+      <Item value="pollingVenues" priority="95" />
+      <Item value="streets" priority="31" />
+      <Item value="LoadFirstNamesWomen`0" priority="63" />
+      <Item value="LoadLastNames`0" priority="31" />
+      <Item value="LoadMunicipalities`0" priority="31" />
+      <Item value="LastNames" priority="63" />
+      <Item value="Municipalities" priority="127" />
+      <Item value="PollingVenues" priority="63" />
+      <Item value="Streets" priority="63" />
+      <Item value="FirstNamesMen" priority="95" />
+      <Item value="List&lt;string&gt;" priority="29" />
+      <Item value="DataSource`0" priority="31" />
+      <Item value="dataSource" priority="127" />
+      <Item value="DataSource" priority="29" />
+      <Item value="XmlDocument" priority="29" />
+      <Item value="doc" priority="415" />
+      <Item value="FileDestination" priority="63" />
+      <Item value="dg" priority="319" />
+      <Item value="XmlDeclaration`0" priority="31" />
+      <Item value="dec" priority="31" />
+      <Item value="Generate`0" priority="63" />
+      <Item value="XmlDocument`0" priority="95" />
+      <Item value="double" priority="31" />
+      <Item value="NumberOfMunicipalities" priority="31" />
+      <Item value="XmlElement`0" priority="127" />
+      <Item value="municipality" priority="159" />
+      <Item value="GenerateMunicipalites`0" priority="31" />
+      <Item value="name" priority="127" />
+      <Item value="Random`0" priority="63" />
+      <Item value="RandomNumber`0" priority="352" />
+      <Item value="muni" priority="95" />
+      <Item value="munis" priority="159" />
+      <Item value="address" priority="31" />
+      <Item value="street" priority="63" />
+      <Item value="GenerateStreet`0" priority="95" />
+      <Item value="ValidationType`0" priority="31" />
+      <Item value="random" priority="31" />
+      <Item value="Random" priority="29" />
+      <Item value="NumberOfPollingVenues" priority="63" />
+      <Item value="venue" priority="31" />
+      <Item value="firstName" priority="95" />
+      <Item value="index" priority="63" />
+      <Item value="from" priority="31" />
+      <Item value="FirstNamesWomen" priority="31" />
+      <Item value="cprNo" priority="63" />
+      <Item value="GenerateBirthday`0" priority="31" />
+      <Item value="GenerateCprMen`0" priority="31" />
+      <Item value="DialogResult" priority="31" />
+      <Item value="saveFileDialog1" priority="31" />
+      <Item value="mbox" priority="63" />
+      <Item value="textBox1" priority="63" />
+      <Item value="Int32`0" priority="31" />
+      <Item value="Label`0" priority="31" />
+      <Item value="number" priority="31" />
+      <Item value="numberOfMunicipalities" priority="63" />
+      <Item value="numberOfPollingVenues" priority="63" />
+      <Item value="numberOfVoters" priority="63" />
+      <Item value="label6" priority="31" />
+      <Item value="approx" priority="31" />
+      <Item value="fileDestination" priority="31" />
+      <Item value="TextBox`0" priority="31" />
+      <Item value="textBox4" priority="31" />
+      <Item value="DataGenerator" priority="26" />
+      <Item value="text" priority="31" />
+      <Item value="label8" priority="63" />
+      <Item value="serverSetup" priority="32" />
+      <Item value="serverSetupHelper" priority="31" />
+      <Item value="ServerSetupHelper" priority="29" />
+      <Item value="ServerTestSuite`0" priority="31" />
+      <Item value="switch" priority="31" />
+      <Item value="input" priority="159" />
+      <Item value="case" priority="191" />
+      <Item value="CannotUnloadAppDomainException`0" priority="31" />
+      <Item value="args" priority="512" />
+      <Item value="Setup`0" priority="63" />
+      <Item value="break" priority="159" />
+      <Item value="InsufficientMemoryException`0" priority="63" />
+      <Item value="serverData" priority="31" />
+      <Item value="ServerData" priority="29" />
+      <Item value="class" priority="31" />
+      <Item value="IO" priority="26" />
+      <Item value="StreamReader" priority="29" />
+      <Item value="PersonEntity" priority="119" />
+      <Item value="VoterId" priority="65" />
+      <Item value="Start`0" priority="31" />
+      <Item value="String`0" priority="31" />
+      <Item value="VoterIdToPersonRequestHandler`0" priority="31" />
+      <Item value="CONNECTOR" priority="95" />
+      <Item value="ConsoleOutput" priority="63" />
+      <Item value="output" priority="31" />
+      <Item value="&lt;summary&gt;&lt;/summary&gt;" priority="25" />
+      <Item value="TheoryAttribute`0" priority="63" />
+      <Item value="AssertionHelper`0" priority="31" />
+      <Item value="PersonResource" priority="29" />
+      <Item value="FirstName" priority="63" />
+      <Item value="LastName" priority="65" />
+      <Item value="LogEntity" priority="59" />
+      <Item value="logA" priority="31" />
+      <Item value="logB" priority="31" />
+      <Item value="data" priority="31" />
+      <Item value="Enum`0" priority="31" />
+      <Item value="PersonEntity`0" priority="31" />
+      <Item value="c" priority="191" />
+      <Item value="DirectoryAssert`0" priority="31" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Console">
+      <Item value="WriteLine`0" priority="1269" />
+      <Item value="ReadKey`0" priority="53" />
+      <Item value="ReadLine`0" priority="107" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="ToString`0" priority="269" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:MySql.Data.MySqlClient.MySqlConnection">
+      <Item value="Open`0" priority="26" />
+      <Item value="Close`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Doc Comment tags">
+      <Item value="&lt;!----&gt;" priority="9" />
+      <Item value="&lt;value&gt;&lt;/value&gt;" priority="36" />
+      <Item value="&lt;summary&gt;&lt;/summary&gt;" priority="5" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:MySql.Data.MySqlClient.MySqlCommand">
+      <Item value="Connection" priority="26" />
+      <Item value="CommandText" priority="26" />
+      <Item value="ExecuteNonQuery`0" priority="26" />
+      <Item value="ExecuteReader`0" priority="27" />
+      <Item value="EndExecuteReader`0" priority="26" />
+      <Item value="EndExecuteNonQuery`0" priority="26" />
+      <Item value="ExecuteScalar`0" priority="107" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:MySql.Data.MySqlClient.MySqlDataReader">
+      <Item value="Read`0" priority="26" />
+      <Item value="InitializeLifetimeService`0" priority="26" />
+      <Item value="GetValue`0" priority="54" />
+      <Item value="FieldCount" priority="26" />
+      <Item value="GetName`0" priority="26" />
+      <Item value="Close`0" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.ArrayList">
+      <Item value="Add`0" priority="107" />
+      <Item value="Count" priority="134" />
+      <Item value="Insert`0" priority="22" />
+      <Item value="AddRange`0" priority="26" />
+      <Item value="ToArray`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Hashtable">
+      <Item value="Add`0" priority="53" />
+      <Item value="Indexer" priority="53" />
+      <Item value="GetEnumerator`0" priority="53" />
+      <Item value="ContainsKey`0" priority="80" />
+      <Item value="Contains`0" priority="27" />
+      <Item value="Count" priority="80" />
+      <Item value="ToString`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Database.Connector">
+      <Item value="Connect`0" priority="53" />
+      <Item value="ExecuteQuery`0" priority="54" />
+      <Item value="Disconnect`0" priority="26" />
+      <Item value="ExecuteNoneQuery`0" priority="26" />
+      <Item value="GetHashCode`0" priority="54" />
+      <Item value="GetCount`0" priority="27" />
+      <Item value="GetCountTotal`0" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@NUnit.Framework.Assert">
+      <Item value="Equals`0" priority="26" />
+      <Item value="That`0" priority="1136" />
+      <Item value="False`0" priority="134" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Diagnostics.Contracts.Contract">
+      <Item value="Requires`0" priority="621" />
+      <Item value="Ensures`0" priority="53" />
+      <Item value="Result`1" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.PersonValueObject">
+      <Item value="SetValues`0" priority="80" />
+      <Item value="GetValues`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.PersonDataAccessObject">
+      <Item value="Load`0" priority="26" />
+      <Item value="Save`0" priority="26" />
+      <Item value="Delete`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Database.QueryBuilder">
+      <Item value="SetType`0" priority="134" />
+      <Item value="SetTable`0" priority="135" />
+      <Item value="SetColumns`0" priority="81" />
+      <Item value="SetLimit`0" priority="107" />
+      <Item value="AddCondition`0" priority="134" />
+      <Item value="ExecuteQuery`0" priority="134" />
+      <Item value="SetValues`0" priority="27" />
+      <Item value="ExecuteNoneQuery`0" priority="26" />
+      <Item value="AddOrder`0" priority="53" />
+      <Item value="SetOffset`0" priority="26" />
+      <Item value="GetHashCode`0" priority="26" />
+      <Item value="SetGroupBy`0" priority="53" />
+      <Item value="RemoveCondition`0" priority="26" />
+      <Item value="RemoveOrder`0" priority="26" />
+      <Item value="GetQuery`0" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.IDictionaryEnumerator">
+      <Item value="Key" priority="53" />
+      <Item value="MoveNext`0" priority="53" />
+      <Item value="Value" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.Person">
+      <Item value="Load`0" priority="136" />
+      <Item value="Firstname" priority="188" />
+      <Item value="Save`0" priority="53" />
+      <Item value="ToStateObject`0" priority="53" />
+      <Item value="Voted" priority="54" />
+      <Item value="Exists`0" priority="80" />
+      <Item value="Id" priority="54" />
+      <Item value="GetMostRecentLog`0" priority="26" />
+      <Item value="DbId" priority="28" />
+      <Item value="VotedPollingTable" priority="27" />
+      <Item value="VoterId" priority="26" />
+      <Item value="Exists" priority="26" />
+      <Item value="Street" priority="26" />
+      <Item value="Equals`0" priority="163" />
+      <Item value="FirstName" priority="26" />
+      <Item value="GetHashCode`0" priority="54" />
+      <Item value="ToString`0" priority="54" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@SmallTuba.Entities.PersonDataAccessObject">
+      <Item value="Table" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.PersonResource">
+      <Item value="Build`0" priority="80" />
+      <Item value="SetLimit`0" priority="53" />
+      <Item value="GetCount`0" priority="83" />
+      <Item value="GetCountTotal`0" priority="27" />
+      <Item value="SetOffset`0" priority="26" />
+      <Item value="SetOrder`0" priority="26" />
+      <Item value="SetFirstname`0" priority="27" />
+      <Item value="SetLastname`0" priority="26" />
+      <Item value="SetCpr`0" priority="26" />
+      <Item value="SetVoterId`0" priority="26" />
+      <Item value="SetPollingTable`0" priority="26" />
+      <Item value="SetPollingVenue`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@SmallTuba.Entities.Person">
+      <Item value="Table" priority="26" />
+      <Item value="Columns" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.LogResource">
+      <Item value="GetCount`0" priority="26" />
+      <Item value="GetCountTotal`0" priority="26" />
+      <Item value="Build`0" priority="26" />
+      <Item value="SetOrder`0" priority="26" />
+      <Item value="SetPerson`0" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Convert">
+      <Item value="ToInt32`0" priority="54" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Array">
+      <Item value="Exists`1" priority="53" />
+      <Item value="IndexOf`0" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ServerApplication.Server">
+      <Item value="Equals`0" priority="26" />
+      <Item value="ValidTableRequestHandler`0" priority="53" />
+      <Item value="RegisterVoteRequestHandler`0" priority="54" />
+      <Item value="Setup`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Network.Voter.VoterNetworkServer">
+      <Item value="ListenForCalls`0" priority="26" />
+      <Item value="SetCprToPersonRequest`0" priority="26" />
+      <Item value="SetIdToPersonRequest`0" priority="26" />
+      <Item value="SetRegisterVoteRequest`0" priority="27" />
+      <Item value="SetValidTableRequest`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.Log">
+      <Item value="Action" priority="53" />
+      <Item value="Timestamp" priority="26" />
+      <Item value="Save`0" priority="26" />
+      <Item value="Delete`0" priority="26" />
+      <Item value="PollingTable" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.DateTime">
+      <Item value="Now" priority="27" />
+      <Item value="UtcNow" priority="28" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.TimeSpan">
+      <Item value="Seconds" priority="27" />
+      <Item value="TotalSeconds" priority="28" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.PersonState">
+      <Item value="Exists" priority="27" />
+      <Item value="Cpr" priority="27" />
+      <Item value="Barcode" priority="27" />
+      <Item value="PollingTable" priority="27" />
+      <Item value="PollingVenue" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.DateTime">
+      <Item value="Ticks" priority="27" />
+      <Item value="ToString`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="Count" priority="163" />
+      <Item value="Contains`0" priority="56" />
+      <Item value="Add`0" priority="26" />
+      <Item value="Remove`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@SmallTuba.Debug">
+      <Item value="ExternalDataSources" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.PersonEntity">
+      <Item value="ToObject`0" priority="162" />
+      <Item value="Save`0" priority="53" />
+      <Item value="Lastname" priority="26" />
+      <Item value="DbId" priority="83" />
+      <Item value="Firstname" priority="109" />
+      <Item value="Load`0" priority="80" />
+      <Item value="VoterId" priority="54" />
+      <Item value="Delete`0" priority="26" />
+      <Item value="Exists`0" priority="26" />
+      <Item value="GetLogs`0" priority="54" />
+      <Item value="GetMostRecentLog`0" priority="54" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@SmallTuba.Utility.TimeConverter">
+      <Item value="ConvertFromUnixTimestamp`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Net.Dns">
+      <Item value="GetHostAddresses`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ClientApplication.Controller">
+      <Item value="logForm" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ClientApplication.LogForm">
+      <Item value="Close`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Button">
+      <Item value="Click" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Network.Voter.VoterNetworkClient">
+      <Item value="RegisterVoter`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.IO.StreamReader">
+      <Item value="ReadLine`0" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.DataGenerator.DataSource">
+      <Item value="LoadPollingVenues`0" priority="27" />
+      <Item value="LoadStreets`0" priority="27" />
+      <Item value="Load`0" priority="26" />
+      <Item value="GetMunicipalityName`0" priority="53" />
+      <Item value="RandomNumber`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Xml.XmlDocument">
+      <Item value="AppendChild`0" priority="80" />
+      <Item value="CreateXmlDeclaration`0" priority="26" />
+      <Item value="CreateElement`0" priority="107" />
+      <Item value="Save`0" priority="26" />
+      <Item value="Equals`0" priority="26" />
+      <Item value="CreateAttribute`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Int32">
+      <Item value="CompareTo`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.DataGenerator.DataGenerator">
+      <Item value="NumberOfMunicipalities" priority="80" />
+      <Item value="NumberOfPollingVenues" priority="53" />
+      <Item value="FileDestination" priority="53" />
+      <Item value="Generate`0" priority="53" />
+      <Item value="NumberOfVoters" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Xml.XmlDeclaration">
+      <Item value="Encoding" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Xml.XmlElement">
+      <Item value="AppendChild`0" priority="107" />
+      <Item value="InnerText" priority="80" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Random">
+      <Item value="Next`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="Split`0" priority="134" />
+      <Item value="EndsWith`0" priority="26" />
+      <Item value="Remove`0" priority="26" />
+      <Item value="Trim`0" priority="53" />
+      <Item value="Substring`0" priority="22" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Format`0" priority="26" />
+      <Item value="Join`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.SaveFileDialog">
+      <Item value="ShowDialog`0" priority="22" />
+      <Item value="FileName" priority="26" />
+      <Item value="Filter" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.DialogResult">
+      <Item value="OK" priority="26" />
+      <Item value="ToString`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
+      <Item value="Text" priority="134" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Int32">
+      <Item value="TryParse`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:GeneratorApplication.Form1">
+      <Item value="CanEnableIme" priority="26" />
+      <Item value="numberOfPollingVenues" priority="108" />
+      <Item value="numberOfVoters" priority="81" />
+      <Item value="fileDestination" priority="137" />
+      <Item value="numberOfMunicipalities" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Label">
+      <Item value="Text" priority="26" />
+      <Item value="Hide`0" priority="26" />
+      <Item value="Show`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@SmallTuba.Database.Connector">
+      <Item value="GetConnector`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@SmallTuba.Utility.Debug">
+      <Item value="ConsoleOutput" priority="54" />
+      <Item value="WriteLine`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Boolean">
+      <Item value="CompareTo`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Exception">
+      <Item value="ToString`0" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTubaTestSuite.Database.ConnectorTestSuite">
+      <Item value="connector" priority="55" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTubaTestSuite.Database.QueryBuilderTestSuite">
+      <Item value="queryBuilder" priority="107" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.LogEntity">
+      <Item value="Load`0" priority="53" />
+      <Item value="Save`0" priority="53" />
+      <Item value="Timestamp" priority="54" />
+      <Item value="Exists`0" priority="82" />
+      <Item value="Delete`0" priority="80" />
+      <Item value="Action" priority="82" />
+      <Item value="DbId" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.Abstracts.AbstractEntity">
+      <Item value="DbId" priority="134" />
+      <Item value="Exists`0" priority="53" />
+      <Item value="ValueObject" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.Abstracts.AbstractDataAccessObject">
+      <Item value="QueryBuilder" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:SmallTuba.Entities.Abstracts.AbstractValueObject">
+      <Item value="SetValues`0" priority="26" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>C:\Program Files\NUnit 2.5.10\bin\net-2.0\lib</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+</Configuration>

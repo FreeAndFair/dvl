@@ -1,0 +1,272 @@
+system_chart NETWORK_COMMUNICATION
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    course: "BDSA";
+    university: "ITU";
+    created: "2011-11-30";
+  explanation
+    "This system handles the network communication in our polling system.\
+    \On the top level voter request are handled, and underneath network\
+    \communication and checks are made to ensure that the UDP multicast\ 
+    \packets are delivered succefully"
+  cluster NETWORK description "The network cluster"
+end
+
+cluster_chart NETWORK
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "The network communication in our system"
+  cluster RPC description "Cluster used for remote procedure calls from a voter client to a voter server"
+  cluster REQUEST_REPLY description "Cluster used for request-reply with delivery garanty"
+  cluster UDP description "Cluster for low level udp multicast"
+end
+
+cluster_chart RPC
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "Cluster used for remote procedure calls from a voter client to a voter server"
+  class VOTER_CLIENT description "The client side"
+  class VOTER_SERVER description "The server side"
+end
+
+cluster_chart REQUEST_REPLY
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "Cluster used for request-reply with delivery garanty"
+  class CLIENT_FRONT_END description "The client front end"
+  class SERVER_FRONT_END description "The server front end"
+end
+
+cluster_chart UDP
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "Cluster for low level udp multicast"
+  class UDP_MULTICAST description "Class used for multicasting data"
+end
+
+class_chart VOTER_CLIENT
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "The client side of the network communication in our voting system.\
+        \This is the top most level and communication is based on procedure calls."
+  query
+    "May I have a new client for the voter network with this name?",
+    "What is the name of this client?",
+    "May I have all information about the person with this cpr. nr.?",
+    "May I have all information about the person with this ID?",
+    "What are the valid tables for this server?",
+    "Are you connected to a server?"
+  command
+    "Make this the new name of this client.",
+    "Register that this voter has voted.",
+    "Unregister that this voter has voted."
+  constraint
+    "Two clients must not have the same name.",
+    "If a reply has not been received within 2 seconds, the method must return.",
+    "If no reply is received, nothing will be returned.",
+    "A request for registering/unregistering a voter, must contain a voter.",
+    "The name must have a value.",
+    "The name must not be SERVER."
+end
+
+class_chart VOTER_SERVER
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "The server side of the network communication in our voting system.\
+      \This is the top most level and communication is based on procedure calls."
+  query
+    "May I have a new server for the voter network with this name?",
+    "Which function will be invoked when asked about a person from a cpr.nr.?",
+    "Which function will be invoked when asked about a person from a barcode ID?",
+    "Which function will be invoked  when asked about registering a user?",
+    "Which function will be invoked  when asked about unregistering a user?",
+    "Which function will be invoked  when asked about valid tables?"
+  command
+    "Invoke this function that returns a person when asked about a person from a cpr.nr.",
+    "Invoke this function that returns a person when asked about a person from a barcode ID.",
+    "Invoke this function when asked about registering a user.",
+    "Invoke this function when asked about unregistering a user.",
+    "Invoke this function when asked about valid tables.",
+    "Listen for calls for this amount of time."
+  constraint
+    "Before calling listen, all handlers for replies must be set.",
+    "If the time specified is 0, the server must wait forever.",
+    "The timout value must not be negative.",
+    "The name must have a value.",
+    "The server must reply to ping requests from the client.",
+    "Two servers must not have the same name."
+end
+  
+class_chart CLIENT_FRONT_END
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "This class keeps resending packets for the server if its unresponsive.\
+        \This class only sends to and receives packages from the server not other clients."
+  query
+    "May I have a new client front end with this name?",
+    "What is the result of the this request, with this timeout?",
+  constraint
+    "If a server is unresponsive the request must be repeated.",
+    "If the time specified is 0, the server must wait forever.",
+    "The timeout value must be not be negative.",
+    "The request cannot be empty.",
+    "Two clients must not have the same name.",
+    "The name must have a value.",
+    "The name must not be SERVER."
+end
+
+class_chart SERVER_FRONT_END
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "This class listens for request for the server and replies.\
+        \This class only receives request adressed to the server."
+  query
+    "May I have a new server front end?",
+    "which function is invoked when a call is received?"
+  command
+    "Invoke this function when a call is received.",
+    "Listen for calls for this amount of time."
+  constraint
+    "If the timeout is set to 0, then it will wait infinit.",
+    "The timeout value must not be negative.",
+    "Before calling listen, the request handler must be set.",
+    "A function must consume a message and produce a message.",
+    "If a request from a client is repeated with the same request ID, the response must be repeated.",
+    "To servers must not exist in the same network."
+end
+
+class_chart UDP_MULTICAST 
+  indexing
+    author: "Christian Olsson <chro@itu.dk>";
+    created: "2011-11-30";
+  explanation "Class used for multicasting data"
+  query
+    "May i have a new multicast client with this choice of server or client setting?",
+    "May I have an object if one is in queue or arrives within this timeframe?"
+  command
+    "Send this object."
+  constraint
+    "If the timeout is set to 0, then it will wait infinit.",
+    "Only two types of udp multicast clients can be made each listening and sending on different ports.",
+    "The client must only listen to ip 224.5.6.7 port 5000.",
+    "The client must only send to ip 224.5.6.7 port 5001.",
+    "The server must only listen to ip 224.5.6.7 port 5001.",
+    "The server must only send to ip 224.5.6.7 port 5000.",
+    "An instance can only listen to either the server socket or the client socket.",
+    "Objects may not arrive to all subscribers of this udp channel.",
+    "A connection is needed to the recipients.",
+    "Packets maybe lost if the buffers gets to full.",
+    "If an incomming data is not a serialized object, the packet must be ignored.",
+    "It is not possible to send nothing.",
+    "If nothing is recieved within the timeout, nothing must be returned."
+end
+
+static_diagram CLASS_INTERFACES
+component
+  cluster NETWORK
+  component
+    cluster RPC
+    component
+      class VOTER_CLIENT
+        feature
+          make : VOTER_CLIENT -> name : STRING
+          getPersonFromCPR : PERSON -> cpr : NATURAL
+            -- ensure 
+              -- connected => result /= void and
+              -- not connected => result = void
+            -- end
+          getPersonFromID : PERSON -> id : NATURAL
+            -- ensure 
+              -- connected => result /= void and
+              -- not connected => result = void
+            -- end
+          registerVoter : BOOLEAN -> person : PERSON
+            require person /= void
+            -- ensure not connected => result = false
+            end
+          unRegisterVoter : BOOLEAN -> person : PERSON
+            require person /= void
+            --- ensure not connected => result = false
+            end
+          validTables : ARRAY[STRING]
+            -- ensure 
+              -- connected => result.length > 0 and
+              -- not conneted => result = void
+            -- end
+          connected : BOOLEAN
+          invariant 
+            name /= void and 
+            name /= "server" and
+            name.length > 0
+          end
+      end
+      class VOTER_NETWORK_SERVER
+        feature
+          make : VOTER_NETWORK_SERVER -> name : STRING
+            require name /= void
+          end
+          CprToPersonRequest : FUNCTION[NATURAL, PERSON]
+          IdToPersonRequest : FUNCTION[NATURAL, PERSON]
+          RegisterVoteRequest : FUNCTION[PERSON, BOOL]
+          UnRegisterVoteRequest : FUNCTION[PERSON, BOOL]
+          ValidTableRequest : FUNCTION[ARRAY[STRING]]
+          ListenForCalls -> timeOut : INTEGER
+            require 
+              timeOut >= 0 and
+              CprToPersonRequest /= void and
+              IdToPersonRequest /= void and
+              RegisterVoteRequest /= void and
+              UnRegisterVoteRequest /= void and
+              ValidTableRequest /= void and
+              ListenForCalls /= void
+            end
+      end
+    end
+    cluster REQUEST_REPLY
+    component
+      class CLIENT_FRONT_END
+        feature
+          make : CLIENT_FRONT_END -> name : STRING
+            require name /= void and name /= "server"
+          end
+          sendQuery : VALUE -> message : VALUE -> timeOut : INTEGER
+            require 
+              message /= void and
+              timeOut >= 0
+            end
+      end
+      class SERVER_FRONT_END
+        feature
+          make : SERVER_FRONT_END
+          RequestHandler : FUNCTION[VALUE, VALUE]
+          listenForCalls -> timeOut : INTEGER
+            require 
+              timeOut >= 0 and
+              RequestHandler /= void
+            end
+      end
+    end
+    cluster UDP
+    component
+      class UDP_MULTICAST
+        feature
+          make : UDP_MULTICAST -> server : INTEGER
+            require server = 0 or server = 1
+          end
+          send -> packet : VALUE
+            require packet /= void
+          end
+          receive : VALUE -> timeOut : INTEGER
+            require timeOut >= 0
+          end
+      end
+    end
+  end
