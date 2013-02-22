@@ -19,6 +19,7 @@ Mandatory Requirements
 * Must prevent that a voter can be handed more than one ballot
 * Must be able to authenticate and register voters at multiple machines in various venues
 * Must have an interactive user interface, for the authentication and registration
+* Must be able to print out the current voterlist at any point of the election
 
 Secondary Requirements
 ===
@@ -44,6 +45,7 @@ Secondary Requirements
 * Analysis of the turnout, both nationally and for specific turnout results
 * A public API for the media or any citizen to access (after the election)
 * Visualize the turnout results
+* Print the list of eligible voters
 
 Instructions
 ===
