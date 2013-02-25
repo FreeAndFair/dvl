@@ -42,3 +42,6 @@ C:\Users\SGHF\Documents\Visual Studio 2010\Projects\dvltsystem\dvltsystem\obj\x8
 C:\Users\SGHF\Documents\Visual Studio 2010\Projects\dvltsystem\dvltsystem\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\SGHF\Documents\Visual Studio 2010\Projects\dvltsystem\dvltsystem\obj\x86\Debug\DVLTerminal.exe.manifest
 C:\Users\SGHF\Documents\Visual Studio 2010\Projects\dvltsystem\dvltsystem\obj\x86\Debug\DVLTerminal.application
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupEMR DVL\Source\dvltsystem\bin\Debug\DVLTerminal.exe.config
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupEMR DVL\Source\dvltsystem\obj\x86\Debug\DVLTerminal.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupEMR DVL\Source\dvltsystem\obj\x86\Debug\DVLTerminal.pdb

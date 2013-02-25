@@ -25,3 +25,24 @@ C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.exe
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.pdb
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\PollingTable\bin\Debug\PDFjet.dll
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\PollingTable.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\PollingTable.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\Central.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\DBComm.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\PDFjet.dll
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\DBComm.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\bin\Debug\Central.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.Log.LogWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.NormVW.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.Root_elements.CancelBtn.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.Root_elements.WarningMsg.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.UnRegVW.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.Properties.Resources.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.ScannerWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.SetupWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.PollingTable.View.WarningVW.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\PollingTable\obj\x86\Debug\PollingTable.pdb

@@ -19,3 +19,18 @@ C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.rewritten
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.exe
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\bin\Debug\Central.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\bin\Debug\Central.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\bin\Debug\DBComm.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\bin\Debug\PDFjet.dll
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\bin\Debug\DBComm.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.Central.Views.ServerSetupWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.Central.Views.VoterBoxManagerWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.Central.Views.VoterCardGeneratorWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.Central.Views.VoterSelectionWindow.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\Central.Properties.Resources.resources
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DigitalVoterList\obj\x86\Debug\GenerateResource.write.1.tlog

@@ -9,3 +9,8 @@ C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\obj\Debug\DBComm.rewritten
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\obj\Debug\DBComm.exe
 C:\Users\jmei\Dropbox\Programmering\Visual Studio\Projects\BDSA\DigitalVoterList\DBComm\obj\Debug\DBComm.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DBComm\bin\Debug\DBComm.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DBComm\bin\Debug\DBComm.pdb
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DBComm\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DBComm\obj\Debug\DBComm.exe
+C:\Users\Hyllekilde\Dropbox\ITU\DemTech\dvl\Old projects\GroupCJN DVL\DigitalVoterList\DBComm\obj\Debug\DBComm.pdb
