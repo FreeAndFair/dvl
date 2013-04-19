@@ -47,7 +47,7 @@ namespace Aegis_DVL.Cryptography {
             _asymEngine = new RsaEngine();
             var rsaKeyPairGnr = new RsaKeyPairGenerator();
             //TODO: It should be 3072 instead of 128 in order to improve safety
-            rsaKeyPairGnr.Init(new KeyGenerationParameters(new SecureRandom(), 128));
+            rsaKeyPairGnr.Init(new KeyGenerationParameters(new SecureRandom(), 1028));
             var keys = rsaKeyPairGnr.GenerateKeyPair();
 
             //AES initialization
@@ -126,7 +126,7 @@ namespace Aegis_DVL.Cryptography {
                 var number = rdm.Next(20);
                 pwd = pwd.Replace(c,goodChars[number]);
             }
-            return "1234";//TODO:Change to return pwd;
+            return "1234AaBb";//TODO:Change to return pwd;
         }
 
 

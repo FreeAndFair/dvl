@@ -45,8 +45,9 @@ namespace UI.ManagerWindows
             {
                 if (((StationStatus)stationGrid.SelectedItem).Connected)
                 {
-                    _ui.RemoveStation(((StationStatus) stationGrid.SelectedItem).IpAdress);
-                    ((StationStatus) stationGrid.SelectedItem).Connected = false;
+                    _ui.RemoveStation(((StationStatus)stationGrid.SelectedItem).IpAdress);
+                    _ui.RemoveStation(((StationStatus)stationGrid.SelectedItem).IpAdress);
+                    UnmarkConnected(new IPEndPoint(IPAddress.Parse(((StationStatus)stationGrid.SelectedItem).IpAdress), 62000));
                     PopulateList();
                 }
             }
@@ -200,6 +201,20 @@ namespace UI.ManagerWindows
             {
                 if (s.IpAdress == ip.Address.ToString())
                     s.Connected = true;
+            }
+            stationGrid.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Unmark a connected station in the list
+        /// </summary>
+        /// <param name="ip">the IP address of the station to unmark</param>
+        public void UnmarkConnected(IPEndPoint ip)
+        {
+            foreach (StationStatus s in stationGrid.Items)
+            {
+                if (s.IpAdress == ip.Address.ToString())
+                    s.Connected = false;
             }
             stationGrid.Items.Refresh();
         }
