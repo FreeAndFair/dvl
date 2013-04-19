@@ -57,4 +57,14 @@ Secondary Requirements
 
 Instructions
 ===
-Coming up..
+In order to run and develop on the current DVL the following must be installed:
+
+Install Code Contracts library for .NET: 
+http://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970
+
+Install the ADO.NET 2.0 Provider for SQLLite: 
+http://sourceforge.net/projects/sqlite-dotnet2/
+
+Intall Adobe Acrobat Reader: 
+http://get.adobe.com/dk/reader/
+
