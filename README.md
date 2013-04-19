@@ -1,15 +1,23 @@
+Everyone is welcome to contribute to the development of the system. If you have any questions or comment, please write to the project admin: hyllekilde@demtech.dk
+
 The Digital Voter List system
 ===
 This project is developed as a part of the DemTech Research Project at the IT University of Copenhagen.
 
 The project is about developing a Digital Voter List system that can be used for the danish election. It is a highly 
-relevant project, as there is many politicians who are positive about the newly suggested bill on e-voting.
+relevant project, as the municipalities are very interested in using a digital voter list, but the price for using the one provided by KMD is too high for many to afford.
 
 Goal
 ===
 The goal of the project is to make the DVL system as secure and complete as possible. It is made an Open Source project
 in order to have as many assessments and thoughts made of the code and the way it is built which in the end will secure
 the outcome.
+
+Current priority of tasks
+==
+* Correction of bugs stated in 'issues'
+* Implement the use of CryptDB
+* 
 
 Mandatory Requirements
 ===
