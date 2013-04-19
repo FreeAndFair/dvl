@@ -1,0 +1,15 @@
+﻿<Page x:Class="UI.StationWindows.BallotRequestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" ShowsNavigationUI="False"
+    Title="BallotRequestPage" Height="226" Width="299">
+
+    <Grid Height="209">
+        <Label Content="Valgkortsnummer" Height="30" HorizontalAlignment="Center" Margin="0,65,0,0" Name="voterCardNumberLabel" VerticalAlignment="Top" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="0,100,0,0" Name="voterCardNumberTextbox" VerticalAlignment="Top" Width="120" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="VoterCardNumberTextboxTextChanged" AcceptsReturn="True" />
+        <Button Content="Færdig" Height="30" HorizontalAlignment="Center" Margin="90,0,90,29" Name="checkValidityButton" VerticalAlignment="Bottom" Width="120" Click="CheckValidityButtonClick" />
+        <Label Content="Venter på svar..." Height="28" HorizontalAlignment="Left" Margin="0,21,0,0" Name="WaitingLabel" VerticalAlignment="Top" Width="300" HorizontalContentAlignment="Center" />
+    </Grid>
+</Page>
