@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading;
 using Aegis_DVL.Commands;
@@ -80,7 +81,6 @@ namespace Aegis_DVL.Communication {
         public void ReceiveAndHandle() {
         //TODO: Uncomment and delete..
         var listener = new TcpListener(Parent.Address);
-        //var listener = new TcpListener(IPAddress.Parse("192.168.1.60"), 62000);
         listener.Start();
             try {
                 using(var client = listener.AcceptTcpClient()) {
@@ -136,6 +136,7 @@ namespace Aegis_DVL.Communication {
                 cdEvent.Signal();
                 cdEvent.Wait();
             }
+            cdEvent.Dispose();
             return res;
         }
     }

@@ -9,7 +9,7 @@
             <ColumnDefinition Width="522*" />
             <ColumnDefinition Width="85*" />
         </Grid.ColumnDefinitions>
-        <DataGrid AutoGenerateColumns="False" Height="263" HorizontalAlignment="Left" Margin="32,43,0,0" Name="stationGrid" VerticalAlignment="Top" Width="533" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2">
+        <DataGrid AutoGenerateColumns="False" Height="263" HorizontalAlignment="Left" Margin="32,43,0,0" Name="stationGrid" VerticalAlignment="Top" Width="533" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2" SelectionChanged="StationGridSelectionChanged">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="IP Adresse" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
@@ -36,7 +36,7 @@
             <Button Content="Fjern" Margin="20,20,10,20" Height="23" Name="RemoveButton" Width="75" Click="RemoveButtonClick" />
             <Button Content="Start Valg" Margin="20,20,10,20" Height="23" Name="StartEndElectionButton" Width="98" Click="StartEndElectionButtonClick" />
         </StackPanel>
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="32,12,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="426" />
+        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="32,12,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="426" FontFamily="Verdana" FontSize="16"/>
         <Label Content="" Height="28" HorizontalAlignment="Left" Margin="464,0,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="101" Grid.ColumnSpan="2" />
         <ProgressBar Height="9" HorizontalAlignment="Left" Margin="465,31,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2" />
     </Grid>
