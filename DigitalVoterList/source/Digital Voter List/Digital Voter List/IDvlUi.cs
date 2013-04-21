@@ -71,6 +71,12 @@ namespace Aegis_DVL {
         void Shutdown();
 
         /// <summary>
+        /// Let the peer know that it is removed
+        /// </summary>
+        /// Called when a peer has been removed by a Manager.
+        void StationRemoved();
+
+        /// <summary>
         /// Let the UI know that there are not enough peers to continue execution!
         /// </summary>
         // Called when the number of peers during the election falls below the required amount.

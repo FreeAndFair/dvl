@@ -23,10 +23,10 @@ namespace UI.ManagerWindows
             _ip = ip;
             InitializeComponent();
             StationLabel.Content = ip.Address.ToString();
-            Focus();
+            Activate();
             PwTextbox.Focus();
             OKButton.IsEnabled = false;
-            Title = "Accept Station";
+            Title = "Tilslut Station";
         }
 
         /// <summary>

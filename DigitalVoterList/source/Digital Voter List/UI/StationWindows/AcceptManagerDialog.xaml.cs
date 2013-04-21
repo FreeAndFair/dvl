@@ -24,10 +24,10 @@ namespace UI.StationWindows
             _parent = parent;
             _waitingForManagerPage = waitingForManagerPage;
             ManagerLabel.Content = ip.Address.ToString();
-            Focus();
+            Activate();
             PwTextbox.Focus();
             OKButton.IsEnabled = false;
-            Title = "Accept Manager";
+            Title = "Tilslut Manager";
         }
 
         /// <summary>

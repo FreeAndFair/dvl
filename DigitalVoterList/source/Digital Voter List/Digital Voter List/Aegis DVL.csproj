@@ -120,6 +120,7 @@
     <Compile Include="Commands\AddPeerCommand.cs" />
     <Compile Include="Commands\BallotReceivedCPROnlyCommand.cs" />
     <Compile Include="Commands\BallotRequestDeniedCommand.cs" />
+    <Compile Include="Commands\DisconnectStationCommand.cs" />
     <Compile Include="Commands\ElectNewManagerCommand.cs" />
     <Compile Include="Commands\EndElectionCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -161,6 +162,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LogModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Bytes.cs" />
@@ -181,8 +187,13 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\DataSources\Aegis_DVL.Database.Entities.datasource" />
     <None Include="Properties\DataSources\Aegis_DVL.Logging.Entities.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

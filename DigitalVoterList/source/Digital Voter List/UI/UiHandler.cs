@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Windows;
+using System.Windows.Controls;
 using Aegis_DVL;
 using Aegis_DVL.Cryptography;
 using Aegis_DVL.Data_Types;
@@ -83,6 +84,16 @@ namespace UI {
             MessageBox.Show("Valget er blevet udsat for et potentielt angreb og lukkes ned", "Lukker ned",
                             MessageBoxButton.OK, MessageBoxImage.Error);
             Environment.Exit(0);
+        }
+
+        public void StationRemoved()
+        {
+            MessageBox.Show("Stationen er blevet lukket ned af Manageren", "Station fjernet", MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+            if (WaitingForManagerPage != null)
+                WaitingForManagerPage.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { WaitingForManagerPage.StationRemoved(); }));
+            if (BallotRequestPage != null)
+                BallotRequestPage.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { BallotRequestPage.StationRemoved(); }));
         }
 
         public void NotEnoughPeers() {
@@ -182,7 +193,6 @@ namespace UI {
         /// <returns>the master password</returns>
         public string GeneratePassword() {
             _masterPassword = Crypto.GeneratePassword();
-            //_masterPassword = "1234"; //TODO: Delete and use the GeneratePassword from the Crypto class
             return _masterPassword;
         }
 
@@ -243,16 +253,9 @@ namespace UI {
         /// <returns>whether or not the import was succesful</returns>
         public bool ImportData(string dataPath, string keyPath) {
 
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            
             _station = _station ?? new Station(this, keyPath, _masterPassword);
             _masterPassword = null;
-
-            stopWatch.Stop();
-            long duration = stopWatch.ElapsedMilliseconds;
-            Debug.WriteLine("TIME ELAPSED (ImportData): " + duration);
-
+            
             try {
                 _station.Database.Import(ImportElectionData(dataPath));
                 return true;

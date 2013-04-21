@@ -2,6 +2,7 @@
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using UI;
 
 namespace UI.StationWindows {
     /// <summary>
@@ -56,6 +57,16 @@ namespace UI.StationWindows {
         public void SetPasswordLabel(string content)
         {
             PasswordLabel.Content = content;
+        }
+
+        /// <summary>
+        /// When the station is told that it has been removed, we navigate to the TypeChoicePage.
+        /// </summary>
+        public void StationRemoved()
+        {
+            _ui.WaitingForManagerPage = null;
+            _ui.DisposeStation();
+            _parent.Navigate(new TypeChoicePage(_parent,_ui));
         }
     }
 }

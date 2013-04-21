@@ -56,5 +56,14 @@ namespace UI
         {
             Environment.Exit(0);
         }
+
+        public void RemoveStation()
+        {
+            _ui.BallotRequestPage = null;
+            _ui.WaitingForManagerPage = null;
+            _ui.WaitingForManagerPage = new WaitingForManagerPage(_parent,_ui);
+            
+           
+        }
     }
 }

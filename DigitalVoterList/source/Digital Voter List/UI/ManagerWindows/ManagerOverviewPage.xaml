@@ -6,7 +6,7 @@
       mc:Ignorable="d" Title="OverviewPage" Height="407" Width="903">
 
     <Grid>
-        <DataGrid AutoGenerateColumns="False" Height="263" HorizontalAlignment="Left" Margin="342,41,0,0" Name="ManagerstationGrid" VerticalAlignment="Top" Width="533" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False">
+        <DataGrid AutoGenerateColumns="False" Height="263" HorizontalAlignment="Left" Margin="342,0,0,103" Name="ManagerstationGrid" VerticalAlignment="Bottom" Width="533" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="ManagerstationGridSelectionChanged">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="IP Adresse" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>

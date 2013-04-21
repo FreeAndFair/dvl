@@ -47,6 +47,13 @@ namespace Tests {
             UIShutDown = true;
         }
 
+        public bool UIRemovePeer { get; private set; }
+
+        public void StationRemoved()
+        {
+            UIRemovePeer = true;
+        }
+
         public void NotEnoughPeers() {
             UIHasEnoughPeers = false;
         }

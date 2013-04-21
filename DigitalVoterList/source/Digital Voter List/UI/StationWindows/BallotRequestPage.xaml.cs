@@ -27,6 +27,7 @@ namespace UI.StationWindows {
             InitializeComponent();
             checkValidityButton.IsEnabled = false;
             WaitingLabel.Content = "";
+            voterCardNumberTextbox.Focus();
         }
 
         /// <summary>
@@ -41,6 +42,7 @@ namespace UI.StationWindows {
                 WaitingLabel.Content = "Venter på svar...";
                 _ui.RequestBallot(voterCardNumberTextbox.Text);
             }
+            voterCardNumberTextbox.Focus();
         }
 
         /// <summary>
@@ -127,6 +129,16 @@ namespace UI.StationWindows {
             else
                 _ui.NotEnoughPeers();
             
+        }
+
+        /// <summary>
+        /// When the station is told that it has been removed, we navigate to the TypeChoicePage.
+        /// </summary>
+        public void StationRemoved()
+        {
+            _ui.BallotRequestPage = null;
+            _ui.DisposeStation();
+            _parent.Navigate(new TypeChoicePage(_parent, _ui));
         }
     }
 }

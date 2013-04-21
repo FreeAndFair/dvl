@@ -24,7 +24,6 @@ namespace Aegis_DVL.Database {
             Parent = parent;
             var password = Crypto.GeneratePassword();
             InitDb(filename, password);
-            Debug.WriteLine("DATBASE PASSWORD: "+ password);
 
             var conStr = String.Format("metadata=res://*/Database.VoterModel.csdl|res://*/Database.VoterModel.ssdl|res://*/Database.VoterModel.msl;provider=System.Data.SQLite;provider connection string='data source={0};Password={1}'", filename, password);
             _db = new Entities(conStr);

@@ -335,6 +335,7 @@ namespace Aegis_DVL {
             Contract.Requires(peer != null);
             Contract.Requires(Peers.ContainsKey(peer));
             Contract.Ensures(!Peers.ContainsKey(peer));
+            Communicator.Send(new DisconnectStationCommand(new IPEndPoint(Manager.Address,62000), peer), peer);
             Peers.Remove(peer);
             if(!EnoughStations)
                 UI.NotEnoughPeers();

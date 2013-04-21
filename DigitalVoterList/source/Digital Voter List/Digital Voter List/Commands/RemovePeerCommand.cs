@@ -22,7 +22,11 @@ namespace Aegis_DVL.Commands {
 
         public void Execute(Station receiver) {
             if(receiver.Manager.Equals(Sender))
+            {
                 receiver.RemovePeer(_peer);
+                receiver.UI.StationRemoved();
+            }
+                
         }
     }
 }

@@ -25,10 +25,7 @@ namespace Aegis_DVL.Commands {
             Sender = sender;
         }
 
-        public IPEndPoint Sender {
-            get;
-            private set;
-        }
+        public IPEndPoint Sender { get; private set; }
 
         public void Execute(Station receiver) {
             if(receiver.Manager.Equals(Sender)) {
