@@ -126,7 +126,7 @@ namespace Aegis_DVL.Cryptography {
                 var number = rdm.Next(20);
                 pwd = pwd.Replace(c,goodChars[number]);
             }
-            return "1234AaBb";//TODO:Change to return pwd;
+            return "1234";//TODO:Change to return pwd;
         }
 
 

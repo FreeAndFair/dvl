@@ -33,6 +33,7 @@ namespace UI.ManagerWindows
             LoadingBar.Value = 100;
             RemoveButton.IsEnabled = false;
             AddButton.IsEnabled = false;
+            StartEndElectionButton.IsEnabled = false;
             PopulateList();
         }
 
@@ -125,6 +126,8 @@ namespace UI.ManagerWindows
         /// </summary>
         public void PopulateList()
         {
+            StartEndElectionButton.IsEnabled = false;
+
             if(_activeUpdateThread != null)
                 _activeUpdateThread.Abort();
 
@@ -155,6 +158,7 @@ namespace UI.ManagerWindows
             ovp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { UpdateLabel.Content = ""; }));
             ovp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { LoadingBar.Visibility = Visibility.Hidden; }));
             ovp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { RefreshButton.IsEnabled = true; }));
+            ovp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { StartEndElectionButton.IsEnabled = true; }));
 
         }
 

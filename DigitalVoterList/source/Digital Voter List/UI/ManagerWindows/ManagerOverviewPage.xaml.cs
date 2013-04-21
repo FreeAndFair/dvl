@@ -40,6 +40,7 @@ namespace UI.ManagerWindows
             LoadingBar.Value = 100;
             RemoveButton.IsEnabled = false;
             AddButton.IsEnabled = false;
+            EndElectionButton.IsEnabled = false;
 
             //Change the width of the window
             var wnd = Window.GetWindow(_parent);
@@ -193,6 +194,8 @@ namespace UI.ManagerWindows
         /// </summary>
         public void PopulateList()
         {
+            EndElectionButton.IsEnabled = false;
+
             if (_activeUpdateThread != null)
                 _activeUpdateThread.Abort();
 
@@ -224,6 +227,7 @@ namespace UI.ManagerWindows
             mvp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { UpdateLabel.Content = ""; }));
             mvp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { LoadingBar.Visibility = Visibility.Hidden; }));
             mvp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { RefreshButton.IsEnabled = true; }));
+            mvp.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { EndElectionButton.IsEnabled = true; }));
         }
 
         /// <summary>

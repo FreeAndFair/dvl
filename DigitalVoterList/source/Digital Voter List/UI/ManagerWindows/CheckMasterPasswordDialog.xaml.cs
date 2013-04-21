@@ -19,7 +19,7 @@ namespace UI.ManagerWindows
         {
             InitializeComponent();
             _ui = ui;
-            Focus();
+            Activate();
             PwTextbox.Focus();
             OKButton.IsEnabled = false;
             Title = "Master Password";

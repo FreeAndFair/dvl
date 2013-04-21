@@ -17,7 +17,7 @@ namespace Aegis_DVL.Commands {
         /// May I have a new command that exchanges public keys with the target?
         /// </summary>
         /// <param name="parent">The parent station starting the exchange. Should be a manager.</param>
-        /// <param name="isReply">Whether it's a reply from the target. Shouldn't be set manually. Defaults to false.</param>
+        /// <param name="isReply">Whether it's a reply from the target. Shouldn't be set manually. Set to false as default.</param>
         public PublicKeyExchangeCommand(Station parent, bool isReply = false) {
             Contract.Requires(parent != null);
             _isReply = isReply;
@@ -45,7 +45,7 @@ namespace Aegis_DVL.Commands {
                 //Done with key-exchange, synchronize new peer
                 receiver.Communicator.Send(new SyncCommand(receiver), Sender);
                 receiver.AnnounceAddPeer(Sender, receiver.Peers[Sender]);
-                if(receiver.ElectionInProgress)
+                if (receiver.ElectionInProgress)
                     receiver.Communicator.Send(new StartElectionCommand(receiver.Address), Sender);
                 return;
             }
