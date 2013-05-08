@@ -4,12 +4,14 @@ using System.Data.SQLite;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using System.Net;
 using Aegis_DVL.Data_Types;
 using Aegis_DVL.Util;
 
 namespace Aegis_DVL.Logging {
     public class Logger : ILogger {
         private readonly Entities _db;
+        private readonly IPEndPoint _stationAddress;
 
         /// <summary>
         /// May I have a new Logger?
@@ -20,6 +22,7 @@ namespace Aegis_DVL.Logging {
             Contract.Requires(parent != null);
             Contract.Requires(logName != null);
 
+            _stationAddress = parent.Address;
             var password = parent.MasterPassword.AsBase64();
             InitDb(logName, password);
             var conStr = String.Format("metadata=res://*/Logging.LogModel.csdl|res://*/Logging.LogModel.ssdl|res://*/Logging.LogModel.msl;provider=System.Data.SQLite;provider connection string='data source={0};Password={1}'", logName, password);
@@ -30,7 +33,7 @@ namespace Aegis_DVL.Logging {
 
         public void Log(object message, Level level) {
             lock(_db) {
-                _db.Logs.AddObject(Logging.Log.CreateLog(++_i, Bytes.From(new LogEntry(message, level))));
+                _db.Logs.AddObject(Logging.Log.CreateLog(++_i, Bytes.From(new LogEntry(message, level, _stationAddress))));
                 _db.SaveChanges();
             }
         }
