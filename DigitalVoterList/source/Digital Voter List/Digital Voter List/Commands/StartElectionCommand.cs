@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Net;
 
@@ -17,7 +18,8 @@ namespace Aegis_DVL.Commands {
         public IPEndPoint Sender { get; private set; }
 
         public void Execute(Station receiver) {
-            if (!receiver.Manager.Equals(Sender)) return;
+            if (!receiver.Manager.Equals(Sender)) { Debug.WriteLine("StartElectionCommand.Execute REGISTERED AS MANAGER");return;}
+            Debug.WriteLine("StartElectionCommand.Execute REGISTERED AS STATION");
             receiver.StartElection();
             receiver.UI.ElectionStarted();
         }

@@ -66,7 +66,7 @@ namespace UI.StationWindows {
         {
             _ui.WaitingForManagerPage = null;
             _ui.DisposeStation();
-            _parent.Navigate(new TypeChoicePage(_parent,_ui));
+            _parent.Navigate(new TypeChoicePage(_parent, _ui));
         }
     }
 }

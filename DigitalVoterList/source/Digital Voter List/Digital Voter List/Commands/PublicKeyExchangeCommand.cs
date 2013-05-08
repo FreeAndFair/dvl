@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Aegis_DVL.Cryptography;
 using Aegis_DVL.Data_Types;
@@ -45,8 +46,15 @@ namespace Aegis_DVL.Commands {
                 //Done with key-exchange, synchronize new peer
                 receiver.Communicator.Send(new SyncCommand(receiver), Sender);
                 receiver.AnnounceAddPeer(Sender, receiver.Peers[Sender]);
-                if (receiver.ElectionInProgress)
+                if (receiver.ElectionInProgress){
+                    /*
+                    while (!receiver.AllStationsAvailable)
+                    {
+                        /*Wait for the station to be ready
+                    }
+                    */
                     receiver.Communicator.Send(new StartElectionCommand(receiver.Address), Sender);
+                }
                 return;
             }
             receiver.Manager = Sender;

@@ -79,7 +79,6 @@ namespace Aegis_DVL.Communication {
         }
 
         public void ReceiveAndHandle() {
-        //TODO: Uncomment and delete..
         var listener = new TcpListener(Parent.Address);
         listener.Start();
             try {

@@ -62,6 +62,8 @@ namespace Aegis_DVL {
         /// </summary>
         public bool ElectionInProgress { [Pure] get; private set; }
 
+        public bool AllStationsAvailable { [Pure] get; set; }
+
         /// <summary>
         /// Who are my peers?
         /// </summary>
@@ -221,6 +223,7 @@ namespace Aegis_DVL {
 
             Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
             ElectionInProgress = false;
+            AllStationsAvailable = true;
             Address = new IPEndPoint(Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip => ip.AddressFamily == AddressFamily.InterNetwork), port);
             Database = new SqLiteDatabase(this, databaseFile);
             Communicator = new Communicator(this);

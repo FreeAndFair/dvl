@@ -28,6 +28,7 @@ namespace Aegis_DVL.Commands {
             _publicKeys = parent.Peers.Values.Select(key => key.Value.ToBytes()).ToArray();
             _masterPwHash = Bytes.FromFile("Master.pw");
             _electionDataKey = parent.Crypto.VoterDataEncryptionKey.Value.ToBytes();
+            parent.AllStationsAvailable = false;
         }
 
         public IPEndPoint Sender {
@@ -57,6 +58,7 @@ namespace Aegis_DVL.Commands {
 
             receiver.Database.Import(_simpleVoterData.Select(row => new EncryptedVoterData(new CipherText(row[0]), new CipherText(row[1]), new CipherText(row[2]))));
             receiver.Logger.Log("Synchronized by " + Sender, Level.Info);
+            receiver.Communicator.Send(new AllStationsAvailable(receiver.Address), receiver.Manager);
         }
     }
 }

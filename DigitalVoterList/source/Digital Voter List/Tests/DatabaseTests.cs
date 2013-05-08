@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Aegis_DVL;
+using Aegis_DVL.Cryptography;
 using Aegis_DVL.Data_Types;
 using Aegis_DVL.Util;
 using NUnit.Framework;
@@ -10,6 +12,7 @@ using NUnit.Framework;
 namespace Tests {
     [TestFixture]
     public class DatabaseTests {
+        public ICrypto Crypto { get; private set; }
         /// <summary>
         /// SetUp test helper properties.
         /// </summary>
@@ -23,7 +26,7 @@ namespace Tests {
         public void TearDown() {
             Station.Dispose();
             Station = null;
-            //File.Delete("DatabaseTestVoters.sqlite");
+            File.Delete("DatabaseTestVoters.sqlite");
         }
 
         public Station Station { get; private set; }
@@ -63,26 +66,67 @@ namespace Tests {
 
             var vn9 = new VoterNumber(000009);
             var cpr9 = new CPR(1111222209);
-            
-            
+            /*
             db.Import(new List<EncryptedVoterData>
                           {
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn0.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr0.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr0.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn1.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr1.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr1.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn2.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr2.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr2.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn3.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr3.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr3.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn4.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr4.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr4.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn5.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr5.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr5.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn6.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr6.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr6.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn7.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr7.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr7.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn8.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr8.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr8.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
-                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn9.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr9.Value), Station.Crypto.VoterDataEncryptionKey)), new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr9.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey)))
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn0.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr0.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr0.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn1.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr1.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr1.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn2.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr2.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr2.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn3.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr3.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr3.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn4.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr4.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr4.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn5.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr5.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr5.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn6.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr6.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr6.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn7.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr7.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr7.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn8.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr8.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr8.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey))),
+                              new EncryptedVoterData(new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn9.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr9.Value), Station.Crypto.VoterDataEncryptionKey)), 
+                                  new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr9.Value + (uint)BallotStatus.NotReceived), Station.Crypto.VoterDataEncryptionKey)))
                           });
-            
+            */
+
+            var encData = new List<EncryptedVoterData>
+                              {
+                                  new EncryptedVoterData(
+                                      new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(vn0.Value),
+                                                                                      Station.Crypto.
+                                                                                          VoterDataEncryptionKey)),
+                                      new CipherText(Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr0.Value),
+                                                                                      Station.Crypto.
+                                                                                          VoterDataEncryptionKey)),
+                                      new CipherText(
+                                          Station.Crypto.AsymmetricEncrypt(
+                                              Bytes.From(cpr0.Value + (uint) BallotStatus.NotReceived),
+                                              Station.Crypto.VoterDataEncryptionKey)))
+                              };
+            db.Import(encData);
+            //Create file
             Bytes.From(db.AllData).ToFile(fileName);
 
             //Check if file is created
             Assert.That(File.Exists(fileName));
+
+            var decVData = Station.Crypto.AsymmetricDecrypt(new CipherText(Bytes.From(db.AllData)), Station.Crypto.VoterDataEncryptionKey);
+            Debug.WriteLine("Decrypted voter data: " + decVData);
+
+            Bytes.From(db.AllData.ToString()).ToFile("DECRYPTED_VOTERDATA");
         }
 
         /// <summary>

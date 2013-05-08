@@ -13,11 +13,11 @@ namespace Aegis_DVL.Commands {
         /// May I have a new command that wraps and encrypts an inner command, to be transmitted securely?
         /// </summary>
         /// <param name="parent">The parent-station sending the command.</param>
-        /// <param name="to">The address of the recipient.</param>
+        /// <param name="receiver">The address of the recipient.</param>
         /// <param name="innerCommand">The command to be wrapped.</param>
-        public CryptoCommand(Station parent, IPEndPoint to, ICommand innerCommand) {
+        public CryptoCommand(Station parent, IPEndPoint receiver, ICommand innerCommand) {
             Contract.Requires(parent != null);
-            Contract.Requires(to != null);
+            Contract.Requires(receiver != null);
             Contract.Requires(innerCommand != null);
 
             Sender = parent.Address;
@@ -29,7 +29,7 @@ namespace Aegis_DVL.Commands {
 
             var symmetricallyEncryptedCmdBytes = crypto.SymmetricEncrypt(cmdBytes, new SymmetricKey(symmetricKey));
 
-            var targetKey = parent.IsManager && to.Equals(parent.Address) ? parent.Crypto.Keys.Item1 : parent.Peers[to];
+            var targetKey = parent.IsManager && receiver.Equals(parent.Address) ? parent.Crypto.Keys.Item1 : parent.Peers[receiver];
             var asymKeyBytes = crypto.AsymmetricEncrypt(symmetricKey, new AsymmetricKey(targetKey));
 
             var senderHashBytes = crypto.AsymmetricEncrypt(crypto.Hash(cmdBytes), new AsymmetricKey(crypto.Keys.Item2));
