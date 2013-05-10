@@ -69,6 +69,27 @@ namespace UI
         }
 
         /// <summary>
+        /// Check if a given text is a valid CPR number.
+        /// The method only validates that the input is a number of 10 characters and that the first six numbers correspond
+        /// to a real date that is not in the future.
+        /// NOTE: At the moment it will only be able to handle CPR numbers in the format "ddmmyxxxx" and NOT "ddmmyy-xxxx".
+        /// </summary>
+        /// <param name="text">Text to validate.</param>
+        /// <returns>True if the entered text is a valid CPR number, false otherwise.</returns>
+        private static bool IsValidCPR(string text)
+        {
+            int tmpnum;
+            if (text.Length == 10 && int.TryParse(text, out tmpnum))
+            {
+                DateTime tmpdate;
+                string datestring = text.Substring(0, 2) + "-" + text.Substring(2, 2) + "-" + text.Substring(4, 2); // dd-mm-yy
+                return DateTime.TryParse(datestring, out tmpdate) && tmpdate < DateTime.Now;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// When someone typed something into a textbox this is called
         /// </summary>
         /// <param name="sender">auto generated</param>
