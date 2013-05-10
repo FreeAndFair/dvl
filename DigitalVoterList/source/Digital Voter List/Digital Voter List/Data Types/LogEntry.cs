@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Net;
 
 namespace Aegis_DVL.Data_Types {
     /// <summary>
@@ -23,21 +24,28 @@ namespace Aegis_DVL.Data_Types {
         public DateTime Timestamp { get; private set; }
 
         /// <summary>
+        /// Where did the log entry originate from?
+        /// </summary>
+        public IPEndPoint StationAddress { get; private set; }
+
+        /// <summary>
         /// May I have a new LogEntry?
         /// </summary>
         /// <param name="message">The object to log. Typically a string.</param>
         /// <param name="level">The severity-level of the log-entry. Typically Info</param>
-        public LogEntry(object message, Level level)
+        public LogEntry(object message, Level level, IPEndPoint stationAddress)
             : this() {
             Contract.Requires(message != null);
+            Contract.Requires(stationAddress != null);
 
+            StationAddress = stationAddress;
             Message = message;
             Level = level;
             Timestamp = DateTime.Now;
         }
 
         public override string ToString() {
-            return Timestamp + "; " + Level + "; " + Message;
+            return Timestamp + "; " + Level + "; " + Message + "; " + StationAddress;
         }
 
         [ContractInvariantMethod]
