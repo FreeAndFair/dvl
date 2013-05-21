@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using Aegis_DVL;
 using Aegis_DVL.Data_Types;
 using Aegis_DVL.Util;
@@ -113,8 +114,12 @@ namespace Tests {
         }
 
         [Test]
-        public void LogEntryTest() {
-            var entry = new LogEntry("hello", Level.Info);
+        public void LogEntryTest()
+        {
+            const string ipString = "192.168.0.123";
+            var ip = new byte[ipString.Length * sizeof(char)];
+            System.Buffer.BlockCopy(ipString.ToCharArray(), 0, ip, 0, ip.Length);
+            var entry = new LogEntry("hello", Level.Info, new IPEndPoint(new IPAddress(ip), 62000));
             Assert.That(entry.Level.Equals(Level.Info));
             Assert.That(entry.Message.Equals("hello"));
             Assert.That(entry.Timestamp != null);
