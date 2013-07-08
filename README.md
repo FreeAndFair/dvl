@@ -1,70 +1,227 @@
-Everyone is welcome to contribute to the development of the system. If you have any questions or comment, please write to the project admin: hyllekilde@demtech.dk
+Everyone is welcome to contribute to the development of the system.  If
+you have any questions or comment, please write to the project admins:
+hyllekilde@demtech.dk and kiniry@demtech.dk
 
 The Digital Voter List system
 ===
-This project is developed as a part of the DemTech Research Project at the IT University of Copenhagen.
 
-The project is about developing a Digital Voter List system that can be used for the danish election. It is a highly 
-relevant project, as the municipalities are very interested in using a digital voter list, but the price for using the one provided by KMD is too high for many to afford.
+This project is developed as a part of the DemTech Research Project at
+the IT University of Copenhagen.
 
-Goal
+The project is a Digital Voter List (DVL) system usable for Danish
+national elections.  A DVL system manages election artifacts like
+voter cards and the voter list before and during election day.
+
+It is a high-profile project as several municipalities are very
+interested in using a Digital Doter List, but the price for using the
+one provided by KMD is too high for many to afford.
+
+Goals
 ===
-The goal of the project is to make the DVL system as secure and complete as possible. It is made an Open Source project
-in order to have as many assessments and thoughts made of the code and the way it is built which in the end will secure
-the outcome.
 
-Current priority of tasks
-==
-* Correction of bugs stated in 'issues'
-* Implement the use of CryptDB
-* 
+The goal of the project is to make a correct and secure DVL system
+that can replace the existing proprietary and expensive KMD system.
+It is an Open Source project developed by several students with Joe
+Kiniry.  The license for the project is current being chosen by the
+developers.
+
+The Municipality of Ballerup has expressed an interest in using the
+DVL in binding trials in the November 2013 national elections.  The
+Danish firm Aion has expressed an interest in contributing to the
+development of the DVL as well as facilitating the binding trials in
+several polling places in Ballerup.
+
+History
+===
+
+Several variants of the DVL were developed by around a dozen students
+for end-of-term projects in the ITU course "Analysis, Design, and
+Software Architecture with Project" under the supervision of Joe
+Kiniry in Q4 2011.  These experiments are collected in the
+"prototypes" directory in the repository.
+
+The students that built these prototypes are Claes Martinsen, Niels
+Martin Søholm Jensen, and Jan Aagaard Meier (P1); Emil Blædel Nygaard,
+Michael Oliver Urhøj Mortensen, and Rasmus Greve (P2); Jens Dahl
+Møllerhøj, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
+(P3); and X.  Each prototype was built in under one month using an
+early version of the DemTech Trust-by-Design (TBD) methodology (see
+below).  
+
+Each prototype includes a short project overview, an architeture
+specification, an implementation, and a validation suite.  Different
+prototypes focused on different aspects of the problem.  E.g., some
+focused on networking, others on crypography, etc.
+
+In the following year (Q1-Q2 2012), two students, Nikolaj Aaes and
+Nicolai Skovvart, developed an entirely new version of the DVL which
+they called "the Aegis Digital Voter List" based upon what was learned
+from the prototypes.  They used a refinement of TBD for their work and
+spent six months developing the system.  Their system is meant to be
+the foundation for a real, deployable, usable, fault tolerant, secure
+DVL.
+
+In early 2013 (Q1-Q2 2013), Morten Hyllekilde Andersen took over the
+management of the project and made some technical contributions to it.
+The intention of his work was to focus on election law and regulations
+to ensure that we knew exactly what was necessary to do to prepare the
+DVL for using in binding elections.
+
+Starting in July 2013, Joe Kiniry took over development of the project
+to push it to completion for using in 2013 elections.
+
+Development Process and Methodology
+===
+
+The DVL, including all prototypes and the current Aegis system, have
+been developed using early variants of the DemTech Trust-by-Design
+(TBD) software engineering methodology.  
+
+The TBD methodology is documented in several papers published by Joe
+Kiniry and his coauthors, available via http://www.kindsoftware.com/.
+
+In general, a system is comprised of:
+
+* a top-level readme (like this one) that includes information about
+  the system's purpose, examples of its use, fundamental concepts,
+  system requirements, and background literature,
+
+* a domain analysis and a detailed architecture specifications written
+  in the Extended Business Object Notation (EBON)[3],
+
+* formal specifications written at the source code level in one or
+  more contract-based specification languages like [Code Contracts][1]
+  (for .NET systems), the [Java Modeling Language][2] (for JVM
+  systems), or the Executable ANSI/ISO C Specification Language
+  (E-ACSL)[4],
+
+* protocol descriptions typically formally specified using abstract
+  state machines (ASMs), petri nets, formally annotated collaboration
+  diagrams, or other formal notations that have tool support for
+  reasoning about such protocols,
+
+* a hand-written set of (sub)system tests and an automatically
+  generated set of unit tests (using PEX[7] for .NET systems and
+  JMLunitNG[8] for JVM ones), including reports on the completeness
+  and quality of these validation artifacts, and
+
+* a set of evidence that the system fulfills its requirements, usually
+  in the form of traceable artifacts from the requirements to other
+  artifacts that validate that they are satisfied (e.g., test results,
+  code reviews, formal proofs, etc.).
+
+Requirements
+===
+
+What follows are the mandatory and secondary requirements imposed upon
+the DVL.  Informal verification (in the traditional software
+engineering sense) of these requirements is accomplished by several
+means, including formal verification of properties of the system's
+specification and implementation, as well as traceability from the
+requirements to artifacts that validate that they are satisfied (e.g.,
+system tests, code review, etc.).
 
 Mandatory Requirements
-===
-* Must be able to generate voter cards from a given set of eligible voters
-* Must be able to authenticate a voter based on a voter card number and a CPR number
-* Must be able to register when a voter has been handed a ballot and store this information
+==
+
+* Must be able to generate voter cards from a given set of eligible
+  voters
+* Must be able to authenticate a voter based on a voter card number
+* Must be able to register when a voter has been handed a ballot and
+  securely store this information
 * Must prevent that a voter can be handed more than one ballot
-* Must be able to authenticate and register voters at multiple machines in various venues
-* Must have an interactive user interface, for the authentication and registration
-* Must be able to print out the current voterlist at any point of the election
+* Must be able to authenticate and register voters at multiple
+  machines simultaneously in various venues
+* Must have an interactive user interface for authentication and
+  registration
+* Must be able to print out the current voterlist at any point of the
+  election
 
 Secondary Requirements
-===
+==
 
 ####Usability:
-* Make the user interface easy to use for non-technical users (election representatives)
-* The voter should be able to register at any table at the voting venue
+
+* The user interface must be trivial to use for non-technical users
+  (election representatives).a
+
+* The voter should be able to register at any table at the voting
+  venue.
 
 ####Persistence:
-* Not loose data in the event of a typical system failure (eg. a computer crashes)
-* Not loose data in the event of a network failure
+
+* The system will exhibit no dataa lost from an arbitrary failure of
+  any system in the DVL network (a typical system failure like a
+  Windows crash).
+
+* The system will exhibit no data loss in the event of a network
+  failure.
 
 ####Scalability:
-* The system should be able to handle a large number of voters. About 30.000 for each voting venue with 10 machines running the DVL
+
+* The system should be able to handle a large number of voters
+  (approximately 30,000 voter in a single voting venue with 10
+  machines running the DVL).
 
 ####Security:
-* The system should use proper security measures and crypto-technology to establish confidence that the system is secure
-* Filter the citizens based on multiple lists and criterion to determine eligible voters
-* Analyze the resulting data, to detect suspicious voters and fraud
-* Status on the digital voter list prior to election and after
+
+* The system should use proper security measures and cryptography to
+  establish confidence that the system is secure.
+
+* The system should be able to filter voters in a voter list based on
+  multiple criterion to determine eligible voters.
+
+* The system should be able to analyze the election result data to
+  detect suspicious voters and fraud.
+
+* The system should be able to provide a status on the digital voter
+  list prior to an election and afterwards.
 
 ####Analysis:
-* Analysis of the turnout, both nationally and for specific turnout results
-* A public API for the media or any citizen to access (after the election)
-* Visualize the turnout results
-* Print the list of eligible voters
 
-Instructions
+* The system should be able to provide an analysis of the turnout,
+  both nationally and for specific turnout results.
+
+* The system should have a public API for the media or any citizen to
+  access (after the election).
+
+* The system should be able to visualize the turnout results.
+
+* The system should print the list of eligible voters.
+
+Development Instructions
 ===
-In order to run and develop on the current DVL the following must be installed:
 
-Install Code Contracts library for .NET: 
-http://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970
+In order to develop on the current DVL the following software
+libraries, tools, and frameworks must be installed.
 
-Install the ADO.NET 2.0 Provider for SQLLite: 
-http://sourceforge.net/projects/sqlite-dotnet2/
+[1]: Code Contracts library for .NET
+[http://research.microsoft.com/en-us/projects/contracts/]
+(http://research.microsoft.com/en-us/projects/contracts/)
 
-Intall Adobe Acrobat Reader: 
-http://get.adobe.com/dk/reader/
+[2]: Java Modeling Language (JML) 
+[http://www.jmlspecs.org/](http://www.jmlspecs.org/)
 
+[3]: The Business Object Notation
+[http://bon-method.com/](http://bon-method.com/)
+
+[4]: the Executable ANSI/ISO C Specification Language
+[http://frama-c.com/](http://frama-c.com/)a
+
+[5] The ADO.NET 2.0 Provider for SQLLite
+[http://sourceforge.net/projects/sqlite-dotnet2/]
+(http://sourceforge.net/projects/sqlite-dotnet2/)
+
+  To install ADO.NET on a modern .NET 4.0 development system, you may
+  need to install a .NET 3.5/2.0 runtime from Microsoft: 
+
+[6] Adobe Acrobat Reader
+[http://get.adobe.com/reader/](http://get.adobe.com/reader/)
+
+[7] PEX
+[http://research.microsoft.com/en-us/projects/pex/]
+(http://research.microsoft.com/en-us/projects/pex/)
+
+[8] JMLunitNG
+[http://formalmethods.insttech.washington.edu/software/jmlunitng/]
+(http://formalmethods.insttech.washington.edu/software/jmlunitng/)
