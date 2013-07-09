@@ -1,0 +1,78 @@
+﻿/*namespace DigitalVoterList.Election.Administration
+{
+    using System.Windows;
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// A printer used to create the physical voter cards
+    /// </summary>
+    public class VoterCardPrinter : FrameworkElement
+    {
+        public VoterCardPrinter()
+        {
+        }
+
+        public void Print(VoterCard voterCard)
+        {
+<<<<<<< HEAD
+            PrintDialog printDlg = new System.Windows.Controls.PrintDialog();
+            PrintVoterCard newVoterCard = new PrintVoterCard(voterCard);
+            if (printDlg.ShowDialog() == true)
+            {
+                //get selected printer capabilities
+                System.Printing.PrintCapabilities capabilities = printDlg.PrintQueue.GetPrintCapabilities(printDlg.PrintTicket);
+
+                //get scale of the print wrt to screen of WPF visual
+                double scale = Math.Min(capabilities.PageImageableArea.ExtentWidth / this.ActualWidth, capabilities.PageImageableArea.ExtentHeight /
+                               this.ActualHeight);
+
+                //Transform the Visual to scale
+                this.LayoutTransform = new ScaleTransform(scale, scale);
+
+                //get the size of the printer page
+                Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
+
+                //update the layout of the visual to the printer page size.
+                this.Measure(sz);
+                this.Arrange(new Rect(new Point(capabilities.PageImageableArea.OriginWidth, capabilities.PageImageableArea.OriginHeight), sz));
+
+                //now print the visual to printer to fit on the one page.
+                printDlg.PrintVisual(newVoterCard, "First Fit to Page WPF Print");
+
+                PrintCapabilities capabilities = printDlg.PrintQueue.GetPrintCapabilities(printDlg.PrintTicket);
+
+                double scale = Math.Min(
+                    capabilities.PageImageableArea.ExtentWidth / grid.ActualHeight,
+                    capabilities.PageImageableArea.ExtentHeight / grid.ActualHeight);
+
+                Transform oldTransform = grid.LayoutTransform;
+
+                grid.LayoutTransform = new ScaleTransform(scale, scale);
+
+                Size oldSize = new Size(grid.ActualHeight, grid.ActualHeight);
+                Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
+                grid.Measure(sz);
+                ((UIElement)grid).Arrange(new Rect(new Point(capabilities.PageImageableArea.OriginWidth, capabilities.PageImageableArea.OriginHeight),sz));
+                printDlg.PrintVisual(grid, "print VoterCard");
+                grid.LayoutTransform = oldTransform;
+                grid.Measure(oldSize);
+
+                ((UIElement)grid).Arrange(new Rect(new Point(0,0), oldSize));
+<<<<<<< HEAD
+=======
+                
+>>>>>>> a83e28e80aa467862a407d6debd788c7c3132dc0
+            }
+                printDlg.PrintVisual(newVoterCard, "Print Single VoterCard");
+            }
+=======
+
+            PrintVoterCard printVoterCard = new PrintVoterCard(voterCard);
+            PrintDialog dialog = new PrintDialog();
+            if (dialog.ShowDialog() == true)
+            { dialog.PrintVisual(printVoterCard.printPage, "Print Voter Card"); }
+>>>>>>> 71c5fc0364061c1756f393990eec5d44e8f49647
+        }
+    }
+}
+*/
