@@ -135,7 +135,7 @@
     <Compile Include="UtilTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Digital Voter List\Aegis DVL.csproj">
+    <ProjectReference Include="..\DVL\Aegis DVL.csproj">
       <Project>{10D0DF95-0552-43AB-B540-8CAD1F631E38}</Project>
       <Name>Aegis DVL</Name>
     </ProjectReference>
