@@ -1,0 +1,50 @@
+<schema xmlns='http://www.w3.org/2001/XMLSchema'>
+	<element name = "Municipalities">
+		<complexType>
+			<sequence maxOccurs="unbounded">
+				<element name = "Municipality">
+					<complexType>
+						<sequence maxOccurs="unbounded">
+							<element name = "Name" type = "string"/>
+							<element name = "Street" type = "string"/>
+							<element name = "City" type = "string"/>
+							<element name = "PollingVenues">
+								<complexType>
+									<sequence maxOccurs="unbounded">
+										<element name = "PollingVenue">
+											<complexType>
+												<sequence>
+													<element name = "Name" type = "string"/>
+													<element name = "Street" type = "string"/>
+													<element name = "City" type = "string"/>
+													<element name = "Voters">
+														<complexType>
+															<sequence maxOccurs="unbounded">
+																<element name = "Voter">
+																	<complexType>
+																		<sequence>
+																			<element name = "FirstName" type = "string"/>
+																			<element name = "LastName" type = "string"/>
+																			<element name = "Street" type = "string"/>
+																			<element name = "City" type = "string"/>
+																			<element name = "CprNo" type = "positiveInteger"/>
+																			<element name = "PollingTable" type = "positiveInteger"/>
+																		</sequence>
+																	</complexType>
+																</element>
+															</sequence>
+														</complexType>
+													</element>
+												</sequence>
+											</complexType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

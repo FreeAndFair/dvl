@@ -1,0 +1,1817 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DBComm.Moles</name>
+    </assembly>
+    <members>
+        <member name="T:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DAO.AbstractDataAccessObject`1"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.#ctor(DBComm.DBComm.DAO.AbstractDataAccessObject{`0})">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.Bind(DBComm.DBComm.DAO.IDataAccessObject{`0})">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1._IDataAccessObjectContract1typeparameterT_Createb__0_0T``1(Microsoft.Moles.Framework.MolesDelegates.Func{``0,System.Boolean})">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.&lt;&gt;IDataAccessObjectContract`1&lt;type parameter.T&gt;_&lt;Create&gt;b__0_0``1(``0)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.ConstructorDigitalVoterList">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.#ctor(DBComm.DBComm.DigitalVoterList)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.CreateIEnumerableOfT">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Create(System.Collections.Generic.IEnumerable`1{`1})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.CreateT">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Create(`1)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.DeleteExpressionOfFuncOfTBoolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Delete(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.ReadExpressionOfFuncOfTBoolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Read(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.UpdateExpressionOfFuncOfTBooleanT">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Update(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}},`1)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.AllInstances.CreateIEnumerableOfT">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Create(System.Collections.Generic.IEnumerable`1{`1})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.AllInstances.CreateT">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Create(`1)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.AllInstances.DeleteExpressionOfFuncOfTBoolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Delete(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.AllInstances.ReadExpressionOfFuncOfTBoolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Read(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MAbstractDataAccessObject`1.AllInstances.UpdateExpressionOfFuncOfTBooleanT">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.AbstractDataAccessObject`1.Update(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}},`1)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.MDBCreator">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DataGeneration.DBCreator"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MDBCreator.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MDBCreator.#ctor(DBComm.DBComm.DataGeneration.DBCreator)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MDBCreator.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MDBCreator.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MDBCreator.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MDBCreator.ConstructorMySqlConnection">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.DBCreator.#ctor(MySql.Data.MySqlClient.MySqlConnection)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MDBCreator.ConstructorStringStringStringString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.DBCreator.#ctor(System.String,System.String,System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MDBCreator.createDBMySqlConnection">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.DBCreator.createDB(MySql.Data.MySqlClient.MySqlConnection)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.MDBCreator.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MDBCreator.AllInstances.createDBMySqlConnection">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.DBCreator.createDB(MySql.Data.MySqlClient.MySqlConnection)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.MData">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DataGeneration.Data"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MData.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MData.#ctor(DBComm.DBComm.DataGeneration.Data)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MData.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MData.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetBoyname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetBoyname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetCPR">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetCPR"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetCityname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetCityname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetFirstNameUInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetFirstName(System.UInt32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetGirlname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetGirlname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetLastname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetLastname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetMunicipalityname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetMunicipalityname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetRoadname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetRoadname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.GetStationName">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetStationName"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.PadIntInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.PadInt(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.createCPR">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.createCPR"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.getDate">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.getDate"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.getMonth">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.getMonth"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.getYear">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.getYear"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetBoyname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetBoyname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetCPR">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetCPR"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetCityname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetCityname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetFirstNameUInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetFirstName(System.UInt32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetGirlname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetGirlname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetLastname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetLastname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetMunicipalityname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetMunicipalityname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetRoadname">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetRoadname"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.GetStationName">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.GetStationName"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.PadIntInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.PadInt(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.createCPR">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.createCPR"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.getDate">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.getDate"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.getMonth">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.getMonth"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MData.AllInstances.getYear">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Data.getYear"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.Moles.MDigitalVoterList">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DigitalVoterList"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MDigitalVoterList.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MDigitalVoterList.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MDigitalVoterList.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MDigitalVoterList.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MDigitalVoterList.Bind(System.IDisposable)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.ConnStringGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DigitalVoterList.ConnString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.ConstructorMySqlConnection">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DigitalVoterList.#ctor(MySql.Data.MySqlClient.MySqlConnection)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.GetConnectionInstanceStringStringStringInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DigitalVoterList.GetConnectionInstance(System.String,System.String,System.String,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.GetDefaultInstance">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DigitalVoterList.GetDefaultInstance"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.GetInstanceFromServerString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DigitalVoterList.GetInstanceFromServer(System.String)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MDigitalVoterList.GetInstanceStringStringStringString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DigitalVoterList.GetInstance(System.String,System.String,System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.Moles.MDigitalVoterList.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.MGenerator">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DataGeneration.Generator"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MGenerator.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MGenerator.#ctor(DBComm.DBComm.DataGeneration.Generator)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MGenerator.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.MGenerator.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.ConstructorDigitalVoterList">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.#ctor(DBComm.DBComm.DigitalVoterList)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.GenerateInt32Int32Int32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.Generate(System.Int32,System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.GenerateMunicipalitiesInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.GenerateMunicipalities(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.GeneratePollingStationsInt32Int32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.GeneratePollingStations(System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.GenerateVotersInt32Int32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.GenerateVoters(System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.MGenerator.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.AllInstances.GenerateInt32Int32Int32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.Generate(System.Int32,System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.AllInstances.GenerateMunicipalitiesInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.GenerateMunicipalities(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.AllInstances.GeneratePollingStationsInt32Int32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.GeneratePollingStations(System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.MGenerator.AllInstances.GenerateVotersInt32Int32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DataGeneration.Generator.GenerateVoters(System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MLogDAO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DAO.LogDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MLogDAO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MLogDAO.#ctor(DBComm.DBComm.DAO.LogDAO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MLogDAO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MLogDAO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MLogDAO.Bind(DBComm.DBComm.DAO.IDataAccessObject{DBComm.DBComm.DO.LogDO})">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.ConstructorDigitalVoterList">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.#ctor(DBComm.DBComm.DigitalVoterList)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.CreateIEnumerableOfLogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.LogDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.CreateLogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.Create(DBComm.DBComm.DO.LogDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO._Createb__0LogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.&lt;Create&gt;b__0(DBComm.DBComm.DO.LogDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO._Createb__1LogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.&lt;Create&gt;b__1(DBComm.DBComm.DO.LogDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MLogDAO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.AllInstances.CreateIEnumerableOfLogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.LogDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.AllInstances.CreateLogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.Create(DBComm.DBComm.DO.LogDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MLogDAO.AllInstances._Createb__1LogDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.LogDAO.&lt;Create&gt;b__1(DBComm.DBComm.DO.LogDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MLogDO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DO.LogDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MLogDO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MLogDO.#ctor(DBComm.DBComm.DO.LogDO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MLogDO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MLogDO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MLogDO.Bind(DBComm.DBComm.DO.IDataObject)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.ActivityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Activity"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.ActivitySetNullableOfActivityEnum">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Activity"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.ConstructorNullableOfUInt32NullableOfUInt32NullableOfActivityEnum">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.#ctor(System.Nullable`1{System.UInt32},System.Nullable`1{System.UInt32},System.Nullable`1{DBComm.DBComm.DO.ActivityEnum})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.CprGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Cpr"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.CprSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Cpr"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.TableGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Table"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.TableSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Table"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.TimeGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Time"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.TimeSetNullableOfDateTime">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Time"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MLogDO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.ActivityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Activity"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.ActivitySetNullableOfActivityEnum">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Activity"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.CprGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Cpr"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.CprSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Cpr"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.TableGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Table"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.TableSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Table"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.TimeGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Time"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.TimeSetNullableOfDateTime">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.LogDO.Time"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MLogDO.AllInstances.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.LogDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MMunicipalityDAO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DAO.MunicipalityDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.#ctor(DBComm.DBComm.DAO.MunicipalityDAO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.Bind(DBComm.DBComm.DAO.IDataAccessObject{DBComm.DBComm.DO.MunicipalityDO})">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.ConstructorDigitalVoterList">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.#ctor(DBComm.DBComm.DigitalVoterList)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.CreateIEnumerableOfMunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.MunicipalityDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.CreateMunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.Create(DBComm.DBComm.DO.MunicipalityDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO._Createb__2MunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.&lt;Create&gt;b__2(DBComm.DBComm.DO.MunicipalityDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO._Createb__3MunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.&lt;Create&gt;b__3(DBComm.DBComm.DO.MunicipalityDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.AllInstances.CreateIEnumerableOfMunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.MunicipalityDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.AllInstances.CreateMunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.Create(DBComm.DBComm.DO.MunicipalityDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MMunicipalityDAO.AllInstances._Createb__3MunicipalityDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.MunicipalityDAO.&lt;Create&gt;b__3(DBComm.DBComm.DO.MunicipalityDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MMunicipalityDO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DO.MunicipalityDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MMunicipalityDO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MMunicipalityDO.#ctor(DBComm.DBComm.DO.MunicipalityDO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MMunicipalityDO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MMunicipalityDO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MMunicipalityDO.Bind(DBComm.DBComm.DO.IDataObject)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AddressGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AddressSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.CityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.CitySetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.ConstructorNullableOfUInt32StringStringString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.#ctor(System.Nullable`1{System.UInt32},System.String,System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.EqualsObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.GetHashCode">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.IdGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Id"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.IdSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Id"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.NameGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.NameSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.PollingStationsGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PollingStations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.PollingStationsSetICollectionOfPollingStationDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PollingStations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.ToString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.ToString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.AddressGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.AddressSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.CityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.CitySetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.EqualsObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.GetHashCode01">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.IdGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Id"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.IdSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Id"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.NameGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.NameSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.PollingStationsGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PollingStations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.PollingStationsSetICollectionOfPollingStationDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PollingStations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.MunicipalityDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.ToString01">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.ToString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MMunicipalityDO.AllInstances.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DAO.PessimisticVoterDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.#ctor(DBComm.DBComm.DAO.PessimisticVoterDAO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.ConstructorStringString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.#ctor(System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.EndTransaction">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.EndTransaction"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.ReadUInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.Read(System.UInt32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.StartTransactionInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.StartTransaction(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.TransactionStarted">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.TransactionStarted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.UpdateUInt32Boolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.Update(System.UInt32,System.Boolean)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.AllInstances.EndTransaction">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.EndTransaction"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.AllInstances.ReadUInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.Read(System.UInt32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.AllInstances.StartTransactionInt32">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.StartTransaction(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.AllInstances.TransactionStarted">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.TransactionStarted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPessimisticVoterDAO.AllInstances.UpdateUInt32Boolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PessimisticVoterDAO.Update(System.UInt32,System.Boolean)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MPollingStationDAO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DAO.PollingStationDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPollingStationDAO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPollingStationDAO.#ctor(DBComm.DBComm.DAO.PollingStationDAO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPollingStationDAO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPollingStationDAO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MPollingStationDAO.Bind(DBComm.DBComm.DAO.IDataAccessObject{DBComm.DBComm.DO.PollingStationDO})">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.ConstructorDigitalVoterList">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.#ctor(DBComm.DBComm.DigitalVoterList)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.CreateIEnumerableOfPollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.PollingStationDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.CreatePollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.Create(DBComm.DBComm.DO.PollingStationDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO._Createb__2PollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.&lt;Create&gt;b__2(DBComm.DBComm.DO.PollingStationDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO._Createb__3PollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.&lt;Create&gt;b__3(DBComm.DBComm.DO.PollingStationDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MPollingStationDAO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.AllInstances.CreateIEnumerableOfPollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.PollingStationDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.AllInstances.CreatePollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.Create(DBComm.DBComm.DO.PollingStationDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MPollingStationDAO.AllInstances._Createb__3PollingStationDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.PollingStationDAO.&lt;Create&gt;b__3(DBComm.DBComm.DO.PollingStationDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MPollingStationDO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DO.PollingStationDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MPollingStationDO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MPollingStationDO.#ctor(DBComm.DBComm.DO.PollingStationDO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MPollingStationDO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MPollingStationDO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MPollingStationDO.Bind(DBComm.DBComm.DO.IDataObject)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AddressGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AddressSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.ConstructorNullableOfUInt32NullableOfUInt32StringString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.#ctor(System.Nullable`1{System.UInt32},System.Nullable`1{System.UInt32},System.String,System.String)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.EqualsObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.GetHashCode">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.MunicipalityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Municipality"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.MunicipalityIdGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.MunicipalityId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.MunicipalityIdSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.MunicipalityId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.MunicipalitySetMunicipalityDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Municipality"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.NameGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.NameSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.ToString">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.ToString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.VotersGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Voters"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.VotersSetICollectionOfVoterDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Voters"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.AddressGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.AddressSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.EqualsObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.GetHashCode01">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.MunicipalityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Municipality"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.MunicipalityIdGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.MunicipalityId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.MunicipalityIdSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.MunicipalityId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.MunicipalitySetMunicipalityDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Municipality"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.NameGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.NameSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.ToString01">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.ToString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.PollingStationDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.VotersGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Voters"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MPollingStationDO.AllInstances.VotersSetICollectionOfVoterDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.PollingStationDO.Voters"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.Moles.MProgram">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.Program"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MProgram.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MProgram.#ctor(DBComm.DBComm.Program)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MProgram.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.MProgram.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MProgram.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MProgram.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.Program.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.MProgram.MainStringArray">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.Program.Main(System.String[])"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.Moles.MProgram.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MVoterDAO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DAO.VoterDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MVoterDAO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MVoterDAO.#ctor(DBComm.DBComm.DAO.VoterDAO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MVoterDAO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MVoterDAO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.MVoterDAO.Bind(DBComm.DBComm.DAO.IDataAccessObject{DBComm.DBComm.DO.VoterDO})">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.ConstructorDigitalVoterList">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.#ctor(DBComm.DBComm.DigitalVoterList)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.CreateIEnumerableOfVoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.VoterDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.CreateVoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.Create(DBComm.DBComm.DO.VoterDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO._Createb__2VoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.&lt;Create&gt;b__2(DBComm.DBComm.DO.VoterDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO._Createb__3VoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.&lt;Create&gt;b__3(DBComm.DBComm.DO.VoterDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.MVoterDAO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.AllInstances.CreateIEnumerableOfVoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.Create(System.Collections.Generic.IEnumerable`1{DBComm.DBComm.DO.VoterDO})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.AllInstances.CreateVoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.Create(DBComm.DBComm.DO.VoterDO)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.MVoterDAO.AllInstances._Createb__3VoterDO">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DAO.VoterDAO.&lt;Create&gt;b__3(DBComm.DBComm.DO.VoterDO)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MVoterDO">
+            <summary>Mole type of <see cref="T:DBComm.DBComm.DO.VoterDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MVoterDO.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MVoterDO.#ctor(DBComm.DBComm.DO.VoterDO)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MVoterDO.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MVoterDO.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.MVoterDO.Bind(DBComm.DBComm.DO.IDataObject)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AddressGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AddressSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.CardPrintedGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.CardPrinted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.CardPrintedSetNullableOfBoolean">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.CardPrinted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.CityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.CitySetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.Constructor">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.ConstructorNullableOfUInt32NullableOfUInt32StringStringStringNullableOfBooleanNullableOfBoolean">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.#ctor(System.Nullable`1{System.UInt32},System.Nullable`1{System.UInt32},System.String,System.String,System.String,System.Nullable`1{System.Boolean},System.Nullable`1{System.Boolean})"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.CprStringGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.CprString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.EqualsObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.GetHashCode">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.NameGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.NameSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.PollingStationGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStation"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.PollingStationIdGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStationId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.PollingStationIdSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStationId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.PollingStationSetPollingStationDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStation"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.VotedGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Voted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.VotedSetNullableOfBoolean">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Voted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO._InvariantMethod">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.$InvariantMethod$"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.AddressGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.AddressSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Address"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.CardPrintedGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.CardPrinted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.CardPrintedSetNullableOfBoolean">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.CardPrinted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.CityGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.CitySetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.City"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.CprStringGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.CprString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.EqualsObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.FullyInitialized">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.GetHashCode01">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.NameGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.NameSetString">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Name"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.PollingStationGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStation"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.PollingStationIdGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStationId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.PollingStationIdSetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStationId"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.PollingStationSetPollingStationDO">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PollingStation"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.PrimaryKeyGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.PrimaryKeySetNullableOfUInt32">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.ResetAssociations">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.UpdateValuesIDataObject">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.VotedGet">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Voted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances.VotedSetNullableOfBoolean">
+            <summary>Sets the mole of <see cref="P:DBComm.DBComm.DO.VoterDO.Voted"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.MVoterDO.AllInstances._InvariantMethod">
+            <summary>Sets the mole of <see cref="M:DBComm.DBComm.DO.VoterDO.$InvariantMethod$"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SAbstractDataAccessObject`1">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.AbstractDataAccessObject`1"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SAbstractDataAccessObject`1.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SAbstractDataAccessObject`1.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SAbstractDataAccessObject`1.InitializeStub">
+            <summary>Initializes a new instance of type SAbstractDataAccessObject</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SAbstractDataAccessObject`1.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SAbstractDataAccessObject`1.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.SDBCreator">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DataGeneration.DBCreator"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SDBCreator.#ctor(MySql.Data.MySqlClient.MySqlConnection)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SDBCreator.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SDBCreator.InitializeStub">
+            <summary>Initializes a new instance of type SDBCreator</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.SDBCreator.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.SDBCreator.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.SData">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DataGeneration.Data"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SData.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SData.InitializeStub">
+            <summary>Initializes a new instance of type SData</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.SData.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.SData.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DataGeneration.Moles.SGenerator">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DataGeneration.Generator"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SGenerator.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DataGeneration.Moles.SGenerator.InitializeStub">
+            <summary>Initializes a new instance of type SGenerator</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.SGenerator.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DataGeneration.Moles.SGenerator.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.IDataAccessObject`1"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.#ctor">
+            <summary>Initializes a new instance of type SIDataAccessObject</summary>
+        </member>
+        <member name="F:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.CreateIEnumerableOfT">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Create(System.Collections.Generic.IEnumerable`1{`1})"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.CreateT">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Create(`1)"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.dbc::DBComm#DBComm#DAO#IDataAccessObject{T}#Create(`0)">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Create(`1)"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.dbc::DBComm#DBComm#DAO#IDataAccessObject{T}#Create(System.Collections.Generic.IEnumerable{`0})">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Create(System.Collections.Generic.IEnumerable`1{`1})"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.dbc::DBComm#DBComm#DAO#IDataAccessObject{T}#Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Delete(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.dbc::DBComm#DBComm#DAO#IDataAccessObject{T}#Read(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Read(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.dbc::DBComm#DBComm#DAO#IDataAccessObject{T}#Update(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},`0)">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Update(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}},`1)"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.DeleteExpressionOfFuncOfTBoolean">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Delete(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.ReadExpressionOfFuncOfTBoolean">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Read(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}})"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DAO.Moles.SIDataAccessObject`1.UpdateExpressionOfFuncOfTBooleanT">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DAO.IDataAccessObject`1.Update(System.Linq.Expressions.Expression`1{System.Func`2{`1,System.Boolean}},`1)"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.SIDataObject">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DO.IDataObject"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SIDataObject.#ctor">
+            <summary>Initializes a new instance of type SIDataObject</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SIDataObject.dbc::DBComm#DBComm#DO#IDataObject#FullyInitialized">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.IDataObject.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SIDataObject.dbc::DBComm#DBComm#DO#IDataObject#ResetAssociations">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.IDataObject.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SIDataObject.dbc::DBComm#DBComm#DO#IDataObject#UpdateValues(DBComm.DBComm.DO.IDataObject)">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.IDataObject.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SIDataObject.FullyInitialized">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.IDataObject.FullyInitialized"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SIDataObject.PrimaryKeyGet">
+            <summary>Sets the stub of <see cref="P:DBComm.DBComm.DO.IDataObject.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SIDataObject.ResetAssociations">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.IDataObject.ResetAssociations"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SIDataObject.UpdateValuesIDataObject">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.IDataObject.UpdateValues(DBComm.DBComm.DO.IDataObject)"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SIDataObject.dbc::DBComm#DBComm#DO#IDataObject#PrimaryKey">
+            <summary>Sets the stub of <see cref="P:DBComm.DBComm.DO.IDataObject.PrimaryKey"/>
+            </summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SLogDAO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.LogDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SLogDAO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SLogDAO.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SLogDAO.InitializeStub">
+            <summary>Initializes a new instance of type SLogDAO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SLogDAO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SLogDAO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.SLogDO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DO.LogDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SLogDO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SLogDO.#ctor(System.Nullable{System.UInt32},System.Nullable{System.UInt32},System.Nullable{DBComm.DBComm.DO.ActivityEnum})">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SLogDO.InitializeStub">
+            <summary>Initializes a new instance of type SLogDO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SLogDO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SLogDO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SMunicipalityDAO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.MunicipalityDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SMunicipalityDAO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SMunicipalityDAO.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SMunicipalityDAO.InitializeStub">
+            <summary>Initializes a new instance of type SMunicipalityDAO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SMunicipalityDAO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SMunicipalityDAO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.SMunicipalityDO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DO.MunicipalityDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SMunicipalityDO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SMunicipalityDO.#ctor(System.Nullable{System.UInt32},System.String,System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SMunicipalityDO.Equals(System.Object)">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SMunicipalityDO.EqualsObject">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SMunicipalityDO.GetHashCode">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SMunicipalityDO.GetHashCode01">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SMunicipalityDO.InitializeStub">
+            <summary>Initializes a new instance of type SMunicipalityDO</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SMunicipalityDO.ToString">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.ToString"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SMunicipalityDO.ToString01">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.MunicipalityDO.ToString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SMunicipalityDO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SMunicipalityDO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SPessimisticVoterDAO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.PessimisticVoterDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SPessimisticVoterDAO.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SPessimisticVoterDAO.InitializeStub">
+            <summary>Initializes a new instance of type SPessimisticVoterDAO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SPessimisticVoterDAO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SPessimisticVoterDAO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SPollingStationDAO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.PollingStationDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SPollingStationDAO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SPollingStationDAO.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SPollingStationDAO.InitializeStub">
+            <summary>Initializes a new instance of type SPollingStationDAO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SPollingStationDAO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SPollingStationDAO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.SPollingStationDO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DO.PollingStationDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SPollingStationDO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SPollingStationDO.#ctor(System.Nullable{System.UInt32},System.Nullable{System.UInt32},System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SPollingStationDO.Equals(System.Object)">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.PollingStationDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SPollingStationDO.EqualsObject">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.PollingStationDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SPollingStationDO.GetHashCode">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.PollingStationDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SPollingStationDO.GetHashCode01">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.PollingStationDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SPollingStationDO.InitializeStub">
+            <summary>Initializes a new instance of type SPollingStationDO</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SPollingStationDO.ToString">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.PollingStationDO.ToString"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SPollingStationDO.ToString01">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.PollingStationDO.ToString"/>
+            </summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SPollingStationDO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SPollingStationDO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.Moles.SProgram">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.Program"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.SProgram.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.Moles.SProgram.InitializeStub">
+            <summary>Initializes a new instance of type SProgram</summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.SProgram.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.Moles.SProgram.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DAO.Moles.SVoterDAO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DAO.VoterDAO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SVoterDAO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SVoterDAO.#ctor(DBComm.DBComm.DigitalVoterList)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DAO.Moles.SVoterDAO.InitializeStub">
+            <summary>Initializes a new instance of type SVoterDAO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SVoterDAO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DAO.Moles.SVoterDAO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:DBComm.DBComm.DO.Moles.SVoterDO">
+            <summary>Stub type of <see cref="T:DBComm.DBComm.DO.VoterDO"/>
+            .</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SVoterDO.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SVoterDO.#ctor(System.Nullable{System.UInt32},System.Nullable{System.UInt32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SVoterDO.Equals(System.Object)">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.VoterDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SVoterDO.EqualsObject">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.VoterDO.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SVoterDO.GetHashCode">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.VoterDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="F:DBComm.DBComm.DO.Moles.SVoterDO.GetHashCode01">
+            <summary>Sets the stub of <see cref="M:DBComm.DBComm.DO.VoterDO.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:DBComm.DBComm.DO.Moles.SVoterDO.InitializeStub">
+            <summary>Initializes a new instance of type SVoterDO</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SVoterDO.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:DBComm.DBComm.DO.Moles.SVoterDO.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+    </members>
+</doc>

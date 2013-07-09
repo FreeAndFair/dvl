@@ -1,0 +1,1578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+
+<title>BON Documentation: PX3_DIGITAL_VOTER_LIST</title>
+
+<script type="text/javascript">
+<!--
+
+var items = ['system_chart:PX3_DIGITAL_VOTER_LIST','class_chart:INTEGER','class_chart:RETRY_UTILITY','class_chart:QUIZ','class_chart:CITIZEN','class_chart:DATA_ACCESS_OBJECT','class_chart:ELECTION_EVENT','class_chart:DAO_FACTORY','class_chart:NUMBER','class_chart:VOTER_CARD_PRINTER','class_chart:TABLE','class_chart:DAO_PERMISSION_PROXY','class_chart:SET','class_chart:FLOAT','class_chart:BARCODE','class_chart:VALUE','class_chart:FILE','class_chart:LIST','class_chart:DAO_MYSQL','class_chart:TUPLE','class_chart:DATA_TRANSFORMER','class_chart:BOOLEAN','class_chart:ANY','class_chart:VOTING_VENUE','class_chart:TREE','class_chart:USER','class_chart:VOTER_CARD','class_chart:PERSON','class_chart:ARRAY','class_chart:STRING','cluster_chart:PX3_DIGITAL_VOTER_LIST','cluster_chart:KERNEL','cluster_chart:UTILITIES','cluster_chart:STRUCTURES','cluster_chart:ELECTION','cluster_chart:ADMINISTRATION','cluster_chart:NUMBERS','cluster_chart:BUILT_IN','scenario_chart:1','scenario_chart:2','scenario_chart:3'];
+var topOptions = [ 'System Chart', 'system_chart', 'Cluster Charts', 'cluster_chart', 'Class Charts', 'class_chart', 'Scenario Charts', 'scenario_chart' ];
+var subOptions = [];
+subOptions['system_chart'] = [ 'PX3_DIGITAL_VOTER_LIST', 'system_chart:PX3_DIGITAL_VOTER_LIST' ];
+subOptions['cluster_chart'] = [ 'ADMINISTRATION','cluster_chart:ADMINISTRATION','BUILT_IN','cluster_chart:BUILT_IN','ELECTION','cluster_chart:ELECTION','KERNEL','cluster_chart:KERNEL','NUMBERS','cluster_chart:NUMBERS','PX3_DIGITAL_VOTER_LIST','cluster_chart:PX3_DIGITAL_VOTER_LIST','STRUCTURES','cluster_chart:STRUCTURES','UTILITIES','cluster_chart:UTILITIES' ];
+subOptions['class_chart'] = [ 'ANY','class_chart:ANY','ARRAY','class_chart:ARRAY','BARCODE','class_chart:BARCODE','BOOLEAN','class_chart:BOOLEAN','CITIZEN','class_chart:CITIZEN','DAO_FACTORY','class_chart:DAO_FACTORY','DAO_MYSQL','class_chart:DAO_MYSQL','DAO_PERMISSION_PROXY','class_chart:DAO_PERMISSION_PROXY','DATA_ACCESS_OBJECT','class_chart:DATA_ACCESS_OBJECT','DATA_TRANSFORMER','class_chart:DATA_TRANSFORMER','ELECTION_EVENT','class_chart:ELECTION_EVENT','FILE','class_chart:FILE','FLOAT','class_chart:FLOAT','INTEGER','class_chart:INTEGER','LIST','class_chart:LIST','NUMBER','class_chart:NUMBER','PERSON','class_chart:PERSON','QUIZ','class_chart:QUIZ','RETRY_UTILITY','class_chart:RETRY_UTILITY','SET','class_chart:SET','STRING','class_chart:STRING','TABLE','class_chart:TABLE','TREE','class_chart:TREE','TUPLE','class_chart:TUPLE','USER','class_chart:USER','VALUE','class_chart:VALUE','VOTER_CARD','class_chart:VOTER_CARD','VOTER_CARD_PRINTER','class_chart:VOTER_CARD_PRINTER','VOTING_VENUE','class_chart:VOTING_VENUE' ];
+subOptions['scenario_chart'] = [ 'Scenario Chart 1','scenario_chart:1','Scenario Chart 2','scenario_chart:2','Scenario Chart 3','scenario_chart:3' ];
+
+
+var showAll = false;
+var sysTitle = 'system_title';
+var topMenu = 'top-menu';
+var subMenu = 'sub-menu';
+
+function setElText(id,text) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    elem.innerHTML = text;
+  }
+}
+
+function toggleShowAll() {
+  showAll = !showAll;
+  if (showAll) {
+    displayAll();
+    setElText('showlink', 'Show One');
+  } else {
+    hideAll();
+    setElText('showlink', 'Show All');
+  }
+  showSelected();
+  return false;
+}
+
+function select(id) {
+  if (showAll) {
+//    setHash(id);
+    return true;
+  } else {
+    showOnly(id);
+    return true;
+  }
+}
+
+function showOnly(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hideAll();
+    showElem(id);
+  }
+}
+
+function hideAll() {
+  for (var i=0; i<items.length; i++) {
+    hideElem(items[i]);
+  }
+}
+
+function displayAll() {
+  for (var i=0; i<items.length; i++) {
+    showElem(items[i]);
+  }
+}
+
+function showElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    show(elem);
+  }
+}
+
+function hideElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hide(elem);
+  }
+}
+
+function hide(elem) {
+  addClass(elem,'hidden');
+}
+
+function show(elem) {
+  removeClass(elem,'hidden');
+}
+
+function addClass(elem,cName) {
+  if (!elem.className) {
+    elem.className = cName;
+  } else if (elem.className.indexOf(cName) == -1) {
+    elem.className += ' ' + cName;
+  }
+}
+
+function removeClass(elem,cName) {
+  if (elem.className) {
+    var toReplace = elem.className.match(' ' + cName);
+    elem.className = elem.className.replace(toReplace, '');
+  }
+}
+
+function setBack(id) {
+//Not yet...
+}
+
+function initialPopulate() {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    topSelect.options.length = 0;
+    for (var i=0; i < topOptions.length; i+=2) {
+      topSelect.options[i/2] = new Option(topOptions[i],topOptions[i+1]);
+    }
+  }
+  if (window.location.hash) {
+    hashSelect(window.location.hash.substr(1));    
+  } else {
+    populate();
+    showSelected();
+  }
+  lastHash = window.location.hash;
+  //Trigger checkHash
+  setInterval(checkHash,100);
+}
+
+function hashSelect(hash) {
+  var parts = hash.split(':');
+  if (parts.length == 2) {
+    linkSelect(parts[0],hash);
+  } else {
+    populate();
+  }
+}
+
+var lastHash = '';
+
+function checkHash() {
+
+  if (window.location.hash) {
+    if (window.location.hash != lastHash) {
+      hashSelect(window.location.hash.substr(1));
+      lastHash = window.location.hash;
+    }
+  }
+}
+
+function setHash(hash) {
+  lastHash = '#' + hash;
+  window.location.hash = hash;
+}
+
+function populate() {
+
+  var subSelect = document.getElementById(subMenu);
+  var topSelect = document.getElementById(topMenu);
+
+  if (subSelect && topSelect) {
+    var selected = topSelect.options[topSelect.selectedIndex].value;
+    if (selected) {
+      var chosenSubOptions = subOptions[selected];
+      subSelect.options.length = 0;
+      for (var i=0; i < chosenSubOptions.length; i+=2) {
+        subSelect.options[i/2] = new Option(chosenSubOptions[i],chosenSubOptions[i+1]);
+      }
+    }
+  }
+}
+
+function showSelected() {
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    var selected = subSelect.options[subSelect.selectedIndex].value;
+    if (selected) {
+      select(selected);
+      setHash(selected);
+    }
+  }
+}
+
+function linkSelect(top, sub) {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    for (var i=0; i < topSelect.options.length; i++) {
+      if (topSelect.options[i].value == top) {
+        topSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }  
+  populate();
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    for (var i=0; i < subSelect.options.length; i++) {
+      if (subSelect.options[i].value == sub) {
+        subSelect.selectedIndex = i;
+        showSelected();
+        return false;
+      }
+    }
+    showSelected();
+  }
+  return true;
+}
+
+
+//-->
+</script>
+
+<style type="text/css">
+
+.hidden {
+  position:absolute;
+  left:0px;
+  top:-500px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+body {
+  font-family: Optima, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, sans-serif;
+}
+
+.list-entry {
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+#main {
+  padding-bottom: 100px;
+}
+
+#footer {
+  z-index: 1;
+  position: fixed; 
+  bottom: 0px;
+  right: 0px; 
+  width: 100%;
+  border-top: 2px solid #000000;
+  background-color: #cccccc;
+}
+
+#left-footer {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+#left-footer select {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+#showlink {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  min-width: 125px;
+}
+
+#top-menu {
+  min-width: 160px;
+}
+
+#sub-menu {
+  min-width: 220px;
+}
+
+#right-footer {
+  margin: 5px 5px 0px 0px;
+  padding: 0;
+  text-align: right;
+}
+
+#footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+dl {
+  margin: 0 0 0 10px;
+}
+
+dd {
+  margin-left: 20px;
+} 
+
+.scenario_entry dt {
+  font-weight: bold;
+}
+
+.indexing dt, .explanation dt {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+.top-level {
+  width: 98%;
+  margin: auto;
+}
+
+.outer {
+  width: 100%;
+  background-color: #a2a2a2;
+  border: 2px solid #000000;
+  margin-bottom: 30px;
+}
+
+.type, .name, .part {
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+
+.explanation, .indexing {
+  padding: 5px 5px 5px 10px;
+  background-color: #ffffff;
+  vertical-align: top;
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+}
+
+.name {
+  background-color: #f3f0f0;
+  font-size: 1.1em;
+}
+
+.part {
+  background-color: #cccccc;
+}
+
+.type, .part {
+  width: 25%;
+}
+
+.type {
+  background-color: #bcbcbc;
+}
+
+.name, .indexing, .explanation {
+  width: 50%;
+}
+
+.top, .middle, .bottom {
+  width: 100%;
+}
+
+.bottom table {
+  border: 4px groove #c0c0c0;
+  width: 100%;
+}
+
+.bottom tr {
+  width: 100%;
+}
+
+.bottom td, .bottom th {
+  border: 1px inset #c0c0c0;
+  vertical-align: top;
+  padding: 8px 20px 8px 20px;
+}
+
+.spaced-lines {
+  line-height: 1.5em;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.light-grey {
+  background-color: #f3f0f0;
+}
+
+.grey {
+  background-color: #cccccc;
+}
+</style>
+
+</head>
+<body onload="initialPopulate();">
+
+<div id="main">
+
+<div class="top-level" id="system_chart:PX3_DIGITAL_VOTER_LIST">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SYSTEM</th>
+      <td class="name" colspan="2">PX3_DIGITAL_VOTER_LIST</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;A system for managing and using digital voter lists at an election for at parlament or similair&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>authors : "Jens Dahl Møllerhøj <jdmo@itu.dk>, Morten Hyllekilde Andersen <mhyl@itu.dk> & Michael Valentin <mier@itu.dk>";</dd>
+          <dd>course : "BDSA";</dd>
+          <dd>university : "IT University of Copenhagen";</dd>
+          <dd>created : "25-11-2011";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:ELECTION" onclick="return linkSelect('cluster_chart','cluster_chart:ELECTION');">ELECTION</a></td>
+            <td class="white">&quot;Things related to an election to a parlament or similair&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:UTILITIES" onclick="return linkSelect('cluster_chart','cluster_chart:UTILITIES');">UTILITIES</a></td>
+            <td class="white">&quot;Various generic utilities for acomplishing simple and/or trivial tasks easier.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:ELECTION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">ELECTION</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Things related to an election for a parlament or similair&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:PERSON" onclick="return linkSelect('class_chart','class_chart:PERSON');">PERSON</a></td>
+            <td class="white">&quot;A human being with a name&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:RAWPERSON" onclick="return linkSelect('class_chart','class_chart:RAWPERSON');">RAWPERSON</a></td>
+            <td class="white">&quot;A datastructure containing all the data that can be found about a human being.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CITIZEN" onclick="return linkSelect('class_chart','class_chart:CITIZEN');">CITIZEN</a></td>
+            <td class="white">&quot;A person with a valid and unique ID-number (CPR-number)&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:USER" onclick="return linkSelect('class_chart','class_chart:USER');">USER</a></td>
+            <td class="white">&quot;A person responsible of helping out at an election&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTER_CARD" onclick="return linkSelect('class_chart','class_chart:VOTER_CARD');">VOTER_CARD</a></td>
+            <td class="white">&quot;A ticket to be exchanged for a ballot, that is send out to the voter as a part of the validation process.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ELECTION_EVENT" onclick="return linkSelect('class_chart','class_chart:ELECTION_EVENT');">ELECTION_EVENT</a></td>
+            <td class="white">&quot;A standardized interface for an election.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:GENERAL_EVENT" onclick="return linkSelect('class_chart','class_chart:GENERAL_EVENT');">GENERAL_EVENT</a></td>
+            <td class="white">&quot;An actual election, that runs at a specific time, in a specific area and with a specific set of elegible voters.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTING_VENUE" onclick="return linkSelect('class_chart','class_chart:VOTING_VENUE');">VOTING_VENUE</a></td>
+            <td class="white">&quot;A specific venue for voting, typically a school or similair public place.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DATA_ACCESS_OBJECT" onclick="return linkSelect('class_chart','class_chart:DATA_ACCESS_OBJECT');">DATA_ACCESS_OBJECT</a></td>
+            <td class="white">&quot;A standardized interface for querieing a data source.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DAO_PERMISSION_PROXY" onclick="return linkSelect('class_chart','class_chart:DAO_PERMISSION_PROXY');">DAO_PERMISSION_PROXY</a></td>
+            <td class="white">&quot;An object that insures that the user have permissions to call functions in the database.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DAO_MYSQL" onclick="return linkSelect('class_chart','class_chart:DAO_MYSQL');">DAO_MYSQL</a></td>
+            <td class="white">&quot;A DAO specific for mySQL databases.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DAO_FACTORY" onclick="return linkSelect('class_chart','class_chart:DAO_FACTORY');">DAO_FACTORY</a></td>
+            <td class="white">&quot;An object to ensure you get the right database object&quot;</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Cluster</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:ADMINISTRATION" onclick="return linkSelect('cluster_chart','cluster_chart:ADMINISTRATION');">ADMINISTRATION</a></td>
+            <td class="white">&quot;Things related to the administration of an election&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:UTILITIES">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">UTILITIES</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Various generic utilities for acomplishing simple and/or trivial tasks easier.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:BARCODE" onclick="return linkSelect('class_chart','class_chart:BARCODE');">BARCODE</a></td>
+            <td class="white">&quot;An optical, machine readable, representation of simple data&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:QUIZ" onclick="return linkSelect('class_chart','class_chart:QUIZ');">QUIZ</a></td>
+            <td class="white">&quot;A linguistic expression used to make a request for information&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:RETRY_UTILITY" onclick="return linkSelect('class_chart','class_chart:RETRY_UTILITY');">RETRY_UTILITY</a></td>
+            <td class="white">&quot;A utility for retrying actions&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:ADMINISTRATION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">ADMINISTRATION</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Things related to the administration of an election&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTER_CARD_PRINTER" onclick="return linkSelect('class_chart','class_chart:VOTER_CARD_PRINTER');">VOTER_CARD_PRINTER</a></td>
+            <td class="white">&quot;A system that can generate a voter card, given a set of information.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DATA_TRANSFORMER" onclick="return linkSelect('class_chart','class_chart:DATA_TRANSFORMER');">DATA_TRANSFORMER</a></td>
+            <td class="white">&quot;A system that can collect the necessary data for an election event.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DATA_ANALYZER" onclick="return linkSelect('class_chart','class_chart:DATA_ANALYZER');">DATA_ANALYZER</a></td>
+            <td class="white">&quot;A system that can analyze the turnout results after an election.&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:RETRY_UTILITY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">RETRY_UTILITY</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A utility for retrying actions&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "UTILITIES";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Please retry this action after this amount of time!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PERSON">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PERSON</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A human being&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new person?&quot;,<br/>&quot;What is your CPR-number?&quot;,<br/>&quot;What is your name?&quot;,<br/>&quot;What is your adress?&quot;,<br/>&quot;What is your passport number?&quot;,<br/>&quot;Where were you born?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:CITIZEN">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">CITIZEN</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A potential voter&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">PERSON</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Are you eligible to vote?&quot;,<br/>&quot;Have you voted?&quot;,<br/>&quot;What is your voting status?&quot;,<br/>&quot;What voter cards belong to you?&quot;,<br/>&quot;What security questions can i ask you?&quot;,<br/>&quot;In what voting venue should you vote?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Change your eligibility to vote!&quot;,<br/>&quot;Register that you have voted!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;Must have a CPR-number&quot;,<br/>&quot;A has voted when he has been handed a ballot&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:USER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">USER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The users at the election venue and people adminitrating the electing, whom have different priviledges.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">CITIZEN</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;What is your title?&quot;,<br/>&quot;What permissions do you have?&quot;,<br/>&quot;What voting venues do you work in?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Change your password!&quot;,<br/>&quot;Get perm&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;Must have a title&quot;,<br/>&quot;Must have a username&quot;,<br/>&quot;Must have a password&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTER_CARD">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTER_CARD</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The voter card being sent to citizens who are eligibe to vote.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Can I have a new voter card for this citizen for this ElectionEvent?&quot;,<br/>&quot;Which election event have you been made for?&quot;,<br/>&quot;Who are you addressed to?&quot;,<br/>&quot;What is your ID?&quot;,<br/>&quot;Are you valid?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set this voter card invalid!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;Must have a citizen&quot;,<br/>&quot;Must have an election event&quot;,<br/>&quot;Must have an ID&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ELECTION_EVENT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ELECTION_EVENT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An event containing data of an election.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Can I have a new election with this name and date?&quot;,<br/>&quot;When are you scheduled to be?&quot;,<br/>&quot;What is your name?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Change your scheduled election date!&quot;,<br/>&quot;Change your name!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;Must have a scheduled election date and a name&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTING_VENUE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTING_VENUE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A specific venue for voting, typically a school or similair public place.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-12-01";</dd>
+          <dd>revised : "2011-12-01";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;What is your name?&quot;,<br/>&quot;What is your address?&quot;,<br/>&quot;What elegible voters do you have?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DATA_ACCESS_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DATA_ACCESS_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An object to access the database in a standardized way.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;What person has this id?&quot;,<br/>&quot;What user has this id?&quot;,<br/>&quot;What user has this username and password?&quot;,<br/>&quot;What votercard has this id?&quot;,<br/>&quot;What votercard has this id-key?&quot;,<br/>&quot;What persons exists with data similiar to this?&quot;,<br/>&quot;May i have all eligible voters in the database?&quot;,<br/>&quot;What users exists with data similiar to this?&quot;,<br/>&quot;What votercards exists with data similiar to this?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Create this person with this data!&quot;,<br/>&quot;Create this user with this data!&quot;,<br/>&quot;Create this voter card with this data!&quot;,<br/>&quot;Update this person with this data!&quot;,<br/>&quot;Mark that a voter has voted with standard validation!&quot;,<br/>&quot;mark that a voter has voted with manual validation!&quot;,<br/>&quot;Change this users pasword to this!&quot;,<br/>&quot;Mark this user as invalid!&quot;,<br/>&quot;Mark this voter card as invalid!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;Person to be created must have a name or CPR-number&quot;,<br/>&quot;User to be created must have a username&quot;,<br/>&quot;User to be created must have a password&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DAO_PERMISSION_PROXY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DAO_PERMISSION_PROXY</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An object that insures that the user have permissions to call functions in the database&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">DATA_ACCESS_OBJECT</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new DAO permission proxy for this DAO with this users permissions&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DAO_MYSQL">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DAO_MYSQL</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A DAO specific for MySQL databases&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">DATA_ACCESS_OBJECT</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Give me a data access object that this user can use.&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;Must be constructed from factory method&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DAO_FACTORY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DAO_FACTORY</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An object to ensure you get the right database object&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ELECTION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Give me the right DAO&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:BARCODE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">BARCODE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An optical, machine readable, representation of simple data, with the ability to output both the data and the optical representation.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "UTILITIES";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new barcode object, representing this data?&quot;,<br/>&quot;What data do you hold?&quot;,<br/>&quot;Can I have an optical representation of the data you hold?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;The data must not be longer than 10 charachters&quot;,<br/>&quot;The optical representation must represent the data exactly and unambiguously.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:QUIZ">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">QUIZ</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A brief assessment used as an authenticator&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "UTILITIES";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Give me a new quiz with this question and this answer to it&quot;,<br/>&quot;What is the question?&quot;,<br/>&quot;What is the answer?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;The answer must be the answer to the question.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTER_CARD_PRINTER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTER_CARD_PRINTER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A printer used to create the physical voter cards&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ADMINISTRATION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new voter card printer?&quot;,<br/>&quot;May I have a voter card based on this voter card information&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DATA_TRANSFORMER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DATA_TRANSFORMER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A system used to collect information about all citizens&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "ADMINISTRATION";</dd>
+          <dd>created : "2011-11-25";</dd>
+          <dd>revised : "2011-11-25";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;What citizen would I get if I gave him/her this rawPersons information?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="scenario_chart:1">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SCENARIOS</th>
+      <td class="name" colspan="2">USE_SCENARIOS</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&quot;Common scenarios at an election, related to the voter lists, from a users view.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>created : "2011-11-30";</dd>
+          <dd>revised : "2011-11-30";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;USER REQUEST FOR INFORMATION&quot;</dt>
+                <dd>&quot;The user can request information regarding his/her voting status. If the information is not available yet, the user can get an estimate on when it will be available. Otherwise the user can see if they are eligible to vote and if he/she has voted.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;COLLECT DATA&quot;</dt>
+                <dd>&quot;Data regarding eligible voters and their personal details must be gathered and filtered from various, preferably secure, data sources.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;PRINT VOTER CARDS&quot;</dt>
+                <dd>&quot;Data must be collected just before printing voter cards. Voter cards are printed based on collected data.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;SEND OUT EXTRA VOTER CARD&quot;</dt>
+                <dd>&quot;Users who haven't got their voter card (lost in mail, etc.) can request a new voter card. The old voter card is invalidated, and a new one is sent out.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;REGISTER VOTERS WITH VOTER CARD&quot;</dt>
+                <dd>&quot;When a voter arrives at the voting venue, he/she must present his/her voter card, enter a personal information (eg. last four digits of CPR-number) and answer one or more security questions in order to recieve their ballot.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;MANUAL REGISTRATION OF VOTER WITHOUT A VOTER CARD&quot;</dt>
+                <dd>&quot;If a voter has no voter card, a manual validation process is performed. The voter must show picture-id or documents of authentication of similair quality. The voter is then evaluated by the election-staff, who determines wether they should be given a ballot. This process is only handled by special, highly trusted election staff.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;CHANGE USER PASSWORD&quot;</dt>
+                <dd>&quot;When a user is logged in the first time, he/she is asked to change his/her password to a personal password of his/her choice. The password must comply with some specific security constraints.&quot;</dd>
+              </dl>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="scenario_chart:2">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SCENARIOS</th>
+      <td class="name" colspan="2">SYSTEM_SCENARIOS</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&quot;Common scenarios at an election, related to the voter lists, from a system view. This is an overview description, omitting technical details.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>created : "2011-11-30";</dd>
+          <dd>revised : "2011-11-30";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;USER REQUEST FOR INFORMATION&quot;</dt>
+                <dd>&quot;A request is sent to the central database. If the information is available, it is returned.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;COLLECT DATA&quot;</dt>
+                <dd>&quot;Retrieve data from various data sources. Filter and merge the information to the best possible set of data. Store useful information in the central database.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;PRINT VOTER CARDS&quot;</dt>
+                <dd>&quot;Data must be collected just before printing. A random voter-card-id is attached to each voter in the central database. For each eligible voter, a voter card is printed with the necessary information and keyphrase from the central database.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;SEND OUT EXTRA VOTER CARD&quot;</dt>
+                <dd>&quot;When a new voter card is sent out, the voter-card-id for the old voter card is marked as invalid in the database, and a new one is written. The new voter-card-id is used on the new voter card, which is sent to the voters address.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;VALIDATION OF VOTERS WITH VOTER CARD&quot;</dt>
+                <dd>&quot;Voter card is scanned. If voter-card-id is found in central database, a security question (for the election official to ask) is returned. To validate, the voter must enter a personal information that is unknown to the election official (eg. last four digits of their CPR-number). If the voter-card-id is not found in the central database, the voter can't be validated by his/her voter card and must go to manual validation.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;MANUAL VALIDATION OF VOTER WITHOUT A VOTER CARD&quot;</dt>
+                <dd>&quot;For the manual validation the election-staff representative can look-up information for the given citizen, based on his/her CPR-number. If manual validation is successfull, a manual registration in the system is performed. This process is handled by authorized staff, and only they can perform the manual regeistration after authenticating themself.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;REGISTER VOTER&quot;</dt>
+                <dd>&quot;A voter must be validated by his/her voter card, or manually by authorized staff, in order to be registered and handed a ballot. A registration can only happen if the voter has not all ready been registered. The registration happens in the central database.&quot;</dd>
+              </dl>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="scenario_chart:3">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SCENARIOS</th>
+      <td class="name" colspan="2">SYSTEM_PROCESS_CHART</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Comment</dt>
+          <dd>&quot;Description of core system processes, and how they interact. Important for understanding the system arcitechture.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>created : "2011-11-30";</dd>
+          <dd>revised : "2011-11-30";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;USER REQUEST FOR INFORMATION&quot;</dt>
+                <dd>&quot;The user enters citizen's CPR-number. This is sent to the server, that gives back data regarding his/her voting status. The voting status can be: 'Information not available yet', 'You are not eligible to vote', You are eligible to vote, your voter card should arrive in X days', 'You have voted', 'The election is over, you have voted' or 'The election is over you have not voted'&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;COLLECT DATA&quot;</dt>
+                <dd>&quot;We just generate mock-up data.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;INITIALIZE ELECTION DAY&quot;</dt>
+                <dd>&quot;At the start of the election day, the local database at every election venue must be sync'ed to match the central database. The digital voter list system cannot be used before this process has succesfully completed.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;PRINT VOTER CARDS&quot;</dt>
+                <dd>&quot;The printing system requests all data to be collected. For each voter in the database, the printing system generates and inserts a voter-card-id. For each voter in the database, the printing system retrieves the voter-card-id, name and address of the voter, and prints this information to the voter card, which is sent by mail.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;SEND OUT EXTRA VOTER CARD&quot;</dt>
+                <dd>&quot;The printing system marks the old voter-card-id as invalid and generates a new voter-card-id for the citizen. For this citizen, the voter-card-id, name and address is retrieved from the database and printed to the voter card. The voter card is sent out by mail.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;VALIDATION OF VOTERS WITH VOTER CARD&quot;</dt>
+                <dd>&quot;The voter-card-id is read through a bar-code. The voter-card-id is looked up in the central database. If the voter-card-id is not found in the database, an error message is returned. If the voter-card-id is marked as invalid in the database, the coresponding error-message is returned. If the voter-card-id is found in the central database and is valid, a security question and it's answer is returned to the election official. The security question can be refreshed by the election official. The voter must enter a simple personal information that is unknown to the election official (eg. last four digits in CPR-number), and the election official must validate the voter through the security question. If the entered, personal information can be validated in the central database, the election official has successfully validated the voter, the voter is eligible to vote and has not allready voted, the voter is marked as 'has voted' in the central database, and the voter-card-id is marked invalid. If the process fails at any point, the process can be retried. If the election official is suspicious about the voter, or the voter fails to enter his/her simple personal information 3 times, the voter must go to manual validation.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;MANUAL REGISTRATION OF VOTER WITHOUT A VOTER CARD&quot;</dt>
+                <dd>&quot;The voters identity and eligibility to vote is manually validated by a trusted election official. The election official can look up information on the voter and his/her eligibility to vote via the voters CPR-number. If the voter is found eligible, the election official can send a request to the central database, for marking the voter as 'has voted', by entering his/her password. Only if the voter is eligible and has not allready voted, a confirmation is returned and the voter can be handed a ballot.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;REGISTRATION OF VOTING&quot;</dt>
+                <dd>&quot;When a voter is registered as 'has voted', information is also kept regarding when this happened and who was the election representative in charge.&quot;</dd>
+              </dl>
+            </td>
+          </tr>          <tr>
+            <td class="white">
+              <dl class="scenario_entry">
+                <dt>&quot;DATABASE PROXY&quot;</dt>
+                <dd>&quot;All requests from the voting venue goes through a database proxy unit at the voting venue. If the proxy can establish connection to the central database, the proper actions are performed there and mirrored in the local database. If a connection can't be established, the proper actions are performed in the local database and marked as unsynchronized, and synced to the central database as soon as the connection can again be established.&quot;</dd>
+              </dl>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="footer">
+  <p id="left-footer">
+    <button id="showlink" onclick="return toggleShowAll();">Show all</button>
+    Chart type:
+    <select id="top-menu" onchange="populate(); showSelected();"><option>processing...</option></select>
+    Chart:
+    <select id="sub-menu" onchange="showSelected();"><option>processing...</option></select>
+  </p>
+  <p id="right-footer">
+    Generated by <a href="http://kind.ucd.ie/products/opensource/BONc">BONc</a> (version: bonc-0.2.7) <a href="http://validator.w3.org/check?uri=referer">XHTML</a> output, 14-12-2011 03:03:44.
+  </p>
+</div>
+
+</div> <!-- End main -->
+
+</body>
+</html>
+

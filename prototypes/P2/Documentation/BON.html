@@ -1,0 +1,2273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+
+<title>BON Documentation: DVLSystem</title>
+
+<script type="text/javascript">
+<!--
+
+var items = ['system_chart:DVLSystem','class_chart:VOTERESULT','class_chart:EVENTSYSTEMEXECUTABLE','class_chart:PINGLISTENER','class_chart:SECURITYMANAGER','class_chart:PINGREQUESTRESPONSE','class_chart:NOTENOUGHPEERSEXCEPTION','class_chart:DECLINEBALLOTHANDOUT','class_chart:CONNECTOR','class_chart:EVENTSYSTEM','class_chart:INETWORKPACKETHANDLER','class_chart:CONFIRMATIONWINDOW','class_chart:VOTERESPONSELISTENER','class_chart:REGISTERVOTERWINDOW','class_chart:PLEASEWAIT','class_chart:PEERDEADLISTENER','class_chart:PINGREQUESTRESPONSELISTENER','class_chart:CONNECTIONWINDOW','class_chart:PONGLISTENER','class_chart:OUTBOX','class_chart:DATABASE','class_chart:ENDELECTIONWINDOW','class_chart:VOTELISTENER','class_chart:INBOX','class_chart:NETWORKLISTENER','class_chart:LOCALVOTELISTENER','class_chart:VOTESTATE','class_chart:MESSAGE','class_chart:PEERSTATE','class_chart:MESSAGETYPE','class_chart:PINGREQUESTLISTENER','class_chart:FORM','class_chart:ACCEPTBALLOTHANDOUT','class_chart:VOTE','class_chart:PACKETRESPONSE','cluster_chart:NETWORKING','cluster_chart:GUI','cluster_chart:DVLSystem','cluster_chart:LOCAL','cluster_chart:UTILITIES','cluster_chart:DVLTerminal','cluster_chart:LIB'];
+var topOptions = [ 'System Chart', 'system_chart', 'Cluster Charts', 'cluster_chart', 'Class Charts', 'class_chart' ];
+var subOptions = [];
+subOptions['system_chart'] = [ 'DVLSystem', 'system_chart:DVLSystem' ];
+subOptions['cluster_chart'] = [ 'DVLSystem','cluster_chart:DVLSystem','DVLTerminal','cluster_chart:DVLTerminal','GUI','cluster_chart:GUI','LIB','cluster_chart:LIB','LOCAL','cluster_chart:LOCAL','NETWORKING','cluster_chart:NETWORKING','UTILITIES','cluster_chart:UTILITIES' ];
+subOptions['class_chart'] = [ 'ACCEPTBALLOTHANDOUT','class_chart:ACCEPTBALLOTHANDOUT','CONFIRMATIONWINDOW','class_chart:CONFIRMATIONWINDOW','CONNECTIONWINDOW','class_chart:CONNECTIONWINDOW','CONNECTOR','class_chart:CONNECTOR','DATABASE','class_chart:DATABASE','DECLINEBALLOTHANDOUT','class_chart:DECLINEBALLOTHANDOUT','ENDELECTIONWINDOW','class_chart:ENDELECTIONWINDOW','EVENTSYSTEM','class_chart:EVENTSYSTEM','EVENTSYSTEMEXECUTABLE','class_chart:EVENTSYSTEMEXECUTABLE','FORM','class_chart:FORM','INBOX','class_chart:INBOX','INETWORKPACKETHANDLER','class_chart:INETWORKPACKETHANDLER','LOCALVOTELISTENER','class_chart:LOCALVOTELISTENER','MESSAGE','class_chart:MESSAGE','MESSAGETYPE','class_chart:MESSAGETYPE','NETWORKLISTENER','class_chart:NETWORKLISTENER','NOTENOUGHPEERSEXCEPTION','class_chart:NOTENOUGHPEERSEXCEPTION','OUTBOX','class_chart:OUTBOX','PACKETRESPONSE','class_chart:PACKETRESPONSE','PEERDEADLISTENER','class_chart:PEERDEADLISTENER','PEERSTATE','class_chart:PEERSTATE','PINGLISTENER','class_chart:PINGLISTENER','PINGREQUESTLISTENER','class_chart:PINGREQUESTLISTENER','PINGREQUESTRESPONSE','class_chart:PINGREQUESTRESPONSE','PINGREQUESTRESPONSELISTENER','class_chart:PINGREQUESTRESPONSELISTENER','PLEASEWAIT','class_chart:PLEASEWAIT','PONGLISTENER','class_chart:PONGLISTENER','REGISTERVOTERWINDOW','class_chart:REGISTERVOTERWINDOW','SECURITYMANAGER','class_chart:SECURITYMANAGER','VOTE','class_chart:VOTE','VOTELISTENER','class_chart:VOTELISTENER','VOTERESPONSELISTENER','class_chart:VOTERESPONSELISTENER','VOTERESULT','class_chart:VOTERESULT','VOTESTATE','class_chart:VOTESTATE' ];
+
+
+var showAll = false;
+var sysTitle = 'system_title';
+var topMenu = 'top-menu';
+var subMenu = 'sub-menu';
+
+function setElText(id,text) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    elem.innerHTML = text;
+  }
+}
+
+function toggleShowAll() {
+  showAll = !showAll;
+  if (showAll) {
+    displayAll();
+    setElText('showlink', 'Show One');
+  } else {
+    hideAll();
+    setElText('showlink', 'Show All');
+  }
+  showSelected();
+  return false;
+}
+
+function select(id) {
+  if (showAll) {
+//    setHash(id);
+    return true;
+  } else {
+    showOnly(id);
+    return true;
+  }
+}
+
+function showOnly(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hideAll();
+    showElem(id);
+  }
+}
+
+function hideAll() {
+  for (var i=0; i<items.length; i++) {
+    hideElem(items[i]);
+  }
+}
+
+function displayAll() {
+  for (var i=0; i<items.length; i++) {
+    showElem(items[i]);
+  }
+}
+
+function showElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    show(elem);
+  }
+}
+
+function hideElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hide(elem);
+  }
+}
+
+function hide(elem) {
+  addClass(elem,'hidden');
+}
+
+function show(elem) {
+  removeClass(elem,'hidden');
+}
+
+function addClass(elem,cName) {
+  if (!elem.className) {
+    elem.className = cName;
+  } else if (elem.className.indexOf(cName) == -1) {
+    elem.className += ' ' + cName;
+  }
+}
+
+function removeClass(elem,cName) {
+  if (elem.className) {
+    var toReplace = elem.className.match(' ' + cName);
+    elem.className = elem.className.replace(toReplace, '');
+  }
+}
+
+function setBack(id) {
+//Not yet...
+}
+
+function initialPopulate() {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    topSelect.options.length = 0;
+    for (var i=0; i < topOptions.length; i+=2) {
+      topSelect.options[i/2] = new Option(topOptions[i],topOptions[i+1]);
+    }
+  }
+  if (window.location.hash) {
+    hashSelect(window.location.hash.substr(1));    
+  } else {
+    populate();
+    showSelected();
+  }
+  lastHash = window.location.hash;
+  //Trigger checkHash
+  setInterval(checkHash,100);
+}
+
+function hashSelect(hash) {
+  var parts = hash.split(':');
+  if (parts.length == 2) {
+    linkSelect(parts[0],hash);
+  } else {
+    populate();
+  }
+}
+
+var lastHash = '';
+
+function checkHash() {
+
+  if (window.location.hash) {
+    if (window.location.hash != lastHash) {
+      hashSelect(window.location.hash.substr(1));
+      lastHash = window.location.hash;
+    }
+  }
+}
+
+function setHash(hash) {
+  lastHash = '#' + hash;
+  window.location.hash = hash;
+}
+
+function populate() {
+
+  var subSelect = document.getElementById(subMenu);
+  var topSelect = document.getElementById(topMenu);
+
+  if (subSelect && topSelect) {
+    var selected = topSelect.options[topSelect.selectedIndex].value;
+    if (selected) {
+      var chosenSubOptions = subOptions[selected];
+      subSelect.options.length = 0;
+      for (var i=0; i < chosenSubOptions.length; i+=2) {
+        subSelect.options[i/2] = new Option(chosenSubOptions[i],chosenSubOptions[i+1]);
+      }
+    }
+  }
+}
+
+function showSelected() {
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    var selected = subSelect.options[subSelect.selectedIndex].value;
+    if (selected) {
+      select(selected);
+      setHash(selected);
+    }
+  }
+}
+
+function linkSelect(top, sub) {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    for (var i=0; i < topSelect.options.length; i++) {
+      if (topSelect.options[i].value == top) {
+        topSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }  
+  populate();
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    for (var i=0; i < subSelect.options.length; i++) {
+      if (subSelect.options[i].value == sub) {
+        subSelect.selectedIndex = i;
+        showSelected();
+        return false;
+      }
+    }
+    showSelected();
+  }
+  return true;
+}
+
+
+//-->
+</script>
+
+<style type="text/css">
+
+.hidden {
+  position:absolute;
+  left:0px;
+  top:-500px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+body {
+  font-family: Optima, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, sans-serif;
+}
+
+.list-entry {
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+#main {
+  padding-bottom: 100px;
+}
+
+#footer {
+  z-index: 1;
+  position: fixed; 
+  bottom: 0px;
+  right: 0px; 
+  width: 100%;
+  border-top: 2px solid #000000;
+  background-color: #cccccc;
+}
+
+#left-footer {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+#left-footer select {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+#showlink {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  min-width: 125px;
+}
+
+#top-menu {
+  min-width: 160px;
+}
+
+#sub-menu {
+  min-width: 220px;
+}
+
+#right-footer {
+  margin: 5px 5px 0px 0px;
+  padding: 0;
+  text-align: right;
+}
+
+#footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+dl {
+  margin: 0 0 0 10px;
+}
+
+dd {
+  margin-left: 20px;
+} 
+
+.scenario_entry dt {
+  font-weight: bold;
+}
+
+.indexing dt, .explanation dt {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+.top-level {
+  width: 98%;
+  margin: auto;
+}
+
+.outer {
+  width: 100%;
+  background-color: #a2a2a2;
+  border: 2px solid #000000;
+  margin-bottom: 30px;
+}
+
+.type, .name, .part {
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+
+.explanation, .indexing {
+  padding: 5px 5px 5px 10px;
+  background-color: #ffffff;
+  vertical-align: top;
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+}
+
+.name {
+  background-color: #f3f0f0;
+  font-size: 1.1em;
+}
+
+.part {
+  background-color: #cccccc;
+}
+
+.type, .part {
+  width: 25%;
+}
+
+.type {
+  background-color: #bcbcbc;
+}
+
+.name, .indexing, .explanation {
+  width: 50%;
+}
+
+.top, .middle, .bottom {
+  width: 100%;
+}
+
+.bottom table {
+  border: 4px groove #c0c0c0;
+  width: 100%;
+}
+
+.bottom tr {
+  width: 100%;
+}
+
+.bottom td, .bottom th {
+  border: 1px inset #c0c0c0;
+  vertical-align: top;
+  padding: 8px 20px 8px 20px;
+}
+
+.spaced-lines {
+  line-height: 1.5em;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.light-grey {
+  background-color: #f3f0f0;
+}
+
+.grey {
+  background-color: #cccccc;
+}
+</style>
+
+</head>
+<body onload="initialPopulate();">
+
+<div id="main">
+
+<div class="top-level" id="system_chart:DVLSystem">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SYSTEM</th>
+      <td class="name" colspan="2">DVLSystem</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;The system running on all voting places&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Emil Blædel Nygaard (ebln@itu.dk), Michael Oliver Urhøj Mortensen (miur@itu.dk), Rasmus Greve (ragr@itu.dk)";</dd>
+          <dd>course : "BDSA";</dd>
+          <dd>date : "2011/11/28";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:DVLTerminal" onclick="return linkSelect('cluster_chart','cluster_chart:DVLTerminal');">DVLTerminal</a></td>
+            <td class="white">&quot;The system running on the “scanning”-terminals&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:LIB" onclick="return linkSelect('cluster_chart','cluster_chart:LIB');">LIB</a></td>
+            <td class="white">&quot;Libraries provided in c sharp and dot net&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:LIB">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">LIB</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Libraries provided in c sharp and dot net&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FORM" onclick="return linkSelect('class_chart','class_chart:FORM');">FORM</a></td>
+            <td class="white">&quot;The Form class from the libraries in C#&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:DVLTerminal">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">DVLTerminal</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;The system running on all the 'scanning'-terminals&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:EVENTSYSTEMEXECUTABLE" onclick="return linkSelect('class_chart','class_chart:EVENTSYSTEMEXECUTABLE');">EVENTSYSTEMEXECUTABLE</a></td>
+            <td class="white">&quot;An executable item in the event system&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:EVENTSYSTEM" onclick="return linkSelect('class_chart','class_chart:EVENTSYSTEM');">EVENTSYSTEM</a></td>
+            <td class="white">&quot;A discrete event simulations system for doing tasks simultaniously&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:NOTENOUGHPEERSEXCEPTION" onclick="return linkSelect('class_chart','class_chart:NOTENOUGHPEERSEXCEPTION');">NOTENOUGHPEERSEXCEPTION</a></td>
+            <td class="white">&quot;An exception to throw and catch if the system ever goes below a specified number of computers in total&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PEERSTATE" onclick="return linkSelect('class_chart','class_chart:PEERSTATE');">PEERSTATE</a></td>
+            <td class="white">&quot;Defines the different states that this computer can know a peer to be in&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PROGRAM" onclick="return linkSelect('class_chart','class_chart:PROGRAM');">PROGRAM</a></td>
+            <td class="white">&quot;The main program&quot;</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Cluster</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:GUI" onclick="return linkSelect('cluster_chart','cluster_chart:GUI');">GUI</a></td>
+            <td class="white">&quot;The graphical user interface&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:LOCAL" onclick="return linkSelect('cluster_chart','cluster_chart:LOCAL');">LOCAL</a></td>
+            <td class="white">&quot;Everything that is handled locally on the machine&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:NETWORKING" onclick="return linkSelect('cluster_chart','cluster_chart:NETWORKING');">NETWORKING</a></td>
+            <td class="white">&quot;All the classes that have to do with the network traffic&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:UTILITIES" onclick="return linkSelect('cluster_chart','cluster_chart:UTILITIES');">UTILITIES</a></td>
+            <td class="white">&quot;General utility classes for use all over&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:GUI">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">GUI</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Graphical User Interface components&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:ACCEPTBALLOTHANDOUT" onclick="return linkSelect('class_chart','class_chart:ACCEPTBALLOTHANDOUT');">ACCEPTBALLOTHANDOUT</a></td>
+            <td class="white">&quot;A window to show that a ballot can be handed out&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CONFIRMATIONWINDOW" onclick="return linkSelect('class_chart','class_chart:CONFIRMATIONWINDOW');">CONFIRMATIONWINDOW</a></td>
+            <td class="white">&quot;A window to confirm that all the computers have received the encryption keys&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CONNECTIONWINDOW" onclick="return linkSelect('class_chart','class_chart:CONNECTIONWINDOW');">CONNECTIONWINDOW</a></td>
+            <td class="white">&quot;A window to check that all computers in the network can see eachother&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DECLINEBALLOTHANDOUT" onclick="return linkSelect('class_chart','class_chart:DECLINEBALLOTHANDOUT');">DECLINEBALLOTHANDOUT</a></td>
+            <td class="white">&quot;A window to show why a ballot should not be handed out&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ENDELECTIONWINDOW" onclick="return linkSelect('class_chart','class_chart:ENDELECTIONWINDOW');">ENDELECTIONWINDOW</a></td>
+            <td class="white">&quot;The window to confirm that you want to exit the program and end the election&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PLEASEWAIT" onclick="return linkSelect('class_chart','class_chart:PLEASEWAIT');">PLEASEWAIT</a></td>
+            <td class="white">&quot;Window shown while the system is gathering information from the other computers&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:REGISTERVOTERWINDOW" onclick="return linkSelect('class_chart','class_chart:REGISTERVOTERWINDOW');">REGISTERVOTERWINDOW</a></td>
+            <td class="white">&quot;The main window where the voternumber and CPR number is entered for validation&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:LOCAL">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">LOCAL</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Everything that is handled locally on the machine&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:LOCALVOTELISTENER" onclick="return linkSelect('class_chart','class_chart:LOCALVOTELISTENER');">LOCALVOTELISTENER</a></td>
+            <td class="white">&quot;Handles new votes on the local machine&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTE" onclick="return linkSelect('class_chart','class_chart:VOTE');">VOTE</a></td>
+            <td class="white">&quot;Describes a vote from the local machine&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTESTATE" onclick="return linkSelect('class_chart','class_chart:VOTESTATE');">VOTESTATE</a></td>
+            <td class="white">&quot;Enumeration describing the different states a Vote can have&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTERESULT" onclick="return linkSelect('class_chart','class_chart:VOTERESULT');">VOTERESULT</a></td>
+            <td class="white">&quot;Enumeration describing the result of the attempted Vote&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:NETWORKING">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">NETWORKING</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;All the classes that have to do with the network traffic&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:CONNECTOR" onclick="return linkSelect('class_chart','class_chart:CONNECTOR');">CONNECTOR</a></td>
+            <td class="white">&quot;Establishes connections to other peers also using the connector&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:INBOX" onclick="return linkSelect('class_chart','class_chart:INBOX');">INBOX</a></td>
+            <td class="white">&quot;Receives and decrypts all messages&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:OUTBOX" onclick="return linkSelect('class_chart','class_chart:OUTBOX');">OUTBOX</a></td>
+            <td class="white">&quot;Encrypts and broadcasts messages on the network&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:INETWORKPACKETHANDLER" onclick="return linkSelect('class_chart','class_chart:INETWORKPACKETHANDLER');">INETWORKPACKETHANDLER</a></td>
+            <td class="white">&quot;Interface&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:MESSAGE" onclick="return linkSelect('class_chart','class_chart:MESSAGE');">MESSAGE</a></td>
+            <td class="white">&quot;A message to be sent or received over the network&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:MESSAGETYPE" onclick="return linkSelect('class_chart','class_chart:MESSAGETYPE');">MESSAGETYPE</a></td>
+            <td class="white">&quot;Defines the different kind of messages that can exist&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:NETWORKLISTENER" onclick="return linkSelect('class_chart','class_chart:NETWORKLISTENER');">NETWORKLISTENER</a></td>
+            <td class="white">&quot;Listens for incomming networkmessages&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PACKETRESPONSE" onclick="return linkSelect('class_chart','class_chart:PACKETRESPONSE');">PACKETRESPONSE</a></td>
+            <td class="white">&quot;A type enum to indicate whether a handler is able to handle a given package&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PEERDEADLISTENER" onclick="return linkSelect('class_chart','class_chart:PEERDEADLISTENER');">PEERDEADLISTENER</a></td>
+            <td class="white">&quot;Handles incoming PeerDead messages&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PINGLISTENER" onclick="return linkSelect('class_chart','class_chart:PINGLISTENER');">PINGLISTENER</a></td>
+            <td class="white">&quot;Listens for Ping messages and answer Pong immediately&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PONGLISTENER" onclick="return linkSelect('class_chart','class_chart:PONGLISTENER');">PONGLISTENER</a></td>
+            <td class="white">&quot;Listens for Pong messages and sends answer to the initiating peer&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PINGREQUESTRESPONSE" onclick="return linkSelect('class_chart','class_chart:PINGREQUESTRESPONSE');">PINGREQUESTRESPONSE</a></td>
+            <td class="white">&quot;Defines the different responses that can be received as answer to a ping request&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PINGREQUESTRESPONSELISTENER" onclick="return linkSelect('class_chart','class_chart:PINGREQUESTRESPONSELISTENER');">PINGREQUESTRESPONSELISTENER</a></td>
+            <td class="white">&quot;Listens for responses to PingRequests&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PINGREQUESTLISTENER" onclick="return linkSelect('class_chart','class_chart:PINGREQUESTLISTENER');">PINGREQUESTLISTENER</a></td>
+            <td class="white">&quot;Listens for PingRequests and creates PongLinsteners&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTELISTENER" onclick="return linkSelect('class_chart','class_chart:VOTELISTENER');">VOTELISTENER</a></td>
+            <td class="white">&quot;Listens for incoming votes, saves to database and answers OK&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:VOTERESPONSELISTENER" onclick="return linkSelect('class_chart','class_chart:VOTERESPONSELISTENER');">VOTERESPONSELISTENER</a></td>
+            <td class="white">&quot;Listens for responses to a vote from network&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:UTILITIES">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">UTILITIES</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DATABASE" onclick="return linkSelect('class_chart','class_chart:DATABASE');">DATABASE</a></td>
+            <td class="white">&quot;API for communicating with the SQLite database.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:SECURITYMANAGER" onclick="return linkSelect('class_chart','class_chart:SECURITYMANAGER');">SECURITYMANAGER</a></td>
+            <td class="white">&quot;Get’s keys from a file and creates the AesManaged object&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:CONNECTOR">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">CONNECTOR</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Establishes connections to other peers also using the connector&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Broadcast a request for other computers&quot;,<br/>&quot;Send out the encryption keys&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:INETWORKPACKETHANDLER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">INETWORKPACKETHANDLER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An interface that defines a method for handling networkpackets&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Handle this packet&quot;,<br/>&quot;You have timed out&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTERESPONSELISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTERESPONSELISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Listens for VoteOK packets, and registers any incoming ok in the vote. Terminates.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTELISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTELISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Handles incoming votes by saving the info to database and replying VoteOK&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PINGLISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PINGLISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Handles ping packets by responding pong back to sender. Persists.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PONGLISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PONGLISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Handles pong packets by responding PingOK to initiator. Terminates.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PINGREQUESTLISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PINGREQUESTLISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Handles pingRequest packets by creating a PONGLISTENER and seding a ping to the wanted peer. Persists.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:INBOX">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">INBOX</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Receives and decrypts all messages from the network&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Can I have the instance of you please&quot;,<br/>&quot;Do you have any new messages?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Start listening for new message&quot;,<br/>&quot;Give me the first new message&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;You must not ask for the first new message when there are no new messages&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:MESSAGE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">MESSAGE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A message to be sent or received over the network&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Who sent this message&quot;,<br/>&quot;Who is the recipient of this message&quot;,<br/>&quot;What kind of message is this?&quot;,<br/>&quot;What is the data array of this message?&quot;,<br/>&quot;What is the string-representation of the message data?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;This peer sent this message&quot;,<br/>&quot;This message is meant for this peer&quot;,<br/>&quot;This is the data array for this message&quot;,<br/>&quot;This is the string-representation of the message data?&quot;,<br/>&quot;This message is invalid&quot;,<br/>&quot;Create a new message from a string representation&quot;,<br/>&quot;Convert the message to a bytearray packet&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;A message must have exactly 1 recipient and exactly 1 sender&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:OUTBOX">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">OUTBOX</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Encrypts and broadcasts messages on the network&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Give me the only instance of you&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Encrypt and send this message&quot;,<br/>&quot;Send this message unencrypted&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;There can be only one&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:MESSAGETYPE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">MESSAGETYPE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Defines the different kind of messages that can exist&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How to represent the type: 'Uknown'&quot;,<br/>&quot;How to represent the type: 'HeartBeatRequest'&quot;,<br/>&quot;How to represent the type: 'Heartbeat'&quot;,<br/>&quot;How to represent the type: 'Vote'&quot;,<br/>&quot;How to represent the type: 'VoteOk'&quot;,<br/>&quot;How to represent the type: 'PingRequest'&quot;,<br/>&quot;How to represent the type: 'Ping'&quot;,<br/>&quot;How to represent the type: 'PingOk'&quot;,<br/>&quot;How to represent the type: 'PingFailed'&quot;,<br/>&quot;How to represent the type: 'Pong'&quot;,<br/>&quot;How to represent the type: 'PeerDead'&quot;,<br/>&quot;How to represent the type: 'EncryptionPacket'&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:NETWORKLISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">NETWORKLISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Listens for incoming network Messages and tries to delegate them to all registered handlers&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">EVENTSYSTEMEXECUTABLE</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Register this handler&quot;,<br/>&quot;Remove this handler&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PACKETRESPONSE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PACKETRESPONSE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Defines the different kind of messages that can exist&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How to represent the response: 'Accept'&quot;,<br/>&quot;How to represent the response: 'Decline'&quot;,<br/>&quot;How to represent the response: 'AcceptAndFinish'&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PEERDEADLISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PEERDEADLISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Handles incoming PeerDead messages&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PINGREQUESTRESPONSE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PINGREQUESTRESPONSE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Defines the different responses that can be received as answer to a ping request&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How to represent the Response: 'Yes'&quot;,<br/>&quot;How to represent the Response: 'No'&quot;,<br/>&quot;How to represent the Response: 'NotYet'&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PINGREQUESTRESPONSELISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PINGREQUESTRESPONSELISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Listens for PingRequestResponses&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">INETWORKPACKETHANDLER</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LOCALVOTELISTENER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LOCALVOTELISTENER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Processes votes received from the local machine&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">EVENTSYSTEMEXECUTABLE</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Give me the list of peers&quot;,<br/>&quot;Give me the current vote&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Give me a new LocalVoteListener from this list of peers&quot;,<br/>&quot;This is now the current vote&quot;,<br/>&quot;This peer is now dead&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Contains information about the voter and the progress of distributing the vote to other peers&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;What is the result of this vote&quot;,<br/>&quot;What is the state of this vote&quot;,<br/>&quot;Give me a dictionary of peer expected to respond to this vote&quot;,<br/>&quot;What is the voting number of the voter&quot;,<br/>&quot;What is the provided cpr check number of the voter&quot;,<br/>&quot;Give me a new vote for this voter and cpr check number, and expect response from these peers&quot;,<br/>&quot;Is the vote acknowledged by all expected peers&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;This is now the result of the vote&quot;,<br/>&quot;This is now the state of the vote&quot;,<br/>&quot;This peer is now in this state&quot;,<br/>&quot;This peer replied to the vote&quot;,<br/>&quot;Broadcast the vote to the network&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines">&quot;The vote must never go back to the state ‘initialized’ after being in another state&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTESTATE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTESTATE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Describes the current state of a vote&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How to represent the state ‘initialized’&quot;,<br/>&quot;How to represent the state ‘message sent’&quot;,<br/>&quot;How to represent the state ‘done’&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:VOTERESULT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">VOTERESULT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Describes if a person was allowed to vote&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How to represent the result ‘yes - handout ballot’&quot;,<br/>&quot;How to represent the result ‘yes - waiting for network’&quot;,<br/>&quot;How to represent the result ‘no - already voted’&quot;,<br/>&quot;How to represent the result ‘no - wrong cpr check number’&quot;,<br/>&quot;How to represent the result ‘no - voting number not in database’&quot;,<br/>&quot;How to represent the result ‘not yet evaluated’&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DATABASE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DATABASE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Gives acces to persistent storage of the voter information&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Get the only instance of the Database&quot;,<br/>&quot;Is this a valid voter number&quot;,<br/>&quot;Does this cpr check number match this voter number&quot;,<br/>&quot;Has the person associated with this voternumber voted&quot;,<br/>&quot;How many people have voted already&quot;,<br/>&quot;How many people are supposed to vote here&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;The person associated with this voternumber has (not) voted&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:SECURITYMANAGER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">SECURITYMANAGER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Gives easy access to encryption of messages&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Get the only instance of the Database object&quot;,<br/>&quot;Give me a byte array representation of the keys&quot;,<br/>&quot;Give me an encrypted version of this unencrypted byte array&quot;,<br/>&quot;Give me a decrypted version of this encrypted byte array&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Generate new encryption keys&quot;,<br/>&quot;Set the keys from this byte array representation&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ACCEPTBALLOTHANDOUT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ACCEPTBALLOTHANDOUT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A window to show that a ballot can be handed out&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:CONFIRMATIONWINDOW">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">CONFIRMATIONWINDOW</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A window used in the start up phase to assure that all clients are propperly connected. This window will appear on all clients, if and only if they have recieved the security key.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:CONNECTIONWINDOW">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">CONNECTIONWINDOW</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;This window will display an overview of all the computers connected to and found in the network. Has functionality of scanning the network for computers and go to the next state, displaying a CONFIRMATIONNWINDOW.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Create a new CONNECTIONWINDOW with a given CONNECTOR&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:DECLINEBALLOTHANDOUT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">DECLINEBALLOTHANDOUT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A window that displayes error messages related to the fact that a ballot cannot be handed out. The message will change depending on the type of error.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ENDELECTIONWINDOW">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ENDELECTIONWINDOW</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A confirmation window that is shown when a person clicks the End election button in REGISTERVOTEWINDOW that will ensure that the person wanting to end the election did not miss click. This window has a randomly generated number that the user needs to retype in a textfield, before the application closes.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PLEASEWAIT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PLEASEWAIT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A window that is displayed when a person sends a message to the network that a person has voted. The window will automatically close, as soon as an OK has been recieved from all clients.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:REGISTERVOTERWINDOW">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">REGISTERVOTERWINDOW</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The main window of the application. This window contains text fields for both the voting number and the last four digits in &quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">FORM</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:EVENTSYSTEM">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">EVENTSYSTEM</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A simulation of multiple threads, using an endless loop to loop through different events.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Register a new EVENTSYSTEMEXECUTABLE that will be run in the event loop.&quot;,<br/>&quot;Start the event loop.&quot;,<br/>&quot;Stop the event loop of the entire system.&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:NOTENOUGHPEERSEXCEPTION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">NOTENOUGHPEERSEXCEPTION</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;A message saying that there is not enough peer to continue operating&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How many peers is this computer connected to&quot;,<br/>&quot;Give me a new not enough peers exception&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PEERSTATE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PEERSTATE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Describes the state of a peer&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;How to represent the result ‘the peer is alive’&quot;,<br/>&quot;How to represent the result ‘the peer might be dead’&quot;,<br/>&quot;How to represent the result ‘the peer is dead’&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:EVENTSYSTEMEXECUTABLE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">EVENTSYSTEMEXECUTABLE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The base class of executable parts of an event system.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Start running the executable until the timeout is reached.&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:FORM">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">FORM</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The Form class from the libraries in C#&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="footer">
+  <p id="left-footer">
+    <button id="showlink" onclick="return toggleShowAll();">Show all</button>
+    Chart type:
+    <select id="top-menu" onchange="populate(); showSelected();"><option>processing...</option></select>
+    Chart:
+    <select id="sub-menu" onchange="showSelected();"><option>processing...</option></select>
+  </p>
+  <p id="right-footer">
+    Generated by <a href="http://kind.ucd.ie/products/opensource/BONc">BONc</a> (version: bonc-0.2.6) <a href="http://validator.w3.org/check?uri=referer">XHTML</a> output, 14-12-2011 09:44:21.
+  </p>
+</div>
+
+</div> <!-- End main -->
+
+</body>
+</html>
+

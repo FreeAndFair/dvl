@@ -1,0 +1,111 @@
+system_chart VOTER_MATERIAL_GENERATOR
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    course: "BDSA";
+    university: "ITU";
+    created: "2011-11-30";
+  explanation
+    "Generates polling cards and voterlist for a election"
+    
+  cluster GENERATOR description "Generates polling cards and voter lists with a unique id."
+end
+
+cluster_chart GENERATOR
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Generates polling cards and voter lists with a unique id."
+  
+  class POLLING_CARDS description "Generated pdf polling cards and save them to the harddrive."
+  class VOTERLIST description "Generates voterlists and save them to the harddrive."
+  class VOTER_ID_GENERATOR description "Generates a unique id number."
+end
+
+class_chart POLLING_CARDS
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Create and append polling cards to a pdf file and save it to the harddrive"
+  query
+    "May I have a new polling cards generator for this election?",
+    "Can you save all the polling card on this location on the harddrive?"
+  command
+    "Create a polling card for this person!"
+  constraint
+    "The person must not be 'nothing'.",
+    "The file is located on the harddrive when it is saved."
+end
+
+class_chart VOTERLIST
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Create voterlist to the polling stations used for backup, if the digital solution fails."
+  query
+    "May I have a new voting list for this election?",
+    "Can you save the voting list to this location on the harddrive?"
+  command
+    "Add this person to the voting list."
+  constraint
+    "The person must not be 'nothing'",
+    "The number of rows on the list have to be bigger than 20.",
+    "The file is located on the harddrive when it is saved."
+end
+
+class_chart VOTER_ID_GENERATOR
+  indexing 
+    author: "Kåre Sylow Pedersen <ksyl@itu.dk>";
+    created: "2011-11-30";
+  explanation
+    "Generates a unique id number."
+  command
+    "Generate a new voter id!"
+  constraint
+    "A new voter id must be bigger than the previous."
+end
+
+static_diagram VOTER_MATERIAL_GENERATOR
+component
+  cluster GENERATOR
+  component 
+    class POLLINGCARDS
+      feature
+        make: POLLINGCARDS -> electionName : STRING -> electionDate : STRING -> electionTime : STRING
+          require 
+            electionName /= void and electionDate /= void and electionTime /= void
+          end
+        CreatePollingCard -> p : PERSON -> ADDRESS : sender -> ADDRESS : pollingVenue -> ADDRESS
+           require p /= void
+          end
+        SaveToDisk -> path : STRING
+          require path /= void
+          ensure "FILE.exist(path)"
+          end
+    end
+    
+    class VOTERLIST
+      feature
+        make: VOTERLIST -> rows : NATURAL -> electionName : STRING -> date : STRING -> table : STRING
+          require 
+            rows > 20 and electionname /= void and date /= void and table /= void
+          end
+        AddVoter -> p : PERSON
+          require p /= void
+          end
+        SaveToDisk -> path : STRING
+          require path /= void
+          ensure "FILE.exist(path)"
+          end
+    end
+
+    class VOTER_ID_GENERATOR
+      feature
+      CreateUniqueID : STRING
+        ensure "return value > old(value)"
+        end
+    end
+  end
+end
