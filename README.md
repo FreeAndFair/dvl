@@ -44,9 +44,9 @@ The students that built these prototypes are Claes Martinsen, Niels
 Martin Søholm Jensen, and Jan Aagaard Meier (P1); Emil Blædel Nygaard,
 Michael Oliver Urhøj Mortensen, and Rasmus Greve (P2); Jens Dahl
 Møllerhøj, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
-(P3); and X.  Each prototype was built in under one month using an
-early version of the DemTech Trust-by-Design (TBD) methodology (see
-below).  
+(P3); and Christian Olsson, Kåre Sylow Pedersen, and Henrik Haugbølle
+(P4).  Each prototype was built in under one month using an early
+version of the DemTech Trust-by-Design (TBD) methodology (see below).
 
 Each prototype includes a short project overview, an architeture
 specification, an implementation, and a validation suite.  Different
