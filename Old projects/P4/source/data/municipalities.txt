@@ -1,0 +1,98 @@
+Albertslund Kommune 2620
+Allerød Kommune 3450
+Assens Kommune 5610
+Ballerup Kommune 2750
+Billund Kommune 7190
+Bornholms Regionskommune 3700
+Brøndby Kommune 2605
+Brønderslev Kommune 9700
+Dragør Kommune 2791
+Egedal Kommune 
+Esbjerg Kommune 6700
+Fanø Kommune 6720
+Favrskov Kommune
+Faxe Kommune 4640
+Fredensborg Kommune 3480
+Fredericia Kommune 700
+Frederiksberg Kommune 2000
+Frederikshavn Kommune 9900
+Frederikssund Kommune 3600
+Furesø Kommune
+Faaborg-Midtfyn Kommune 5600
+Gentofte Kommune 2820
+Gladsaxe Kommune 2860
+Glostrup Kommune 2600
+Greve Kommune 2670
+Gribskov Kommune
+Guldborgsund Kommune 4682
+Haderslev Kommune 6100
+Halsnæs Kommune
+Hedensted Kommune 8722
+Helsingør Kommune 3000
+Herlev Kommune 2730
+Herning Kommune 7400
+Hillerød Kommune 3400
+Hjørring Kommune 9800
+Holbæk Kommune 4300
+Holstebro Kommune 7500
+Horsens Kommune 8700
+Hvidovre Kommune 2650
+Høje-Taastrup Kommune 0800
+Hørsholm Kommune 2970
+Ikast-Brande Kommune 7430
+Ishøj Kommune 2635
+Jammerbugt Kommune
+Kalundborg Kommune 4400
+Kerteminde Kommune 5300
+Kolding Kommune 6000
+Københavns Kommune
+Køge Kommune 4600
+Langeland Kommune
+Lejre Kommune 4320
+Lemvig Kommune 7620
+Lolland Kommune
+Lyngby-Taarbæk Kommune 2800
+Læsø Kommune 9940
+Mariagerfjord Kommune 9550
+Middelfart Kommune 5500
+Morsø Kommune
+Norddjurs Kommune
+Nordfyns Kommune
+Nyborg Kommune 5800
+Næstved Kommune 4700
+Odder Kommune 8300
+Odense Kommune 5000
+Odsherred Kommune
+Randers Kommune 8900
+Rebild Kommune
+Ringkøbing-Skjern Kommune 6950
+Ringsted Kommune 4100
+Roskilde Kommune 4000
+Rudersdal Kommune
+Rødovre Kommune 2610
+Samsø Kommune 8305
+Silkeborg Kommune 8600
+Skanderborg Kommune 8660
+Skive Kommune 7800
+Slagelse Kommune 4200
+Solrød Kommune 2680
+Sorø Kommune 4180
+Stevns Kommune 4673
+Struer Kommune 7600
+Svendborg Kommune 5700
+Syddjurs Kommune
+Sønderborg Kommune 6400
+Thisted Kommune 7700
+Tønder Kommune 6270
+Tårnby Kommune 2770
+Vallensbæk Kommune 2625
+Varde Kommune 6800
+Vejen Kommune 6600
+Vejle Kommune 7100
+Vesthimmerlands Kommune
+Viborg Kommune 8800
+Vordingborg Kommune 4760
+Ærø Kommune 5985
+Aabenraa Kommune 6200
+Aalborg Kommune 9000
+Aarhus Kommune 8000

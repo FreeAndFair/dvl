@@ -1,0 +1,1310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+
+<title>BON Documentation: ENTITY_SYSTEM</title>
+
+<script type="text/javascript">
+<!--
+
+var items = ['system_chart:ENTITY_SYSTEM','class_chart:INTEGER','class_chart:ABSTRACT_ENTITY','class_chart:NUMBER','class_chart:TABLE','class_chart:PERSON_VALUE_OBJECT','class_chart:SET','class_chart:FLOAT','class_chart:LOG_RESOURCE','class_chart:VALUE','class_chart:ABSTRACT_VALUE_OBJECT','class_chart:FILE','class_chart:LIST','class_chart:POLLING_VENUE','class_chart:PERSON_ENTITY','class_chart:TUPLE','class_chart:ABSTRACT_DATA_ACCESS_OBJECT','class_chart:PERSON_DATA_ACCESS_OBJECT','class_chart:LOG_ENTITY','class_chart:BOOLEAN','class_chart:ANY','class_chart:TREE','class_chart:ADDRESS','class_chart:PERSON_RESOURCE','class_chart:ABSTRACT_RESOURCE','class_chart:LOG_DATA_ACCESS_OBJECT','class_chart:PERSON','class_chart:LOG_VALUE_OBJECT','class_chart:ARRAY','class_chart:STRING','cluster_chart:ENTITIES','cluster_chart:KERNEL','cluster_chart:ENTITY_SYSTEM','cluster_chart:STRUCTURES','cluster_chart:ABSTRACTS','cluster_chart:NUMBERS','cluster_chart:BUILT_IN'];
+var topOptions = [ 'System Chart', 'system_chart', 'Cluster Charts', 'cluster_chart', 'Class Charts', 'class_chart' ];
+var subOptions = [];
+subOptions['system_chart'] = [ 'ENTITY_SYSTEM', 'system_chart:ENTITY_SYSTEM' ];
+subOptions['cluster_chart'] = [ 'ABSTRACTS','cluster_chart:ABSTRACTS','BUILT_IN','cluster_chart:BUILT_IN','ENTITIES','cluster_chart:ENTITIES','ENTITY_SYSTEM','cluster_chart:ENTITY_SYSTEM','KERNEL','cluster_chart:KERNEL','NUMBERS','cluster_chart:NUMBERS','STRUCTURES','cluster_chart:STRUCTURES' ];
+subOptions['class_chart'] = [ 'ABSTRACT_DATA_ACCESS_OBJECT','class_chart:ABSTRACT_DATA_ACCESS_OBJECT','ABSTRACT_ENTITY','class_chart:ABSTRACT_ENTITY','ABSTRACT_RESOURCE','class_chart:ABSTRACT_RESOURCE','ABSTRACT_VALUE_OBJECT','class_chart:ABSTRACT_VALUE_OBJECT','ADDRESS','class_chart:ADDRESS','ANY','class_chart:ANY','ARRAY','class_chart:ARRAY','BOOLEAN','class_chart:BOOLEAN','FILE','class_chart:FILE','FLOAT','class_chart:FLOAT','INTEGER','class_chart:INTEGER','LIST','class_chart:LIST','LOG_DATA_ACCESS_OBJECT','class_chart:LOG_DATA_ACCESS_OBJECT','LOG_ENTITY','class_chart:LOG_ENTITY','LOG_RESOURCE','class_chart:LOG_RESOURCE','LOG_VALUE_OBJECT','class_chart:LOG_VALUE_OBJECT','NUMBER','class_chart:NUMBER','PERSON','class_chart:PERSON','PERSON_DATA_ACCESS_OBJECT','class_chart:PERSON_DATA_ACCESS_OBJECT','PERSON_ENTITY','class_chart:PERSON_ENTITY','PERSON_RESOURCE','class_chart:PERSON_RESOURCE','PERSON_VALUE_OBJECT','class_chart:PERSON_VALUE_OBJECT','POLLING_VENUE','class_chart:POLLING_VENUE','SET','class_chart:SET','STRING','class_chart:STRING','TABLE','class_chart:TABLE','TREE','class_chart:TREE','TUPLE','class_chart:TUPLE','VALUE','class_chart:VALUE' ];
+
+
+var showAll = false;
+var sysTitle = 'system_title';
+var topMenu = 'top-menu';
+var subMenu = 'sub-menu';
+
+function setElText(id,text) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    elem.innerHTML = text;
+  }
+}
+
+function toggleShowAll() {
+  showAll = !showAll;
+  if (showAll) {
+    displayAll();
+    setElText('showlink', 'Show One');
+  } else {
+    hideAll();
+    setElText('showlink', 'Show All');
+  }
+  showSelected();
+  return false;
+}
+
+function select(id) {
+  if (showAll) {
+//    setHash(id);
+    return true;
+  } else {
+    showOnly(id);
+    return true;
+  }
+}
+
+function showOnly(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hideAll();
+    showElem(id);
+  }
+}
+
+function hideAll() {
+  for (var i=0; i<items.length; i++) {
+    hideElem(items[i]);
+  }
+}
+
+function displayAll() {
+  for (var i=0; i<items.length; i++) {
+    showElem(items[i]);
+  }
+}
+
+function showElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    show(elem);
+  }
+}
+
+function hideElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hide(elem);
+  }
+}
+
+function hide(elem) {
+  addClass(elem,'hidden');
+}
+
+function show(elem) {
+  removeClass(elem,'hidden');
+}
+
+function addClass(elem,cName) {
+  if (!elem.className) {
+    elem.className = cName;
+  } else if (elem.className.indexOf(cName) == -1) {
+    elem.className += ' ' + cName;
+  }
+}
+
+function removeClass(elem,cName) {
+  if (elem.className) {
+    var toReplace = elem.className.match(' ' + cName);
+    elem.className = elem.className.replace(toReplace, '');
+  }
+}
+
+function setBack(id) {
+//Not yet...
+}
+
+function initialPopulate() {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    topSelect.options.length = 0;
+    for (var i=0; i < topOptions.length; i+=2) {
+      topSelect.options[i/2] = new Option(topOptions[i],topOptions[i+1]);
+    }
+  }
+  if (window.location.hash) {
+    hashSelect(window.location.hash.substr(1));    
+  } else {
+    populate();
+    showSelected();
+  }
+  lastHash = window.location.hash;
+  //Trigger checkHash
+  setInterval(checkHash,100);
+}
+
+function hashSelect(hash) {
+  var parts = hash.split(':');
+  if (parts.length == 2) {
+    linkSelect(parts[0],hash);
+  } else {
+    populate();
+  }
+}
+
+var lastHash = '';
+
+function checkHash() {
+
+  if (window.location.hash) {
+    if (window.location.hash != lastHash) {
+      hashSelect(window.location.hash.substr(1));
+      lastHash = window.location.hash;
+    }
+  }
+}
+
+function setHash(hash) {
+  lastHash = '#' + hash;
+  window.location.hash = hash;
+}
+
+function populate() {
+
+  var subSelect = document.getElementById(subMenu);
+  var topSelect = document.getElementById(topMenu);
+
+  if (subSelect && topSelect) {
+    var selected = topSelect.options[topSelect.selectedIndex].value;
+    if (selected) {
+      var chosenSubOptions = subOptions[selected];
+      subSelect.options.length = 0;
+      for (var i=0; i < chosenSubOptions.length; i+=2) {
+        subSelect.options[i/2] = new Option(chosenSubOptions[i],chosenSubOptions[i+1]);
+      }
+    }
+  }
+}
+
+function showSelected() {
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    var selected = subSelect.options[subSelect.selectedIndex].value;
+    if (selected) {
+      select(selected);
+      setHash(selected);
+    }
+  }
+}
+
+function linkSelect(top, sub) {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    for (var i=0; i < topSelect.options.length; i++) {
+      if (topSelect.options[i].value == top) {
+        topSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }  
+  populate();
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    for (var i=0; i < subSelect.options.length; i++) {
+      if (subSelect.options[i].value == sub) {
+        subSelect.selectedIndex = i;
+        showSelected();
+        return false;
+      }
+    }
+    showSelected();
+  }
+  return true;
+}
+
+
+//-->
+</script>
+
+<style type="text/css">
+
+.hidden {
+  position:absolute;
+  left:0px;
+  top:-500px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+body {
+  font-family: Optima, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, sans-serif;
+}
+
+.list-entry {
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+#main {
+  padding-bottom: 100px;
+}
+
+#footer {
+  z-index: 1;
+  position: fixed; 
+  bottom: 0px;
+  right: 0px; 
+  width: 100%;
+  border-top: 2px solid #000000;
+  background-color: #cccccc;
+}
+
+#left-footer {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+#left-footer select {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+#showlink {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  min-width: 125px;
+}
+
+#top-menu {
+  min-width: 160px;
+}
+
+#sub-menu {
+  min-width: 220px;
+}
+
+#right-footer {
+  margin: 5px 5px 0px 0px;
+  padding: 0;
+  text-align: right;
+}
+
+#footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+dl {
+  margin: 0 0 0 10px;
+}
+
+dd {
+  margin-left: 20px;
+} 
+
+.scenario_entry dt {
+  font-weight: bold;
+}
+
+.indexing dt, .explanation dt {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+.top-level {
+  width: 98%;
+  margin: auto;
+}
+
+.outer {
+  width: 100%;
+  background-color: #a2a2a2;
+  border: 2px solid #000000;
+  margin-bottom: 30px;
+}
+
+.type, .name, .part {
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+
+.explanation, .indexing {
+  padding: 5px 5px 5px 10px;
+  background-color: #ffffff;
+  vertical-align: top;
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+}
+
+.name {
+  background-color: #f3f0f0;
+  font-size: 1.1em;
+}
+
+.part {
+  background-color: #cccccc;
+}
+
+.type, .part {
+  width: 25%;
+}
+
+.type {
+  background-color: #bcbcbc;
+}
+
+.name, .indexing, .explanation {
+  width: 50%;
+}
+
+.top, .middle, .bottom {
+  width: 100%;
+}
+
+.bottom table {
+  border: 4px groove #c0c0c0;
+  width: 100%;
+}
+
+.bottom tr {
+  width: 100%;
+}
+
+.bottom td, .bottom th {
+  border: 1px inset #c0c0c0;
+  vertical-align: top;
+  padding: 8px 20px 8px 20px;
+}
+
+.spaced-lines {
+  line-height: 1.5em;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.light-grey {
+  background-color: #f3f0f0;
+}
+
+.grey {
+  background-color: #cccccc;
+}
+</style>
+
+</head>
+<body onload="initialPopulate();">
+
+<div id="main">
+
+<div class="top-level" id="system_chart:ENTITY_SYSTEM">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SYSTEM</th>
+      <td class="name" colspan="2">ENTITY_SYSTEM</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Classes used to represent various logically encapsulated data in object form.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>course : "BDSA";</dd>
+          <dd>university : "ITU";</dd>
+          <dd>created : "2011-11-30";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:ENTITIES" onclick="return linkSelect('cluster_chart','cluster_chart:ENTITIES');">ENTITIES</a></td>
+            <td class="white">&quot;Classes used to represent various logically encapsulated data in object form.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:ENTITIES">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">ENTITIES</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Entity classes reflects virtual and real-world objects.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "entity, value object, data access object";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:ADDRESS" onclick="return linkSelect('class_chart','class_chart:ADDRESS');">ADDRESS</a></td>
+            <td class="white">&quot;A shallow object containing information about an address.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:POLLING_VENUE" onclick="return linkSelect('class_chart','class_chart:POLLING_VENUE');">POLLING_VENUE</a></td>
+            <td class="white">&quot;A shallow object containing information about an polling venue.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PERSON" onclick="return linkSelect('class_chart','class_chart:PERSON');">PERSON</a></td>
+            <td class="white">&quot;A shallow value holder object of the person entity used where no external data connectivity is required.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PERSON_ENTITY" onclick="return linkSelect('class_chart','class_chart:PERSON_ENTITY');">PERSON_ENTITY</a></td>
+            <td class="white">&quot;A person entity reflecting a person in real life with associated relevant information.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PERSON_VALUE_OBJECT" onclick="return linkSelect('class_chart','class_chart:PERSON_VALUE_OBJECT');">PERSON_VALUE_OBJECT</a></td>
+            <td class="white">&quot;The value object of the person entity&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PERSON_DATA_ACCESS_OBJECT" onclick="return linkSelect('class_chart','class_chart:PERSON_DATA_ACCESS_OBJECT');">PERSON_DATA_ACCESS_OBJECT</a></td>
+            <td class="white">&quot;The data access object of the person entity&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PERSON_RESOURCE" onclick="return linkSelect('class_chart','class_chart:PERSON_RESOURCE');">PERSON_RESOURCE</a></td>
+            <td class="white">&quot;The resource of the person entity, which is used to fetch one or more persons from the external data source.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:LOG" onclick="return linkSelect('class_chart','class_chart:LOG');">LOG</a></td>
+            <td class="white">&quot;A shallow value holder object of the log entity used where no external data connectivity is required.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:LOG_ENTITY" onclick="return linkSelect('class_chart','class_chart:LOG_ENTITY');">LOG_ENTITY</a></td>
+            <td class="white">&quot;A log entity containing information on client events and time of execution.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:LOG_VALUE_OBJECT" onclick="return linkSelect('class_chart','class_chart:LOG_VALUE_OBJECT');">LOG_VALUE_OBJECT</a></td>
+            <td class="white">&quot;The value object of the log entity&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:LOG_DATA_ACCESS_OBJECT" onclick="return linkSelect('class_chart','class_chart:LOG_DATA_ACCESS_OBJECT');">LOG_DATA_ACCESS_OBJECT</a></td>
+            <td class="white">&quot;The data access object of the log entity&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:LOG_RESOURCE" onclick="return linkSelect('class_chart','class_chart:LOG_RESOURCE');">LOG_RESOURCE</a></td>
+            <td class="white">&quot;The resource of the log entity, which is used to fetch one or more logs from the external data source.&quot;</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Cluster</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:ABSTRACTS" onclick="return linkSelect('cluster_chart','cluster_chart:ABSTRACTS');">ABSTRACTS</a></td>
+            <td class="white">&quot;Abstracts for the entities.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:ABSTRACTS">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">ABSTRACTS</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Abstracts for entities, value objects, data access objects and resources.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "entity, value object, data access object, abstracts";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:ABSTRACT_ENTITY" onclick="return linkSelect('class_chart','class_chart:ABSTRACT_ENTITY');">ABSTRACT_ENTITY</a></td>
+            <td class="white">&quot;The abstract entity implements standard load, save and delete methods for all entities.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ABSTRACT_VALUE_OBJECT" onclick="return linkSelect('class_chart','class_chart:ABSTRACT_VALUE_OBJECT');">ABSTRACT_VALUE_OBJECT</a></td>
+            <td class="white">&quot;The abstract value object implements methods to set and get values from a value object.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ABSTRACT_DATA_ACCESS_OBJECT" onclick="return linkSelect('class_chart','class_chart:ABSTRACT_DATA_ACCESS_OBJECT');">ABSTRACT_DATA_ACCESS_OBJECT</a></td>
+            <td class="white">&quot;Abstracts the standard load, save and delete methods for data access objects.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ABSTRACT_RESOURCE" onclick="return linkSelect('class_chart','class_chart:ABSTRACT_RESOURCE');">ABSTRACT_RESOURCE</a></td>
+            <td class="white">&quot;Makes the standard methods for a resource available, including an abstract build method for entity generation.&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ABSTRACT_ENTITY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ABSTRACT_ENTITY</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;An entity is a object encapsulating and making data within a specific logically scope manipulable.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "entity, data object, virtual and real-world encapsulation.";</dd>
+          <dd>in_cluster : "ABSTRACTS";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have an existing entity loaded with these parameters?&quot;,<br/>&quot;May I have the id of this entity?&quot;,<br/>&quot;Does this entity exists?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Save this entity!&quot;,<br/>&quot;Delete this entity!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ABSTRACT_VALUE_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ABSTRACT_VALUE_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The entity value object is the holder for all of the entities values fetch from an external data source.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "entity, value object";</dd>
+          <dd>in_cluster : "ABSTRACTS";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new empty value object?&quot;,<br/>&quot;May I have the value?&quot;,<br/>&quot;May I have the values?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set value!&quot;,<br/>&quot;Set values!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ABSTRACT_DATA_ACCESS_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ABSTRACT_DATA_ACCESS_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The entity data access object handles the communication with the external data source through an entity's resource.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "entity, data access object, query builder";</dd>
+          <dd>in_cluster : "ABSTRACTS";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new data access object?&quot;,<br/>&quot;May I have an existing entity data set loaded with these parameters?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Save the associated entity given these data!&quot;,<br/>&quot;Delete the associated entity given this id!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ABSTRACT_RESOURCE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ABSTRACT_RESOURCE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The abstract resource makes available the mmost often used methods of a resource and is able to build entities from data sets fetched by the query builder.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "entity, resource, query builder";</dd>
+          <dd>in_cluster : "ABSTRACTS";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new resource?&quot;,<br/>&quot;May I have the the real number of entities fetched?&quot;,<br/>&quot;May I have the total number of entities which where possible to fetch without the offset and limit parameters?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set the sorting order with this sorting direction!&quot;,<br/>&quot;Set the limit of entities fetched!&quot;,<br/>&quot;Set the offset of entities fetched!&quot;,<br/>&quot;Set the group by of entities fetched&quot;,<br/>&quot;Fetch and build the entities from the external data source by the current parameters set!&quot;,<br/>&quot;Build the entities accordion to the parameters given!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:ADDRESS">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">ADDRESS</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Represents an address.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-12-12";</dd>
+          <dd>keywords : "address";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new address?&quot;,<br/>&quot;May I have the name of the address?&quot;,<br/>&quot;May I have the street of the address?&quot;,<br/>&quot;May I have the city of the address?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set the name to this!&quot;,<br/>&quot;Set the street to this!&quot;,<br/>&quot;Set the city to this!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:POLLING_VENUE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">POLLING_VENUE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Represents a polling venue&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-12-12";</dd>
+          <dd>keywords : "polling venue, voters, addresses";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new polling venue?&quot;,<br/>&quot;May I have the persons who can vote here?&quot;,<br/>&quot;May I have the address of the polling venue?&quot;,<br/>&quot;May I have the address of the municipality the polling venue is in?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set the persons who can vote here!&quot;,<br/>&quot;Set the address of the polling venue?&quot;,<br/>&quot;Set the address of the municipality the polling venue is in?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PERSON">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PERSON</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Represents a real person, but with no external data connectivity.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>, Christian Olsson <chro@itu.dk>, Kåre Sylow Pedersen <ksyl@itu.dk>";</dd>
+          <dd>created : "2011-12-12";</dd>
+          <dd>keywords : "person, voter, shallow, value holder";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new person?&quot;,<br/>&quot;May I have the Database id?&quot;,<br/>&quot;May I have the Firstname?&quot;,<br/>&quot;May I have the Lastname?&quot;,<br/>&quot;May I have the Street?&quot;,<br/>&quot;May I have the City?&quot;,<br/>&quot;May I have the Cpr?&quot;,<br/>&quot;May I have the Voter id?&quot;,<br/>&quot;Which polling venue should the person vote at?&quot;,<br/>&quot;Which polling table should the person vote at?&quot;,<br/>&quot;Has the person voted?&quot;,<br/>&quot;At which time did the person vote?&quot;,<br/>&quot;At which polling table did the person vote?&quot;,<br/>&quot;Does the person exists in the external data source?&quot;,<br/>&quot;Is this person equal to this other person?&quot;,<br/>&quot;Is this person equal to this object?&quot;,<br/>&quot;What is the hash code of the person?&quot;,<br/>&quot;How is the person represented as a string?&quot;,<br/>&quot;How should I sort this person, given other persons, by name?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set database id!&quot;,<br/>&quot;Set firstname!&quot;,<br/>&quot;Set lastname!&quot;,<br/>&quot;Set street!&quot;,<br/>&quot;Set city!&quot;,<br/>&quot;Set cpr!&quot;,<br/>&quot;Set voter id!&quot;,<br/>&quot;Set at which polling venue the person should vote!&quot;,<br/>&quot;Set at which polling table the person should vote!&quot;,<br/>&quot;Set whether the person has voted!&quot;,<br/>&quot;Set the time of which the person voted!&quot;,<br/>&quot;Set which table the person voted at!&quot;,<br/>&quot;Set whether the person exists in the data source!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PERSON_ENTITY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PERSON_ENTITY</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Represents a real person with associated CPR number, firstname, lastname, gender etc.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "person, voter";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_ENTITY</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new person?&quot;,<br/>&quot;May I have a new person given these values?&quot;,<br/>&quot;May I have the Firstame?&quot;,<br/>&quot;May I have the Lastname?&quot;,<br/>&quot;May I have the Cpr?&quot;,<br/>&quot;May I have the Voter id?&quot;,<br/>&quot;Which polling station should you vote at?&quot;,<br/>&quot;Which polling table should you vote at?&quot;,<br/>&quot;Have you voted?&quot;,<br/>&quot;At what time did you vote?&quot;,<br/>&quot;At what polling table did you vote?&quot;,<br/>&quot;May I have all logs?&quot;,<br/>&quot;May I have the most recent log?&quot;,<br/>&quot;May I have a representation of this as a PERSON object?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set firstname!&quot;,<br/>&quot;Set lastname!&quot;,<br/>&quot;Set cpr!&quot;,<br/>&quot;Set voter id&quot;,<br/>&quot;Set at which polling venue the person should vote!&quot;,<br/>&quot;Set at which polling table the person should vote!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PERSON_VALUE_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PERSON_VALUE_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The person value object inheriting from the abstract value object&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "person, voter, value object";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_VALUE_OBJECT</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new person value object?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PERSON_DATA_ACCESS_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PERSON_DATA_ACCESS_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The person data access object inheriting from the abstract data access object&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "person, voter, data access object";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_DATA_ACCESS_OBJECT</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have a new person data access object?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:PERSON_RESOURCE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">PERSON_RESOURCE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The person resource inheriting from the abstract resource&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "person, voter, resource object";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_RESOURCE</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have the persons given the parameters set?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;The firstname must be like this value!&quot;,<br/>&quot;The lastname must be like this value!&quot;,<br/>&quot;The gender must be this value!&quot;,<br/>&quot;The CPR number must be this value!&quot;,<br/>&quot;The polling station must be this value!&quot;,<br/>&quot;The polling table must be this value!&quot;,<br/>&quot;The state of whether the person has voted must be this value!&quot;,<br/>&quot;Set whether the barcode value must have been generated!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LOG_ENTITY">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LOG_ENTITY</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;Used to log the actions of a client computer.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "log, client";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_ENTITY</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;May I have the person id of which the log belongs to?&quot;,<br/>&quot;Which command was executed?&quot;,<br/>&quot;Which client executed the command?&quot;,<br/>&quot;At which polling table was the command executed?&quot;,<br/>&quot;At what time was the command executed?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;Set the person id!&quot;,<br/>&quot;Set the command!&quot;,<br/>&quot;Set the executing client!&quot;,<br/>&quot;Set the polling table at which the command was executed!&quot;,<br/>&quot;Set the time of when the command was executed!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LOG_VALUE_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LOG_VALUE_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The log value object inheriting from the abstract value object&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "log, client, value object";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_VALUE_OBJECT</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines">&quot;Which command was executed?&quot;,<br/>&quot;Which client executed the command?&quot;,<br/>&quot;At what time was the command executed?&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LOG_DATA_ACCESS_OBJECT">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LOG_DATA_ACCESS_OBJECT</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The log data access object inheriting from the abstract data access object&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "log, client, data access object";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_DATA_ACCESS_OBJECT</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="class_chart:LOG_RESOURCE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLASS</th>
+      <td class="name" colspan="2">LOG_RESOURCE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Type Of Object</dt>
+          <dd>&quot;The log resource inheriting from the abstract resource&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Henrik Haugbølle <hhau@itu.dk>";</dd>
+          <dd>created : "2011-11-30";</dd>
+          <dd>keywords : "log, client, resource object";</dd>
+          <dd>in_cluster : "ENTITIES";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="light-grey">Inherits from</th>
+            <td class="white spaced-lines">ABSTRACT_RESOURCE</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Queries</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+          <tr>
+            <th class="light-grey">Commands</th>
+            <td class="white spaced-lines">&quot;The timeinterval must be between these two timestamps!&quot;,<br/>&quot;The client computer must be identified by this value!&quot;,<br/>&quot;The action must be this value!&quot;</td>
+          </tr>
+          <tr>
+            <th class="light-grey">Constraints</th>
+            <td class="white spaced-lines"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div id="footer">
+  <p id="left-footer">
+    <button id="showlink" onclick="return toggleShowAll();">Show all</button>
+    Chart type:
+    <select id="top-menu" onchange="populate(); showSelected();"><option>processing...</option></select>
+    Chart:
+    <select id="sub-menu" onchange="showSelected();"><option>processing...</option></select>
+  </p>
+  <p id="right-footer">
+    Generated by <a href="http://kind.ucd.ie/products/opensource/BONc">BONc</a> (version: bonc-0.2.7) <a href="http://validator.w3.org/check?uri=referer">XHTML</a> output, 13-12-2011 19:21:04.
+  </p>
+</div>
+
+</div> <!-- End main -->
+
+</body>
+</html>
+
