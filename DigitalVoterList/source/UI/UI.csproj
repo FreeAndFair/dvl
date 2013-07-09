@@ -78,6 +78,7 @@
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>ExtendedCorrectnessRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -91,7 +92,13 @@
   <PropertyGroup>
     <ApplicationIcon>icon2.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>UI.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.CryptoExt">
+      <HintPath>..\..\libs\BouncyCastle.CryptoExt.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -113,6 +120,7 @@
     <Compile Include="ManagerWindows\CheckMasterPasswordDialog.xaml.cs">
       <DependentUpon>CheckMasterPasswordDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="StationWindows\AcceptManagerDialog.xaml.cs">
       <DependentUpon>AcceptManagerDialog.xaml</DependentUpon>
     </Compile>
@@ -236,10 +244,6 @@
     <ProjectReference Include="..\DVL\Aegis DVL.csproj">
       <Project>{10D0DF95-0552-43AB-B540-8CAD1F631E38}</Project>
       <Name>Aegis DVL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libraries\Libraries.csproj">
-      <Project>{3F7816C1-F64C-4716-B844-3A68A740FAF3}</Project>
-      <Name>Libraries</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
