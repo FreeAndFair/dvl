@@ -24,15 +24,6 @@ namespace Tests {
   /// The logging tests.
   /// </summary>
   [TestFixture] public class LoggingTests {
-    #region Static Fields
-
-    /// <summary>
-    /// The key.
-    /// </summary>
-    public static string key = "../../data/ElectionPublicKey.key";
-
-    #endregion
-
     #region Public Properties
 
     /// <summary>
@@ -49,7 +40,8 @@ namespace Tests {
     /// </summary>
     [SetUp] public void SetUp() {
       this.Station = new Station(
-        new TestUi(), key, "yo boii", 62000, "LoggingTestsVoters.sqlite", "LoggingTestsLog.sqlite");
+        new TestUi(), SystemTestData.Key, SystemTestData.Password, SystemTestData.StationPort, 
+          "LoggingTestsVoters.sqlite", "LoggingTestsLog.sqlite");
     }
 
     /// <summary>

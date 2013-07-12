@@ -34,15 +34,6 @@ namespace Tests {
   ///   Test the communicator.
   /// </summary>
   [TestFixture] public class CommunicatorTests {
-    #region Static Fields
-
-    /// <summary>
-    /// The key.
-    /// </summary>
-    public static string key = "../../data/ElectionPublicKey.key";
-
-    #endregion
-
     #region Fields
 
     /// <summary>
@@ -162,24 +153,27 @@ namespace Tests {
       using (
         var manager = new Station(
           ui, 
-          key, 
-          "yo boii", 
-          60000, 
+          SystemTestData.Key, 
+          SystemTestData.Password, 
+          SystemTestData.ManagerPort, 
           "CommunicatorTestsReceiverFailureTestManagerVoters.sqlite", 
           "CommunicatorTestsReceiverFailureTestManagerLog.sqlite")) {
         byte[] pswd =
-          manager.Crypto.Hash(Bytes.From("_½æøåÆÅØ§.^\\,QBsa(/YHh*^#3£()cZ?\\}`|`´ '*jJxCvZ;;;<><aQ\\ ><yo boii"));
-        using (var peer1 = new Station(ui, 61000, "CommunicatorTestsReceiverFailureTestPeer1Voters.sqlite") {
+          manager.Crypto.Hash(Bytes.From(SystemTestData.Password));
+        using (var peer1 = new Station(ui, SystemTestData.StationPort, 
+            "CommunicatorTestsReceiverFailureTestPeer1Voters.sqlite") {
           Manager = manager.Address, 
           MasterPassword = pswd, 
           Crypto = { VoterDataEncryptionKey = manager.Crypto.VoterDataEncryptionKey }
         })
-        using (var peer2 = new Station(ui, 62000, "CommunicatorTestsReceiverFailureTestPeer2Voters.sqlite") {
+        using (var peer2 = new Station(ui, SystemTestData.StationPort + 1, 
+            "CommunicatorTestsReceiverFailureTestPeer2Voters.sqlite") {
           Manager = manager.Address, 
           MasterPassword = pswd, 
           Crypto = { VoterDataEncryptionKey = manager.Crypto.VoterDataEncryptionKey }
         })
-        using (var peer3 = new Station(ui, 63000, "CommunicatorTestsReceiverFailureTestPeer3Voters.sqlite") {
+        using (var peer3 = new Station(ui, SystemTestData.StationPort + 2, 
+          "CommunicatorTestsReceiverFailureTestPeer3Voters.sqlite") {
           Manager = manager.Address, 
           MasterPassword = pswd, 
           Crypto = { VoterDataEncryptionKey = manager.Crypto.VoterDataEncryptionKey }
@@ -280,12 +274,13 @@ namespace Tests {
     [SetUp] public void SetUp() {
       var ui = new TestUi();
       this.Sender = new Station(
-        ui, key, "yo boii", 62345, "CommunicatorTestsSenderVoters.sqlite", "CommunicatorTestsSenderLog.sqlite");
-      this.Receiver = new Station(ui, 62346, "CommunicatorTestsReceiverVoters.sqlite") {
+        ui, SystemTestData.Key, SystemTestData.Password, SystemTestData.StationPort, 
+        "CommunicatorTestsSenderVoters.sqlite", "CommunicatorTestsSenderLog.sqlite");
+      this.Receiver = new Station(ui, SystemTestData.PeerPort, "CommunicatorTestsReceiverVoters.sqlite") {
         Manager = this.Sender.Address, 
         Crypto = { VoterDataEncryptionKey = this.Sender.Crypto.VoterDataEncryptionKey }, 
         MasterPassword =
-          this.Sender.Crypto.Hash(Bytes.From("_½æøåÆÅØ§.^\\,QBsa(/YHh*^#3£()cZ?\\}`|`´ '*jJxCvZ;;;<><aQ\\ ><yo boii"))
+          this.Sender.Crypto.Hash(Bytes.From(SystemTestData.Password))
       };
 
       // Receiver.Logger = new Logger(Receiver, "CommunicatorTestsReceiverLog.sqlite");

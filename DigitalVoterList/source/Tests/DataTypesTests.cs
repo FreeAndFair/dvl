@@ -35,15 +35,6 @@ namespace Tests {
   ///   The data types tests.
   /// </summary>
   [TestFixture] public class DataTypesTests {
-    #region Static Fields
-
-    /// <summary>
-    ///   The key.
-    /// </summary>
-    public static string key = "../../data/ElectionPublicKey.key";
-
-    #endregion
-
     #region Public Methods and Operators
 
     /// <summary>
@@ -117,7 +108,7 @@ namespace Tests {
       var entry = new LogEntry(
         "hello", 
         Level.Info, 
-        new IPEndPoint(IPAddress.Loopback, 62000));
+        new IPEndPoint(IPAddress.Loopback, SystemTestData.ManagerPort));
       Assert.That(entry.Level.Equals(Level.Info));
       Assert.That(entry.Message.Equals("hello"));
       Assert.That(entry.Timestamp != null);

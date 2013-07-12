@@ -23,15 +23,6 @@ namespace Tests {
   /// The crypto tests.
   /// </summary>
   [TestFixture] public class CryptoTests {
-    #region Static Fields
-
-    /// <summary>
-    /// The key.
-    /// </summary>
-    public static string key = "../../data/ElectionPublicKey.key";
-
-    #endregion
-
     #region Fields
 
     /// <summary>
@@ -106,7 +97,8 @@ namespace Tests {
     ///   SetUp test helper properties.
     /// </summary>
     [SetUp] public void SetUp() {
-      this._station = new Station(new TestUi(), key, "yo boii", 62001, "CryptoTestVoters.sqlite");
+      this._station = new Station(new TestUi(), SystemTestData.Key, SystemTestData.Password, 
+        SystemTestData.StationPort, "CryptoTestVoters.sqlite");
       this.Crypto = this._station.Crypto;
     }
 

@@ -28,15 +28,6 @@ namespace Tests {
   /// The station tests.
   /// </summary>
   [TestFixture] public class StationTests {
-    #region Static Fields
-
-    /// <summary>
-    /// The key.
-    /// </summary>
-    public static string key = "../../data/ElectionPublicKey.key";
-
-    #endregion
-
     #region Delegates
 
     /// <summary>
@@ -211,7 +202,10 @@ namespace Tests {
     /// <summary>
     /// The enough stations test.
     /// </summary>
-    [Test] public void EnoughStationsTest() { this.AsyncManagerAnnounce(() => Assert.That(this.Manager.EnoughStations)); }
+    [Test]
+    public void EnoughStationsTest() {
+      this.AsyncManagerAnnounce(() => Assert.That(this.Manager.EnoughStations));
+    }
 
     /// <summary>
     /// The exchange public keys test.
@@ -221,12 +215,13 @@ namespace Tests {
       using (
         var manager = new Station(
           ui, 
-          key, 
-          "sup homey", 
-          63554, 
+          SystemTestData.Key, 
+          SystemTestData.Password, 
+          SystemTestData.ManagerPort, 
           "ExchangePublicKeysTestManagerVoters.sqlite", 
           "ExchangePublicKeysTestManagerLog.sqlite"))
-      using (var station = new Station(ui, 63555, "ExchangePublicKeysTestStationVoters.sqlite")) {
+      using (var station = new Station(ui, SystemTestData.StationPort, 
+                                       "ExchangePublicKeysTestStationVoters.sqlite")) {
         Assert.That(!manager.Peers.ContainsKey(station.Address));
         Assert.That(!station.Peers.ContainsKey(manager.Address));
         manager.ExchangePublicKeys(station.Address);
@@ -336,29 +331,32 @@ namespace Tests {
     ///   SetUp test helper properties.
     /// </summary>
     [SetUp] public void SetUp() {
-      const string masterpassword = "yo boii";
       var ui = new TestUi();
       this.Manager = new Station(
-        ui, key, masterpassword, 62000, "StationTestsManagerVoters.sqlite", "StationTestsManagerLog.sqlite");
+        ui, SystemTestData.Key, SystemTestData.Password, SystemTestData.ManagerPort, 
+        "StationTestsManagerVoters.sqlite", "StationTestsManagerLog.sqlite");
       byte[] pswd =
         this.Manager.Crypto.Hash(
-          Bytes.From("_½æøåÆÅØ§.^\\,QBsa(/YHh*^#3£()cZ?\\}`|`´ '*jJxCvZ;;;<><aQ\\ ><" + masterpassword));
-      this.Peer1 = new Station(ui, 62001, "StationTestsPeer1Voters.sqlite") {
+          Bytes.From(SystemTestData.Password));
+      this.Peer1 = new Station(ui, SystemTestData.StationPort, "StationTestsPeer1Voters.sqlite") {
         Manager = this.Manager.Address, 
         MasterPassword = pswd, 
         Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
       };
-      this.Peer2 = new Station(ui, 62002, "StationTestsPeer2Voters.sqlite") {
+      this.Peer2 = new Station(ui, SystemTestData.StationPort+1, "StationTestsPeer2Voters.sqlite")
+      {
         Manager = this.Manager.Address, 
         MasterPassword = pswd, 
         Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
       };
-      this.Peer3 = new Station(ui, 62003, "StationTestsPeer3Voters.sqlite") {
+      this.Peer3 = new Station(ui, SystemTestData.StationPort+2, "StationTestsPeer3Voters.sqlite")
+      {
         Manager = this.Manager.Address, 
         MasterPassword = pswd, 
         Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
       };
-      this.Peer4 = new Station(ui, 62004, "StationTestsPeer4Voters.sqlite") {
+      this.Peer4 = new Station(ui, SystemTestData.StationPort+3, "StationTestsPeer4Voters.sqlite")
+      {
         Manager = this.Manager.Address, 
         MasterPassword = pswd, 
         Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
@@ -416,20 +414,22 @@ namespace Tests {
       using (
         var manager = new Station(
           ui, 
-          key, 
-          "sup homey", 
-          63554, 
+          SystemTestData.Key, 
+          SystemTestData.Password, 
+          SystemTestData.ManagerPort, 
           "ExchangePublicKeysTestManagerVoters.sqlite", 
           "ExchangePublicKeysTestManagerLog.sqlite")) {
         AsymmetricKey pswd = manager.Crypto.VoterDataEncryptionKey;
         using (
-          var station = new Station(ui, 63555, "ExchangePublicKeysTestStationVoters.sqlite") {
+          var station = new Station(ui, SystemTestData.StationPort, 
+                                    "ExchangePublicKeysTestStationVoters.sqlite") {
             Manager = manager.Address, 
             Crypto = { VoterDataEncryptionKey = pswd }, 
             MasterPassword = manager.MasterPassword
           })
         using (
-          var station2 = new Station(ui, 63556, "ExchangePublicKeysTestStation2Voters.sqlite") {
+          var station2 = new Station(ui, SystemTestData.PeerPort, 
+                                     "ExchangePublicKeysTestStation2Voters.sqlite") {
             Manager = manager.Address, 
             Crypto = { VoterDataEncryptionKey = pswd }, 
             MasterPassword = manager.MasterPassword
@@ -493,8 +493,8 @@ namespace Tests {
     /// The valid master password test.
     /// </summary>
     [Test] public void ValidMasterPasswordTest() {
-      Assert.That(this.Manager.ValidMasterPassword("yo boii"));
-      Assert.That(!this.Manager.ValidMasterPassword("yo homie"));
+      Assert.That(this.Manager.ValidMasterPassword(SystemTestData.Password));
+      Assert.That(!this.Manager.ValidMasterPassword(SystemTestData.Password + "foo"));
     }
 
     #endregion
@@ -513,6 +513,7 @@ namespace Tests {
       IAsyncResult peer3ListenerResult = this.Peer3Listener.BeginInvoke(null, null);
 
       // Waste some CPU time while the thread hopefully starts...
+      // TODO: ICK!
       int c = 0;
       while (c < 5000000) c++;
       Console.WriteLine(c);
