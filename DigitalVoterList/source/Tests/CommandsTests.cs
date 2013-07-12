@@ -27,35 +27,6 @@ namespace Tests
   [TestFixture]
   public class CommandsTests
   {
-    #region Static Fields
-
-    /// <summary>
-    ///   The log test db.
-    /// </summary>
-    public static string LogTestDb = SubsystemName + SystemTestData.LogTestDb;
-
-    /// <summary>
-    ///   The manager test db.
-    /// </summary>
-    public static string ManagerTestDb = SubsystemName + SystemTestData.ManagerTestDb;
-
-    /// <summary>
-    ///   The peer test db.
-    /// </summary>
-    public static string PeerTestDb = SubsystemName + SystemTestData.PeerTestDb;
-
-    /// <summary>
-    ///   The station test db.
-    /// </summary>
-    public static string StationTestDb = SubsystemName + SystemTestData.StationTestDb;
-
-    /// <summary>
-    ///   The subsystem name.
-    /// </summary>
-    public static string SubsystemName = "CommandsTests";
-
-    #endregion
-
     #region Public Properties
 
     /// <summary>
@@ -83,7 +54,8 @@ namespace Tests
     [Test]
     public void AddPeerCommandTest()
     {
-      var cmd = new AddPeerCommand(this.Manager.Address, this.Station.Address, this.Station.Crypto.Keys.Item1);
+      var cmd = new AddPeerCommand(this.Manager.Address, 
+        this.Station.Address, this.Station.Crypto.Keys.Item1);
       Assert.That(cmd.Sender == this.Manager.Address);
 
       // Manager sending to station, should work
@@ -92,7 +64,8 @@ namespace Tests
       Assert.That(this.NewPeer.Peers.ContainsKey(this.Station.Address));
 
       // Station sending to manager, shouldn't work.
-      cmd = new AddPeerCommand(this.NewPeer.Address, this.NewPeer.Address, this.NewPeer.Crypto.Keys.Item1);
+      cmd = new AddPeerCommand(this.NewPeer.Address, 
+        this.NewPeer.Address, this.NewPeer.Crypto.Keys.Item1);
       Assert.That(!this.Manager.Peers.ContainsKey(this.NewPeer.Address));
       cmd.Execute(this.Manager);
       Assert.That(!this.Manager.Peers.ContainsKey(this.NewPeer.Address));
@@ -114,18 +87,21 @@ namespace Tests
           {
             new EncryptedVoterData(
               new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
-                Bytes.From(vn.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
+                this.Station.Crypto.AsymmetricEncrypt(
+                  Bytes.From(vn.Value), 
+                  this.Station.Crypto.VoterDataEncryptionKey)), 
               new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
-                Bytes.From(cpr.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
+                this.Station.Crypto.AsymmetricEncrypt(
+                  Bytes.From(cpr.Value), 
+                  this.Station.Crypto.VoterDataEncryptionKey)),
               new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
-                Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
-                this.Station.Crypto.VoterDataEncryptionKey)))
+                this.Station.Crypto.AsymmetricEncrypt(
+                  Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
+                  this.Station.Crypto.VoterDataEncryptionKey)))
           });
 
-      var cmd = new BallotReceivedCommand(this.Manager.Address, this.Station.Address, vn, cpr);
+      var cmd = new BallotReceivedCommand(this.Manager.Address, 
+        this.Station.Address, vn, cpr);
       Assert.That(cmd.Sender == this.Manager.Address);
       Assert.That(this.Station.Database[vn] == BallotStatus.NotReceived);
       cmd.Execute(this.Station);
@@ -156,7 +132,8 @@ namespace Tests
     [Test]
     public void CryptoCommandTest()
     {
-      var cmd = new CryptoCommand(this.Manager, this.Station.Address, new StartElectionCommand(this.Manager.Address));
+      var cmd = new CryptoCommand(this.Manager, 
+        this.Station.Address, new StartElectionCommand(this.Manager.Address));
       Assert.That(cmd.Sender == this.Manager.Address);
       Assert.That(!this.Station.ElectionInProgress);
       cmd.Execute(this.Station);
@@ -164,7 +141,8 @@ namespace Tests
 
       // Station sending to NewPeer
       this.NewPeer.RemovePeer(this.Manager.Address);
-      cmd = new CryptoCommand(this.Station, this.NewPeer.Address, new StartElectionCommand(this.Station.Address));
+      cmd = new CryptoCommand(this.Station, 
+        this.NewPeer.Address, new StartElectionCommand(this.Station.Address));
       Assert.That(!this.NewPeer.ElectionInProgress);
       Assert.Throws<TheOnlyException>(() => cmd.Execute(this.NewPeer));
       Assert.That(!this.NewPeer.ElectionInProgress);
@@ -212,20 +190,26 @@ namespace Tests
       var vn = new VoterNumber(5);
       var cpr = new CPR(5);
       var req = new RequestBallotCommand(this.NewPeer.Address, vn);
-      var reqCprOnly = new RequestBallotCPROnlyCommand(this.NewPeer.Address, cpr, SystemTestData.Password);
+      var reqCprOnly = 
+        new RequestBallotCPROnlyCommand(this.NewPeer.Address, cpr, 
+          SystemTestData.Password);
       var revoke = new RevokeBallotCommand(this.NewPeer.Address, vn, cpr);
-      var revokeCprOnly = new RevokeBallotCPROnlyCommand(this.NewPeer.Address, cpr, SystemTestData.Password);
+      var revokeCprOnly = 
+        new RevokeBallotCPROnlyCommand(this.NewPeer.Address, cpr, 
+          SystemTestData.Password);
       req.Execute(this.Station);
       reqCprOnly.Execute(this.Station);
       revoke.Execute(this.Station);
       revokeCprOnly.Execute(this.Station);
       Assert.That(this.Station.Database[vn] == BallotStatus.Unavailable);
 
-      this.NewPeer.Crypto.VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey;
+      this.NewPeer.Crypto.VoterDataEncryptionKey = 
+        this.Manager.Crypto.VoterDataEncryptionKey;
       var sync = new SyncCommand(this.NewPeer);
       sync.Execute(this.Station);
 
-      var promoteManager = new PromoteNewManagerCommand(this.NewPeer.Address, this.NewPeer.Address);
+      var promoteManager = 
+        new PromoteNewManagerCommand(this.NewPeer.Address, this.NewPeer.Address);
       promoteManager.Execute(this.Station);
       Assert.That(!this.Station.Manager.Equals(this.NewPeer.Address));
     }
@@ -247,8 +231,8 @@ namespace Tests
           "CommandsTestPublicKeyExchangeCommandTestManagerLog.sqlite"))
       using (
         var receiver = new Station(
-          ui, SystemTestData.StationPort, "CommandsTestPublicKeyExchangeCommandTestReceiverVoters.sqlite"))
-      {
+          ui, SystemTestData.StationPort, 
+          "CommandsTestPublicKeyExchangeCommandTestReceiverVoters.sqlite")) {
         var cmd = new PublicKeyExchangeCommand(manager);
         Assert.That(cmd.Sender.Equals(manager.Address));
         Assert.That(!receiver.Peers.ContainsKey(manager.Address));
@@ -273,21 +257,21 @@ namespace Tests
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
       var cmd = new RequestBallotCommand(this.Station.Address, vn);
-      var pswdcmd = new RequestBallotCPROnlyCommand(this.Station.Address, cpr, SystemTestData.Password);
-      var data = new List<EncryptedVoterData>
-                   {
-                     new EncryptedVoterData(
-                       new CipherText(
-                       this.Station.Crypto.AsymmetricEncrypt(
-                         Bytes.From(vn.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
-                       new CipherText(
-                       this.Station.Crypto.AsymmetricEncrypt(
-                         Bytes.From(cpr.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
-                       new CipherText(
-                       this.Station.Crypto.AsymmetricEncrypt(
-                         Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
-                         this.Station.Crypto.VoterDataEncryptionKey)))
-                   };
+      var pswdcmd = new RequestBallotCPROnlyCommand(
+        this.Station.Address, cpr, SystemTestData.Password);
+      var data =
+        new List<EncryptedVoterData> {
+          new EncryptedVoterData(
+            new CipherText(this.Station.Crypto.AsymmetricEncrypt(
+                             Bytes.From(vn.Value), 
+                             this.Station.Crypto.VoterDataEncryptionKey)), 
+            new CipherText(this.Station.Crypto.AsymmetricEncrypt(
+                           Bytes.From(cpr.Value), 
+                           this.Station.Crypto.VoterDataEncryptionKey)), 
+            new CipherText(this.Station.Crypto.AsymmetricEncrypt(
+                           Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
+                           this.Station.Crypto.VoterDataEncryptionKey)))
+        };
       this.Manager.Database.Import(data);
       this.Station.Database.Import(data);
       this.Station.MasterPassword = this.Manager.MasterPassword;
@@ -300,7 +284,8 @@ namespace Tests
       this.Manager.RevokeBallot(vn);
 
       cmd = new RequestBallotCommand(this.Manager.Address, vn);
-      pswdcmd = new RequestBallotCPROnlyCommand(this.Manager.Address, cpr, "yo boii");
+      pswdcmd = new RequestBallotCPROnlyCommand(this.Manager.Address, 
+        cpr, SystemTestData.Password);
       cmd.Execute(this.Manager);
       Assert.That(ui.HandOutBallot);
       this.Manager.RevokeBallot(vn);
@@ -309,15 +294,22 @@ namespace Tests
     }
 
     /// <summary>
-    ///   Create a new UI, Manager, Station, and joining peer Station along with their respective DBs.
+    ///   Create a new UI, Manager, Station, and joining peer Station along 
+    /// with their respective DBs.
     /// </summary>
     [SetUp]
     public void SetUp()
     {
       var ui = new TestUi();
       this.Manager = new Station(
-        ui, SystemTestData.Key, SystemTestData.Password, SystemTestData.ManagerPort, ManagerTestDb, LogTestDb);
-      this.NewPeer = new Station(ui, SystemTestData.PeerPort, PeerTestDb);
+        ui, SystemTestData.Key, 
+        SystemTestData.Password, 
+        SystemTestData.ManagerPort, 
+        "CommandsTestsManagerTestVoters.sqlite",  
+        "CommandsTestsManagerLogTestDb.sqlite");
+      this.NewPeer = new Station(
+        ui, SystemTestData.PeerPort, 
+        "CommandsTestsManagerPeerTestDb.sqlite");
 
       this.Manager.Manager = this.Manager.Address;
       this.Station.Manager = this.Manager.Address;
@@ -327,7 +319,8 @@ namespace Tests
 
       this.Station.AddPeer(this.Manager.Address, this.Manager.Crypto.Keys.Item1);
       this.Station.AddPeer(this.NewPeer.Address, this.NewPeer.Crypto.Keys.Item1);
-      this.Station.Crypto.VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey;
+      this.Station.Crypto.VoterDataEncryptionKey = 
+        this.Manager.Crypto.VoterDataEncryptionKey;
 
       this.NewPeer.AddPeer(this.Manager.Address, this.Manager.Crypto.Keys.Item1);
     }
@@ -349,28 +342,15 @@ namespace Tests
     [TearDown]
     public void TearDown()
     {
-      if (this.Manager != null)
-      {
-        this.Manager.Dispose();
-      }
-
-      if (this.Station != null)
-      {
-        this.Station.Dispose();
-      }
-
-      if (this.NewPeer != null)
-      {
-        this.NewPeer.Dispose();
-      }
-
+      if (this.Manager != null) this.Manager.Dispose();
+      if (this.Station != null) this.Station.Dispose();
+      if (this.NewPeer != null) this.NewPeer.Dispose();
       this.Manager = null;
       this.Station = null;
       this.NewPeer = null;
-      File.Delete(ManagerTestDb);
-      File.Delete(LogTestDb);
-      File.Delete(StationTestDb);
-      File.Delete(PeerTestDb);
+      File.Delete("CommandsTestsManagerTestVoters.sqlite");
+      File.Delete("CommandsTestsManagerLogTestDb.sqlite");
+      File.Delete("CommandsTestsManagerPeerTestDb.sqlite");
     }
 
     #endregion
