@@ -71,15 +71,16 @@ namespace Aegis_DVL.Logging {
 
       this._stationAddress = parent.Address;
       string password = parent.MasterPassword.AsBase64();
-      InitDb(logName, password);
+      InitDb(parent, logName, password);
       string conStr = string.Format(
         "metadata=res://*/Logging.LogModel.csdl|" +
         "res://*/Logging.LogModel.ssdl|" +
         "res://*/Logging.LogModel.msl;" +
         "provider=System.Data.SQLite;" +
-        "provider connection string='Data Source={0};Password={1}'", 
-        logName, 
-        password);
+        "provider connection string='Data Source={0}", 
+        logName);
+      if (parent.IsMasterPasswordInUse) conStr += string.Format(";Password={0}'", password);
+      else conStr += "'";
       this._db = new Entities(conStr);
       this._db.Connection.Open();
       this.Log("Logger created", Level.Info);
@@ -134,7 +135,8 @@ namespace Aegis_DVL.Logging {
 
     /// <summary>
     /// Create a new logging DB and, if one already exists under the proposed name,
-    ///   archive it with a suffix of the current time.
+    ///   archive it with a suffix of the current time.  Only create a password-
+    /// protected DB if theStation tells us to.
     /// </summary>
     /// <param name="logName">
     /// the proposed log database name
@@ -142,7 +144,7 @@ namespace Aegis_DVL.Logging {
     /// <param name="password">
     /// the database password
     /// </param>
-    private static void InitDb(string logName, string password) {
+    private static void InitDb(Station theStation, string logName, string password) {
       if (File.Exists(logName)) {
         DateTime now = DateTime.Now;
         File.Move(
@@ -154,8 +156,9 @@ namespace Aegis_DVL.Logging {
       }
 
       SQLiteConnection.CreateFile(logName);
-      string connString = string.Format(
-        "Data Source={0};Password={1}", logName, password);
+      string connString = string.Format("Data Source={0}", logName);
+      if ((theStation.IsMasterPasswordInUse) && (password != null)) 
+        connString += string.Format(";Password={0}", password);
       using (var db = new SQLiteConnection(connString)) {
         db.Open();
         using (SQLiteCommand cmd = db.CreateCommand()) {

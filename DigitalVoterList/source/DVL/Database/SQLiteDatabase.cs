@@ -41,6 +41,8 @@ namespace Aegis_DVL.Database {
     /// </summary>
     private readonly Entities db;
 
+    private readonly bool passwordProtectDb = false;
+
     /// <summary>
     /// The _is disposed.
     /// </summary>
@@ -65,7 +67,9 @@ namespace Aegis_DVL.Database {
       Contract.Requires(filename != null);
 
       this.Parent = parent;
-      string password = Crypto.GeneratePassword();
+      string password = "";
+      if (passwordProtectDb)
+        password = Crypto.GeneratePassword();
       InitDb(filename, password);
 
       string conStr =
@@ -74,9 +78,10 @@ namespace Aegis_DVL.Database {
           "res://*/Database.VoterModel.ssdl|" +
           "res://*/Database.VoterModel.msl;" +
           "provider=System.Data.SQLite;" +
-          "provider connection string='Data Source={0};Password={1}'", 
-          filename, 
-          password);
+          "provider connection string='Data Source={0}", 
+          filename);
+      if (passwordProtectDb) conStr += string.Format(";Password={0}'", password);
+      else conStr += "'";
       this.db = new Entities(conStr);
       this.db.Connection.Open();
     }
@@ -230,18 +235,19 @@ namespace Aegis_DVL.Database {
     #region Methods
 
     /// <summary>
-    /// The init db.
+    /// Create the voter list database.
     /// </summary>
     /// <param name="fileName">
-    /// The file name.
+    /// The name of the file containing the database.
     /// </param>
     /// <param name="password">
-    /// The password.
+    /// The password; if password is null, do not password-protect the DB.
     /// </param>
     private static void InitDb(string fileName, string password) {
       SQLiteConnection.CreateFile(fileName);
-      string connString = string.Format(
-        "Data Source={0};Password={1}", fileName, password);
+      string connString = string.Format("Data Source={0}", fileName);
+      if (password != null)
+        connString += string.Format(";Password={0}", password);
       using (var db = new SQLiteConnection(connString)) {
         db.Open();
         using (SQLiteCommand cmd = db.CreateCommand()) {

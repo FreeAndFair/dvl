@@ -70,6 +70,11 @@ namespace Aegis_DVL {
     /// </summary>
     private byte[] _masterPassword;
 
+    /// <summary>
+    /// Are we currently using a master password at all?
+    /// </summary>
+    internal bool IsMasterPasswordInUse = false;
+
     #endregion
 
     #region Constructors and Destructors
