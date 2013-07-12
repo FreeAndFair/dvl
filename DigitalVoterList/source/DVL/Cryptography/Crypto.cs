@@ -179,9 +179,11 @@ namespace Aegis_DVL.Cryptography {
     /// <returns>
     /// The <see cref="byte[]"/>.
     /// </returns>
-    public byte[] AsymmetricDecrypt(CipherText cipher, AsymmetricKey asymmetricKey) {
+    public byte[] AsymmetricDecrypt(CipherText cipher, 
+                                    AsymmetricKey asymmetricKey) {
       this._asymEngine.Init(false, asymmetricKey.Value);
-      return this._asymEngine.ProcessBlock(cipher, 0, cipher.Value.Length).Skip(1).ToArray();
+      return this._asymEngine.ProcessBlock(cipher, 0, cipher.Value.Length).
+        Skip(1).ToArray();
     }
 
     /// <summary>
