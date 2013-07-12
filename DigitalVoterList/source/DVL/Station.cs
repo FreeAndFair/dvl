@@ -89,7 +89,7 @@ namespace Aegis_DVL {
     /// <param name="voterDataEncryptionKey">
     /// The AsymmetricKey used for encrypting the data at this election venue.
     /// </param>
-    /// <param name="masterpassword">
+    /// <param name="masterPassword">
     /// The masterpassword known only by the election secretary.
     /// </param>
     /// <param name="port">
@@ -103,19 +103,19 @@ namespace Aegis_DVL {
     /// </param>
     public Station(IDvlUi ui, 
                    AsymmetricKey voterDataEncryptionKey, 
-                   string masterpassword, 
+                   string masterPassword, 
                    int port = 62000, 
                    string voterDbName = "Voters.sqlite", 
                    string logName = "Log.sqlite")
       : this(ui, port, voterDbName) {
       Contract.Requires(ui != null);
-      Contract.Requires(masterpassword != null);
+      Contract.Requires(masterPassword != null);
       Contract.Requires(voterDbName != null);
       Contract.Requires(logName != null);
 
       this.Crypto = new Crypto(voterDataEncryptionKey);
       this.MasterPassword =
-        this.Crypto.Hash(Bytes.From("_½æøåÆÅØ§.^\\,QBsa(/YHh*^#3£()cZ?\\}`|`´ '*jJxCvZ;;;<><aQ\\ ><" + masterpassword));
+        this.Crypto.Hash(Bytes.From(masterPassword));
       this.Logger = new Logger(this, logName);
       this.Manager = this.Address;
       this.Logger.Log("Manager initialized", Level.Info);
@@ -186,7 +186,7 @@ namespace Aegis_DVL {
         new IPEndPoint(
           Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip => ip.AddressFamily == AddressFamily.InterNetwork), 
           port);
-      this.Database = new SqLiteDatabase(this, databaseFile);
+      this.Database = new VoterListDatabase(this, databaseFile);
       this.Communicator = new Communicator(this);
       this.UI = ui;
       this.Crypto = new Crypto();
@@ -666,7 +666,8 @@ namespace Aegis_DVL {
       while (this.StationActive(this.Address)) ;
       if (this._listenerThread != null) this._listenerThread.Abort();
       this._listenerThread = null;
-      if (this.Logger != null) this.Logger.Log("Stopped listening", Level.Info);
+      if (this.Logger != null) 
+        this.Logger.Log("Stopped listening", Level.Info);
     }
 
     /// <summary>
@@ -682,7 +683,7 @@ namespace Aegis_DVL {
       Contract.Requires(password != null);
       return this._masterPassword != null &&
              this._masterPassword.SequenceEqual(
-               this.Crypto.Hash(Bytes.From("_½æøåÆÅØ§.^\\,QBsa(/YHh*^#3£()cZ?\\}`|`´ '*jJxCvZ;;;<><aQ\\ ><" + password)));
+               this.Crypto.Hash(Bytes.From(password)));
     }
 
     #endregion

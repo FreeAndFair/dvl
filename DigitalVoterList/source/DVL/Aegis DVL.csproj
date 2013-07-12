@@ -160,7 +160,7 @@
     <Compile Include="Cryptography\Crypto.cs" />
     <Compile Include="Cryptography\ICrypto.cs" />
     <Compile Include="Database\IDatabase.cs" />
-    <Compile Include="Database\SqLiteDatabase.cs" />
+    <Compile Include="Database\VoterListDatabase.cs" />
     <Compile Include="Database\VoterModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
