@@ -26,20 +26,6 @@ namespace Tests {
   /// The database tests.
   /// </summary>
   [TestFixture] public class DatabaseTests {
-    #region Constants
-
-    /// <summary>
-    ///   What is the name of the test database used in these subsystem tests?
-    /// </summary>
-    public const string DatabaseTestDb = SubsystemName + SystemTestData.ManagerTestDb;
-
-    /// <summary>
-    ///   What is the name of subsystem under test?
-    /// </summary>
-    public const string SubsystemName = "DatabaseTests";
-
-    #endregion
-
     #region Public Properties
 
     /// <summary>
@@ -60,8 +46,8 @@ namespace Tests {
         new TestUi(), 
         SystemTestData.Key, 
         SystemTestData.Password, 
-        SystemTestData.ManagerPort, 
-        DatabaseTestDb);
+        SystemTestData.ManagerPort,
+        "DatabaseTestsManagerVoters.sqlite");
       Assert.That(this.Station.ValidMasterPassword(SystemTestData.Password));
     }
 
@@ -71,7 +57,7 @@ namespace Tests {
     [TearDown] public void TearDown() {
       if (this.Station != null) this.Station.Dispose();
       this.Station = null;
-      File.Delete(DatabaseTestDb);
+      File.Delete("DatabaseTestsManagerVoters.sqlite");
     }
 
     /// <summary>

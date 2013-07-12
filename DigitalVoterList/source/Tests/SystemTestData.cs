@@ -23,15 +23,6 @@ namespace Tests {
   ///   A static class holding data relevant to multiple subsystem test suites.
   /// </summary>
   public static class SystemTestData {
-    #region Constants
-
-    /// <summary>
-    ///   What is the suffix of the name of the Manager's test DB?
-    /// </summary>
-    internal const string ManagerTestDb = "ManagerVoters.sqlite";
-
-    #endregion
-
     #region Static Fields
 
     /// <summary>
@@ -53,17 +44,7 @@ namespace Tests {
     /// <summary>
     ///   What is the test database password?
     /// </summary>
-    internal static string Password = "yo boii";
-
-    /// <summary>
-    ///   What port should the test peer Station use?
-    /// </summary>
-    internal static int PeerPort = StationPort + 1;
-
-    /// <summary>
-    ///   What is the suffix of the name of the secondary Station's test DB?
-    /// </summary>
-    internal static string PeerTestDb = "NewPeerVoters.sqlite";
+    internal static string Password = "foobar";
 
     /// <summary>
     ///   What port should the test Station use?
@@ -74,6 +55,16 @@ namespace Tests {
     ///   What is the suffix of the name of the primary Station's test DB?
     /// </summary>
     internal static string StationTestDb = "StationVoters.sqlite";
+
+    /// <summary>
+    ///   What port should the test peer Station use?
+    /// </summary>
+    internal static int PeerPort = StationPort + 1;
+
+    /// <summary>
+    ///   What is the suffix of the name of the secondary Station's test DB?
+    /// </summary>
+    internal static string PeerTestDb = "NewPeerVoters.sqlite";
 
     #endregion
   }
