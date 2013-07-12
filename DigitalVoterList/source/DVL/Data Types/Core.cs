@@ -21,7 +21,8 @@ namespace Aegis_DVL.Data_Types {
   #region Crypto
 
   /// <summary>
-  ///   Encrypted voterdata is the encrypted combination of CPR, VoterNumber and BallotStatus.
+  ///   Encrypted voterdata is the encrypted combination of CPR, 
+  /// VoterNumber and BallotStatus.
   /// </summary>
   [Serializable] public struct EncryptedVoterData {
     #region Constructors and Destructors
@@ -38,7 +39,9 @@ namespace Aegis_DVL.Data_Types {
     /// <param name="ballotstatus">
     /// The ballotstatus.
     /// </param>
-    public EncryptedVoterData(CipherText voternumber, CipherText cpr, CipherText ballotstatus)
+    public EncryptedVoterData(CipherText voternumber, 
+                              CipherText cpr, 
+                              CipherText ballotstatus)
       : this() {
       this.VoterNumber = voternumber;
       this.CPR = cpr;
@@ -74,7 +77,10 @@ namespace Aegis_DVL.Data_Types {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public override string ToString() { return string.Format("VoterNumber: {0}; CPR: {1}; Ballot: {2}", this.VoterNumber, this.CPR, this.BallotStatus); }
+    public override string ToString() {
+      return string.Format("VoterNumber: {0}; CPR: {1}; Ballot: {2}", 
+        this.VoterNumber, this.CPR, this.BallotStatus);
+    }
 
     #endregion
 
@@ -265,8 +271,9 @@ namespace Aegis_DVL.Data_Types {
   #endregion
 
   /// <summary>
-  ///   A message contains the ciphertexts of a symmetric key, a message encrypted with the symmetric key and
-  ///   a hash encrypted with the senders public key. Used for secure communication.
+  ///   A message contains the ciphertexts of a symmetric key, a message 
+  ///   encrypted with the symmetric key and a hash encrypted with the 
+  ///   sender's public key. Used for secure communication.
   /// </summary>
   [Serializable] public struct Message {
     #region Constructors and Destructors
@@ -287,8 +294,10 @@ namespace Aegis_DVL.Data_Types {
     /// <param name="iv">
     /// The initilization-vector for the content.
     /// </param>
-    public Message(CipherText symmetricKey, CipherText content, CipherText senderHash, byte[] iv)
-      : this() {
+    public Message(CipherText symmetricKey, 
+                   CipherText content, 
+                   CipherText senderHash, 
+                   byte[] iv) : this() {
       Contract.Requires(iv != null);
 
       this.SymmetricKey = symmetricKey;
@@ -360,7 +369,8 @@ namespace Aegis_DVL.Data_Types {
   #region Voter Data
 
   /// <summary>
-  ///   A voternumber is a unique number used in conjunction with the CPR-number to request a ballot.
+  ///   A voternumber is a unique number used in conjunction with the 
+  /// CPR-number to request a ballot.
   /// </summary>
   [Serializable] public struct VoterNumber {
     #region Constructors and Destructors
@@ -396,7 +406,9 @@ namespace Aegis_DVL.Data_Types {
     /// </param>
     /// <returns>
     /// </returns>
-    public static implicit operator uint(VoterNumber voterNum) { return voterNum.Value; }
+    public static implicit operator uint(VoterNumber voterNum) {
+      return voterNum.Value;
+    }
 
     /// <summary>
     /// The to string.
@@ -404,7 +416,9 @@ namespace Aegis_DVL.Data_Types {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public override string ToString() { return this.Value.ToString(CultureInfo.InvariantCulture); }
+    public override string ToString() {
+      return this.Value.ToString(CultureInfo.InvariantCulture);
+    }
 
     #endregion
   }
