@@ -177,8 +177,8 @@ namespace Aegis_DVL.Database {
       set {
         if (this.Parent.Logger != null) {
           this.Parent.Logger.Log(
-            "Setting ballotstatus for CPR=" + cpr +
-            " with masterpassword to " + value, 
+            "Setting ballotstatus for CPR " + cpr +
+            " with master password to " + value, 
             Level.Info);
         }
 

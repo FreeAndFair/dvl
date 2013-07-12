@@ -43,7 +43,8 @@ namespace Aegis_DVL.Commands {
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BallotReceivedCPROnlyCommand"/> class. 
-    /// May I have a new command that requests a ballot with just the CPR number and masterpassword known?
+    /// May I have a new command that requests a ballot with just the CPR 
+    /// number and master password known?
     /// </summary>
     /// <param name="sender">
     /// The address of the one sending the command.
@@ -55,7 +56,8 @@ namespace Aegis_DVL.Commands {
     /// The CPR-number of the ballot being requested.
     /// </param>
     /// <param name="password">
-    /// The masterpassword for the election, that only the election secretary should know.
+    /// The master password for the election, that only the election 
+    /// secretary should know.
     /// </param>
     public BallotReceivedCPROnlyCommand(IPEndPoint sender, IPEndPoint requester, CPR cpr, string password) {
       Contract.Requires(sender != null);

@@ -60,7 +60,7 @@ namespace Aegis_DVL.Database {
     /// The CPR number to be checked.
     /// </param>
     /// <param name="masterPassword">
-    /// The masterpassword of the election.
+    /// The master password of the election.
     /// </param>
     /// <returns>
     /// The BallotStatus for the voternumber/cpr combination.

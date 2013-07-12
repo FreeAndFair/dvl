@@ -90,7 +90,7 @@ namespace Aegis_DVL {
     /// The AsymmetricKey used for encrypting the data at this election venue.
     /// </param>
     /// <param name="masterPassword">
-    /// The masterpassword known only by the election secretary.
+    /// The master password known only by the election secretary.
     /// </param>
     /// <param name="port">
     /// The network port the station is communicating over. Defaults to 62000.
@@ -132,7 +132,7 @@ namespace Aegis_DVL {
     /// The path to the key-file.
     /// </param>
     /// <param name="masterPassword">
-    /// The masterpassword known only by the election secretary.
+    /// The master password known only by the election secretary.
     /// </param>
     /// <param name="port">
     /// The network port the station is communicating over. Defaults to 62000.
@@ -175,7 +175,9 @@ namespace Aegis_DVL {
     /// <param name="databaseFile">
     /// The name of the database file.
     /// </param>
-    public Station(IDvlUi ui, int port = 62000, string databaseFile = "Voters.sqlite") {
+    public Station(IDvlUi ui, 
+                   int port = 62000, 
+                   string databaseFile = "Voters.sqlite") {
       Contract.Requires(ui != null);
       Contract.Requires(databaseFile != null);
 
@@ -184,7 +186,8 @@ namespace Aegis_DVL {
       this.AllStationsAvailable = true;
       this.Address =
         new IPEndPoint(
-          Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip => ip.AddressFamily == AddressFamily.InterNetwork), 
+          Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip => 
+            ip.AddressFamily == AddressFamily.InterNetwork), 
           port);
       this.Database = new VoterListDatabase(this, databaseFile);
       this.Communicator = new Communicator(this);
@@ -243,12 +246,17 @@ namespace Aegis_DVL {
     /// <summary>
     ///   Is there enough active stations in the group to continue operations?
     /// </summary>
-    public bool EnoughStations { [Pure] get { return this.Peers.Keys.Count(this.StationActive) >= 0; /*TODO: Correct to '>' when not testing*/ } }
+    public bool EnoughStations { [Pure] get {
+      return this.Peers.Keys.Count(this.StationActive) >= 0; 
+      // TODO: Correct to '>' when not testing
+    }}
 
     /// <summary>
     ///   Am I the manager?
     /// </summary>
-    public bool IsManager { [Pure] get { return this.Address.Equals(this.Manager); } }
+    public bool IsManager { [Pure] get {
+      return this.Address.Equals(this.Manager);
+    }}
 
     /// <summary>
     /// Gets a value indicating whether listening.
@@ -299,7 +307,9 @@ namespace Aegis_DVL {
     /// <summary>
     ///   Who are my peers?
     /// </summary>
-    public SortedDictionary<IPEndPoint, AsymmetricKey> Peers { [Pure] get; private set; }
+    public SortedDictionary<IPEndPoint, AsymmetricKey> Peers {
+      [Pure] get; private set;
+    }
 
     /// <summary>
     ///   How can the user interact with me?
@@ -341,8 +351,11 @@ namespace Aegis_DVL {
       Contract.Requires(this.IsManager);
       Contract.Requires(newPeer != null);
       this.Peers.Keys.Where(peer => !peer.Equals(newPeer))
-          .ForEach(peer => this.Communicator.Send(new AddPeerCommand(this.Address, newPeer, newPeerKey), peer));
-      if (this.Logger != null) this.Logger.Log("Announcing that this peer should be added to the peerlist: " + newPeer, Level.Info);
+          .ForEach(peer => 
+            this.Communicator.Send(new AddPeerCommand(this.Address, newPeer, newPeerKey), peer));
+      if (this.Logger != null) 
+        this.Logger.Log("Announcing that this peer should be added to the peerlist: " + 
+          newPeer, Level.Info);
     }
 
     /// <summary>
@@ -353,8 +366,11 @@ namespace Aegis_DVL {
       Contract.Requires(this.IsManager);
       Contract.Ensures(!this.ElectionInProgress);
       this.EndElection();
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(new EndElectionCommand(this.Address), peer));
-      if (this.Logger != null) this.Logger.Log("Announcing that the election should be ended.", Level.Info);
+      this.Peers.Keys.ForEach(peer => 
+        this.Communicator.Send(new EndElectionCommand(this.Address), peer));
+      if (this.Logger != null) 
+        this.Logger.Log("Announcing that the election should be ended.", 
+          Level.Info);
     }
 
     /// <summary>
@@ -367,8 +383,11 @@ namespace Aegis_DVL {
       Contract.Requires(this.IsManager);
       Contract.Requires(peerToRemove != null);
       this.RemovePeer(peerToRemove);
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(new RemovePeerCommand(this.Address, peerToRemove), peer));
-      if (this.Logger != null) this.Logger.Log("Announcing that this peer should be removed from the peerlist: " + peerToRemove, Level.Info);
+      this.Peers.Keys.ForEach(peer => 
+        this.Communicator.Send(new RemovePeerCommand(this.Address, peerToRemove), peer));
+      if (this.Logger != null) 
+        this.Logger.Log("Announcing that this peer should be removed from the peerlist: " + 
+          peerToRemove, Level.Info);
     }
 
     /// <summary>
@@ -386,7 +405,9 @@ namespace Aegis_DVL {
       var cmd = new RevokeBallotCommand(this.Address, voterNumber, cpr);
       this.Peers.Keys.ForEach(peer => this.Communicator.Send(cmd, peer));
       cmd.Execute(this);
-      if (this.Logger != null) this.Logger.Log("Announcing that this ballot should be revoked: voternumber=" + voterNumber, Level.Warn);
+      if (this.Logger != null) 
+        this.Logger.Log("Announcing that this ballot should be revoked for voter number " + 
+          voterNumber, Level.Warn);
     }
 
     /// <summary>
@@ -396,17 +417,20 @@ namespace Aegis_DVL {
     /// The CPR number to revoke a ballot for.
     /// </param>
     /// <param name="masterPassword">
-    /// The masterpassword that only the election secretary should know.
+    /// The master password that only the election secretary should know.
     /// </param>
     public void AnnounceRevokeBallot(CPR cpr, string masterPassword) {
       Contract.Requires(masterPassword != null);
       Contract.Requires(this.ValidMasterPassword(masterPassword));
-      Contract.Requires(this.Database[cpr, masterPassword] == BallotStatus.Received);
+      Contract.Requires(this.Database[cpr, masterPassword] == 
+        BallotStatus.Received);
       Contract.Requires(this.IsManager);
       var cmd = new RevokeBallotCPROnlyCommand(this.Address, cpr, masterPassword);
       this.Peers.Keys.ForEach(peer => this.Communicator.Send(cmd, peer));
       cmd.Execute(this);
-      if (this.Logger != null) this.Logger.Log("Announcing that this ballot should be revoked with masterpassword: CPR=" + cpr, Level.Warn);
+      if (this.Logger != null)
+        this.Logger.Log("Announcing that this ballot should be revoked " +
+          "with master password: CPR " + cpr, Level.Warn);
     }
 
     /// <summary>
@@ -418,7 +442,9 @@ namespace Aegis_DVL {
       Contract.Ensures(this.ElectionInProgress);
       this.StartElection();
       this.Peers.Keys.ForEach(peer => this.Communicator.Send(new StartElectionCommand(this.Address), peer));
-      if (this.Logger != null) this.Logger.Log("Announcing that the election should be started.", Level.Info);
+      if (this.Logger != null) 
+        this.Logger.Log("Announcing that the election should be started.", 
+          Level.Info);
     }
 
     /// <summary>
@@ -431,7 +457,9 @@ namespace Aegis_DVL {
       Contract.Requires(this.Database[voterNumber] == BallotStatus.NotReceived);
       Contract.Ensures(this.Database[voterNumber] == BallotStatus.Received);
       this.Database[voterNumber] = BallotStatus.Received;
-      if (this.Logger != null) this.Logger.Log("Marking voternumber=" + voterNumber + " as having received a ballot.", Level.Info);
+      if (this.Logger != null) 
+        this.Logger.Log("Marking voternumber=" + voterNumber + 
+          " as having received a ballot.", Level.Info);
     }
 
     /// <summary>
@@ -441,7 +469,7 @@ namespace Aegis_DVL {
     /// The CPR number to request a ballot for.
     /// </param>
     /// <param name="password">
-    /// The masterpassword.
+    /// The master password.
     /// </param>
     public void BallotReceived(CPR cpr, string password) {
       Contract.Requires(password != null);
@@ -449,7 +477,8 @@ namespace Aegis_DVL {
       Contract.Requires(this.Database[cpr, password] == BallotStatus.NotReceived);
       Contract.Ensures(this.Database[cpr, password] == BallotStatus.Received);
       this.Database[cpr, password] = BallotStatus.Received;
-      if (this.Logger != null) this.Logger.Log("Marking CPR=" + cpr + " with masterpassword as having received a ballot.", Level.Info);
+      if (this.Logger != null) this.Logger.Log("Marking CPR " + cpr + 
+        " with master password as having received a ballot.", Level.Info);
     }
 
     /// <summary>
@@ -460,8 +489,10 @@ namespace Aegis_DVL {
     /// </returns>
     [Pure] public IEnumerable<IPEndPoint> DiscoverPeers() {
       Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>() != null);
-      Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>().All(x => x != null));
-      return this.Communicator.DiscoverNetworkMachines().Where(address => !address.Equals(this.Address));
+      Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>().
+        All(x => x != null));
+      return this.Communicator.DiscoverNetworkMachines().Where(address => 
+        !address.Equals(this.Address));
     }
 
     /// <summary>
@@ -480,10 +511,12 @@ namespace Aegis_DVL {
       Contract.Ensures(!this.Manager.Equals(Contract.OldValue(this.Manager)));
       this.RemovePeer(this.Manager);
       var candidates = new SortedSet<IPEndPoint>(new IPEndPointComparer()) { this.Address };
-      this.Peers.Keys.Where(this.StationActive).ForEach(candidate => candidates.Add(candidate));
+      this.Peers.Keys.Where(this.StationActive).ForEach(candidate => 
+        candidates.Add(candidate));
       this.Manager = candidates.First();
       if (this.IsManager) this.UI.IsNowManager();
-      if (this.Logger != null) this.Logger.Log("Elected new manager: " + this.Manager, Level.Warn);
+      if (this.Logger != null) 
+        this.Logger.Log("Elected new manager: " + this.Manager, Level.Warn);
     }
 
     /// <summary>
@@ -506,7 +539,8 @@ namespace Aegis_DVL {
       Contract.Requires(target != null);
       Contract.Requires(this.StationActive(target));
       this.Communicator.Send(new PublicKeyExchangeCommand(this), target);
-      if (this.Logger != null) this.Logger.Log("Exchanging public keys with " + target, Level.Info);
+      if (this.Logger != null) 
+        this.Logger.Log("Exchanging public keys with " + target, Level.Info);
     }
 
     /// <summary>
@@ -521,7 +555,9 @@ namespace Aegis_DVL {
       this.Peers.Keys.ForEach(
         peer => this.Communicator.Send(new PromoteNewManagerCommand(this.Address, newManager), peer));
       this.Manager = newManager;
-      if (this.Logger != null) this.Logger.Log("Promoting " + newManager + " to be the manager", Level.Warn);
+      if (this.Logger != null) 
+        this.Logger.Log("Promoting " + newManager + " to be the manager", 
+          Level.Warn);
     }
 
     /// <summary>
@@ -549,7 +585,9 @@ namespace Aegis_DVL {
     public void RequestBallot(VoterNumber voterNumber) {
       Contract.Requires(this.Database[voterNumber] == BallotStatus.NotReceived);
       this.Communicator.Send(new RequestBallotCommand(this.Address, voterNumber), this.Manager);
-      if (this.Logger != null) this.Logger.Log("Requesting ballot for: voternumber=" + voterNumber, Level.Info);
+      if (this.Logger != null) 
+        this.Logger.Log("Requesting ballot for: voter number " + 
+          voterNumber, Level.Info);
     }
 
     /// <summary>
@@ -559,14 +597,17 @@ namespace Aegis_DVL {
     /// The CPR number to request a ballot for.
     /// </param>
     /// <param name="password">
-    /// The masterpassword.
+    /// The master password.
     /// </param>
     public void RequestBallot(CPR cpr, string password) {
       Contract.Requires(password != null);
       Contract.Requires(this.ValidMasterPassword(password));
       Contract.Requires(this.Database[cpr, password] == BallotStatus.NotReceived);
-      this.Communicator.Send(new RequestBallotCPROnlyCommand(this.Address, cpr, password), this.Manager);
-      if (this.Logger != null) this.Logger.Log("Requesting ballot with masterpassword for: CPR=" + cpr, Level.Info);
+      this.Communicator.Send(new RequestBallotCPROnlyCommand(this.Address, cpr,
+        password), this.Manager);
+      if (this.Logger != null) 
+        this.Logger.Log("Requesting ballot with master password for CPR " + 
+          cpr, Level.Info);
     }
 
     /// <summary>
@@ -579,7 +620,9 @@ namespace Aegis_DVL {
       Contract.Requires(this.Database[voterNumber] == BallotStatus.Received);
       Contract.Ensures(this.Database[voterNumber] == BallotStatus.NotReceived);
       this.Database[voterNumber] = BallotStatus.NotReceived;
-      if (this.Logger != null) this.Logger.Log("Revoking ballot for voter with voternumber=" + voterNumber, Level.Warn);
+      if (this.Logger != null) 
+        this.Logger.Log("Revoking ballot for voter with voter number " + 
+          voterNumber, Level.Warn);
     }
 
     /// <summary>
@@ -589,7 +632,7 @@ namespace Aegis_DVL {
     /// The CPR number to revoke a ballot for.
     /// </param>
     /// <param name="masterPassword">
-    /// The masterpassword that only the election secretary should know.
+    /// The master password that only the election secretary should know.
     /// </param>
     public void RevokeBallot(CPR cpr, string masterPassword) {
       Contract.Requires(masterPassword != null);
@@ -597,15 +640,20 @@ namespace Aegis_DVL {
       Contract.Requires(this.Database[cpr, masterPassword] == BallotStatus.Received);
       Contract.Ensures(this.Database[cpr, masterPassword] == BallotStatus.NotReceived);
       this.Database[cpr, masterPassword] = BallotStatus.NotReceived;
-      if (this.Logger != null) this.Logger.Log("Revoking ballot with masterpassword for voter with CPR=" + cpr, Level.Warn);
+      if (this.Logger != null) 
+        this.Logger.Log("Revoking ballot with master password for voter with CPR " + 
+          cpr, Level.Warn);
     }
 
     /// <summary>
     ///   The system is compromised, notify everyone and shut down the election!
     /// </summary>
     public void ShutDownElection() {
-      if (this.Logger != null) this.Logger.Log("Compromised system, shutting down election.", Level.Fatal);
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(new ShutDownElectionCommand(this.Address), peer));
+      if (this.Logger != null) 
+        this.Logger.Log("Compromised system---shutting down election.", 
+          Level.Fatal);
+      this.Peers.Keys.ForEach(peer => 
+        this.Communicator.Send(new ShutDownElectionCommand(this.Address), peer));
       this.UI.Shutdown();
       throw new TheOnlyException();
     }
@@ -638,8 +686,11 @@ namespace Aegis_DVL {
     /// </summary>
     public void StartNewManagerElection() {
       this.ElectNewManager();
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(new ElectNewManagerCommand(this.Address), peer));
-      if (this.Logger != null) this.Logger.Log("Announced that a new manager should be elected", Level.Warn);
+      this.Peers.Keys.ForEach(peer => 
+        this.Communicator.Send(new ElectNewManagerCommand(this.Address), peer));
+      if (this.Logger != null) 
+        this.Logger.Log("Announced that a new manager should be elected", 
+          Level.Warn);
     }
 
     /// <summary>
@@ -671,13 +722,13 @@ namespace Aegis_DVL {
     }
 
     /// <summary>
-    /// Is this string the masterpassword?
+    /// Is this string the master password?
     /// </summary>
     /// <param name="password">
     /// The password to check.
     /// </param>
     /// <returns>
-    /// True if the password is identical to the masterpassword, false otherwise.
+    /// True if the password is identical to the master password, false otherwise.
     /// </returns>
     [Pure] public bool ValidMasterPassword(string password) {
       Contract.Requires(password != null);

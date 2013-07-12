@@ -47,7 +47,7 @@ namespace Aegis_DVL.Commands {
     /// The CPR-number to revoke a ballot for.
     /// </param>
     /// <param name="masterPassword">
-    /// The masterpassword only the election secretary should know.
+    /// The master password only the election secretary should know.
     /// </param>
     public RevokeBallotCPROnlyCommand(IPEndPoint sender, CPR cpr, string masterPassword) {
       Contract.Requires(sender != null);
