@@ -1,30 +1,76 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using System.Net;
+﻿#region Copyright and License
+
+// // -----------------------------------------------------------------------
+// // <copyright file="PromoteNewManagerCommand.cs" company="DemTech">
+// // Copyright (C) 2013 Joseph Kiniry, DemTech, 
+// // IT University of Copenhagen, Technical University of Denmark,
+// // Nikolaj Aaes, Nicolai Skovvart
+// // </copyright>
+// // -----------------------------------------------------------------------
+#endregion
 
 namespace Aegis_DVL.Commands {
-    [Serializable]
-    public class PromoteNewManagerCommand : ICommand {
-        private readonly IPEndPoint _newManager;
+  using System;
+  using System.Diagnostics.Contracts;
+  using System.Net;
 
-        /// <summary>
-        /// May I have a new command that promotes another machine to be the new manager?
-        /// </summary>
-        /// <param name="sender">The address of the one sending the command.</param>
-        /// <param name="newManager">The address of the station that should be the new manager.</param>
-        public PromoteNewManagerCommand(IPEndPoint sender, IPEndPoint newManager) {
-            Contract.Requires(sender != null);
-            Contract.Requires(newManager != null);
-            _newManager = newManager;
-            Sender = sender;
-        }
+  /// <summary>
+  /// The promote new manager command.
+  /// </summary>
+  [Serializable] public class PromoteNewManagerCommand : ICommand {
+    #region Fields
 
-        public IPEndPoint Sender { get; private set; }
+    /// <summary>
+    /// The _new manager.
+    /// </summary>
+    private readonly IPEndPoint _newManager;
 
-        public void Execute(Station receiver) {
-            if (!receiver.Manager.Equals(Sender)) return;
-            receiver.Manager = _newManager;
-            receiver.UI.IsNowManager();
-        }
+    #endregion
+
+    #region Constructors and Destructors
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PromoteNewManagerCommand"/> class. 
+    /// May I have a new command that promotes another machine to be the new manager?
+    /// </summary>
+    /// <param name="sender">
+    /// The address of the one sending the command.
+    /// </param>
+    /// <param name="newManager">
+    /// The address of the station that should be the new manager.
+    /// </param>
+    public PromoteNewManagerCommand(IPEndPoint sender, IPEndPoint newManager) {
+      Contract.Requires(sender != null);
+      Contract.Requires(newManager != null);
+      this._newManager = newManager;
+      this.Sender = sender;
     }
+
+    #endregion
+
+    #region Public Properties
+
+    /// <summary>
+    /// Gets the sender.
+    /// </summary>
+    public IPEndPoint Sender { get; private set; }
+
+    #endregion
+
+    #region Public Methods and Operators
+
+    /// <summary>
+    /// The execute.
+    /// </summary>
+    /// <param name="receiver">
+    /// The receiver.
+    /// </param>
+    public void Execute(Station receiver) {
+      if (!receiver.Manager.Equals(this.Sender)) return;
+      receiver.Manager = this._newManager;
+      receiver.UI.IsNowManager();
+    }
+
+    #endregion
+  }
 }

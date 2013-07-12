@@ -1,5 +1,35 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   AssemblyInfo.cs
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+#region Copyright and License
+
+// // -----------------------------------------------------------------------
+// // <copyright file="AssemblyInfo.cs" company="DemTech">
+// // Copyright (C) 2013 Joseph Kiniry, DemTech, 
+// // IT University of Copenhagen, Technical University of Denmark,
+// // Nikolaj Aaes, Nicolai Skovvart
+// // </copyright>
+// // -----------------------------------------------------------------------
+#endregion
+
+#region Copyright and License
+
+// // -----------------------------------------------------------------------
+// // <copyright file="AssemblyInfo.cs" company="DemTech">
+// // Copyright (C) 2013 Joseph Kiniry, DemTech, 
+// // IT University of Copenhagen, Technical University of Denmark,
+// // Nikolaj Aaes, Nicolai Skovvart
+// // </copyright>
+// // -----------------------------------------------------------------------
+#endregion
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -23,12 +53,10 @@ using System.Runtime.InteropServices;
 [assembly: Guid("e69c39e6-be35-4787-a70e-3ddab10a8883")]
 
 // Version information for an assembly consists of the following four values:
-//
 //      Major Version
 //      Minor Version 
 //      Build Number
 //      Revision
-//
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]

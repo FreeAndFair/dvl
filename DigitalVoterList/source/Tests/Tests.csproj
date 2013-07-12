@@ -129,6 +129,7 @@
     <Compile Include="LoggingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StationTests.cs" />
+    <Compile Include="SystemTestData.cs" />
     <Compile Include="TestUi.cs" />
     <Compile Include="UtilTests.cs" />
   </ItemGroup>
@@ -137,6 +138,9 @@
       <Project>{10D0DF95-0552-43AB-B540-8CAD1F631E38}</Project>
       <Name>Aegis DVL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\ElectionPublicKey.key" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

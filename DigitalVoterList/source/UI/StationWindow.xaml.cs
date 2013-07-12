@@ -1,104 +1,143 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Win32;
-using UI.ManagerWindows;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="StationWindow.xaml.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Interaction logic for StationWindow.xaml
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+#region Copyright and License
+
+// // -----------------------------------------------------------------------
+// // <copyright file="StationWindow.xaml.cs" company="DemTech">
+// // Copyright (C) 2013 Joseph Kiniry, DemTech, 
+// // IT University of Copenhagen, Technical University of Denmark,
+// // Nikolaj Aaes, Nicolai Skovvart
+// // </copyright>
+// // -----------------------------------------------------------------------
+#endregion
 
 namespace UI {
+  using System;
+  using System.ComponentModel;
+  using System.Windows;
+
+  using Microsoft.Win32;
+
+  using UI.ManagerWindows;
+
+  /// <summary>
+  /// Interaction logic for StationWindow.xaml
+  /// </summary>
+  public partial class StationWindow {
+    #region Fields
+
     /// <summary>
-    /// Interaction logic for StationWindow.xaml
+    /// The _ui.
     /// </summary>
-    public partial class StationWindow
-    {
-        private readonly UiHandler _ui;
+    private readonly UiHandler _ui;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public StationWindow()
-        {
-            InitializeComponent();
-            _ui = new UiHandler(this);
-            MainFrame.Navigate(new TypeChoicePage(MainFrame,_ui));
-        }
+    #endregion
 
-        /// <summary>
-        /// Make sure that the red X in the corner doesn't close the window
-        /// </summary>
-        /// <param name="e">the event argument</param>
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e) {
-            e.Cancel = true;
-        }
+    #region Constructors and Destructors
 
-        /// <summary>
-        /// Called when File -> Mark voter is clicked
-        /// </summary>
-        /// <param name="sender">auto generated</param>
-        /// <param name="e">auto generated</param>
-        private void MarkVoterClick(object sender, RoutedEventArgs e)
-        {
-            var ballotCPRRequestWindow = new BallotCPRRequestWindow(_ui);
-            ballotCPRRequestWindow.ShowDialog();
-        }
-
-        /// <summary>
-        /// Called whn File -> Export data is clicked
-        /// </summary>
-        /// <param name="sender">auto generated</param>
-        /// <param name="e">auto generated</param>
-        private void ExportDataClick(object sender, RoutedEventArgs e)
-        {         
-            var d = new CheckMasterPasswordDialog(_ui);
-            d.ShowDialog();
-
-            if (d.DialogResult.HasValue && d.DialogResult == true)
-            {
-                if(d.IsCancel)
-                    return;
-
-                var saveDialog = new SaveFileDialog {Title = "Eksporter Valg Data"};
-                saveDialog.Filter = "Data files (*.data)|*.data|All files (*.*)|*.*";
-                saveDialog.ShowDialog();
-                if(!saveDialog.FileName.Equals(""))
-                    _ui.ExportData(saveDialog.FileName);
-            }
-            else
-            {
-                MessageBox.Show("Det kodeord du indtastede er ikke korrekt, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
-            }
-        }
-
-        /// <summary>
-        /// Called when File -> Exit is clicked
-        /// </summary>
-        /// <param name="sender">auto generated</param>
-        /// <param name="e">auto generated</param>
-        private void ExitClick(object sender, RoutedEventArgs e)
-        {
-            var d = new CheckMasterPasswordDialog(_ui);
-            d.ShowDialog();
-
-            if (d.DialogResult.HasValue && d.DialogResult == true)
-            {
-                if (d.IsCancel)
-                    return;
-
-                Environment.Exit(0);
-            }
-            else
-            {
-                MessageBox.Show("Det kodeord du indtastede er ikke korret, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
-            }
-        }
-
-        /// <summary>
-        /// Called when Help -> User Manual is clicked
-        /// </summary>
-        /// <param name="sender">auto generated</param>
-        /// <param name="e">auto generated</param>
-        private void HelpClick(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(@"Manual.pdf");
-        }
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StationWindow"/> class. 
+    /// Constructor
+    /// </summary>
+    public StationWindow() {
+      this.InitializeComponent();
+      this._ui = new UiHandler(this);
+      this.MainFrame.Navigate(new TypeChoicePage(this.MainFrame, this._ui));
     }
+
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Make sure that the red X in the corner doesn't close the window
+    /// </summary>
+    /// <param name="e">
+    /// the event argument
+    /// </param>
+    protected override void OnClosing(CancelEventArgs e) { e.Cancel = true; }
+
+    /// <summary>
+    /// Called when File -&gt; Exit is clicked
+    /// </summary>
+    /// <param name="sender">
+    /// auto generated
+    /// </param>
+    /// <param name="e">
+    /// auto generated
+    /// </param>
+    private void ExitClick(object sender, RoutedEventArgs e) {
+      var d = new CheckMasterPasswordDialog(this._ui);
+      d.ShowDialog();
+
+      if (d.DialogResult.HasValue &&
+          d.DialogResult == true) {
+        if (d.IsCancel) return;
+
+        Environment.Exit(0);
+      } else
+        MessageBox.Show(
+          "Det kodeord du indtastede er ikke korret, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
+    }
+
+    /// <summary>
+    /// Called whn File -&gt; Export data is clicked
+    /// </summary>
+    /// <param name="sender">
+    /// auto generated
+    /// </param>
+    /// <param name="e">
+    /// auto generated
+    /// </param>
+    private void ExportDataClick(object sender, RoutedEventArgs e) {
+      var d = new CheckMasterPasswordDialog(this._ui);
+      d.ShowDialog();
+
+      if (d.DialogResult.HasValue &&
+          d.DialogResult == true) {
+        if (d.IsCancel) return;
+
+        var saveDialog = new SaveFileDialog { Title = "Eksporter Valg Data" };
+        saveDialog.Filter = "Data files (*.data)|*.data|All files (*.*)|*.*";
+        saveDialog.ShowDialog();
+        if (!saveDialog.FileName.Equals(string.Empty)) this._ui.ExportData(saveDialog.FileName);
+      } else
+        MessageBox.Show(
+          "Det kodeord du indtastede er ikke korrekt, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
+    }
+
+    /// <summary>
+    /// Called when Help -&gt; User Manual is clicked
+    /// </summary>
+    /// <param name="sender">
+    /// auto generated
+    /// </param>
+    /// <param name="e">
+    /// auto generated
+    /// </param>
+    private void HelpClick(object sender, RoutedEventArgs e) { System.Diagnostics.Process.Start(@"Manual.pdf"); }
+
+    /// <summary>
+    /// Called when File -&gt; Mark voter is clicked
+    /// </summary>
+    /// <param name="sender">
+    /// auto generated
+    /// </param>
+    /// <param name="e">
+    /// auto generated
+    /// </param>
+    private void MarkVoterClick(object sender, RoutedEventArgs e) {
+      var ballotCPRRequestWindow = new BallotCPRRequestWindow(this._ui);
+      ballotCPRRequestWindow.ShowDialog();
+    }
+
+    #endregion
+  }
 }
