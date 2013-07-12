@@ -39,7 +39,7 @@ namespace Tests {
     #region Public Methods and Operators
 
     /// <summary>
-    /// The set up.
+    ///   Create the test database and station for database testing.
     /// </summary>
     [SetUp] public void SetUp() {
       this.Station = new Station(
@@ -61,6 +61,8 @@ namespace Tests {
     }
 
     /// <summary>
+    ///   Create some voter card data, insert it into the test DB,
+    /// and check that various operations on said data hold.
     /// </summary>
     [Test] public void Test() {
       IDatabase db = this.Station.Database;
@@ -75,18 +77,23 @@ namespace Tests {
         new List<EncryptedVoterData> {
           new EncryptedVoterData(
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
+              this.Station.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), 
+                this.Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
+              this.Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), 
+                this.Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
               this.Station.Crypto.AsymmetricEncrypt(
-                Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), this.Station.Crypto.VoterDataEncryptionKey)))
+                Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
+                  this.Station.Crypto.VoterDataEncryptionKey)))
         });
 
       Assert.That(db.AllData != null);
       Assert.That(
         db.AllData.All(
-          data => !Equals(data.BallotStatus, null) && !Equals(data.CPR, null) && !Equals(data.VoterNumber, null)));
+          data => !Equals(data.BallotStatus, null) && 
+                  !Equals(data.CPR, null) && 
+                  !Equals(data.VoterNumber, null)));
 
       // CPR is in DB, but the voternumber doesn't match.
       Assert.That(db[new VoterNumber(123)] == BallotStatus.Unavailable);
@@ -103,7 +110,7 @@ namespace Tests {
     }
 
     /// <summary>
-    /// The test create datafile.
+    ///   Create some voter card data, insert it into the test DB,
     /// </summary>
     [Test] public void TestCreateDatafile() {
       const string FileName = "TEST_VOTERDATA.data";
@@ -177,10 +184,12 @@ namespace Tests {
           new EncryptedVoterData(
             new CipherText(
               this.Station.Crypto.AsymmetricEncrypt(
-                Bytes.From(vn0.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
+                Bytes.From(vn0.Value), 
+                this.Station.Crypto.VoterDataEncryptionKey)),
             new CipherText(
               this.Station.Crypto.AsymmetricEncrypt(
-                Bytes.From(cpr0.Value), this.Station.Crypto.VoterDataEncryptionKey)), 
+                Bytes.From(cpr0.Value), 
+                this.Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
               this.Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr0.Value + (uint)BallotStatus.NotReceived), 
