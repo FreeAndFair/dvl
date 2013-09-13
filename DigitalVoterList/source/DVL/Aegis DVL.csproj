@@ -201,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\DataSources\Aegis_DVL.Database.Entities.datasource" />
     <None Include="Properties\DataSources\Aegis_DVL.Logging.Entities.datasource" />
     <None Include="Properties\Settings.settings">
