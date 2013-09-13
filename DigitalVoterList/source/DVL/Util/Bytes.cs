@@ -81,7 +81,7 @@ namespace Aegis_DVL.Util {
     }
 
     /// <summary>
-    /// What is the bytes from this file?
+    /// What are the bytes from this file?
     /// </summary>
     /// <param name="filename">
     /// The name of the file to read bytes from.
@@ -95,10 +95,10 @@ namespace Aegis_DVL.Util {
     [Pure] public static byte[] FromFile(string filename, uint bufferSize = 16384) { using (FileStream file = File.OpenRead(filename)) return FromStream(file, bufferSize); }
 
     /// <summary>
-    /// What are the bytes in this networkstream?
+    /// What are the bytes in this network stream?
     /// </summary>
     /// <param name="stream">
-    /// The networkstream to extract bytes from.
+    /// The network stream to extract bytes from.
     /// </param>
     /// <param name="bufferSize">
     /// The internal buffer size. Defaults to 65535.
@@ -199,7 +199,8 @@ namespace Aegis_DVL.Util {
       Contract.Requires(modifier != null);
 
       // ReSharper disable PossibleNullReferenceException
-      Contract.Ensures(Contract.Result<byte[]>() != null && Contract.Result<byte[]>().Length == source.Length);
+      Contract.Ensures(Contract.Result<byte[]>() != null);
+      Contract.Ensures(Contract.Result<byte[]>().Length == source.Length);
 
       // ReSharper restore PossibleNullReferenceException
       byte[] modBytes = GenModifier(crypto, modifier, source.Length);

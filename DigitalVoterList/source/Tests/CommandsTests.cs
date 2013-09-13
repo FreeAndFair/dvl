@@ -55,7 +55,7 @@ namespace Tests
     public void AddPeerCommandTest()
     {
       var cmd = new AddPeerCommand(this.Manager.Address, 
-        this.Station.Address, this.Station.Crypto.Keys.Item1);
+        this.Station.Address, this.Station.Crypto.KeyPair.Item1);
       Assert.That(cmd.Sender == this.Manager.Address);
 
       // Manager sending to station, should work
@@ -65,7 +65,7 @@ namespace Tests
 
       // Station sending to manager, shouldn't work.
       cmd = new AddPeerCommand(this.NewPeer.Address, 
-        this.NewPeer.Address, this.NewPeer.Crypto.Keys.Item1);
+        this.NewPeer.Address, this.NewPeer.Crypto.KeyPair.Item1);
       Assert.That(!this.Manager.Peers.ContainsKey(this.NewPeer.Address));
       cmd.Execute(this.Manager);
       Assert.That(!this.Manager.Peers.ContainsKey(this.NewPeer.Address));
@@ -155,7 +155,7 @@ namespace Tests
     public void ElectNewManagerCommandTest()
     {
       var cmd = new ElectNewManagerCommand(this.Station.Address);
-      this.NewPeer.AddPeer(this.Station.Address, this.Station.Crypto.Keys.Item1);
+      this.NewPeer.AddPeer(this.Station.Address, this.Station.Crypto.KeyPair.Item1);
       this.Manager.StopListening();
       cmd.Execute(this.NewPeer);
       Assert.That(this.NewPeer.Manager.Equals(this.Station.Address));
@@ -315,14 +315,14 @@ namespace Tests
       this.Station.Manager = this.Manager.Address;
       this.NewPeer.Manager = this.Manager.Address;
 
-      this.Manager.AddPeer(this.Station.Address, this.Station.Crypto.Keys.Item1);
+      this.Manager.AddPeer(this.Station.Address, this.Station.Crypto.KeyPair.Item1);
 
-      this.Station.AddPeer(this.Manager.Address, this.Manager.Crypto.Keys.Item1);
-      this.Station.AddPeer(this.NewPeer.Address, this.NewPeer.Crypto.Keys.Item1);
+      this.Station.AddPeer(this.Manager.Address, this.Manager.Crypto.KeyPair.Item1);
+      this.Station.AddPeer(this.NewPeer.Address, this.NewPeer.Crypto.KeyPair.Item1);
       this.Station.Crypto.VoterDataEncryptionKey = 
         this.Manager.Crypto.VoterDataEncryptionKey;
 
-      this.NewPeer.AddPeer(this.Manager.Address, this.Manager.Crypto.Keys.Item1);
+      this.NewPeer.AddPeer(this.Manager.Address, this.Manager.Crypto.KeyPair.Item1);
     }
 
     /// <summary>

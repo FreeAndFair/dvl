@@ -1,5 +1,4 @@
 ﻿#region Copyright and License
-
 // // -----------------------------------------------------------------------
 // // <copyright file="Core.cs" company="DemTech">
 // // Copyright (C) 2013 Joseph Kiniry, DemTech, 
@@ -21,8 +20,8 @@ namespace Aegis_DVL.Data_Types {
   #region Crypto
 
   /// <summary>
-  ///   Encrypted voterdata is the encrypted combination of CPR, 
-  /// VoterNumber and BallotStatus.
+  /// Encrypted voterdata is the encrypted combination of CPR, 
+  /// VoterNumber, and BallotStatus.
   /// </summary>
   [Serializable] public struct EncryptedVoterData {
     #region Constructors and Destructors
@@ -31,18 +30,17 @@ namespace Aegis_DVL.Data_Types {
     /// Initializes a new instance of the <see cref="EncryptedVoterData"/> struct.
     /// </summary>
     /// <param name="voternumber">
-    /// The voternumber.
+    /// The voter number.
     /// </param>
     /// <param name="cpr">
-    /// The cpr.
+    /// The cpr number.
     /// </param>
     /// <param name="ballotstatus">
-    /// The ballotstatus.
+    /// The ballot status.
     /// </param>
     public EncryptedVoterData(CipherText voternumber, 
                               CipherText cpr, 
-                              CipherText ballotstatus)
-      : this() {
+                              CipherText ballotstatus) : this() {
       this.VoterNumber = voternumber;
       this.CPR = cpr;
       this.BallotStatus = ballotstatus;
@@ -99,7 +97,8 @@ namespace Aegis_DVL.Data_Types {
   }
 
   /// <summary>
-  ///   CipherText is encrypted data.
+  /// CipherText is encrypted data.
+  /// @design This is nothing more than a struct wrapping a byte[].
   /// </summary>
   [Serializable] public struct CipherText {
     #region Constructors and Destructors
@@ -111,8 +110,7 @@ namespace Aegis_DVL.Data_Types {
     /// <param name="cipher">
     /// The back ciphertext. Commonly a byte-array.
     /// </param>
-    public CipherText(byte[] cipher)
-      : this() {
+    public CipherText(byte[] cipher) : this() {
       Contract.Requires(cipher != null);
       this.Value = cipher;
     }
@@ -122,7 +120,7 @@ namespace Aegis_DVL.Data_Types {
     #region Public Properties
 
     /// <summary>
-    ///   What does this CipherText look like?
+    /// What does this CipherText look like?
     /// </summary>
     public byte[] Value { get; private set; }
 
@@ -155,13 +153,15 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     /// The object invariant.
     /// </summary>
-    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(this.Value != null); }
+    [ContractInvariantMethod] private void ObjectInvariant() {
+      Contract.Invariant(this.Value != null);
+    }
 
     #endregion
   }
 
   /// <summary>
-  ///   An asymmetric key can be used for either encryption or decryption of data.
+  /// An asymmetric key can be used for either encryption or decryption of data.
   /// </summary>
   public struct AsymmetricKey {
     #region Constructors and Destructors
