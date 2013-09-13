@@ -1,5 +1,4 @@
 ﻿#region Copyright and License
-
 // // -----------------------------------------------------------------------
 // // <copyright file="CryptoCommand.cs" company="DemTech">
 // // Copyright (C) 2013 Joseph Kiniry, DemTech, 
@@ -24,7 +23,7 @@ namespace Aegis_DVL.Commands {
     #region Fields
 
     /// <summary>
-    /// The _content.
+    /// The encrypted content message.
     /// </summary>
     private Message _content;
 
@@ -34,7 +33,8 @@ namespace Aegis_DVL.Commands {
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CryptoCommand"/> class. 
-    /// May I have a new command that wraps and encrypts an inner command, to be transmitted securely?
+    /// May I have a new command that wraps and encrypts an inner command, 
+    /// to be transmitted securely?
     /// </summary>
     /// <param name="parent">
     /// The parent-station sending the command.
@@ -50,28 +50,31 @@ namespace Aegis_DVL.Commands {
       Contract.Requires(receiver != null);
       Contract.Requires(innerCommand != null);
 
-      this.Sender = parent.Address;
+      Sender = parent.Address;
       var crypto = parent.Crypto;
 
       var cmdBytes = Bytes.From(innerCommand);
       var symmetricKey = crypto.GenerateSymmetricKey();
       crypto.NewIv();
 
-      var symmetricallyEncryptedCmdBytes = crypto.SymmetricEncrypt(cmdBytes, new SymmetricKey(symmetricKey));
+      var symmetricallyEncryptedCmdBytes = 
+        crypto.SymmetricEncrypt(cmdBytes, new SymmetricKey(symmetricKey));
 
       var targetKey = parent.IsManager && receiver.Equals(parent.Address)
-                        ? parent.Crypto.Keys.Item1
+                        ? parent.Crypto.KeyPair.Public
                         : parent.Peers[receiver];
-      var asymKeyBytes = crypto.AsymmetricEncrypt(symmetricKey, new AsymmetricKey(targetKey));
+      var asymKeyBytes = crypto.AsymmetricEncrypt(symmetricKey, 
+        new AsymmetricKey(targetKey));
 
-      var senderHashBytes = crypto.AsymmetricEncrypt(crypto.Hash(cmdBytes), new AsymmetricKey(crypto.Keys.Item2));
+      var senderHashBytes = crypto.AsymmetricEncrypt(crypto.Hash(cmdBytes), 
+        new AsymmetricKey(crypto.KeyPair.Private));
 
       var symmetricKeyCipher = new CipherText(asymKeyBytes);
       var commandCipher = new CipherText(symmetricallyEncryptedCmdBytes);
       var senderHash = new CipherText(senderHashBytes);
       var iv = crypto.Iv;
 
-      this._content = new Message(symmetricKeyCipher, commandCipher, senderHash, iv);
+      _content = new Message(symmetricKeyCipher, commandCipher, senderHash, iv);
     }
 
     #endregion
@@ -95,17 +98,22 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       var crypto = receiver.Crypto;
-      var symmetricKey = crypto.AsymmetricDecrypt(this._content.SymmetricKey, crypto.Keys.Item2);
-      crypto.Iv = this._content.Iv;
+      var symmetricKey = crypto.AsymmetricDecrypt(_content.SymmetricKey, 
+        new AsymmetricKey(crypto.KeyPair.Private));
+      crypto.Iv = _content.Iv;
 
-      var cmd = crypto.SymmetricDecrypt(this._content.Command, new SymmetricKey(symmetricKey)).To<ICommand>();
+      var cmd = crypto.SymmetricDecrypt(_content.Command, 
+        new SymmetricKey(symmetricKey)).To<ICommand>();
 
       // Do we "know" the sender?
-      if ((receiver.Peers.ContainsKey(cmd.Sender) || this.Sender.Equals(receiver.Address)) &&
-          this.Sender.Equals(cmd.Sender)) {
-        var key = receiver.Peers.ContainsKey(cmd.Sender) ? receiver.Peers[this.Sender] : receiver.Crypto.Keys.Item1;
-        var senderHash = crypto.AsymmetricDecrypt(this._content.SenderHash, key);
-        if (crypto.Hash(Bytes.From(cmd)).IsIdenticalTo(senderHash)) cmd.Execute(receiver);
+      if ((receiver.Peers.ContainsKey(cmd.Sender) || Sender.Equals(receiver.Address)) &&
+          Sender.Equals(cmd.Sender)) {
+        var key = receiver.Peers.ContainsKey(cmd.Sender) ? 
+          receiver.Peers[Sender] : 
+          receiver.Crypto.KeyPair.Public;
+        var senderHash = crypto.AsymmetricDecrypt(_content.SenderHash, new AsymmetricKey(key));
+        if (crypto.Hash(Bytes.From(cmd)).IsIdenticalTo(senderHash))
+          cmd.Execute(receiver);
         else receiver.ShutDownElection();
       } else receiver.ShutDownElection();
     }

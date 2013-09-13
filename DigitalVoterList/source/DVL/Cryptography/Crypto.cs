@@ -20,6 +20,7 @@ namespace Aegis_DVL.Cryptography {
 
   using Org.BouncyCastle.Crypto;
   using Org.BouncyCastle.Crypto.Engines;
+  using Org.BouncyCastle.Crypto.Digests;
   using Org.BouncyCastle.Crypto.Generators;
   using Org.BouncyCastle.Crypto.Modes;
   using Org.BouncyCastle.Crypto.Paddings;
@@ -31,51 +32,32 @@ namespace Aegis_DVL.Cryptography {
   /// </summary>
   public class Crypto : ICrypto {
     #region Fields
-
-    /// <summary>
-    /// The _asym engine.
-    /// </summary>
-    private readonly RsaEngine _asymEngine;
-
-    /// <summary>
-    /// The _hasher.
-    /// </summary>
-    private readonly SHA256Managed _hasher;
-
-    /// <summary>
-    /// The _random.
-    /// </summary>
+    // Our asymmetric cipher (currently ElGamal).
+    private readonly IBufferedCipher _aCipher;
+    // Our hasher (currently SHA256).
+    private readonly IDigest _hasher;
+    // Our pseudo-random number generator.
     private readonly SecureRandom _random;
-
-    /// <summary>
-    /// The _sym engine.
-    /// </summary>
-    private readonly PaddedBufferedBlockCipher _symEngine;
-
-    /// <summary>
-    /// The _is disposed.
-    /// </summary>
+    // Our symmetric cipher (currently AES).
+    private readonly IBufferedCipher _cipher;
+    // Have we been disposed?
     private bool _isDisposed;
-
-    /// <summary>
-    /// The _iv.
-    /// </summary>
+    // Our initialization vector.
+    // TODO Can/should we make the IV readonly?
     private byte[] _iv;
-
+    // Our key pair generator (for ElGamal).
+    private readonly IAsymmetricCipherKeyPairGenerator _keyGen;
+    // Our key pair (for ElGamal).
+    private readonly AsymmetricCipherKeyPair _keys;
     #endregion
 
     #region Constructors and Destructors
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Crypto"/> class. 
-    /// May I have a new Crypto where the VoterDataEncryptionKey is set to this?
+    /// <summary> 
+    /// May I have a new Crypto for this VoterDataEncryptionKey?
     /// </summary>
-    /// <param name="encryptionAsymmetricKey">
-    /// The VoterDataEncryptionKey.
-    /// </param>
-    public Crypto(AsymmetricKey encryptionAsymmetricKey)
-      : this() {
-      Contract.Ensures(this.VoterDataEncryptionKey.Equals(encryptionAsymmetricKey));
+    public Crypto(AsymmetricKey encryptionAsymmetricKey) : this() {
+      Contract.Ensures(VoterDataEncryptionKey.Equals(encryptionAsymmetricKey));
       this.VoterDataEncryptionKey = encryptionAsymmetricKey;
     }
 
@@ -84,63 +66,38 @@ namespace Aegis_DVL.Cryptography {
     ///   May I have a new Crypto?
     /// </summary>
     public Crypto() {
-      this._random = new SecureRandom();
+      _random = new SecureRandom();
 
-      // RSA initialization
-      this._asymEngine = new RsaEngine();
-      var rsaKeyPairGnr = new RsaKeyPairGenerator();
+      _keyGen = GeneratorUtilities.GetKeyPairGenerator("ElGamal");
+      _keyGen.Init(new KeyGenerationParameters(_random, 1024));
+      _keys = _keyGen.GenerateKeyPair();
+      _aCipher = CipherUtilities.GetCipher("ElGamal");
 
-      // TODO: It should be 3072 instead of 128 in order to improve safety
-      rsaKeyPairGnr.Init(new KeyGenerationParameters(new SecureRandom(), 1028));
-      AsymmetricCipherKeyPair keys = rsaKeyPairGnr.GenerateKeyPair();
+      _cipher = new PaddedBufferedBlockCipher(new CbcBlockCipher(new AesEngine()));
 
-      // AES initialization
-      // TODO: Should probably use CCM-mode instead of CBC (since bouncy 
-      // doesn't have CWC..), but we couldn't get it to work because 
-      // we're stupid as hell.
-      this._symEngine = new PaddedBufferedBlockCipher(
-        new CbcBlockCipher(new AesEngine()));
-      this.NewIv();
+      Iv = new byte[_cipher.GetBlockSize()];
+      _random.NextBytes(this.Iv);
 
-      // SHA256 initilization
-      this._hasher = new SHA256Managed();
+      _hasher = new Sha256Digest();
 
-      this.Keys = new Tuple<AsymmetricKey, AsymmetricKey>(
-        new AsymmetricKey(keys.Public), new AsymmetricKey(keys.Private));
+      KeyPair = new AsymmetricCipherKeyPair(
+        new AsymmetricKey(_keys.Public), new AsymmetricKey(_keys.Private));
     }
-
-    /// <summary>
-    /// Finalizes an instance of the <see cref="Crypto"/> class. 
-    /// </summary>
-    ~Crypto() { this.Dispose(false); }
 
     #endregion
 
     #region Public Properties
 
-    /// <summary>
-    /// Gets or sets the iv.
-    /// </summary>
-    public byte[] Iv { get { return this._iv; } set { this._iv = value; } }
+    public byte[] Iv { get { return _iv; } set { _iv = value; } }
 
-    /// <summary>
-    /// Gets the keys.
-    /// </summary>
-    public Tuple<AsymmetricKey, AsymmetricKey> Keys { get; private set; }
+    public AsymmetricCipherKeyPair KeyPair { get; private set; }
 
-    /// <summary>
-    /// Gets or sets the voter data encryption key.
-    /// </summary>
     [Pure] public AsymmetricKey VoterDataEncryptionKey { get; set; }
 
     #endregion
 
     #region Public Methods and Operators
 
-    /// <summary>
-    ///   May I have a new randomly generated human-readable password?
-    /// </summary>
-    /// <returns>A randomly generated password.</returns>
     [Pure] public static string GeneratePassword() {
       Contract.Ensures(
         Contract.Result<string>() != null &&
@@ -167,141 +124,71 @@ namespace Aegis_DVL.Cryptography {
       return pwd;
     }
 
-    /// <summary>
-    /// The asymmetric decrypt.
-    /// </summary>
-    /// <param name="cipher">
-    /// The cipher.
-    /// </param>
-    /// <param name="asymmetricKey">
-    /// The asymmetric key.
-    /// </param>
-    /// <returns>
-    /// The <see cref="byte[]"/>.
-    /// </returns>
     public byte[] AsymmetricDecrypt(CipherText cipher, 
                                     AsymmetricKey asymmetricKey) {
-      this._asymEngine.Init(false, asymmetricKey.Value);
-      return this._asymEngine.ProcessBlock(cipher, 0, cipher.Value.Length).
+      _aCipher.Init(false, asymmetricKey.Value);
+      return this._aCipher.ProcessBytes(cipher, 0, cipher.Value.Length).
         Skip(1).ToArray();
     }
 
-    /// <summary>
-    /// The asymmetric encrypt.
-    /// </summary>
-    /// <param name="bytes">
-    /// The bytes.
-    /// </param>
-    /// <param name="asymmetricKey">
-    /// The asymmetric key.
-    /// </param>
-    /// <returns>
-    /// The <see cref="CipherText"/>.
-    /// </returns>
     public CipherText AsymmetricEncrypt(byte[] bytes, AsymmetricKey asymmetricKey) {
-      this._asymEngine.Init(true, asymmetricKey.Value);
-      return new CipherText(
-        this._asymEngine.ProcessBlock(
-          new byte[] { 1 }.Merge(bytes), 0, bytes.Length + 1));
+      _aCipher.Init(true, asymmetricKey.Value);
+      return new CipherText(_aCipher.ProcessBytes(bytes, 0, bytes.Length));
     }
 
-    /// <summary>
-    /// The dispose.
-    /// </summary>
-    public void Dispose() {
-      if (!this._isDisposed) this.Dispose(true);
-      GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
-    /// The generate symmetric key.
-    /// </summary>
-    /// <returns>
-    /// The <see cref="byte[]"/>.
-    /// </returns>
     public byte[] GenerateSymmetricKey() {
       var key = new byte[32];
       this._random.NextBytes(key);
       return key;
     }
 
-    /// <summary>
-    /// The hash.
-    /// </summary>
-    /// <param name="bytes">
-    /// The bytes.
-    /// </param>
-    /// <returns>
-    /// The <see cref="byte[]"/>.
-    /// </returns>
-    public byte[] Hash(byte[] bytes) { return this._hasher.ComputeHash(bytes); }
-
-    /// <summary>
-    /// The new iv.
-    /// </summary>
-    public void NewIv() {
-      byte[] oldIv = this._iv;
-      do {
-        this._iv = new byte[this._symEngine.GetBlockSize()];
-        this._random.NextBytes(this.Iv);
-        oldIv = oldIv ?? this._iv;
-      }
- while (oldIv.SequenceEqual(this._iv));
+    public byte[] Hash(byte[] bytes) {
+      _hasher.Reset();
+      _hasher.BlockUpdate(bytes, 0, bytes.Length);
+      byte[] result = new byte[_hasher.GetDigestSize()];
+      _hasher.DoFinal(result, 0);
+      return result;
     }
 
-    /// <summary>
-    /// The symmetric decrypt.
-    /// </summary>
-    /// <param name="cipher">
-    /// The cipher.
-    /// </param>
-    /// <param name="symmetricKey">
-    /// The symmetric key.
-    /// </param>
-    /// <returns>
-    /// The <see cref="byte[]"/>.
-    /// </returns>
     public byte[] SymmetricDecrypt(CipherText cipher, SymmetricKey symmetricKey) {
-      this._symEngine.Init(
+      this._cipher.Init(
         false, 
         new ParametersWithIV(
           new KeyParameter(symmetricKey), this.Iv));
-      return this._symEngine.DoFinal(cipher);
+      return this._cipher.DoFinal(cipher);
     }
 
-    /// <summary>
-    /// The symmetric encrypt.
-    /// </summary>
-    /// <param name="bytes">
-    /// The bytes.
-    /// </param>
-    /// <param name="symmetricKey">
-    /// The symmetric key.
-    /// </param>
-    /// <returns>
-    /// The <see cref="CipherText"/>.
-    /// </returns>
     public CipherText SymmetricEncrypt(byte[] bytes, SymmetricKey symmetricKey) {
-      this._symEngine.Init(
+      this._cipher.Init(
         true, 
         new ParametersWithIV(
           new KeyParameter(symmetricKey), this.Iv));
-      return new CipherText(this._symEngine.DoFinal(bytes));
+      return new CipherText(this._cipher.DoFinal(bytes));
+    }
+
+    public void NewIv() {
+      var oldIv = _iv;
+      do {
+        _iv = new byte[this._cipher.GetBlockSize()];
+        _random.NextBytes(Iv);
+        oldIv = oldIv ?? _iv;
+      } while (oldIv.SequenceEqual(_iv));
     }
 
     #endregion
 
     #region Methods
 
-    /// <summary>
-    /// The dispose.
-    /// </summary>
-    /// <param name="disposing">
-    /// The disposing.
-    /// </param>
-    private void Dispose(bool disposing) {
-      this._isDisposed = true;
-      if (disposing) this._hasher.Dispose();
+    [ContractInvariantMethod]
+    private void ObjectInvariant() {
+      Contract.Invariant(_aCipher != null);
+      Contract.Invariant(_cipher != null);
+      Contract.Invariant(_hasher != null);
+      Contract.Invariant(_iv != null);
+      Contract.Invariant(0 < _iv.Length);
+      Contract.Invariant(_keyGen != null);
+      Contract.Invariant(_keys != null);
+      Contract.Invariant(_random != null);
     }
 
     #endregion

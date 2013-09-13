@@ -1,18 +1,21 @@
 class_chart CRYPTO
   indexing
-    author: "Nikolaj Aaes (niaa@itu.dk) & Nicolai Skovvart (nbsk@itu.dk)"
-  explanation "Crypto is responsible for cryptographic functions such as public-key encryption."
+    author: "Nikolaj Aaes (niaa@itu.dk) & Nicolai Skovvart (nbsk@itu.dk) & Joseph Kiniry (kiniry@demtech.dk)"
+  explanation "A facade to the specific ciphers and hash necessary for the DVL protocols."
 query
   "What is the asymmetric key used for encrypting voterdata at this election venue?",
   "What are the keys for my public key infrastructure?",
   "What does this look like when it's symmetrically encrypted with this key?",
   "What does this look like when it's symmetrically decrypted with this key?",
-  "What is the current initilization vector?",
+  "What is the current initialization vector?",
   "What does this look like when it's asymmetrically encrypted with this key?",
   "What does this look like when it's asymmetrically decrypted with this key?",
   "What is the hashed value of this?",
   "May I have a new randomly generated symmetric key?"
 command
-  "The initilization vector is this!",
-  "Generate a new initilization vector to be used for symmetric encryption!"
+  "The initialization vector is the provide value.",
+  "Generate a new initialization vector to be used for symmetric encryption."
+constraint
+  "Initialization vectors have a positive length.",
+  "Initialization vectors should be random."
 end

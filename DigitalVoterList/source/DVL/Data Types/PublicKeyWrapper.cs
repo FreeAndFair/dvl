@@ -44,7 +44,8 @@ namespace Aegis_DVL.Data_Types {
     public PublicKeyWrapper(ICrypto crypto, string physicalSecret) {
       Contract.Requires(crypto != null);
       Contract.Requires(physicalSecret != null);
-      this._keyBytes = Bytes.Obfuscate(crypto, crypto.Keys.Item1.Value.ToBytes(), physicalSecret);
+      this._keyBytes = Bytes.Obfuscate(crypto, 
+        crypto.KeyPair.Public.ToBytes(), physicalSecret);
     }
 
     #endregion

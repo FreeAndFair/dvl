@@ -753,7 +753,7 @@ namespace Aegis_DVL {
     private void Dispose(bool disposing) {
       this._isDisposed = true;
       if (!disposing) return;
-      if (this.Crypto != null) this.Crypto.Dispose();
+      //if (this.Crypto != null) this.Crypto.Dispose();
       if (this.Listening) this.StopListening();
       this.Database.Dispose();
       if (this.Logger != null) {

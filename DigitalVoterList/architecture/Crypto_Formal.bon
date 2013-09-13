@@ -59,16 +59,20 @@ component
       
       SetIv : void
         -> b : BYTEARRAY
-        require b /= void
+        require b /= void;
+                0 < b.size
         ensure GetIv = b
       end
       
       GetIv : BYTEARRAY
-        ensure result /= void
+        ensure result /= void;
+               0 < Result.size
       end
       
       NewIv : void
-        ensure GetIv /= void and GetIv /= old getIv
+        ensure GetIv /= void;
+               0 < GetIv.size;
+               GetIv /= old getIv;
       end
       
       GenerateSymmetricKey : BYTEARRAY
