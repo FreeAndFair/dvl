@@ -144,7 +144,7 @@ namespace Tests {
         SystemTestData.Password, 
         SystemTestData.ManagerPort, 
         "CoreDataTypesTestsPkWrapperVoters.sqlite")) {
-        AsymmetricKeyParameter originalKey = s.Crypto.KeyPair.Item1.Value;
+        AsymmetricKeyParameter originalKey = s.Crypto.KeyPair.Public;
         var pkWrapper = new PublicKeyWrapper(s.Crypto, "batman");
         Assert.That(originalKey.Equals(pkWrapper.GetKey(s.Crypto, "batman").Value));
         try {

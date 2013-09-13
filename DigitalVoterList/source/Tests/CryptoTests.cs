@@ -1,5 +1,4 @@
 ﻿#region Copyright and License
-
 // // -----------------------------------------------------------------------
 // // <copyright file="CryptoTests.cs" company="DemTech">
 // // Copyright (C) 2013 Joseph Kiniry, DemTech, 
@@ -16,6 +15,8 @@ namespace Tests {
   using Aegis_DVL.Cryptography;
   using Aegis_DVL.Data_Types;
   using Aegis_DVL.Util;
+
+  using Org.BouncyCastle.Crypto;
 
   using NUnit.Framework;
 
@@ -44,25 +45,32 @@ namespace Tests {
     #region Public Methods and Operators
 
     /// <summary>
+    /// Test asymmetric crypto features of Crypto subsystem.
     /// </summary>
     [Test] public void AsymmetricTest() {
       // Encrypt/decrypt
       const string testString = "Howdy there, partner!";
       byte[] bytes = Bytes.From(testString);
-      CipherText ciphertext = this.Crypto.AsymmetricEncrypt(bytes, this.Crypto.Keys.Item1);
+      CipherText ciphertext = Crypto.AsymmetricEncrypt(bytes, 
+        new AsymmetricKey(Crypto.KeyPair.Public));
       Assert.That(!bytes.IsIdenticalTo(ciphertext));
-      byte[] decryptedBytes = this.Crypto.AsymmetricDecrypt(ciphertext, this.Crypto.Keys.Item2);
+      byte[] decryptedBytes = Crypto.AsymmetricDecrypt(ciphertext, 
+        new AsymmetricKey(Crypto.KeyPair.Private));
       Assert.That(bytes.IsIdenticalTo(decryptedBytes));
       Assert.That(decryptedBytes.To<string>().Equals(testString));
 
       // Encrypt/decrypt using reversed keys
-      ciphertext = this.Crypto.AsymmetricEncrypt(bytes, this.Crypto.Keys.Item2);
-      decryptedBytes = this.Crypto.AsymmetricDecrypt(ciphertext, this.Crypto.Keys.Item1);
+      ciphertext = Crypto.AsymmetricEncrypt(bytes, 
+        new AsymmetricKey(Crypto.KeyPair.Private));
+      decryptedBytes = Crypto.AsymmetricDecrypt(ciphertext, 
+        new AsymmetricKey(Crypto.KeyPair.Public));
       Assert.That(bytes.IsIdenticalTo(decryptedBytes));
 
       // Test that the same content/key give the same result
-      ciphertext = this.Crypto.AsymmetricEncrypt(bytes, this.Crypto.Keys.Item1);
-      Assert.That(ciphertext.Value.IsIdenticalTo(this.Crypto.AsymmetricEncrypt(bytes, this.Crypto.Keys.Item1)));
+      ciphertext = Crypto.AsymmetricEncrypt(bytes, 
+        new AsymmetricKey(Crypto.KeyPair.Public));
+      Assert.That(ciphertext.Value.IsIdenticalTo(Crypto.AsymmetricEncrypt(bytes,
+        new AsymmetricKey(Crypto.KeyPair.Public))));
     }
 
     /// <summary>
@@ -77,51 +85,53 @@ namespace Tests {
     /// The hash test.
     /// </summary>
     [Test] public void HashTest() {
-      const string str1 = "hello";
-      const string str2 = "hello";
-      Assert.That(this.Crypto.Hash(Bytes.From(str1)).IsIdenticalTo(this.Crypto.Hash(Bytes.From(str2))));
+      const string Str1 = "hello";
+      const string Str2 = "hello";
+      Assert.That(Crypto.Hash(Bytes.From(Str1)).
+        IsIdenticalTo(Crypto.Hash(Bytes.From(Str2))));
     }
 
     /// <summary>
     /// The iv test.
     /// </summary>
     [Test] public void IvTest() {
-      byte[] oldIv = this.Crypto.Iv;
-      this.Crypto.NewIv();
-      Assert.That(!oldIv.IsIdenticalTo(this.Crypto.Iv));
-      this.Crypto.Iv = oldIv;
-      Assert.That(oldIv.IsIdenticalTo(this.Crypto.Iv));
-    }
-
-    /// <summary>
-    ///   SetUp test helper properties.
-    /// </summary>
-    [SetUp] public void SetUp() {
-      this._station = new Station(new TestUi(), SystemTestData.Key, SystemTestData.Password, 
-        SystemTestData.StationPort, "CryptoTestVoters.sqlite");
-      this.Crypto = this._station.Crypto;
+      byte[] oldIv = Crypto.Iv;
+      Crypto.NewIv();
+      Assert.That(!oldIv.IsIdenticalTo(Crypto.Iv));
+      Crypto.Iv = oldIv;
+      Assert.That(oldIv.IsIdenticalTo(Crypto.Iv));
     }
 
     /// <summary>
     /// The symmetric test.
     /// </summary>
     [Test] public void SymmetricTest() {
-      var key = new SymmetricKey(this.Crypto.GenerateSymmetricKey());
-      const string testString = "Howdy there, partner!";
-      byte[] bytes = Bytes.From(testString);
-      CipherText ciphertext = this.Crypto.SymmetricEncrypt(bytes, key);
+      var key = new SymmetricKey(Crypto.GenerateSymmetricKey());
+      const string TestString = "Howdy there, partner!";
+      byte[] bytes = Bytes.From(TestString);
+      CipherText ciphertext = Crypto.SymmetricEncrypt(bytes, key);
       Assert.That(!bytes.IsIdenticalTo(ciphertext));
-      byte[] decryptedBytes = this.Crypto.SymmetricDecrypt(ciphertext, key);
+      byte[] decryptedBytes = Crypto.SymmetricDecrypt(ciphertext, key);
       Assert.That(bytes.IsIdenticalTo(decryptedBytes));
-      Assert.That(decryptedBytes.To<string>().Equals(testString));
+      Assert.That(decryptedBytes.To<string>().Equals(TestString));
+    }
+
+    /// <summary>
+    ///   SetUp test helper properties.
+    /// </summary>
+    [SetUp]
+    public void SetUp() {
+      _station = new Station(new TestUi(), SystemTestData.Key, SystemTestData.Password,
+        SystemTestData.StationPort, "CryptoTestVoters.sqlite");
+      Crypto = _station.Crypto;
     }
 
     /// <summary>
     /// The tear down.
     /// </summary>
     [TearDown] public void TearDown() {
-      this._station.Dispose();
-      this._station = null;
+      _station.Dispose();
+      _station = null;
       File.Delete("CryptoTestVoters.sqlite");
     }
 

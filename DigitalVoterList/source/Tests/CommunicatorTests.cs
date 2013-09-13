@@ -98,8 +98,8 @@ namespace Tests {
           Manager = this.Sender.Address
         }) {
         receiver.StopListening();
-        this.Sender.AddPeer(receiver.Address, receiver.Crypto.KeyPair.Item1);
-        receiver.AddPeer(this.Sender.Address, this.Sender.Crypto.KeyPair.Item1);
+        this.Sender.AddPeer(receiver.Address, new AsymmetricKey(receiver.Crypto.KeyPair.Public));
+        receiver.AddPeer(this.Sender.Address, new AsymmetricKey(this.Sender.Crypto.KeyPair.Public));
         var receiverListener = new ReceiverListener(receiver.Communicator.ReceiveAndHandle);
         IAsyncResult receiverResult = receiverListener.BeginInvoke(null, null);
 
@@ -183,21 +183,21 @@ namespace Tests {
           peer3.Logger = new Logger(peer3, "CommunicatorTestsReceiverFailureTestPeer3log.sqlite");
           peer1.StopListening();
 
-          manager.AddPeer(peer1.Address, peer1.Crypto.KeyPair.Item1);
-          manager.AddPeer(peer2.Address, peer2.Crypto.KeyPair.Item1);
-          manager.AddPeer(peer3.Address, peer3.Crypto.KeyPair.Item1);
+          manager.AddPeer(peer1.Address, new AsymmetricKey(peer1.Crypto.KeyPair.Public));
+          manager.AddPeer(peer2.Address, new AsymmetricKey(peer2.Crypto.KeyPair.Public));
+          manager.AddPeer(peer3.Address, new AsymmetricKey(peer3.Crypto.KeyPair.Public));
 
-          peer1.AddPeer(peer2.Address, peer2.Crypto.KeyPair.Item1);
-          peer1.AddPeer(peer3.Address, peer3.Crypto.KeyPair.Item1);
-          peer1.AddPeer(manager.Address, manager.Crypto.KeyPair.Item1);
+          peer1.AddPeer(peer2.Address, new AsymmetricKey(peer2.Crypto.KeyPair.Public));
+          peer1.AddPeer(peer3.Address, new AsymmetricKey(peer3.Crypto.KeyPair.Public));
+          peer1.AddPeer(manager.Address, new AsymmetricKey(manager.Crypto.KeyPair.Public));
 
-          peer2.AddPeer(peer1.Address, peer1.Crypto.KeyPair.Item1);
-          peer2.AddPeer(peer3.Address, peer3.Crypto.KeyPair.Item1);
-          peer2.AddPeer(manager.Address, manager.Crypto.KeyPair.Item1);
+          peer2.AddPeer(peer1.Address, new AsymmetricKey(peer1.Crypto.KeyPair.Public));
+          peer2.AddPeer(peer3.Address, new AsymmetricKey(peer3.Crypto.KeyPair.Public));
+          peer2.AddPeer(manager.Address, new AsymmetricKey(manager.Crypto.KeyPair.Public));
 
-          peer3.AddPeer(peer1.Address, peer1.Crypto.KeyPair.Item1);
-          peer3.AddPeer(peer2.Address, peer2.Crypto.KeyPair.Item1);
-          peer3.AddPeer(manager.Address, manager.Crypto.KeyPair.Item1);
+          peer3.AddPeer(peer1.Address, new AsymmetricKey(peer1.Crypto.KeyPair.Public));
+          peer3.AddPeer(peer2.Address, new AsymmetricKey(peer2.Crypto.KeyPair.Public));
+          peer3.AddPeer(manager.Address, new AsymmetricKey(manager.Crypto.KeyPair.Public));
 
           Assert.That(manager.IsManager);
           Assert.That(!peer1.IsManager);
@@ -228,7 +228,8 @@ namespace Tests {
     ///   Test whether the Send and ReceiveAndHandle methods works.
     /// </summary>
     [Test] public void SendAndReceiveAndHandleTest() {
-      this.Sender.AddPeer(this.Receiver.Address, this.Receiver.Crypto.KeyPair.Item1);
+      this.Sender.AddPeer(this.Receiver.Address, 
+        new AsymmetricKey(this.Receiver.Crypto.KeyPair.Public));
 
       var receiver = new ReceiverListener(this.Receiver.Communicator.ReceiveAndHandle);
 

@@ -85,7 +85,7 @@ namespace Tests {
     /// </summary>
     [Test] public void KeyUtilTest() {
       var crypto = new Crypto(new AsymmetricKey());
-      AsymmetricKeyParameter key = crypto.KeyPair.Item1.Value;
+      AsymmetricKeyParameter key = crypto.KeyPair.Public;
 
       Assert.That(key.ToBytes().ToKey().Equals(key));
     }

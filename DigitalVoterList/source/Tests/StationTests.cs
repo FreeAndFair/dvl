@@ -93,7 +93,7 @@ namespace Tests {
     /// </summary>
     [Test] public void AddAndRemovePeerTest() {
       Assert.That(!this.Manager.Peers.ContainsKey(this.Peer4.Address));
-      this.Manager.AddPeer(this.Peer4.Address, this.Peer4.Crypto.KeyPair.Item1);
+      this.Manager.AddPeer(this.Peer4.Address, new AsymmetricKey(this.Peer4.Crypto.KeyPair.Public));
       Assert.That(this.Manager.Peers.ContainsKey(this.Peer4.Address));
       this.Manager.RemovePeer(this.Peer4.Address);
       Assert.That(!this.Manager.Peers.ContainsKey(this.Peer4.Address));
@@ -111,8 +111,10 @@ namespace Tests {
       Assert.That(
         !this.Manager.Peers.ContainsKey(this.Peer4.Address) && !this.Peer1.Peers.ContainsKey(this.Peer4.Address) &&
         !this.Peer2.Peers.ContainsKey(this.Peer4.Address) && !this.Peer3.Peers.ContainsKey(this.Peer4.Address));
-      this.Manager.AnnounceAddPeer(this.Peer4.Address, this.Peer4.Crypto.KeyPair.Item1);
-      this.Manager.AddPeer(this.Peer4.Address, this.Peer4.Crypto.KeyPair.Item1);
+      this.Manager.AnnounceAddPeer(this.Peer4.Address, 
+        new AsymmetricKey(this.Peer4.Crypto.KeyPair.Public));
+      this.Manager.AddPeer(this.Peer4.Address, 
+        new AsymmetricKey(this.Peer4.Crypto.KeyPair.Public));
       Thread.Sleep(3000);
       Assert.That(
         this.Manager.Peers.ContainsKey(this.Peer4.Address) && this.Peer1.Peers.ContainsKey(this.Peer4.Address) &&
@@ -373,21 +375,22 @@ namespace Tests {
       this.Peer3.Logger = new Logger(this.Peer3, "StationsTestsPeer3Log.sqlite");
       this.Peer4.Logger = new Logger(this.Peer4, "StationsTestsPeer4Log.sqlite");
 
-      this.Manager.AddPeer(this.Peer1.Address, this.Peer1.Crypto.KeyPair.Item1);
-      this.Manager.AddPeer(this.Peer2.Address, this.Peer2.Crypto.KeyPair.Item1);
-      this.Manager.AddPeer(this.Peer3.Address, this.Peer3.Crypto.KeyPair.Item1);
+      this.Manager.AddPeer(this.Peer1.Address, 
+        new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
+      this.Manager.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
+      this.Manager.AddPeer(this.Peer3.Address, new AsymmetricKey(this.Peer3.Crypto.KeyPair.Public));
 
-      this.Peer1.AddPeer(this.Manager.Address, this.Manager.Crypto.KeyPair.Item1);
-      this.Peer1.AddPeer(this.Peer2.Address, this.Peer2.Crypto.KeyPair.Item1);
-      this.Peer1.AddPeer(this.Peer3.Address, this.Peer3.Crypto.KeyPair.Item1);
+      this.Peer1.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
+      this.Peer1.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
+      this.Peer1.AddPeer(this.Peer3.Address, new AsymmetricKey(this.Peer3.Crypto.KeyPair.Public));
 
-      this.Peer2.AddPeer(this.Manager.Address, this.Manager.Crypto.KeyPair.Item1);
-      this.Peer2.AddPeer(this.Peer1.Address, this.Peer1.Crypto.KeyPair.Item1);
-      this.Peer2.AddPeer(this.Peer3.Address, this.Peer3.Crypto.KeyPair.Item1);
+      this.Peer2.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
+      this.Peer2.AddPeer(this.Peer1.Address, new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
+      this.Peer2.AddPeer(this.Peer3.Address, new AsymmetricKey(this.Peer3.Crypto.KeyPair.Public));
 
-      this.Peer3.AddPeer(this.Manager.Address, this.Manager.Crypto.KeyPair.Item1);
-      this.Peer3.AddPeer(this.Peer1.Address, this.Peer1.Crypto.KeyPair.Item1);
-      this.Peer3.AddPeer(this.Peer2.Address, this.Peer2.Crypto.KeyPair.Item1);
+      this.Peer3.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
+      this.Peer3.AddPeer(this.Peer1.Address, new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
+      this.Peer3.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
 
       this.ManagerListener = this.Manager.Communicator.ReceiveAndHandle;
       this.Peer1Listener = this.Peer1.Communicator.ReceiveAndHandle;
@@ -440,10 +443,10 @@ namespace Tests {
           Assert.That(station2.Manager.Equals(manager.Address));
           Assert.That(station2.Manager.Equals(station.Manager));
 
-          station.AddPeer(manager.Address, manager.Crypto.KeyPair.Item1);
-          station.AddPeer(station2.Address, station2.Crypto.KeyPair.Item1);
-          station2.AddPeer(manager.Address, manager.Crypto.KeyPair.Item1);
-          station2.AddPeer(station.Address, station.Crypto.KeyPair.Item1);
+          station.AddPeer(manager.Address, new AsymmetricKey(manager.Crypto.KeyPair.Public));
+          station.AddPeer(station2.Address, new AsymmetricKey(station2.Crypto.KeyPair.Public));
+          station2.AddPeer(manager.Address, new AsymmetricKey(manager.Crypto.KeyPair.Public));
+          station2.AddPeer(station.Address, new AsymmetricKey(station.Crypto.KeyPair.Public));
 
           manager.StopListening();
           station.StartNewManagerElection();
