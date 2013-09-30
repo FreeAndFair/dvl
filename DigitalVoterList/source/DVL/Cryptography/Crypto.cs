@@ -13,7 +13,6 @@ namespace Aegis_DVL.Cryptography {
   using System;
   using System.Diagnostics.Contracts;
   using System.Linq;
-  using System.Security.Cryptography;
 
   using Aegis_DVL.Data_Types;
   using Aegis_DVL.Util;
@@ -69,11 +68,15 @@ namespace Aegis_DVL.Cryptography {
       _random = new SecureRandom();
 
       _keyGen = GeneratorUtilities.GetKeyPairGenerator("ElGamal");
-      _keyGen.Init(new KeyGenerationParameters(_random, 1024));
+      var parameterGenerator = new ElGamalParametersGenerator();
+      parameterGenerator.Init(512, 10, _random);
+      var parameters = parameterGenerator.GenerateParameters();
+      _keyGen.Init(new ElGamalKeyGenerationParameters(_random, parameters));
       _keys = _keyGen.GenerateKeyPair();
-      _aCipher = CipherUtilities.GetCipher("ElGamal");
+      _aCipher = CipherUtilities.GetCipher("ElGamal/NONE/PKCS1Padding");
 
-      _cipher = new PaddedBufferedBlockCipher(new CbcBlockCipher(new AesEngine()));
+      _cipher = CipherUtilities.GetCipher("AES/CBC/PKCS7Padding");
+      //new PaddedBufferedBlockCipher(new CbcBlockCipher(new AesEngine()));
 
       Iv = new byte[_cipher.GetBlockSize()];
       _random.NextBytes(this.Iv);
@@ -123,17 +126,39 @@ namespace Aegis_DVL.Cryptography {
 
       return pwd;
     }
-
+    // TODO refactor block processing
     public byte[] AsymmetricDecrypt(CipherText cipher, 
                                     AsymmetricKey asymmetricKey) {
       _aCipher.Init(false, asymmetricKey.Value);
-      return this._aCipher.ProcessBytes(cipher, 0, cipher.Value.Length).
-        Skip(1).ToArray();
+      int blockSize = _aCipher.GetBlockSize();
+      byte[] result = new byte[_aCipher.GetOutputSize(cipher.Value.Length)];
+      int bytesProcessed = 0;
+      byte[] bytes = cipher.Value;
+
+      for (int i = 0; i < bytes.Length / blockSize; i++) {
+        int offset = i * blockSize;
+        int length = Math.Min(blockSize, bytes.Length - offset);
+        bytesProcessed += 
+          _aCipher.ProcessBytes(bytes, offset, length, result, bytesProcessed);
+      }
+      _aCipher.DoFinal(bytes, result, bytesProcessed);
+      return new CipherText(result);
     }
 
     public CipherText AsymmetricEncrypt(byte[] bytes, AsymmetricKey asymmetricKey) {
       _aCipher.Init(true, asymmetricKey.Value);
-      return new CipherText(_aCipher.ProcessBytes(bytes, 0, bytes.Length));
+      int blockSize = _aCipher.GetBlockSize();
+      byte[] result = new byte[_aCipher.GetOutputSize(bytes.Length)];
+      int bytesProcessed = 0;
+
+      for (int i = 0; i < bytes.Length / blockSize; i++) {
+        int offset = i * blockSize;
+        int length = Math.Min(blockSize, bytes.Length - offset);
+        bytesProcessed += 
+          _aCipher.ProcessBytes(bytes, offset, length, result, bytesProcessed);
+      }
+      _aCipher.DoFinal(bytes, result, bytesProcessed);
+      return new CipherText(result);
     }
 
     public byte[] GenerateSymmetricKey() {
