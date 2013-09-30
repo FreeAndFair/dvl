@@ -70,7 +70,8 @@ namespace Aegis_DVL.Util {
     [Pure] public static byte[] From<T>(T source) {
       Contract.Requires(!Equals(source, null));
       Contract.Requires(source.GetType().IsSerializable);
-      Contract.Ensures(!(source is byte[]) || Contract.Result<byte[]>() == source as byte[]);
+      Contract.Ensures(!(source is byte[]) || 
+        Contract.Result<byte[]>() == source as byte[]);
       Contract.Ensures(Contract.Result<byte[]>() != null);
       if (source is byte[]) return source as byte[];
       using (var ms = new MemoryStream()) {
