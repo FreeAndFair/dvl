@@ -60,8 +60,8 @@ namespace Aegis_DVL.Cryptography {
     /// <summary>
     /// What does this look like when it's asymmetrically encrypted with this key?
     /// </summary>
-    /// <param name="bytes">
-    /// the bytes to be encrypted
+    /// <param name="input">
+    /// the input to be encrypted
     /// </param>
     /// <param name="asymmetricKey">
     /// the AsymmetricKey to ecnrypt with
@@ -69,7 +69,7 @@ namespace Aegis_DVL.Cryptography {
     /// <returns>
     /// the encrypted byte array as a ciphertext
     /// </returns>
-    [Pure] CipherText AsymmetricEncrypt(byte[] bytes, AsymmetricKey asymmetricKey);
+    [Pure] CipherText AsymmetricEncrypt(byte[] input, AsymmetricKey asymmetricKey);
 
     /// <returns>
     /// A new randomly generated symmetric key?
@@ -80,10 +80,10 @@ namespace Aegis_DVL.Cryptography {
     /// What is the hashed value of this?
     /// </summary>
     /// <param name="bytes">
-    /// The bytes to be hashed.
+    /// The input to be hashed.
     /// </param>
     /// <returns>
-    /// The hashed bytes.
+    /// The hashed input.
     /// </returns>
     [Pure] byte[] Hash(byte[] bytes);
 
@@ -105,7 +105,7 @@ namespace Aegis_DVL.Cryptography {
     /// What does this look like when it's symmetrically encrypted with this key?
     /// </summary>
     /// <param name="bytes">
-    /// the bytes to be encrypted
+    /// the input to be encrypted
     /// </param>
     /// <param name="symmetricKey">
     /// the AsymmetricKey to ecnrypt with
@@ -162,8 +162,8 @@ namespace Aegis_DVL.Cryptography {
       return default(byte[]);
     }
 
-    public CipherText AsymmetricEncrypt(byte[] bytes, AsymmetricKey asymmetricKey) {
-      Contract.Requires(bytes != null);
+    public CipherText AsymmetricEncrypt(byte[] input, AsymmetricKey asymmetricKey) {
+      Contract.Requires(input != null);
       return default(CipherText);
     }
 
