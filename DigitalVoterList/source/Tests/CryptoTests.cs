@@ -73,19 +73,6 @@ namespace Tests {
         new AsymmetricKey(Crypto.KeyPair.Private));
       Assert.That(bytes.IsIdenticalTo(decryptedBytes));
       Assert.That(decryptedBytes.To<string>().Equals(testString));
-
-      // Encrypt/decrypt using reversed keys
-      ciphertext = Crypto.AsymmetricEncrypt(bytes, 
-        new AsymmetricKey(Crypto.KeyPair.Private));
-      decryptedBytes = Crypto.AsymmetricDecrypt(ciphertext, 
-        new AsymmetricKey(Crypto.KeyPair.Public));
-      Assert.That(bytes.IsIdenticalTo(decryptedBytes));
-
-      // Test that the same content/key give the same result
-      ciphertext = Crypto.AsymmetricEncrypt(bytes, 
-        new AsymmetricKey(Crypto.KeyPair.Public));
-      Assert.That(ciphertext.Value.IsIdenticalTo(Crypto.AsymmetricEncrypt(bytes,
-        new AsymmetricKey(Crypto.KeyPair.Public))));
     }
 
     /// <summary>
