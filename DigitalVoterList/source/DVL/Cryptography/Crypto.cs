@@ -18,11 +18,8 @@ namespace Aegis_DVL.Cryptography {
   using Aegis_DVL.Util;
 
   using Org.BouncyCastle.Crypto;
-  using Org.BouncyCastle.Crypto.Engines;
   using Org.BouncyCastle.Crypto.Digests;
   using Org.BouncyCastle.Crypto.Generators;
-  using Org.BouncyCastle.Crypto.Modes;
-  using Org.BouncyCastle.Crypto.Paddings;
   using Org.BouncyCastle.Crypto.Parameters;
   using Org.BouncyCastle.Security;
 
@@ -127,72 +124,88 @@ namespace Aegis_DVL.Cryptography {
       return pwd;
     }
     // TODO refactor block processing
-    public byte[] AsymmetricDecrypt(CipherText cipher, 
-                                    AsymmetricKey asymmetricKey) {
-      //Contract.Requires(cipher.Value.Length <= _aCipher.GetBlockSize());
-      _aCipher.Init(false, asymmetricKey.Value);
-      byte[] plainText = new byte[_aCipher.GetOutputSize(cipher.Value.Length)];
-      /*
+    [Pure] private byte[] AsymmetricProcessBuffer(byte[] input, 
+                                                  AsymmetricKey asymmetricKey) {
       int blockSize = _aCipher.GetBlockSize();
-      int bytesProcessed = 0;
-      byte[] input = cipher.Value;
+      byte[] buffer = new byte[_aCipher.GetOutputSize(blockSize)];
+      byte[] intermediateResult = new byte[0];
+      int bytesProcessed = 0, totalBytesProcessed = 0;
 
-      if (input.Length < blockSize) {
-        bytesProcessed = _aCipher.ProcessBytes(input, plainText, 0);
+      if (input.Length <= blockSize) {
+        bytesProcessed =
+          _aCipher.ProcessBytes(input, 0, input.Length, buffer, 0);
+        bytesProcessed += _aCipher.DoFinal(buffer, bytesProcessed);
+        totalBytesProcessed += bytesProcessed;
+        Contract.Assert(bytesProcessed == totalBytesProcessed);
+        // exiting this branch, buffer contains the ciphertext plus
+        // some junk.  only bytes 0 to totalBytesProcessed are the ciphertext to
+        // return.
+        intermediateResult = new byte[totalBytesProcessed];
+        Array.Copy(buffer, intermediateResult, bytesProcessed);
+        // exiting this branch, intermediateResult contains the ciphertext
       } else {
-        for (int i = 0; i < input.Length / blockSize; i++) {
+        for (int i = 0; i <= input.Length / blockSize; i++) {
+          // intermediateResult contains the ciphertext produced thus far
+          bytesProcessed = 0;
           int offset = i * blockSize;
           int length = Math.Min(blockSize, input.Length - offset);
           bytesProcessed +=
-            _aCipher.ProcessBytes(
-                                  input,
-                                  offset,
-                                  length,
-                                  plainText,
-                                  bytesProcessed);
+            _aCipher.ProcessBytes(input, offset, length, buffer, 0);
+          bytesProcessed += _aCipher.DoFinal(buffer, bytesProcessed);
+          // buffer contains the ciphertext for the most recent block, plus some junk.
+          // bytes 0 to bytesProcessed are the ciphertext.
+          // the first time through this loop, we just need to copy the buffer to
+          // intermediateResult.
+          if (i == 0) {
+            intermediateResult = new byte[bytesProcessed];
+            Array.Copy(buffer, 0, intermediateResult, 0, bytesProcessed);
+          } else {
+            // we have already processed at least one block, so intermediateResult
+            // contains the ciphertext produced thus far.
+            byte[] intermediateCopy =
+              new byte[intermediateResult.Length + bytesProcessed];
+            Array.Copy(intermediateResult, 0,
+              intermediateCopy, 0, intermediateResult.Length);
+            Array.Copy(buffer, 0, intermediateCopy,
+              intermediateResult.Length, bytesProcessed);
+            intermediateResult = intermediateCopy;
+          }
+          totalBytesProcessed += bytesProcessed;
         }
       }
-      bytesProcessed += _aCipher.DoFinal(input, plainText, bytesProcessed);
-       * */
-      int outputLength = 
+      byte[] finalResult = new byte[totalBytesProcessed];
+      Array.Copy(intermediateResult, finalResult, totalBytesProcessed);
+      return finalResult;
+    }
+
+    [Pure] public byte[] AsymmetricDecrypt(CipherText cipher, 
+                                           AsymmetricKey asymmetricKey) {
+      _aCipher.Init(false, asymmetricKey.Value);
+      byte[] plainText = 
+        this.AsymmetricProcessBuffer(cipher.Value, asymmetricKey);
+      return new CipherText(plainText);
+
+      /* int outputLength = 
         _aCipher.ProcessBytes(cipher.Value, 0, cipher.Value.Length, plainText, 0);
       outputLength += _aCipher.DoFinal(plainText, outputLength);
       byte[] result = new byte[outputLength];
       Array.Copy(plainText, result, outputLength);
-      return new CipherText(result);
+      return new CipherText(result); */
     }
 
-    public CipherText AsymmetricEncrypt(byte[] input, AsymmetricKey asymmetricKey) {
-      //Contract.Requires(input.Length <= _aCipher.GetBlockSize());
+    [Pure]
+    public CipherText AsymmetricEncrypt(byte[] input, 
+                                        AsymmetricKey asymmetricKey) {
       _aCipher.Init(true, asymmetricKey.Value);
-      byte[] cipherText = new byte[_aCipher.GetOutputSize(input.Length)];
-      /*
-      int blockSize = _aCipher.GetBlockSize();
-      int bytesProcessed = 0;
-
-      if (input.Length < blockSize) {
-          bytesProcessed = _aCipher.ProcessBytes(input, cipherText, 0);
-      } else {
-        for (int i = 0; i < input.Length / blockSize; i++) {
-          int offset = i * blockSize;
-          int length = Math.Min(blockSize, input.Length - offset);
-          bytesProcessed +=
-            _aCipher.ProcessBytes(
-                                  input,
-                                  offset,
-                                  length,
-                                  cipherText,
-                                  bytesProcessed);
-        }
-      }
-      bytesProcessed += _aCipher.DoFinal(input, cipherText, bytesProcessed);
-       * */
-      int outputLength = 
+      byte[] cipherText = this.AsymmetricProcessBuffer(input, asymmetricKey);
+      return new CipherText(cipherText);
+      
+      /* int outputLength = 
         _aCipher.ProcessBytes(input, 0, input.Length, cipherText, 0);
       outputLength += _aCipher.DoFinal(cipherText, outputLength);
       byte[] result = new byte[outputLength];
       Array.Copy(cipherText, result, outputLength);
-      return new CipherText(result);
+      return new CipherText(result);*/
     }
 
     public byte[] GenerateSymmetricKey() {
