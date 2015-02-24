@@ -3,7 +3,7 @@ The Digital Poll Book System
 
 This project is part of the Verifiable Elections software
 infrastructure, developed by Verifiable Elections, Inc. It is a
-*Digital Poll Book System*, consisting of two main components: (1) a
+*Digital Poll Book System*, consisting of two main components: (1) a 
 data management application that imports voter and ballot data,
 provisions digital poll books before and during Election Day, and
 outputs voter roll updates after Election Day; and (2) a digital poll
@@ -16,7 +16,7 @@ respect to the voter data they handle, are critical aspects of this
 project.
 
 Prototype Background
-====
+===
 
 The prototype implementations were developed as a part of the DemTech
 Research Project at the IT University of Copenhagen in 2011-2013.
@@ -146,10 +146,10 @@ Kiniry in Q4 2011.  These experiments are collected in the
 "prototypes" directory in the repository.
 
 The students that built these prototypes are Claes Martinsen, Niels
-Martin Søholm Jensen, and Jan Aagaard Meier (P1); Emil Blædel Nygaard,
-Michael Oliver Urhøj Mortensen, and Rasmus Greve (P2); Jens Dahl
-Møllerhøj, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
-(P3); and Christian Olsson, Kåre Sylow Pedersen, and Henrik Haugbølle
+Martin SÃ¸holm Jensen, and Jan Aagaard Meier (P1); Emil BlÃ¦del Nygaard,
+Michael Oliver UrhÃ¸j Mortensen, and Rasmus Greve (P2); Jens Dahl
+MÃ¸llerhÃ¸j, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
+(P3); and Christian Olsson, KÃ¥re Sylow Pedersen, and Henrik HaugbÃ¸lle
 (P4).  Each prototype was built in under one month using an early
 version of the Trust-by-Design (TBD) methodology (see above).
 
