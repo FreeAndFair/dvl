@@ -1,18 +1,19 @@
-The Digital Poll Book system
+The Digital Poll Book System
 ===
 
 This project is part of the Verifiable Elections software
-infrastructure, developed by Verified Elections, Inc. It is a *Digital
-Poll Book System*, consisting of two main components: (1) a data
-management application, which maintains voter lists, candidate lists,
-and ballot design information and provisions digital poll books before
-and during Election Day; and (2) a digital poll book application that
-runs on commodity laptop or tablet devices to enable poll workers to
-check in voters on Election Day.
+infrastructure, developed by Verifiable Elections, Inc. It is a
+*Digital Poll Book System*, consisting of two main components: (1) a
+data management application that imports voter and ballot data,
+provisions digital poll books before and during Election Day, and
+outputs voter roll updates after Election Day; and (2) a digital poll
+book application that runs on commodity laptop or tablet devices to
+enable voters to be checked in and presented with the appropriate
+ballots on Election Day.
 
-Correctness of the software components, and security guarantees with
-respect to the voter data it is used to manage, are critical aspects
-of this project.
+Correctness of these software components, and security guarantees with
+respect to the voter data they handle, are critical aspects of this
+project.
 
 Prototype Background
 ====
@@ -27,9 +28,9 @@ The prototype was designed for use in Danish elections.
 Development Process and Methodology
 ===
 
-The *DVL*, including all prototypes and the current Aegis system, have
-been developed using early variants of the DemTech Trust-by-Design
-(TBD) software engineering methodology.
+The *DVL*, including all prototypes and the current system, has been
+developed using the Trust-by-Design (TBD) software engineering
+methodology.
 
 The TBD methodology is documented in several papers published by Joe
 Kiniry and his coauthors, available via http://www.kindsoftware.com/.
@@ -41,13 +42,13 @@ In general, a system is comprised of:
   system requirements, and background literature,
 
 * a domain analysis and a detailed architecture specifications written
-  in the Extended Business Object Notation (EBON)[3],
+  in the Extended Business Object Notation (EBON) [3],
 
 * formal specifications written at the source code level in one or
-  more contract-based specification languages like [Code Contracts][1]
-  (for .NET systems), the [Java Modeling Language][2] (for JVM
+  more contract-based specification languages like [Code Contracts] [1]
+  (for .NET systems), the [Java Modeling Language] [2] (for JVM
   systems), or the Executable ANSI/ISO C Specification Language
-  (E-ACSL)[4],
+  (E-ACSL) [4],
 
 * protocol descriptions typically formally specified using abstract
   state machines (ASMs), petri nets, formally annotated collaboration
@@ -55,8 +56,8 @@ In general, a system is comprised of:
   reasoning about such protocols,
 
 * a hand-written set of (sub)system tests and an automatically
-  generated set of unit tests (using PEX[7] for .NET systems and
-  JMLunitNG[8] for JVM ones), including reports on the completeness
+  generated set of unit tests (using [PEX] [7] for .NET systems and
+  [ JMLUnitNG] [8] for JVM ones), including reports on the completeness
   and quality of these validation artifacts, and
 
 * a set of evidence that the system fulfills its requirements, usually
@@ -83,12 +84,12 @@ Mandatory Requirements
 * Must be able to authenticate a voter based on a voter card number
 * Must be able to register when a voter has been handed a ballot and
   securely store this information
-* Must prevent that a voter can be handed more than one ballot
+* Must prevent a voter from being handed more than one ballot
 * Must be able to authenticate and register voters at multiple
   machines simultaneously in various venues
 * Must have an interactive user interface for authentication and
   registration
-* Must be able to print out the current voterlist at any point of the
+* Must be able to print out the current voter list at any point of the
   election
 
 Secondary Requirements
@@ -97,16 +98,16 @@ Secondary Requirements
 ####Usability:
 
 * The user interface must be trivial to use for non-technical users
-  (election representatives).a
+  (election representatives).
 
 * The voter should be able to register at any table at the voting
   venue.
 
 ####Persistence:
 
-* The system will exhibit no dataa lost from an arbitrary failure of
-  any system in the *DVL* network (a typical system failure like a
-  Windows crash).
+* The system will exhibit no data loss from an arbitrary failure
+  (e.g., a typical system failure like a Windows crash) of any system
+  in the *DVL* network.
 
 * The system will exhibit no data loss in the event of a network
   failure.
@@ -114,7 +115,7 @@ Secondary Requirements
 ####Scalability:
 
 * The system should be able to handle a large number of voters
-  (approximately 30,000 voter in a single voting venue with 10
+  (approximately 30,000 voters in a single voting venue with 10
   machines running the *DVL*).
 
 ####Security:
@@ -123,13 +124,13 @@ Secondary Requirements
   establish confidence that the system is secure.
 
 * The system should be able to filter voters in a voter list based on
-  multiple criterion to determine eligible voters.
+  multiple criteria to determine eligible voters.
 
-* The system should be able to analyze the election result data to
-  detect suspicious voters and fraud.
+* The system should be able to provide sufficient audit information to
+  allow the detection of suspicious voters and fraud.
 
-* The system should be able to provide a status on the digital voter
-  list prior to an election and afterwards.
+* The system should be able to provide a status report on the digital
+  voter list prior to an election and afterwards.
 
 ####Analysis:
 
@@ -146,9 +147,9 @@ Secondary Requirements
 History
 ===
 
-Several variants of the *DVL* were developed by around a dozen students
-for end-of-term projects in the ITU course "Analysis, Design, and
-Software Architecture with Project" under the supervision of Joe
+Several variants of the *DVL* were developed by around a dozen
+students for end-of-term projects in the ITU course "Analysis, Design,
+and Software Architecture with Project" under the supervision of Joe
 Kiniry in Q4 2011.  These experiments are collected in the
 "prototypes" directory in the repository.
 
@@ -158,16 +159,16 @@ Michael Oliver Urhøj Mortensen, and Rasmus Greve (P2); Jens Dahl
 Møllerhøj, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
 (P3); and Christian Olsson, Kåre Sylow Pedersen, and Henrik Haugbølle
 (P4).  Each prototype was built in under one month using an early
-version of the DemTech Trust-by-Design (TBD) methodology (see below).
+version of the Trust-by-Design (TBD) methodology (see above).
 
-Each prototype includes a short project overview, an architeture
+Each prototype includes a short project overview, an architecture
 specification, an implementation, and a validation suite.  Different
-prototypes focused on different aspects of the problem.  E.g., some
+prototypes focused on different aspects of the problem; e.g., some
 focused on networking, others on crypography, etc.
 
 In the following year (Q1-Q2 2012), two students, Nikolaj Aaes and
-Nicolai Skovvart, developed an entirely new version of the *DVL* which
-they called "the Aegis Digital Voter List" based upon what was learned
+Nicolai Skovvart, developed an entirely new version of the *DVL* that
+they called "the Aegis Digital Voter List", based upon what was learned
 from the prototypes.  They used a refinement of TBD for their work and
 spent six months developing the system.  Their system is meant to be
 the foundation for a real, deployable, usable, fault tolerant, secure
@@ -176,11 +177,11 @@ the foundation for a real, deployable, usable, fault tolerant, secure
 In early 2013 (Q1-Q2 2013), Morten Hyllekilde Andersen took over the
 management of the project and made some technical contributions to it.
 The intention of his work was to focus on election law and regulations
-to ensure that we knew exactly what was necessary to do to prepare the
+to ensure that we knew exactly what was necessary to prepare the
 *DVL* for using in binding elections.
 
 Starting in July 2013, Joe Kiniry took over development of the project
-to push it to completion for using in 2013 elections.
+to push it to completion for use in 2013 elections.
 
 Development Instructions
 ===
@@ -188,33 +189,18 @@ Development Instructions
 In order to develop on the prototype *DVL* the following software
 libraries, tools, and frameworks must be installed.
 
-[1]: Code Contracts library for .NET
-[http://research.microsoft.com/en-us/projects/contracts/]
-(http://research.microsoft.com/en-us/projects/contracts/)
+[1]: http://research.microsoft.com/en-us/projects/contracts/  "Code Contracts library for .NET"
 
-[2]: Java Modeling Language (JML) 
-[http://www.jmlspecs.org/](http://www.jmlspecs.org/)
+[2]: http://www.jmlspecs.org/  "Java Modeling Language (JML)"
 
-[3]: The Business Object Notation
-[http://bon-method.com/](http://bon-method.com/)
+[3]: http://bon-method.com/  "The Business Object Notation"
 
-[4]: the Executable ANSI/ISO C Specification Language
-[http://frama-c.com/](http://frama-c.com/)a
+[4]: http://frama-c.com/ "The Executable ANSI/ISO C Specification Language"
 
-[5] The ADO.NET 2.0 Provider for SQLLite
-[http://sourceforge.net/projects/sqlite-dotnet2/]
-(http://sourceforge.net/projects/sqlite-dotnet2/)
+[5]: http://sourceforge.net/projects/sqlite-dotnet2/ "The ADO.NET 2.0 Provider for SQLLite"
 
-  To install ADO.NET on a modern .NET 4.0 development system, you may
-  need to install a .NET 3.5/2.0 runtime from Microsoft: 
+[6]: http://get.adobe.com/reader/ "Adobe Acrobat Reader"
 
-[6] Adobe Acrobat Reader
-[http://get.adobe.com/reader/](http://get.adobe.com/reader/)
+[7]: http://research.microsoft.com/en-us/projects/pex/  "PEX"
 
-[7] PEX
-[http://research.microsoft.com/en-us/projects/pex/]
-(http://research.microsoft.com/en-us/projects/pex/)
-
-[8] JMLunitNG
-[http://formalmethods.insttech.washington.edu/software/jmlunitng/]
-(http://formalmethods.insttech.washington.edu/software/jmlunitng/)
+[8]: http://formalmethods.insttech.washington.edu/software/jmlunitng/ "JMLUnitNG"
