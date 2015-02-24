@@ -1,81 +1,35 @@
-Everyone is welcome to contribute to the development of the system.  If
-you have any questions or comment, please write to the project admins:
-hyllekilde@demtech.dk and kiniry@demtech.dk
-
-The Digital Voter List system
+The Digital Poll Book system
 ===
 
-This project is developed as a part of the DemTech Research Project at
-the IT University of Copenhagen.
+This project is part of the Verifiable Elections software
+infrastructure, developed by Verified Elections, Inc. It is a *Digital
+Poll Book System*, consisting of two main components: (1) a data
+management application, which maintains voter lists, candidate lists,
+and ballot design information and provisions digital poll books before
+and during Election Day; and (2) a digital poll book application that
+runs on commodity laptop or tablet devices to enable poll workers to
+check in voters on Election Day.
 
-The project is a Digital Voter List (DVL) system usable for Danish
-national elections.  A DVL system manages election artifacts like
-voter cards and the voter list before and during election day.
+Correctness of the software components, and security guarantees with
+respect to the voter data it is used to manage, are critical aspects
+of this project.
 
-It is a high-profile project as several municipalities are very
-interested in using a Digital Doter List, but the price for using the
-one provided by KMD is too high for many to afford.
+Prototype Background
+====
 
-Goals
-===
+The prototype implementations were developed as a part of the DemTech
+Research Project at the IT University of Copenhagen in 2011-2013.
 
-The goal of the project is to make a correct and secure DVL system
-that can replace the existing proprietary and expensive KMD system.
-It is an Open Source project developed by several students with Joe
-Kiniry.  The license for the project is current being chosen by the
-developers.
-
-The Municipality of Ballerup has expressed an interest in using the
-DVL in binding trials in the November 2013 national elections.  The
-Danish firm Aion has expressed an interest in contributing to the
-development of the DVL as well as facilitating the binding trials in
-several polling places in Ballerup.
-
-History
-===
-
-Several variants of the DVL were developed by around a dozen students
-for end-of-term projects in the ITU course "Analysis, Design, and
-Software Architecture with Project" under the supervision of Joe
-Kiniry in Q4 2011.  These experiments are collected in the
-"prototypes" directory in the repository.
-
-The students that built these prototypes are Claes Martinsen, Niels
-Martin Søholm Jensen, and Jan Aagaard Meier (P1); Emil Blædel Nygaard,
-Michael Oliver Urhøj Mortensen, and Rasmus Greve (P2); Jens Dahl
-Møllerhøj, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
-(P3); and Christian Olsson, Kåre Sylow Pedersen, and Henrik Haugbølle
-(P4).  Each prototype was built in under one month using an early
-version of the DemTech Trust-by-Design (TBD) methodology (see below).
-
-Each prototype includes a short project overview, an architeture
-specification, an implementation, and a validation suite.  Different
-prototypes focused on different aspects of the problem.  E.g., some
-focused on networking, others on crypography, etc.
-
-In the following year (Q1-Q2 2012), two students, Nikolaj Aaes and
-Nicolai Skovvart, developed an entirely new version of the DVL which
-they called "the Aegis Digital Voter List" based upon what was learned
-from the prototypes.  They used a refinement of TBD for their work and
-spent six months developing the system.  Their system is meant to be
-the foundation for a real, deployable, usable, fault tolerant, secure
-DVL.
-
-In early 2013 (Q1-Q2 2013), Morten Hyllekilde Andersen took over the
-management of the project and made some technical contributions to it.
-The intention of his work was to focus on election law and regulations
-to ensure that we knew exactly what was necessary to do to prepare the
-DVL for using in binding elections.
-
-Starting in July 2013, Joe Kiniry took over development of the project
-to push it to completion for using in 2013 elections.
+A *Digital Poll Book System* is also known as a *Digital Voter List
+System*.  Consequently, the code name for this prototype is *DVL*.
+The prototype was designed for use in Danish elections.
 
 Development Process and Methodology
 ===
 
-The DVL, including all prototypes and the current Aegis system, have
+The *DVL*, including all prototypes and the current Aegis system, have
 been developed using early variants of the DemTech Trust-by-Design
-(TBD) software engineering methodology.  
+(TBD) software engineering methodology.
 
 The TBD methodology is documented in several papers published by Joe
 Kiniry and his coauthors, available via http://www.kindsoftware.com/.
@@ -114,7 +68,7 @@ Requirements
 ===
 
 What follows are the mandatory and secondary requirements imposed upon
-the DVL.  Informal verification (in the traditional software
+the *DVL*.  Informal verification (in the traditional software
 engineering sense) of these requirements is accomplished by several
 means, including formal verification of properties of the system's
 specification and implementation, as well as traceability from the
@@ -151,7 +105,7 @@ Secondary Requirements
 ####Persistence:
 
 * The system will exhibit no dataa lost from an arbitrary failure of
-  any system in the DVL network (a typical system failure like a
+  any system in the *DVL* network (a typical system failure like a
   Windows crash).
 
 * The system will exhibit no data loss in the event of a network
@@ -161,7 +115,7 @@ Secondary Requirements
 
 * The system should be able to handle a large number of voters
   (approximately 30,000 voter in a single voting venue with 10
-  machines running the DVL).
+  machines running the *DVL*).
 
 ####Security:
 
@@ -189,10 +143,49 @@ Secondary Requirements
 
 * The system should print the list of eligible voters.
 
+History
+===
+
+Several variants of the *DVL* were developed by around a dozen students
+for end-of-term projects in the ITU course "Analysis, Design, and
+Software Architecture with Project" under the supervision of Joe
+Kiniry in Q4 2011.  These experiments are collected in the
+"prototypes" directory in the repository.
+
+The students that built these prototypes are Claes Martinsen, Niels
+Martin Søholm Jensen, and Jan Aagaard Meier (P1); Emil Blædel Nygaard,
+Michael Oliver Urhøj Mortensen, and Rasmus Greve (P2); Jens Dahl
+Møllerhøj, Michael Valentin Erichsen, and Morten Hyllekilde Andersen
+(P3); and Christian Olsson, Kåre Sylow Pedersen, and Henrik Haugbølle
+(P4).  Each prototype was built in under one month using an early
+version of the DemTech Trust-by-Design (TBD) methodology (see below).
+
+Each prototype includes a short project overview, an architeture
+specification, an implementation, and a validation suite.  Different
+prototypes focused on different aspects of the problem.  E.g., some
+focused on networking, others on crypography, etc.
+
+In the following year (Q1-Q2 2012), two students, Nikolaj Aaes and
+Nicolai Skovvart, developed an entirely new version of the *DVL* which
+they called "the Aegis Digital Voter List" based upon what was learned
+from the prototypes.  They used a refinement of TBD for their work and
+spent six months developing the system.  Their system is meant to be
+the foundation for a real, deployable, usable, fault tolerant, secure
+*DVL*.
+
+In early 2013 (Q1-Q2 2013), Morten Hyllekilde Andersen took over the
+management of the project and made some technical contributions to it.
+The intention of his work was to focus on election law and regulations
+to ensure that we knew exactly what was necessary to do to prepare the
+*DVL* for using in binding elections.
+
+Starting in July 2013, Joe Kiniry took over development of the project
+to push it to completion for using in 2013 elections.
+
 Development Instructions
 ===
 
-In order to develop on the current DVL the following software
+In order to develop on the prototype *DVL* the following software
 libraries, tools, and frameworks must be installed.
 
 [1]: Code Contracts library for .NET
