@@ -1,11 +1,7 @@
 The Digital Poll Book System
 ===
 
-This project is part of the Verifiable Elections software
-infrastructure, developed by Verifiable Elections, Inc. It is a
-*Digital Poll Book System*, consisting of two main components: (1) a 
-data management application that imports voter and ballot data,
-provisions digital poll books before and during Election Day, and
+*DVL* or the Digital Voter List is a part of the Verifiable Elections software suite of products, developed by Verifiable Elections, Inc. It is a *Digital Poll Book System*, consisting of two main components: (1) a data management application that imports voter and ballot data,provisions digital poll books before and during Election Day, and
 outputs voter roll updates after Election Day; and (2) a digital poll
 book application that runs on commodity laptop or tablet devices to
 enable voters to be checked in and presented with the appropriate
@@ -18,12 +14,12 @@ project.
 Prototype Background
 ===
 
-The prototype implementations were developed as a part of the DemTech
-Research Project at the IT University of Copenhagen in 2011-2013.
+The DVL prototype implementations were developed as a part of the DemTech
+Research Project at the IT University of Copenhagen in 2011-2013 and were designed for use in Danish elections.
 
-A *Digital Poll Book System* is also known as a *Digital Voter List
+It is a *Digital Poll Book System* that is also known as a *Digital Voter List
 System*.  Consequently, the code name for this prototype is *DVL*.
-The prototype was designed for use in Danish elections.
+
 
 Development Process and Methodology
 ===
@@ -82,11 +78,11 @@ Mandatory Requirements
 * Must be able to generate voter cards from a given set of eligible
   voters
 * Must be able to authenticate a voter based on a voter card number
-* Must be able to register when a voter has been given a ballot and
-  securely store this information
-* Must prevent a voter from being given more than one ballot
+* Must be able to record when a voter has been given a ballot and
+  securely store this information for posting voting history
+* Must prevent a voter from being issued more than one ballot
 * Must be able to authenticate and register voters at multiple
-  machines simultaneously in various venues
+  machines simultaneously in various venues across the jurisdiction
 * Must have an interactive user interface for authentication and
   registration
 * Must be able to print out the current voter list at any point of the
