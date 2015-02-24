@@ -42,13 +42,13 @@ In general, a system is comprised of:
   system requirements, and background literature,
 
 * a domain analysis and a detailed architecture specifications written
-  in the Extended Business Object Notation (EBON) [3],
+  in the [Extended Business Object Notation (EBON)] [3],
 
 * formal specifications written at the source code level in one or
   more contract-based specification languages like [Code Contracts] [1]
   (for .NET systems), the [Java Modeling Language] [2] (for JVM
-  systems), or the Executable ANSI/ISO C Specification Language
-  (E-ACSL) [4],
+  systems), or the [Executable ANSI/ISO C Specification Language
+  (E-ACSL)] [4],
 
 * protocol descriptions typically formally specified using abstract
   state machines (ASMs), petri nets, formally annotated collaboration
@@ -82,9 +82,9 @@ Mandatory Requirements
 * Must be able to generate voter cards from a given set of eligible
   voters
 * Must be able to authenticate a voter based on a voter card number
-* Must be able to register when a voter has been handed a ballot and
+* Must be able to register when a voter has been given a ballot and
   securely store this information
-* Must prevent a voter from being handed more than one ballot
+* Must prevent a voter from being given more than one ballot
 * Must be able to authenticate and register voters at multiple
   machines simultaneously in various venues
 * Must have an interactive user interface for authentication and
@@ -99,7 +99,6 @@ Secondary Requirements
 
 * The user interface must be trivial to use for non-technical users
   (election representatives).
-
 * The voter should be able to register at any table at the voting
   venue.
 
@@ -108,7 +107,6 @@ Secondary Requirements
 * The system will exhibit no data loss from an arbitrary failure
   (e.g., a typical system failure like a Windows crash) of any system
   in the *DVL* network.
-
 * The system will exhibit no data loss in the event of a network
   failure.
 
@@ -122,13 +120,10 @@ Secondary Requirements
 
 * The system should use proper security measures and cryptography to
   establish confidence that the system is secure.
-
 * The system should be able to filter voters in a voter list based on
   multiple criteria to determine eligible voters.
-
 * The system should be able to provide sufficient audit information to
   allow the detection of suspicious voters and fraud.
-
 * The system should be able to provide a status report on the digital
   voter list prior to an election and afterwards.
 
@@ -136,13 +131,10 @@ Secondary Requirements
 
 * The system should be able to provide an analysis of the turnout,
   both nationally and for specific turnout results.
-
 * The system should have a public API for the media or any citizen to
   access (after the election).
-
 * The system should be able to visualize the turnout results.
-
-* The system should print the list of eligible voters.
+* The system should be able to print the list of eligible voters.
 
 History
 ===
