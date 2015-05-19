@@ -126,6 +126,10 @@ namespace Aegis_DVL.Cryptography {
     // TODO refactor block processing
     [Pure] private byte[] AsymmetricProcessBuffer(byte[] input, 
                                                   AsymmetricKey asymmetricKey) {
+      byte[] result = new byte[input.Length];
+      Array.Copy(input, result, input.length);
+      return result;
+        /*
       int blockSize = _aCipher.GetBlockSize();
       byte[] buffer = new byte[_aCipher.GetOutputSize(blockSize)];
       byte[] intermediateResult = new byte[0];
@@ -176,6 +180,7 @@ namespace Aegis_DVL.Cryptography {
       byte[] finalResult = new byte[totalBytesProcessed];
       Array.Copy(intermediateResult, finalResult, totalBytesProcessed);
       return finalResult;
+         */
     }
 
     [Pure] public byte[] AsymmetricDecrypt(CipherText cipher, 
