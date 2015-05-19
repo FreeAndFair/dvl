@@ -9,8 +9,8 @@
 
     <Grid Height="252" Width="515">
         <TextBox Height="28" HorizontalAlignment="Left" Margin="36,93,0,0" Name="filePathTextbox" VerticalAlignment="Top" Width="319" />
-        <Button Content="Gennemse" Height="28" HorizontalAlignment="Right" Margin="0,93,35,0" Name="fileBrowseButton" VerticalAlignment="Top" Width="100" Click="FileBrowseButtonClick" />
-        <Label Content="Valg destination" Height="28" HorizontalAlignment="Left" Margin="36,48,0,0" Name="fileBrowseLabel" VerticalAlignment="Top" />
-        <Button Content="Eksporter" Height="28" HorizontalAlignment="Left" IsEnabled="False" Margin="202,185,0,0" Name="ExportButton" VerticalAlignment="Top" Width="100" Click="ExportButtonClick" />
+        <Button Content="Browse" Height="28" HorizontalAlignment="Right" Margin="0,93,35,0" Name="fileBrowseButton" VerticalAlignment="Top" Width="100" Click="FileBrowseButtonClick" />
+        <Label Content="Election data output destination" Height="28" HorizontalAlignment="Left" Margin="36,48,0,0" Name="fileBrowseLabel" VerticalAlignment="Top" />
+        <Button Content="Export" Height="28" HorizontalAlignment="Left" IsEnabled="False" Margin="202,185,0,0" Name="ExportButton" VerticalAlignment="Top" Width="100" Click="ExportButtonClick" />
     </Grid>
 </Page>

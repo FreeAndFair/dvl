@@ -1,15 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aegis DVL", "Aegis DVL.csproj", "{10D0DF95-0552-43AB-B540-8CAD1F631E38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{CE0E53EF-66D5-4B92-9F8C-6FB6BED8FC1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "..\UI\UI.csproj", "{5DFB3CAB-3406-4C98-A038-8637D9934ED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypto", "..\..\..\..\..\..\Downloads\bccrypto-net-1.7-src-ext\csharp\crypto\crypto.csproj", "{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypto", "..\..\..\..\bccrypto-net-1.7-src-ext\csharp\crypto\crypto.csproj", "{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypto-test", "..\..\..\..\..\..\Downloads\bccrypto-net-1.7-src-ext\csharp\crypto-test\crypto-test.csproj", "{C857AD68-8F1B-4C7A-A76B-3DC03CBE4FB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypto-test", "..\..\..\..\bccrypto-net-1.7-src-ext\csharp\crypto-test\crypto-test.csproj", "{C857AD68-8F1B-4C7A-A76B-3DC03CBE4FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

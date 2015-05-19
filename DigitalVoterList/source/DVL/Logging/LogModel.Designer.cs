@@ -8,14 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Data.Objects;
-using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
 using System.ComponentModel;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace Aegis_DVL.Logging
 {
     #region Contexts
@@ -81,6 +82,7 @@ namespace Aegis_DVL.Logging
         private ObjectSet<Log> _Logs;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -92,11 +94,11 @@ namespace Aegis_DVL.Logging
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -123,7 +125,8 @@ namespace Aegis_DVL.Logging
         }
 
         #endregion
-        #region Primitive Properties
+
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -142,7 +145,7 @@ namespace Aegis_DVL.Logging
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -167,7 +170,7 @@ namespace Aegis_DVL.Logging
             {
                 OnLogEntryChanging(value);
                 ReportPropertyChanging("LogEntry");
-                _LogEntry = StructuralObject.SetValidValue(value, false);
+                _LogEntry = StructuralObject.SetValidValue(value, false, "LogEntry");
                 ReportPropertyChanged("LogEntry");
                 OnLogEntryChanged();
             }
@@ -177,9 +180,9 @@ namespace Aegis_DVL.Logging
         partial void OnLogEntryChanged();
 
         #endregion
-    
+
     }
 
     #endregion
-    
+
 }

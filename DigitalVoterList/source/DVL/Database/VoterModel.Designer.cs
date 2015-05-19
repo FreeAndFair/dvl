@@ -8,14 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Data.Objects;
-using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
 using System.ComponentModel;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
-
 namespace Aegis_DVL.Database
 {
     #region Contexts
@@ -81,6 +82,7 @@ namespace Aegis_DVL.Database
         private ObjectSet<Voter> _Voters;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -92,11 +94,11 @@ namespace Aegis_DVL.Database
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -125,7 +127,8 @@ namespace Aegis_DVL.Database
         }
 
         #endregion
-        #region Primitive Properties
+
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -144,7 +147,7 @@ namespace Aegis_DVL.Database
                 {
                     OnVoterNumberChanging(value);
                     ReportPropertyChanging("VoterNumber");
-                    _VoterNumber = StructuralObject.SetValidValue(value, false);
+                    _VoterNumber = StructuralObject.SetValidValue(value, false, "VoterNumber");
                     ReportPropertyChanged("VoterNumber");
                     OnVoterNumberChanged();
                 }
@@ -169,7 +172,7 @@ namespace Aegis_DVL.Database
             {
                 OnCPRChanging(value);
                 ReportPropertyChanging("CPR");
-                _CPR = StructuralObject.SetValidValue(value, false);
+                _CPR = StructuralObject.SetValidValue(value, false, "CPR");
                 ReportPropertyChanged("CPR");
                 OnCPRChanged();
             }
@@ -193,7 +196,7 @@ namespace Aegis_DVL.Database
             {
                 OnBallotStatusChanging(value);
                 ReportPropertyChanging("BallotStatus");
-                _BallotStatus = StructuralObject.SetValidValue(value, false);
+                _BallotStatus = StructuralObject.SetValidValue(value, false, "BallotStatus");
                 ReportPropertyChanged("BallotStatus");
                 OnBallotStatusChanged();
             }
@@ -203,9 +206,9 @@ namespace Aegis_DVL.Database
         partial void OnBallotStatusChanged();
 
         #endregion
-    
+
     }
 
     #endregion
-    
+
 }

@@ -7,13 +7,13 @@
     
     <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
         <Menu IsMainMenu="True" Width="Auto" Height="Auto" DockPanel.Dock="Top">
-            <MenuItem Header="_Filer">
-                <MenuItem Header="Marker vælger" Click="MarkVoterClick" Name="MarkVoterMenuItem"/>
-                <MenuItem Header="Eksporter data" Click="ExportDataClick" Name="ExportDataMenuItem"/>
-                <MenuItem Header="Afslut" Click="ExitClick" Name="ExitMenuItem"/>
+            <MenuItem Header="_File">
+                <MenuItem Header="Mark voter" Click="MarkVoterClick" Name="MarkVoterMenuItem"/>
+                <MenuItem Header="Export data" Click="ExportDataClick" Name="ExportDataMenuItem"/>
+                <MenuItem Header="Exit" Click="ExitClick" Name="ExitMenuItem"/>
             </MenuItem>
-            <MenuItem Header="_Hjælp">
-                <MenuItem Header="Bruger manual" Click="HelpClick"/>
+            <MenuItem Header="_Help">
+                <MenuItem Header="User manual" Click="HelpClick"/>
             </MenuItem>
         </Menu>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Width="Auto" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">

@@ -7,9 +7,9 @@
     Title="BallotRequestPage" Height="226" Width="299">
 
     <Grid Height="209">
-        <Label Content="Valgkortsnummer" Height="30" HorizontalAlignment="Center" Margin="0,65,0,0" Name="voterCardNumberLabel" VerticalAlignment="Top" />
+        <Label Content="Voting Card Number" Height="30" HorizontalAlignment="Center" Margin="0,65,0,0" Name="voterCardNumberLabel" VerticalAlignment="Top" />
         <TextBox Height="30" HorizontalAlignment="Center" Margin="0,100,0,0" Name="voterCardNumberTextbox" VerticalAlignment="Top" Width="120" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="VoterCardNumberTextboxTextChanged" AcceptsReturn="True" />
-        <Button Content="Færdig" Height="30" HorizontalAlignment="Center" Margin="90,0,90,29" Name="checkValidityButton" VerticalAlignment="Bottom" Width="120" Click="CheckValidityButtonClick" />
-        <Label Content="Venter på svar..." Height="28" HorizontalAlignment="Left" Margin="0,21,0,0" Name="WaitingLabel" VerticalAlignment="Top" Width="300" HorizontalContentAlignment="Center" />
+        <Button Content="Complete" Height="30" HorizontalAlignment="Center" Margin="90,0,90,29" Name="checkValidityButton" VerticalAlignment="Bottom" Width="120" Click="CheckValidityButtonClick" />
+        <Label Content="Waiting for input..." Height="28" HorizontalAlignment="Left" Margin="0,21,0,0" Name="WaitingLabel" VerticalAlignment="Top" Width="300" HorizontalContentAlignment="Center" />
     </Grid>
 </Page>
