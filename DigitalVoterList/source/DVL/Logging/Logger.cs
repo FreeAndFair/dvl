@@ -122,6 +122,7 @@ namespace Aegis_DVL.Logging {
     /// The level.
     /// </param>
     public void Log(object message, Level level) {
+      Console.WriteLine(message);
       lock (this._db) {
         this._db.Logs.AddObject(
           Logging.Log.CreateLog(++this._i, Bytes.From(new LogEntry(message, level, this._stationAddress))));

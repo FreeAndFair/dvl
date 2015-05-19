@@ -135,7 +135,7 @@ namespace UI.ManagerWindows {
     public void PopulateListThread(OverviewPage ovp) {
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.UpdateLabel.Content = "Scanning for Stations..."; }));
+        new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));

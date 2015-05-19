@@ -108,14 +108,14 @@ namespace UI.ManagerWindows {
 
       if (succes) {
         MessageBox.Show(
-          "Vælgeren " + this.voterCardNumberTextbox.Text + " må gives en stemmeseddel ", 
-          "Giv stemmeseddel", 
+          "Voter number " + this.voterCardNumberTextbox.Text + " should be given a ballot ", 
+          "Give Ballot", 
           MessageBoxButton.OK, 
           MessageBoxImage.Exclamation);
       } else {
         MessageBox.Show(
-          "Vælgeren " + this.voterCardNumberTextbox.Text + " må IKKE gives en stemmeseddel ", 
-          "Giv ikke stemmeseddel", 
+          "Voter number " + this.voterCardNumberTextbox.Text + " should NOT be given a ballot ", 
+          "Do Not Give Ballot", 
           MessageBoxButton.OK, 
           MessageBoxImage.Stop);
       }
@@ -179,7 +179,7 @@ namespace UI.ManagerWindows {
     public void PopulateListThread(ManagerOverviewPage mvp) {
       mvp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.UpdateLabel.Content = "Scanning for Stations..."; }));
+        new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
       mvp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
