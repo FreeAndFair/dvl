@@ -145,7 +145,7 @@ namespace UI.ManagerWindows {
     /// </param>
     private void NextButtonClick(object sender, RoutedEventArgs e) {
       if (this._ui.ImportData(this.filePathTextbox.Text, this.keyPathTextBox.Text)) this._parent.Navigate(new OverviewPage(this._parent, this._ui));
-      else MessageBox.Show("Filen du valgte kunne ikke importeres", "Fejl i import", MessageBoxButton.OK);
+      else MessageBox.Show("Could not import data from specified files.", "Import Failed", MessageBoxButton.OK);
     }
 
     #endregion

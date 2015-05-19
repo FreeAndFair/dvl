@@ -71,18 +71,20 @@ namespace Aegis_DVL.Logging {
 
       this._stationAddress = parent.Address;
       string password = parent.MasterPassword.AsBase64();
+
       InitDb(parent, logName, password);
       string conStr = string.Format(
         "metadata=res://*/Logging.LogModel.csdl|" +
         "res://*/Logging.LogModel.ssdl|" +
         "res://*/Logging.LogModel.msl;" +
         "provider=System.Data.SQLite;" +
-        "provider connection string='Data Source={0}", 
+        "provider connection string='Data Source={0}",
         logName);
       if (parent.IsMasterPasswordInUse) conStr += string.Format(";Password={0}'", password);
       else conStr += "'";
       this._db = new Entities(conStr);
       this._db.Connection.Open();
+        
       this.Log("Logger created", Level.Info);
     }
 
@@ -123,11 +125,12 @@ namespace Aegis_DVL.Logging {
     /// </param>
     public void Log(object message, Level level) {
       Console.WriteLine(message);
+        /*
       lock (this._db) {
         this._db.Logs.AddObject(
           Logging.Log.CreateLog(++this._i, Bytes.From(new LogEntry(message, level, this._stationAddress))));
         this._db.SaveChanges();
-      }
+      }*/
     }
 
     #endregion
