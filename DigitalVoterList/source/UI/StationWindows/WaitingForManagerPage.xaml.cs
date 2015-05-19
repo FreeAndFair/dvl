@@ -89,7 +89,7 @@ namespace UI.StationWindows {
           result == true) {
         this.CenterLabel.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.CenterLabel.Content = "Venter på at valget starter..."; }));
+          new Action(delegate { this.CenterLabel.Content = "Waiting for the election to start..."; }));
         return this.TypedPassword;
       }
 

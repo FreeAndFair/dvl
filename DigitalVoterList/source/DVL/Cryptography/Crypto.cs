@@ -180,7 +180,7 @@ namespace Aegis_DVL.Cryptography {
 
     [Pure] public byte[] AsymmetricDecrypt(CipherText cipher, 
                                            AsymmetricKey asymmetricKey) {
-      _aCipher.Init(false, asymmetricKey.Value);
+      //_aCipher.Init(false, asymmetricKey.Value);
       byte[] plainText = 
         this.AsymmetricProcessBuffer(cipher.Value, asymmetricKey);
       return new CipherText(plainText);
@@ -196,7 +196,7 @@ namespace Aegis_DVL.Cryptography {
     [Pure]
     public CipherText AsymmetricEncrypt(byte[] input, 
                                         AsymmetricKey asymmetricKey) {
-      _aCipher.Init(true, asymmetricKey.Value);
+      //_aCipher.Init(true, asymmetricKey.Value);
       byte[] cipherText = this.AsymmetricProcessBuffer(input, asymmetricKey);
       return new CipherText(cipherText);
       

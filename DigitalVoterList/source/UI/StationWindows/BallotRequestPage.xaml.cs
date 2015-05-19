@@ -156,7 +156,7 @@ namespace UI.StationWindows {
     /// </param>
     private void CheckValidityButtonClick(object sender, RoutedEventArgs e) {
       if (!this.voterCardNumberTextbox.Text.Equals(string.Empty)) {
-        this.WaitingLabel.Content = "Venter på svar...";
+        this.WaitingLabel.Content = "Waiting for reply...";
         this._ui.RequestBallot(this.voterCardNumberTextbox.Text);
       }
 

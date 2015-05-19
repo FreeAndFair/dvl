@@ -157,7 +157,7 @@ namespace UI {
         if (d.IsCancel) return;
 
         if (!this.CPRTextbox.Text.Equals(string.Empty)) {
-          this.WaitingLabel.Content = "Venter på svar...";
+          this.WaitingLabel.Content = "Waiting for reply...";
           this.doneButton.IsEnabled = false;
           this.CancelButton.IsEnabled = false;
           this._ui.RequestBallotOnlyCPR(this.CPRTextbox.Text, d.TypedPassword);

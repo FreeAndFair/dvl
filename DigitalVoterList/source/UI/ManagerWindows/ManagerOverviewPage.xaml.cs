@@ -179,7 +179,7 @@ namespace UI.ManagerWindows {
     public void PopulateListThread(ManagerOverviewPage mvp) {
       mvp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.UpdateLabel.Content = "Opdaterer..."; }));
+        new Action(delegate { this.UpdateLabel.Content = "Scanning for Stations..."; }));
       mvp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
