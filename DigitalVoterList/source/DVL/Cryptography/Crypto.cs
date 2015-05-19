@@ -127,7 +127,7 @@ namespace Aegis_DVL.Cryptography {
     [Pure] private byte[] AsymmetricProcessBuffer(byte[] input, 
                                                   AsymmetricKey asymmetricKey) {
       byte[] result = new byte[input.Length];
-      Array.Copy(input, result, input.length);
+      Array.Copy(input, result, input.Length);
       return result;
         /*
       int blockSize = _aCipher.GetBlockSize();
