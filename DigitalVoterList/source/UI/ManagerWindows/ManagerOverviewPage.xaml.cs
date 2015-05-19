@@ -296,7 +296,7 @@ namespace UI.ManagerWindows {
     /// </param>
     private void CheckValidityButtonClick(object sender, RoutedEventArgs e) {
       if (!this.voterCardNumberTextbox.Text.Equals(string.Empty)) {
-        this.WaitingLabel.Content = "Venter på svar..";
+        this.WaitingLabel.Content = "Waiting for reply...";
         this._ui.RequestBallot(this.voterCardNumberTextbox.Text);
       } else {
         if (!this.CPRNumberTextbox.Text.Equals(string.Empty)) {
@@ -310,7 +310,7 @@ namespace UI.ManagerWindows {
             this._ui.RequestBallotOnlyCPR(this.CPRNumberTextbox.Text, d.TypedPassword);
           } else
             MessageBox.Show(
-              "Det kodeord du indtastede er ikke korret, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
+              "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
         }
       }
     }
@@ -338,8 +338,8 @@ namespace UI.ManagerWindows {
           this._parent.Navigate(new EndedElectionPage(this._parent, this._ui));
         }
       } else
-        MessageBox.Show(
-          "Det indtastede kodeord er ikke korret, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
+          MessageBox.Show(
+            "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
     }
 
     /// <summary>
@@ -372,12 +372,12 @@ namespace UI.ManagerWindows {
         } else {
           if (d.IsCancel) return;
 
-          MessageBox.Show("Der kunne ikke forbindes til den valgte station", "Ingen forbindelse", MessageBoxButton.OK);
+          MessageBox.Show("Could not connect to the specified station", "No Connection", MessageBoxButton.OK);
         }
       } else {
         MessageBox.Show(
-          "Det kodeord du indtastede er ikke korrekt, prøv igen", 
-          "Forkert Master Kodeord", 
+          "You have entered an incorrect master password, please try again.", 
+          "Incorrect Master Password", 
           MessageBoxButton.OK, 
           MessageBoxImage.Stop);
       }

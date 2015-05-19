@@ -218,7 +218,7 @@ namespace UI {
     /// </param>
     public void ExportData(string filePath) {
       if (this._station != null) this.ExportData(this._station.Database.AllData, filePath);
-      else MessageBox.Show("Du kan ikke eksportere dataen på dette tidspunkt", "Ikke muligt", MessageBoxButton.OK);
+      else MessageBox.Show("You can not export data at this time.", "Operation Not Allowed", MessageBoxButton.OK);
     }
 
     /// <summary>
@@ -376,7 +376,7 @@ namespace UI {
           new Action(delegate { this.BallotRequestPage.checkValidityButton.IsEnabled = false; }));
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.WaitingLabel.Content = "Der er ikke nok stationer tilsluttet"; }));
+          new Action(delegate { this.BallotRequestPage.WaitingLabel.Content = "There are not enough stations connected"; }));
       }
 
       if (this.ManagerOverviewPage != null) {
@@ -389,7 +389,7 @@ namespace UI {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.ManagerOverviewPage.WaitingLabel.Content = "Der er ikke nok stationer tilsluttet"; }));
+            delegate { this.ManagerOverviewPage.WaitingLabel.Content = "There are not enough stations connected"; }));
       }
     }
 
@@ -442,14 +442,14 @@ namespace UI {
         this.OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.OverviewPage.SetPasswordLabel("Indtast dette kodeord på stationen: " + password); }));
+            delegate { this.OverviewPage.SetPasswordLabel("Enter this password at the station: " + password); }));
       }
 
       if (this.ManagerOverviewPage != null) {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.ManagerOverviewPage.SetPasswordLabel("Indtast dette kodeord på stationen: " + password); }));
+            delegate { this.ManagerOverviewPage.SetPasswordLabel("Enter this password at the station: " + password); }));
       }
     }
 
@@ -464,7 +464,7 @@ namespace UI {
         this.WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.WaitingForManagerPage.SetPasswordLabel("Indtast dette kodeord på manageren: " + password); }));
+            delegate { this.WaitingForManagerPage.SetPasswordLabel("Enter this password at the manager: " + password); }));
       }
     }
 
@@ -473,8 +473,8 @@ namespace UI {
     /// </summary>
     public void Shutdown() {
       MessageBox.Show(
-        "Valget er blevet udsat for et potentielt angreb og lukkes ned", 
-        "Lukker ned", 
+        "Something has gone wrong with the system, shutting down", 
+        "Shutting Down", 
         MessageBoxButton.OK, 
         MessageBoxImage.Error);
       Environment.Exit(0);
@@ -512,8 +512,8 @@ namespace UI {
     /// </summary>
     public void StationRemoved() {
       MessageBox.Show(
-        "Stationen er blevet lukket ned af Manageren", 
-        "Station fjernet", 
+        "This station has been shut down by the manager", 
+        "Station Shut Down", 
         MessageBoxButton.OK, 
         MessageBoxImage.Warning);
       if (this.WaitingForManagerPage != null) {

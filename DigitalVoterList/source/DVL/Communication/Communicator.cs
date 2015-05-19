@@ -69,7 +69,7 @@ namespace Aegis_DVL.Communication {
           ThreadPool.QueueUserWorkItem(
             element => {
               var elem = (Tuple<int, CountdownEvent>)element;
-              var endpoint = new IPEndPoint(IPAddress.Parse("192.168.0." + elem.Item1), 62000);
+              var endpoint = new IPEndPoint(IPAddress.Parse("192.168.41." + elem.Item1), 62000);
               if (this.IsListening(endpoint)) res.Add(endpoint);
               elem.Item2.Signal();
             }, 
