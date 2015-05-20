@@ -466,7 +466,7 @@ namespace Aegis_DVL.Data_Types {
     /// <param name="value">
     /// The value of the voternumber.
     /// </param>
-    public VoterNumber(uint value)
+    public VoterNumber(Int32 value)
       : this() { this.Value = value; }
 
     #endregion
@@ -476,7 +476,7 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     ///   What does this voter-number look like?
     /// </summary>
-    public uint Value { get; set; }
+    public Int32 Value { get; set; }
 
     #endregion
 
@@ -490,7 +490,7 @@ namespace Aegis_DVL.Data_Types {
     /// </param>
     /// <returns>
     /// </returns>
-    public static implicit operator uint(VoterNumber voterNum) {
+    public static implicit operator Int32(VoterNumber voterNum) {
       return voterNum.Value;
     }
 
@@ -510,7 +510,7 @@ namespace Aegis_DVL.Data_Types {
   /// <summary>
   ///   A CPR-number is a number and a unique identifier for a danish citizen, consisting of the birthdate and a number.
   /// </summary>
-  [Serializable] public struct CPR {
+  [Serializable] public struct VoterId {
     #region Constructors and Destructors
 
     /// <summary>
@@ -520,7 +520,7 @@ namespace Aegis_DVL.Data_Types {
     /// <param name="value">
     /// The value of the CPR-number.
     /// </param>
-    public CPR(uint value)
+    public VoterId(Int32 value)
       : this() { this.Value = value; }
 
     #endregion
@@ -530,7 +530,7 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     ///   What does this CPR-number look like?
     /// </summary>
-    public uint Value { get; set; }
+    public Int32 Value { get; set; }
 
     #endregion
 
@@ -544,7 +544,7 @@ namespace Aegis_DVL.Data_Types {
     /// </param>
     /// <returns>
     /// </returns>
-    public static implicit operator uint(CPR cpr) { return cpr.Value; }
+    public static implicit operator Int32(VoterId cpr) { return cpr.Value; }
 
     /// <summary>
     /// The to string.

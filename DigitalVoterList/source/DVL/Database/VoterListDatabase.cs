@@ -117,14 +117,9 @@ namespace Aegis_DVL.Database {
     /// TODO: review for problems with complexity
     public BallotStatus this[VoterNumber voternumber] {
       get {
-        Voter voter = GetVoter(voternumber);
+        Voter voter = GetVoterByVoterId(voternumber.Value);
         if (voter == null) return BallotStatus.Unavailable;
-        CipherText encVn = this.Parent.Crypto.AsymmetricEncrypt(
-          Bytes.From(voternumber.Value), this.Parent.Crypto.VoterDataEncryptionKey);
-        if (!voter.VoterNumber.IsIdenticalTo(encVn)) return BallotStatus.Unavailable;
-        CipherText encBallotReceived = this.Parent.Crypto.AsymmetricEncrypt(
-          Bytes.From((uint)BallotStatus.Received), 
-          this.Parent.Crypto.VoterDataEncryptionKey);
+       
         return voter.BallotStatus.IsIdenticalTo(encBallotReceived)
                  ? BallotStatus.Received
                  : BallotStatus.NotReceived;
@@ -139,7 +134,7 @@ namespace Aegis_DVL.Database {
         }
 
         Voter voter = GetVoter(voternumber);
-        voter.BallotStatus = this.Parent.Crypto.AsymmetricEncrypt(
+        voter.Voted = this.Parent.Crypto.AsymmetricEncrypt(
           Bytes.From((uint)value), this.Parent.Crypto.VoterDataEncryptionKey);
         this._db.SaveChanges();
       }
@@ -256,8 +251,7 @@ namespace Aegis_DVL.Database {
       Contract.Requires(!Equals(data, null));
 
       // Contract.Requires(Contract.ForAll(AllData, row => !row.CPR.Value.IsIdenticalTo(data.CPR.Value) && !row.VoterNumber.Value.IsIdenticalTo(data.VoterNumber.Value)));
-      this._db.Voters.AddObject(
-        Voter.CreateVoter(data.VoterNumber, data.CPR, data.BallotStatus));
+      this._db.Voters.AddObject(data);
       this._db.SaveChanges();
     }
 
@@ -281,13 +275,8 @@ namespace Aegis_DVL.Database {
     /// <returns>
     /// The <see cref="Voter"/>.
     /// </returns>
-    private Voter GetVoter(CPR cpr) {
-      CipherText encCpr = this.Parent.Crypto.AsymmetricEncrypt(
-        Bytes.From(cpr.Value), this.Parent.Crypto.VoterDataEncryptionKey);
-
-      IQueryable<Voter> res = this._db.Voters.Where(
-        data =>
-        data.CPR == encCpr.Value);
+    private Voter GetVoterByVoterId(Int32 vid) {
+      IQueryable<Voter> res = this._db.Voters.Where(data => data.VoterId == vid);
       return !res.Any() ? null : res.Single();
     }
 
@@ -300,13 +289,14 @@ namespace Aegis_DVL.Database {
     /// <returns>
     /// The <see cref="Voter"/>.
     /// </returns>
-    private Voter GetVoter(VoterNumber voterNumber) {
-      CipherText encvoterNumber = this.Parent.Crypto.AsymmetricEncrypt(
-        Bytes.From(voterNumber.Value), this.Parent.Crypto.VoterDataEncryptionKey);
-
+    private Voter GetVoterByDriversLicense(String dl) {
       IQueryable<Voter> res = this._db.Voters.Where(
-        data => data.VoterNumber ==
-                encvoterNumber.Value);
+        data => data.DriversLicense.Equals(dl, StringComparison.CurrentCulture));
+      return !res.Any() ? null : res.Single();
+    }
+
+    private Voter GetVoterByStateId(Int32 sid) {
+      IQueryable<Voter> res = this._db.Voters.Where(data => data.StateId == sid);
       return !res.Any() ? null : res.Single();
     }
 
