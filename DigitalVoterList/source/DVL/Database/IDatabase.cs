@@ -27,7 +27,7 @@ namespace Aegis_DVL.Database {
     /// <summary>
     ///   What does the entire database look like?
     /// </summary>
-    IEnumerable<EncryptedVoterData> AllData { [Pure] get; }
+    IEnumerable<Voter> AllData { [Pure] get; }
 
     /// <summary>
     ///   Who is my parent station?
@@ -72,12 +72,12 @@ namespace Aegis_DVL.Database {
     #region Public Methods and Operators
 
     /// <summary>
-    /// Import this encrypted data into the database!
+    /// Import this data into the database!
     /// </summary>
     /// <param name="data">
     /// A dataset to be imported.
     /// </param>
-    void Import(IEnumerable<EncryptedVoterData> data);
+    void Import(IEnumerable<Voter> data);
 
     #endregion
   }
@@ -91,10 +91,10 @@ namespace Aegis_DVL.Database {
     /// <summary>
     /// Gets the all data.
     /// </summary>
-    public IEnumerable<EncryptedVoterData> AllData {
+    public IEnumerable<Voter> AllData {
       get {
-        Contract.Ensures(Contract.Result<IEnumerable<EncryptedVoterData>>() != null);
-        return default(IEnumerable<EncryptedVoterData>);
+        Contract.Ensures(Contract.Result<IEnumerable<Voter>>() != null);
+        return default(IEnumerable<Voter>);
       }
     }
 
@@ -199,7 +199,7 @@ namespace Aegis_DVL.Database {
     /// <param name="data">
     /// The data.
     /// </param>
-    public void Import(IEnumerable<EncryptedVoterData> data) { Contract.Requires(data != null); }
+    public void Import(IEnumerable<Voter> data) { Contract.Requires(data != null); }
 
     #endregion
   }

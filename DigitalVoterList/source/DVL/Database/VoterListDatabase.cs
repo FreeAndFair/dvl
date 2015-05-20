@@ -89,17 +89,10 @@ namespace Aegis_DVL.Database {
     /// <summary>
     /// Gets the all data.
     /// </summary>
-    public IEnumerable<EncryptedVoterData> AllData {
+    public IEnumerable<Voter> AllData {
       get {
         return
-          this._db.Voters.ToArray()
-              .Select(
-                data =>
-                new EncryptedVoterData(
-                  new CipherText(data.VoterNumber), 
-                  new CipherText(data.CPR), 
-                  new CipherText(data.BallotStatus)))
-              .ToArray();
+          this._db.Voters.ToArray();
       }
     }
 
@@ -207,7 +200,7 @@ namespace Aegis_DVL.Database {
     /// <param name="data">
     /// The data.
     /// </param>
-    public void Import(IEnumerable<EncryptedVoterData> data) {
+    public void Import(IEnumerable<Voter> data) {
       int c = 0;
       using (DbTransaction transaction = this._db.Connection.BeginTransaction()) {
         data.ForEach(
@@ -246,8 +239,8 @@ namespace Aegis_DVL.Database {
             "CREATE TABLE Voters(VoterId int not null primary key desc, " +
             "Status int not null, LastName nvarchar(255) not null, FirstName nvarchar(255) not null, " +
             "MiddleName nvarchar(255), Suffix nvarchar(255), DateOfBirth datetime not null, " +
-            "EligibleDate datetime not null, Absentee bit not null, Voted bit not null, " +
-            "ReturnStatus nvarchar(255), BallotStyle int not null)";
+            "EligibleDate datetime not null, Absentee bit not null, DriversLicense nvarchar(255), " +
+            "Voted bit not null, ReturnStatus nvarchar(255), BallotStyle int not null, StateId int not null)";
           cmd.ExecuteNonQuery();
         }
       }
@@ -259,7 +252,7 @@ namespace Aegis_DVL.Database {
     /// <param name="data">
     /// The data to add.
     /// </param>
-    private void Add(EncryptedVoterData data) {
+    private void Add(Voter data) {
       Contract.Requires(!Equals(data, null));
 
       // Contract.Requires(Contract.ForAll(AllData, row => !row.CPR.Value.IsIdenticalTo(data.CPR.Value) && !row.VoterNumber.Value.IsIdenticalTo(data.VoterNumber.Value)));

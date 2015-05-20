@@ -47,6 +47,7 @@ namespace Aegis_DVL.Data_Types {
     #region Public Properties
 
     public Int32 VoterId { get; private set; }
+    public Int32 Status { get; private set; }
     public String LastName { get; private set; }
     public String FirstName { get; private set; }
     public String MiddleName { get; private set; }
@@ -54,9 +55,11 @@ namespace Aegis_DVL.Data_Types {
     public DateTime DateOfBirth { get; private set; }
     public DateTime EligibleDate { get; private set; }
     public Boolean Absentee { get; private set; }
+    public String DriversLicense { get; private set; }
     public Boolean Voted { get; private set; }
     public String ReturnStatus { get; private set; }
     public Int32 BallotStyle { get; private set; }
+    public Int32 StateId { get; private set; }
 
     #endregion
 
@@ -70,10 +73,11 @@ namespace Aegis_DVL.Data_Types {
     /// </returns>
     public override string ToString()
     {
-      return string.Format("VoterId: {0}; Name: {1}, {2} {3}, {4}; DateOfBirth: {5}; " + 
-        "EligibleDate: {6}; Absentee: {7}; Voted: {8}; ReturnStatus: {9}; BallotStyle: {10}",
-        VoterId, LastName, FirstName, MiddleName, Suffix, DateOfBirth, EligibleDate, 
-        Absentee, Voted, ReturnStatus, BallotStyle);
+      return string.Format("VoterId: {0}; Status: {1}; Name: {2}, {3} {4}, {5}; DateOfBirth: {6}; " + 
+        "EligibleDate: {7}; Absentee: {8}; DriversLicense: {9}; Voted: {10}; ReturnStatus: {11}; " +
+        "BallotStyle: {12}; StateId: {13}",
+        VoterId, Status, LastName, FirstName, MiddleName, Suffix, DateOfBirth, EligibleDate, 
+        Absentee, DriversLicense, Voted, ReturnStatus, BallotStyle, StateId);
     }
 
     #endregion
@@ -102,6 +106,7 @@ namespace Aegis_DVL.Data_Types {
   /// Encrypted voterdata is the encrypted combination of CPR, 
   /// VoterNumber, and BallotStatus.
   /// </summary>
+  /*
   [Serializable] public struct EncryptedVoterData {
     #region Constructors and Destructors
 
@@ -174,7 +179,7 @@ namespace Aegis_DVL.Data_Types {
 
     #endregion
   }
-
+  */
   /// <summary>
   /// CipherText is encrypted data.
   /// @design This is nothing more than a struct wrapping a byte[].

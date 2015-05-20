@@ -118,23 +118,19 @@ namespace Aegis_DVL.Database
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
-        /// <param name="middleName">Initial value of the MiddleName property.</param>
-        /// <param name="suffix">Initial value of the Suffix property.</param>
         /// <param name="dateOfBirth">Initial value of the DateOfBirth property.</param>
         /// <param name="eligibleDate">Initial value of the EligibleDate property.</param>
         /// <param name="absentee">Initial value of the Absentee property.</param>
         /// <param name="voted">Initial value of the Voted property.</param>
         /// <param name="returnStatus">Initial value of the ReturnStatus property.</param>
         /// <param name="ballotStyle">Initial value of the BallotStyle property.</param>
-        public static Voter CreateVoter(global::System.Int32 voterId, global::System.Int32 status, global::System.String lastName, global::System.String firstName, global::System.String middleName, global::System.String suffix, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean absentee, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle)
+        public static Voter CreateVoter(global::System.Int32 voterId, global::System.Int32 status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean absentee, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle)
         {
             Voter voter = new Voter();
             voter.VoterId = voterId;
             voter.Status = status;
             voter.LastName = lastName;
             voter.FirstName = firstName;
-            voter.MiddleName = middleName;
-            voter.Suffix = suffix;
             voter.DateOfBirth = dateOfBirth;
             voter.EligibleDate = eligibleDate;
             voter.Absentee = absentee;
@@ -250,7 +246,7 @@ namespace Aegis_DVL.Database
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String MiddleName
         {
@@ -262,7 +258,7 @@ namespace Aegis_DVL.Database
             {
                 OnMiddleNameChanging(value);
                 ReportPropertyChanging("MiddleName");
-                _MiddleName = StructuralObject.SetValidValue(value, false);
+                _MiddleName = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("MiddleName");
                 OnMiddleNameChanged();
             }
@@ -274,7 +270,7 @@ namespace Aegis_DVL.Database
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Suffix
         {
@@ -286,7 +282,7 @@ namespace Aegis_DVL.Database
             {
                 OnSuffixChanging(value);
                 ReportPropertyChanging("Suffix");
-                _Suffix = StructuralObject.SetValidValue(value, false);
+                _Suffix = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Suffix");
                 OnSuffixChanged();
             }
@@ -370,6 +366,30 @@ namespace Aegis_DVL.Database
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DriversLicense
+        {
+            get
+            {
+                return _DriversLicense;
+            }
+            set
+            {
+                OnDriversLicenseChanging(value);
+                ReportPropertyChanging("DriversLicense");
+                _DriversLicense = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DriversLicense");
+                OnDriversLicenseChanged();
+            }
+        }
+        private global::System.String _DriversLicense;
+        partial void OnDriversLicenseChanging(global::System.String value);
+        partial void OnDriversLicenseChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Boolean Voted
@@ -438,6 +458,30 @@ namespace Aegis_DVL.Database
         private global::System.Int32 _BallotStyle;
         partial void OnBallotStyleChanging(global::System.Int32 value);
         partial void OnBallotStyleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> StateId
+        {
+            get
+            {
+                return _StateId;
+            }
+            set
+            {
+                OnStateIdChanging(value);
+                ReportPropertyChanging("StateId");
+                _StateId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StateId");
+                OnStateIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _StateId;
+        partial void OnStateIdChanging(Nullable<global::System.Int32> value);
+        partial void OnStateIdChanged();
 
         #endregion
 

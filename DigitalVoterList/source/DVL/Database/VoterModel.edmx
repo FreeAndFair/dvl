@@ -16,14 +16,16 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(255)" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(255)" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar(255)" Nullable="false" />
-          <Property Name="Suffix" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(255)" Nullable="true" />
+          <Property Name="Suffix" Type="nvarchar(255)" Nullable="true" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="EligibleDate" Type="datetime" Nullable="false" />
           <Property Name="Absentee" Type="bit" Nullable="false" />
+          <Property Name="DriversLicense" Type="nvarchar(255)" Nullable="true" />
           <Property Name="Voted" Type="bit" Nullable="false" />
           <Property Name="ReturnStatus" Type="nvarchar(255)" Nullable="false" />
           <Property Name="BallotStyle" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="true" />
         </EntityType>
       </Schema>
     </edmx:StorageModels>
@@ -41,14 +43,16 @@
           <Property Type="Int32" Name="Status" Nullable="false" />
           <Property Type="String" Name="LastName" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" />
-          <Property Type="String" Name="MiddleName" Nullable="false" />
-          <Property Type="String" Name="Suffix" Nullable="false" />
+          <Property Type="String" Name="MiddleName" Nullable="true" />
+          <Property Type="String" Name="Suffix" Nullable="true" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
           <Property Type="DateTime" Name="EligibleDate" Nullable="false" />
           <Property Type="Boolean" Name="Absentee" Nullable="false" />
+          <Property Type="String" Name="DriversLicense" Nullable="true" />
           <Property Type="Boolean" Name="Voted" Nullable="false" />
           <Property Type="String" Name="ReturnStatus" Nullable="false" />
           <Property Type="Int32" Name="BallotStyle" Nullable="false" />
+          <Property Type="Int32" Name="StateId" Nullable="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -59,9 +63,20 @@
           <EntitySetMapping Name="Voters">
             <EntityTypeMapping TypeName="VoterModel.Voter">
               <MappingFragment StoreEntitySet="Voters">
-                <ScalarProperty Name="VoterNumber" ColumnName="VoterNumber" />
-                <ScalarProperty Name="CPR" ColumnName="CPR" />
-                <ScalarProperty Name="BallotStatus" ColumnName="BallotStatus" />
+                <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="EligibleDate" ColumnName="EligibleDate" />
+                <ScalarProperty Name="Absentee" ColumnName="Absentee" />
+                <ScalarProperty Name="DriversLicense" ColumnName="DriversLicense" />
+                <ScalarProperty Name="Voted" ColumnName="Voted" />
+                <ScalarProperty Name="ReturnStatus" ColumnName="ReturnStatus" />
+                <ScalarProperty Name="BallotStyle" ColumnName="BallotStyle" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
