@@ -9,9 +9,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.EntityClient;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -128,7 +128,7 @@ namespace Aegis_DVL.Database
 
         #endregion
 
-        #region Simple Properties
+        #region Primitive Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -147,7 +147,7 @@ namespace Aegis_DVL.Database
                 {
                     OnVoterNumberChanging(value);
                     ReportPropertyChanging("VoterNumber");
-                    _VoterNumber = StructuralObject.SetValidValue(value, false, "VoterNumber");
+                    _VoterNumber = StructuralObject.SetValidValue(value, false);
                     ReportPropertyChanged("VoterNumber");
                     OnVoterNumberChanged();
                 }
@@ -172,7 +172,7 @@ namespace Aegis_DVL.Database
             {
                 OnCPRChanging(value);
                 ReportPropertyChanging("CPR");
-                _CPR = StructuralObject.SetValidValue(value, false, "CPR");
+                _CPR = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("CPR");
                 OnCPRChanged();
             }
@@ -196,7 +196,7 @@ namespace Aegis_DVL.Database
             {
                 OnBallotStatusChanging(value);
                 ReportPropertyChanging("BallotStatus");
-                _BallotStatus = StructuralObject.SetValidValue(value, false, "BallotStatus");
+                _BallotStatus = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("BallotStatus");
                 OnBallotStatusChanged();
             }
@@ -207,8 +207,10 @@ namespace Aegis_DVL.Database
 
         #endregion
 
+    
     }
 
     #endregion
 
+    
 }

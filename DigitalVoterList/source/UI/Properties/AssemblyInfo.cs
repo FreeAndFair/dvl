@@ -30,7 +30,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("UI")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright ©  2012-15")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

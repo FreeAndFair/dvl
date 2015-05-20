@@ -9,9 +9,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.EntityClient;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -126,7 +126,7 @@ namespace Aegis_DVL.Logging
 
         #endregion
 
-        #region Simple Properties
+        #region Primitive Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -145,7 +145,7 @@ namespace Aegis_DVL.Logging
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    _Id = StructuralObject.SetValidValue(value);
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -170,7 +170,7 @@ namespace Aegis_DVL.Logging
             {
                 OnLogEntryChanging(value);
                 ReportPropertyChanging("LogEntry");
-                _LogEntry = StructuralObject.SetValidValue(value, false, "LogEntry");
+                _LogEntry = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("LogEntry");
                 OnLogEntryChanged();
             }
@@ -181,8 +181,10 @@ namespace Aegis_DVL.Logging
 
         #endregion
 
+    
     }
 
     #endregion
 
+    
 }
