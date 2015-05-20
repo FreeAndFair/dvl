@@ -16,6 +16,7 @@ namespace Aegis_DVL.Commands {
   using System.Net;
 
   using Aegis_DVL.Data_Types;
+  using Aegis_DVL.Database;
   using Aegis_DVL.Logging;
   using Aegis_DVL.Util;
 
@@ -51,9 +52,9 @@ namespace Aegis_DVL.Commands {
     private readonly string _sender;
 
     /// <summary>
-    /// The _simple voter data.
+    /// The voter data.
     /// </summary>
-    private readonly byte[][][] _simpleVoterData;
+    private readonly Voter[] _voterData;
 
     #endregion
 
@@ -69,9 +70,7 @@ namespace Aegis_DVL.Commands {
     public SyncCommand(Station parent) {
       Contract.Requires(parent != null);
       this._sender = parent.Address.ToString();
-      this._simpleVoterData =
-        parent.Database.AllData.Select(
-          encvdata => new[] { encvdata.VoterNumber.Value, encvdata.CPR.Value, encvdata.BallotStatus.Value }).ToArray();
+      this._voterData = parent.Database.AllData.ToArray();
       this._addresses = parent.Peers.Keys.Select(endpoint => endpoint.ToString()).ToArray();
       this._publicKeys = parent.Peers.Values.Select(key => key.Value.ToBytes()).ToArray();
       this._masterPwHash = Bytes.FromFile("Master.pw");
@@ -119,9 +118,7 @@ namespace Aegis_DVL.Commands {
         if (!receiver.Address.Equals(endPoint)) receiver.AddPeer(endPoint, new AsymmetricKey(this._publicKeys[i].ToKey()));
       }
 
-      receiver.Database.Import(
-        this._simpleVoterData.Select(
-          row => new EncryptedVoterData(new CipherText(row[0]), new CipherText(row[1]), new CipherText(row[2]))));
+      receiver.Database.Import(_voterData);
       receiver.Logger.Log("Synchronized by " + this.Sender, Level.Info);
       receiver.Communicator.Send(new AllStationsAvailable(receiver.Address), receiver.Manager);
     }

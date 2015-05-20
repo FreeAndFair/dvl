@@ -133,7 +133,7 @@ namespace Aegis_DVL.Database {
             Level.Info);
         }
 
-        Voter voter = GetVoter(voternumber);
+        Voter voter = GetVoterByVoterId(voternumber.Value);
         voter.Voted = this.Parent.Crypto.AsymmetricEncrypt(
           Bytes.From((uint)value), this.Parent.Crypto.VoterDataEncryptionKey);
         this._db.SaveChanges();
@@ -242,7 +242,7 @@ namespace Aegis_DVL.Database {
     }
 
     /// <summary>
-    /// Add this encrypted voter data to the database!
+    /// Add this voter data to the database!
     /// </summary>
     /// <param name="data">
     /// The data to add.
