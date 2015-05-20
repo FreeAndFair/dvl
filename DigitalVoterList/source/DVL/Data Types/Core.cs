@@ -20,6 +20,85 @@ namespace Aegis_DVL.Data_Types {
   #region Crypto
 
   /// <summary>
+  /// Voterdata is the combination of all the fields in a voter record.
+  /// </summary>
+  [Serializable] public struct VoterData {
+    #region Constructors and Destructors
+
+    public VoterData(Int32 voterid, String lastname, String firstname, 
+                     String middlename, String suffix, DateTime dateofbirth,
+                     DateTime eligibledate, Boolean absentee, Boolean voted,
+                     String returnstatus, Int32 ballotstyle) : this() {
+      this.VoterId = voterid;
+      this.LastName = lastname;
+      this.FirstName = firstname;
+      this.MiddleName = middlename;
+      this.Suffix = suffix;
+      this.DateOfBirth = dateofbirth;
+      this.EligibleDate = eligibledate;
+      this.Absentee = absentee;
+      this.Voted = voted;
+      this.ReturnStatus = returnstatus;
+      this.BallotStyle = ballotstyle;
+    }
+
+    #endregion
+
+    #region Public Properties
+
+    public Int32 VoterId { get; private set; }
+    public String LastName { get; private set; }
+    public String FirstName { get; private set; }
+    public String MiddleName { get; private set; }
+    public String Suffix { get; private set; }
+    public DateTime DateOfBirth { get; private set; }
+    public DateTime EligibleDate { get; private set; }
+    public Boolean Absentee { get; private set; }
+    public Boolean Voted { get; private set; }
+    public String ReturnStatus { get; private set; }
+    public Int32 BallotStyle { get; private set; }
+
+    #endregion
+
+    #region Public Methods and Operators
+
+    /// <summary>
+    /// The to string.
+    /// </summary>
+    /// <returns>
+    /// The <see cref="string"/>.
+    /// </returns>
+    public override string ToString()
+    {
+      return string.Format("VoterId: {0}; Name: {1}, {2} {3}, {4}; DateOfBirth: {5}; " + 
+        "EligibleDate: {6}; Absentee: {7}; Voted: {8}; ReturnStatus: {9}; BallotStyle: {10}",
+        VoterId, LastName, FirstName, MiddleName, Suffix, DateOfBirth, EligibleDate, 
+        Absentee, Voted, ReturnStatus, BallotStyle);
+    }
+
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// The object invariant.
+    /// </summary>
+    [ContractInvariantMethod]
+    private void ObjectInvariant()
+    {
+      Contract.Invariant(!Equals(this.VoterId, null));
+      Contract.Invariant(!Equals(this.LastName, null));
+      Contract.Invariant(!Equals(this.FirstName, null));
+      Contract.Invariant(!Equals(this.DateOfBirth, null));
+      Contract.Invariant(!Equals(this.EligibleDate, null));
+      Contract.Invariant(!Equals(this.Absentee, null));
+      Contract.Invariant(!Equals(this.Voted, null));
+      Contract.Invariant(!Equals(this.BallotStyle, null));
+    }
+
+    #endregion
+  }
+  /// <summary>
   /// Encrypted voterdata is the encrypted combination of CPR, 
   /// VoterNumber, and BallotStatus.
   /// </summary>

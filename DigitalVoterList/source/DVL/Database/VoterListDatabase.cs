@@ -243,8 +243,11 @@ namespace Aegis_DVL.Database {
         db.Open();
         using (SQLiteCommand cmd = db.CreateCommand()) {
           cmd.CommandText =
-            "CREATE TABLE Voters(VoterNumber BLOB NOT NULL PRIMARY KEY DESC, " +
-            "CPR BLOB UNIQUE NOT NULL, BallotStatus BLOB NOT NULL)";
+            "CREATE TABLE Voters(VoterId int not null primary key desc, " +
+            "Status int not null, LastName nvarchar(255) not null, FirstName nvarchar(255) not null, " +
+            "MiddleName nvarchar(255), Suffix nvarchar(255), DateOfBirth datetime not null, " +
+            "EligibleDate datetime not null, Absentee bit not null, Voted bit not null, " +
+            "ReturnStatus nvarchar(255), BallotStyle int not null)";
           cmd.ExecuteNonQuery();
         }
       }

@@ -114,15 +114,33 @@ namespace Aegis_DVL.Database
         /// <summary>
         /// Create a new Voter object.
         /// </summary>
-        /// <param name="voterNumber">Initial value of the VoterNumber property.</param>
-        /// <param name="cPR">Initial value of the CPR property.</param>
-        /// <param name="ballotStatus">Initial value of the BallotStatus property.</param>
-        public static Voter CreateVoter(global::System.Byte[] voterNumber, global::System.Byte[] cPR, global::System.Byte[] ballotStatus)
+        /// <param name="voterId">Initial value of the VoterId property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        /// <param name="lastName">Initial value of the LastName property.</param>
+        /// <param name="firstName">Initial value of the FirstName property.</param>
+        /// <param name="middleName">Initial value of the MiddleName property.</param>
+        /// <param name="suffix">Initial value of the Suffix property.</param>
+        /// <param name="dateOfBirth">Initial value of the DateOfBirth property.</param>
+        /// <param name="eligibleDate">Initial value of the EligibleDate property.</param>
+        /// <param name="absentee">Initial value of the Absentee property.</param>
+        /// <param name="voted">Initial value of the Voted property.</param>
+        /// <param name="returnStatus">Initial value of the ReturnStatus property.</param>
+        /// <param name="ballotStyle">Initial value of the BallotStyle property.</param>
+        public static Voter CreateVoter(global::System.Int32 voterId, global::System.Int32 status, global::System.String lastName, global::System.String firstName, global::System.String middleName, global::System.String suffix, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean absentee, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle)
         {
             Voter voter = new Voter();
-            voter.VoterNumber = voterNumber;
-            voter.CPR = cPR;
-            voter.BallotStatus = ballotStatus;
+            voter.VoterId = voterId;
+            voter.Status = status;
+            voter.LastName = lastName;
+            voter.FirstName = firstName;
+            voter.MiddleName = middleName;
+            voter.Suffix = suffix;
+            voter.DateOfBirth = dateOfBirth;
+            voter.EligibleDate = eligibleDate;
+            voter.Absentee = absentee;
+            voter.Voted = voted;
+            voter.ReturnStatus = returnStatus;
+            voter.BallotStyle = ballotStyle;
             return voter;
         }
 
@@ -135,75 +153,291 @@ namespace Aegis_DVL.Database
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] VoterNumber
+        public global::System.Int32 VoterId
         {
             get
             {
-                return StructuralObject.GetValidValue(_VoterNumber);
+                return _VoterId;
             }
             set
             {
-                if (!StructuralObject.BinaryEquals(_VoterNumber, value))
+                if (_VoterId != value)
                 {
-                    OnVoterNumberChanging(value);
-                    ReportPropertyChanging("VoterNumber");
-                    _VoterNumber = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("VoterNumber");
-                    OnVoterNumberChanged();
+                    OnVoterIdChanging(value);
+                    ReportPropertyChanging("VoterId");
+                    _VoterId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("VoterId");
+                    OnVoterIdChanged();
                 }
             }
         }
-        private global::System.Byte[] _VoterNumber;
-        partial void OnVoterNumberChanging(global::System.Byte[] value);
-        partial void OnVoterNumberChanged();
+        private global::System.Int32 _VoterId;
+        partial void OnVoterIdChanging(global::System.Int32 value);
+        partial void OnVoterIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] CPR
+        public global::System.Int32 Status
         {
             get
             {
-                return StructuralObject.GetValidValue(_CPR);
+                return _Status;
             }
             set
             {
-                OnCPRChanging(value);
-                ReportPropertyChanging("CPR");
-                _CPR = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("CPR");
-                OnCPRChanged();
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
             }
         }
-        private global::System.Byte[] _CPR;
-        partial void OnCPRChanging(global::System.Byte[] value);
-        partial void OnCPRChanged();
+        private global::System.Int32 _Status;
+        partial void OnStatusChanging(global::System.Int32 value);
+        partial void OnStatusChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] BallotStatus
+        public global::System.String LastName
         {
             get
             {
-                return StructuralObject.GetValidValue(_BallotStatus);
+                return _LastName;
             }
             set
             {
-                OnBallotStatusChanging(value);
-                ReportPropertyChanging("BallotStatus");
-                _BallotStatus = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("BallotStatus");
-                OnBallotStatusChanged();
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
             }
         }
-        private global::System.Byte[] _BallotStatus;
-        partial void OnBallotStatusChanging(global::System.Byte[] value);
-        partial void OnBallotStatusChanged();
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String MiddleName
+        {
+            get
+            {
+                return _MiddleName;
+            }
+            set
+            {
+                OnMiddleNameChanging(value);
+                ReportPropertyChanging("MiddleName");
+                _MiddleName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("MiddleName");
+                OnMiddleNameChanged();
+            }
+        }
+        private global::System.String _MiddleName;
+        partial void OnMiddleNameChanging(global::System.String value);
+        partial void OnMiddleNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Suffix
+        {
+            get
+            {
+                return _Suffix;
+            }
+            set
+            {
+                OnSuffixChanging(value);
+                ReportPropertyChanging("Suffix");
+                _Suffix = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Suffix");
+                OnSuffixChanged();
+            }
+        }
+        private global::System.String _Suffix;
+        partial void OnSuffixChanging(global::System.String value);
+        partial void OnSuffixChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateOfBirth
+        {
+            get
+            {
+                return _DateOfBirth;
+            }
+            set
+            {
+                OnDateOfBirthChanging(value);
+                ReportPropertyChanging("DateOfBirth");
+                _DateOfBirth = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateOfBirth");
+                OnDateOfBirthChanged();
+            }
+        }
+        private global::System.DateTime _DateOfBirth;
+        partial void OnDateOfBirthChanging(global::System.DateTime value);
+        partial void OnDateOfBirthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime EligibleDate
+        {
+            get
+            {
+                return _EligibleDate;
+            }
+            set
+            {
+                OnEligibleDateChanging(value);
+                ReportPropertyChanging("EligibleDate");
+                _EligibleDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EligibleDate");
+                OnEligibleDateChanged();
+            }
+        }
+        private global::System.DateTime _EligibleDate;
+        partial void OnEligibleDateChanging(global::System.DateTime value);
+        partial void OnEligibleDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Absentee
+        {
+            get
+            {
+                return _Absentee;
+            }
+            set
+            {
+                OnAbsenteeChanging(value);
+                ReportPropertyChanging("Absentee");
+                _Absentee = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Absentee");
+                OnAbsenteeChanged();
+            }
+        }
+        private global::System.Boolean _Absentee;
+        partial void OnAbsenteeChanging(global::System.Boolean value);
+        partial void OnAbsenteeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Voted
+        {
+            get
+            {
+                return _Voted;
+            }
+            set
+            {
+                OnVotedChanging(value);
+                ReportPropertyChanging("Voted");
+                _Voted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Voted");
+                OnVotedChanged();
+            }
+        }
+        private global::System.Boolean _Voted;
+        partial void OnVotedChanging(global::System.Boolean value);
+        partial void OnVotedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ReturnStatus
+        {
+            get
+            {
+                return _ReturnStatus;
+            }
+            set
+            {
+                OnReturnStatusChanging(value);
+                ReportPropertyChanging("ReturnStatus");
+                _ReturnStatus = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ReturnStatus");
+                OnReturnStatusChanged();
+            }
+        }
+        private global::System.String _ReturnStatus;
+        partial void OnReturnStatusChanging(global::System.String value);
+        partial void OnReturnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BallotStyle
+        {
+            get
+            {
+                return _BallotStyle;
+            }
+            set
+            {
+                OnBallotStyleChanging(value);
+                ReportPropertyChanging("BallotStyle");
+                _BallotStyle = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BallotStyle");
+                OnBallotStyleChanged();
+            }
+        }
+        private global::System.Int32 _BallotStyle;
+        partial void OnBallotStyleChanging(global::System.Int32 value);
+        partial void OnBallotStyleChanged();
 
         #endregion
 

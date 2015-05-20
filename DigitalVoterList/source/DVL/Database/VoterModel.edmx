@@ -10,11 +10,20 @@
         </EntityContainer>
         <EntityType Name="Voters">
           <Key>
-            <PropertyRef Name="VoterNumber" />
+            <PropertyRef Name="VoterId" />
           </Key>
-          <Property Name="VoterNumber" Type="blob" Nullable="false" />
-          <Property Name="CPR" Type="blob" Nullable="false" />
-          <Property Name="BallotStatus" Type="blob" Nullable="false" />
+          <Property Name="VoterId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="Suffix" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="EligibleDate" Type="datetime" Nullable="false" />
+          <Property Name="Absentee" Type="bit" Nullable="false" />
+          <Property Name="Voted" Type="bit" Nullable="false" />
+          <Property Name="ReturnStatus" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="BallotStyle" Type="int" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:StorageModels>
@@ -26,11 +35,20 @@
         </EntityContainer>
         <EntityType Name="Voter">
           <Key>
-            <PropertyRef Name="VoterNumber" />
+            <PropertyRef Name="VoterId" />
           </Key>
-          <Property Name="VoterNumber" Type="Binary" Nullable="false" MaxLength="2147483647" FixedLength="false" />
-          <Property Name="CPR" Type="Binary" Nullable="false" MaxLength="2147483647" FixedLength="false" />
-          <Property Name="BallotStatus" Type="Binary" Nullable="false" MaxLength="2147483647" FixedLength="false" />
+          <Property Type="Int32" Name="VoterId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" />
+          <Property Type="String" Name="MiddleName" Nullable="false" />
+          <Property Type="String" Name="Suffix" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="DateTime" Name="EligibleDate" Nullable="false" />
+          <Property Type="Boolean" Name="Absentee" Nullable="false" />
+          <Property Type="Boolean" Name="Voted" Nullable="false" />
+          <Property Type="String" Name="ReturnStatus" Nullable="false" />
+          <Property Type="Int32" Name="BallotStyle" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
