@@ -74,6 +74,7 @@ namespace Tests
     /// <summary>
     ///   The ballot received command and revoke ballot command test.
     /// </summary>
+    /*
     [Test]
     public void BallotReceivedCommandAndRevokeBallotCommandTest()
     {
@@ -111,7 +112,7 @@ namespace Tests
       revoke.Execute(this.Station);
       Assert.That(this.Station.Database[vn] == BallotStatus.NotReceived);
     }
-
+      */
     /// <summary>
     ///   The ballot request denied test.
     /// </summary>
@@ -175,6 +176,7 @@ namespace Tests
     /// <summary>
     ///   The manager requirement check test.
     /// </summary>
+    /*
     [Test]
     public void ManagerRequirementCheckTest()
     {
@@ -214,6 +216,7 @@ namespace Tests
       promoteManager.Execute(this.Station);
       Assert.That(!this.Station.Manager.Equals(this.NewPeer.Address));
     }
+      */
 
     /// <summary>
     ///   The public key exchange command test.
@@ -251,6 +254,7 @@ namespace Tests
     /// <summary>
     ///   The request ballot commands test.
     /// </summary>
+    /*
     [Test]
     public void RequestBallotCommandsTest()
     {
@@ -293,6 +297,7 @@ namespace Tests
       pswdcmd.Execute(this.Manager);
       Assert.That(ui.HandOutBallot);
     }
+      */
 
     /// <summary>
     ///   Create a new UI, Manager, Station, and joining peer Station along 

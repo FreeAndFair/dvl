@@ -120,7 +120,7 @@ namespace Aegis_DVL.Database {
         Voter voter = GetVoterByVoterId(voternumber.Value);
         if (voter == null) return BallotStatus.Unavailable;
        
-        return voter.BallotStatus.IsIdenticalTo(encBallotReceived)
+        return voter.Voted
                  ? BallotStatus.Received
                  : BallotStatus.NotReceived;
       }
@@ -134,8 +134,7 @@ namespace Aegis_DVL.Database {
         }
 
         Voter voter = GetVoterByVoterId(voternumber.Value);
-        voter.Voted = this.Parent.Crypto.AsymmetricEncrypt(
-          Bytes.From((uint)value), this.Parent.Crypto.VoterDataEncryptionKey);
+        voter.Voted = (value == BallotStatus.Received);
         this._db.SaveChanges();
       }
     }
@@ -153,6 +152,7 @@ namespace Aegis_DVL.Database {
     /// The <see cref="BallotStatus"/>.
     /// </returns>
     /// TODO: review for problems with complexity
+    /*
     public BallotStatus this[CPR cpr, string masterPassword] {
       get {
         CipherText encBallotReceived = this.Parent.Crypto.AsymmetricEncrypt(
@@ -176,7 +176,7 @@ namespace Aegis_DVL.Database {
         this._db.SaveChanges();
       }
     }
-
+      */
     #endregion
 
     #region Public Methods and Operators
@@ -232,10 +232,11 @@ namespace Aegis_DVL.Database {
         using (SQLiteCommand cmd = db.CreateCommand()) {
           cmd.CommandText =
             "CREATE TABLE Voters(VoterId int not null primary key desc, " +
-            "Status int not null, LastName nvarchar(255) not null, FirstName nvarchar(255) not null, " +
-            "MiddleName nvarchar(255), Suffix nvarchar(255), DateOfBirth datetime not null, " +
-            "EligibleDate datetime not null, Absentee bit not null, DriversLicense nvarchar(255), " +
-            "Voted bit not null, ReturnStatus nvarchar(255), BallotStyle int not null, StateId int not null)";
+            "Status nvarchar not null, LastName nvarchar not null, FirstName nvarchar not null, " +
+            "MiddleName nvarchar, Suffix nvarchar, DateOfBirth datetime not null, " +
+            "EligibleDate datetime not null, MustShowId bit not null, Absentee bit not null, " +
+            "DriversLicense nvarchar, Voted bit not null, ReturnStatus nvarchar, " + 
+            "BallotStyle int not null, PrecinctSub nvarchar not null, StateId int not null)";
           cmd.ExecuteNonQuery();
         }
       }

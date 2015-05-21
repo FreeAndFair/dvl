@@ -120,11 +120,13 @@ namespace Aegis_DVL.Database
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="dateOfBirth">Initial value of the DateOfBirth property.</param>
         /// <param name="eligibleDate">Initial value of the EligibleDate property.</param>
+        /// <param name="mustShowId">Initial value of the MustShowId property.</param>
         /// <param name="absentee">Initial value of the Absentee property.</param>
         /// <param name="voted">Initial value of the Voted property.</param>
         /// <param name="returnStatus">Initial value of the ReturnStatus property.</param>
         /// <param name="ballotStyle">Initial value of the BallotStyle property.</param>
-        public static Voter CreateVoter(global::System.Int32 voterId, global::System.Int32 status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean absentee, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle)
+        /// <param name="precinctSub">Initial value of the PrecinctSub property.</param>
+        public static Voter CreateVoter(global::System.Int32 voterId, global::System.String status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean mustShowId, global::System.Boolean absentee, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle, global::System.String precinctSub)
         {
             Voter voter = new Voter();
             voter.VoterId = voterId;
@@ -133,10 +135,12 @@ namespace Aegis_DVL.Database
             voter.FirstName = firstName;
             voter.DateOfBirth = dateOfBirth;
             voter.EligibleDate = eligibleDate;
+            voter.MustShowId = mustShowId;
             voter.Absentee = absentee;
             voter.Voted = voted;
             voter.ReturnStatus = returnStatus;
             voter.BallotStyle = ballotStyle;
+            voter.PrecinctSub = precinctSub;
             return voter;
         }
 
@@ -176,7 +180,7 @@ namespace Aegis_DVL.Database
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Status
+        public global::System.String Status
         {
             get
             {
@@ -186,13 +190,13 @@ namespace Aegis_DVL.Database
             {
                 OnStatusChanging(value);
                 ReportPropertyChanging("Status");
-                _Status = StructuralObject.SetValidValue(value);
+                _Status = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Status");
                 OnStatusChanged();
             }
         }
-        private global::System.Int32 _Status;
-        partial void OnStatusChanging(global::System.Int32 value);
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
         partial void OnStatusChanged();
     
         /// <summary>
@@ -344,6 +348,30 @@ namespace Aegis_DVL.Database
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Boolean MustShowId
+        {
+            get
+            {
+                return _MustShowId;
+            }
+            set
+            {
+                OnMustShowIdChanging(value);
+                ReportPropertyChanging("MustShowId");
+                _MustShowId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MustShowId");
+                OnMustShowIdChanged();
+            }
+        }
+        private global::System.Boolean _MustShowId;
+        partial void OnMustShowIdChanging(global::System.Boolean value);
+        partial void OnMustShowIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Boolean Absentee
         {
             get
@@ -458,6 +486,30 @@ namespace Aegis_DVL.Database
         private global::System.Int32 _BallotStyle;
         partial void OnBallotStyleChanging(global::System.Int32 value);
         partial void OnBallotStyleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PrecinctSub
+        {
+            get
+            {
+                return _PrecinctSub;
+            }
+            set
+            {
+                OnPrecinctSubChanging(value);
+                ReportPropertyChanging("PrecinctSub");
+                _PrecinctSub = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PrecinctSub");
+                OnPrecinctSubChanged();
+            }
+        }
+        private global::System.String _PrecinctSub;
+        partial void OnPrecinctSubChanging(global::System.String value);
+        partial void OnPrecinctSubChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

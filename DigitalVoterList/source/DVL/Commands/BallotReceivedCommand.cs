@@ -23,11 +23,6 @@ namespace Aegis_DVL.Commands {
     #region Fields
 
     /// <summary>
-    /// The _cpr.
-    /// </summary>
-    private readonly CPR _cpr;
-
-    /// <summary>
     /// The _requester.
     /// </summary>
     private readonly IPEndPoint _requester;
@@ -57,13 +52,12 @@ namespace Aegis_DVL.Commands {
     /// <param name="cpr">
     /// The CPR-number of the ballot to be handed out and to be marked as received.
     /// </param>
-    public BallotReceivedCommand(IPEndPoint sender, IPEndPoint requester, VoterNumber voterNumber, CPR cpr) {
+    public BallotReceivedCommand(IPEndPoint sender, IPEndPoint requester, VoterNumber voterNumber) {
       Contract.Requires(sender != null);
       Contract.Requires(requester != null);
 
       this._requester = requester;
       this._voterNumber = voterNumber;
-      this._cpr = cpr;
       this.Sender = sender;
     }
 
@@ -88,8 +82,8 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       if (!receiver.Manager.Equals(this.Sender) ||
-          receiver.Database[this._voterNumber] == BallotStatus.Received) return;
-      receiver.Database[this._voterNumber] = BallotStatus.Received;
+          receiver.Database[_voterNumber] == BallotStatus.Received) return;
+      receiver.Database[_voterNumber] = BallotStatus.Received;
       if (receiver.Address.Equals(this._requester)) receiver.UI.BallotRequestReply(true);
     }
 

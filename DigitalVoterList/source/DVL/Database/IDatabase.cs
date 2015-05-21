@@ -65,7 +65,7 @@ namespace Aegis_DVL.Database {
     /// <returns>
     /// The BallotStatus for the voternumber/cpr combination.
     /// </returns>
-    BallotStatus this[CPR cpr, string masterPassword] { [Pure] get; set; }
+   // BallotStatus this[CPR cpr, string masterPassword] { [Pure] get; set; }
 
     #endregion
 
@@ -157,6 +157,7 @@ namespace Aegis_DVL.Database {
     /// <returns>
     /// The <see cref="BallotStatus"/>.
     /// </returns>
+    /*
     public BallotStatus this[CPR cpr, string masterPassword] {
       get {
         Contract.Requires(masterPassword != null);
@@ -183,6 +184,7 @@ namespace Aegis_DVL.Database {
         Contract.Ensures(this[cpr, masterPassword] == value);
       }
     }
+    */
 
     #endregion
 

@@ -23,11 +23,6 @@ namespace Aegis_DVL.Commands {
     #region Fields
 
     /// <summary>
-    /// The _cpr.
-    /// </summary>
-    private readonly CPR _cpr;
-
-    /// <summary>
     /// The _voter number.
     /// </summary>
     private readonly VoterNumber _voterNumber;
@@ -49,10 +44,9 @@ namespace Aegis_DVL.Commands {
     /// <param name="cpr">
     /// The CPR-number to revoke a ballot for.
     /// </param>
-    public RevokeBallotCommand(IPEndPoint sender, VoterNumber voterNumber, CPR cpr) {
+    public RevokeBallotCommand(IPEndPoint sender, VoterNumber voterNumber) {
       Contract.Requires(sender != null);
       this._voterNumber = voterNumber;
-      this._cpr = cpr;
       this.Sender = sender;
     }
 

@@ -73,6 +73,7 @@ namespace Tests {
 
     #region Public Methods and Operators
 
+      /*
     /// <summary>
     /// The big command send and receive test.
     /// </summary>
@@ -114,6 +115,7 @@ namespace Tests {
 
       File.Delete("BigCommandSendAndReceiveTestVoters.sqlite");
     }
+      */
 
     /// <summary>
     /// The discover network machines test.

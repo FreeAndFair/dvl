@@ -13,18 +13,20 @@
             <PropertyRef Name="VoterId" />
           </Key>
           <Property Name="VoterId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(255)" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(255)" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar(255)" Nullable="true" />
-          <Property Name="Suffix" Type="nvarchar(255)" Nullable="true" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" Nullable="true" />
+          <Property Name="Suffix" Type="nvarchar" Nullable="true" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="EligibleDate" Type="datetime" Nullable="false" />
+          <Property Name="MustShowId" Type="bit" Nullable="false" />
           <Property Name="Absentee" Type="bit" Nullable="false" />
-          <Property Name="DriversLicense" Type="nvarchar(255)" Nullable="true" />
+          <Property Name="DriversLicense" Type="nvarchar" Nullable="true" />
           <Property Name="Voted" Type="bit" Nullable="false" />
-          <Property Name="ReturnStatus" Type="nvarchar(255)" Nullable="false" />
+          <Property Name="ReturnStatus" Type="nvarchar" Nullable="false" />
           <Property Name="BallotStyle" Type="int" Nullable="false" />
+          <Property Name="PrecinctSub" Type="nvarchar" Nullable="false" />
           <Property Name="StateId" Type="int" Nullable="true" />
         </EntityType>
       </Schema>
@@ -40,18 +42,20 @@
             <PropertyRef Name="VoterId" />
           </Key>
           <Property Type="Int32" Name="VoterId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="String" Name="Status" Nullable="false" />
           <Property Type="String" Name="LastName" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" />
           <Property Type="String" Name="MiddleName" Nullable="true" />
           <Property Type="String" Name="Suffix" Nullable="true" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
           <Property Type="DateTime" Name="EligibleDate" Nullable="false" />
+          <Property Type="Boolean" Name="MustShowId" Nullable="false" />
           <Property Type="Boolean" Name="Absentee" Nullable="false" />
           <Property Type="String" Name="DriversLicense" Nullable="true" />
           <Property Type="Boolean" Name="Voted" Nullable="false" />
           <Property Type="String" Name="ReturnStatus" Nullable="false" />
           <Property Type="Int32" Name="BallotStyle" Nullable="false" />
+          <Property Type="String" Name="PrecinctSub" Nullable="false" />
           <Property Type="Int32" Name="StateId" Nullable="true" />
         </EntityType>
       </Schema>
@@ -71,11 +75,13 @@
                 <ScalarProperty Name="Suffix" ColumnName="Suffix" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="EligibleDate" ColumnName="EligibleDate" />
+                <ScalarProperty Name="MustShowId" ColumnName="MustShowId" />
                 <ScalarProperty Name="Absentee" ColumnName="Absentee" />
                 <ScalarProperty Name="DriversLicense" ColumnName="DriversLicense" />
                 <ScalarProperty Name="Voted" ColumnName="Voted" />
                 <ScalarProperty Name="ReturnStatus" ColumnName="ReturnStatus" />
                 <ScalarProperty Name="BallotStyle" ColumnName="BallotStyle" />
+                <ScalarProperty Name="PrecinctSub" ColumnName="PrecinctSub"/>
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
               </MappingFragment>
             </EntityTypeMapping>

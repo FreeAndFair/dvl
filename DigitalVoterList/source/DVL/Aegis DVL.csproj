@@ -150,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AddPeerCommand.cs" />
-    <Compile Include="Commands\BallotReceivedCPROnlyCommand.cs" />
     <Compile Include="Commands\BallotRequestDeniedCommand.cs" />
     <Compile Include="Commands\DisconnectStationCommand.cs" />
     <Compile Include="Commands\ElectNewManagerCommand.cs" />
@@ -161,10 +160,8 @@
     <Compile Include="Commands\PromoteNewManagerCommand.cs" />
     <Compile Include="Commands\RemovePeerCommand.cs" />
     <Compile Include="Commands\RequestBallotCommand.cs" />
-    <Compile Include="Commands\RequestBallotCPROnlyCommand.cs" />
     <Compile Include="Commands\RevokeBallotCommand.cs" />
     <Compile Include="Commands\CryptoCommand.cs" />
-    <Compile Include="Commands\RevokeBallotCPROnlyCommand.cs" />
     <Compile Include="Commands\ShutDownElectionCommand.cs" />
     <Compile Include="Commands\StartElectionCommand.cs" />
     <Compile Include="Commands\BallotReceivedCommand.cs" />

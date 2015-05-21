@@ -26,11 +26,6 @@ namespace Aegis_DVL.Commands {
     #region Fields
 
     /// <summary>
-    /// The _cpr.
-    /// </summary>
-    private readonly CPR _cpr;
-
-    /// <summary>
     /// The _voternumber.
     /// </summary>
     private readonly VoterNumber _voternumber;
@@ -90,7 +85,7 @@ namespace Aegis_DVL.Commands {
               .ForEach(
                 peer =>
                 receiver.Communicator.Send(
-                  new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber, this._cpr), peer));
+                  new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber), peer));
 
       if (this.Sender.Equals(receiver.Manager)) {
         receiver.UI.BallotRequestReply(true);
@@ -100,9 +95,9 @@ namespace Aegis_DVL.Commands {
       // Send to requester last.
       try {
         receiver.Communicator.Send(
-          new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber, this._cpr), this.Sender);
+          new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber), this.Sender);
       } catch (SocketException) {
-        receiver.AnnounceRevokeBallot(this._voternumber, this._cpr);
+        receiver.AnnounceRevokeBallot(this._voternumber);
       }
     }
 

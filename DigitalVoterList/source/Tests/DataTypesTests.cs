@@ -49,6 +49,7 @@ namespace Tests {
       Assert.That((uint)bs == 13);
     }
 
+      /*
     /// <summary>
     ///   The cpr test.
     /// </summary>
@@ -58,7 +59,7 @@ namespace Tests {
       Assert.That(cpr.ToString().Equals("2312881133"));
       Assert.That(2312881133.Equals(cpr));
     }
-
+      */
     /// <summary>
     ///   The cipher text test.
     /// </summary>
@@ -73,6 +74,7 @@ namespace Tests {
     /// <summary>
     ///   The encrypted voter data test.
     /// </summary>
+    /*
     [Test] public void EncryptedVoterDataTest() {
       var voternumber = new CipherText(new byte[] { 2, 1 });
       var cpr = new CipherText(new byte[] { 3, 2 });
@@ -85,7 +87,7 @@ namespace Tests {
       Assert.That(ballotstatus.Equals(encVoterData.BallotStatus));
       Assert.That(encVoterData.ToString() != null);
     }
-
+      */
     /// <summary>
     ///   The key test.
     /// </summary>

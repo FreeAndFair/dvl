@@ -399,17 +399,18 @@ namespace Aegis_DVL {
     /// <param name="cpr">
     /// The CPR number to revoke a ballot for.
     /// </param>
-    public void AnnounceRevokeBallot(VoterNumber voterNumber, CPR cpr) {
+    public void AnnounceRevokeBallot(VoterNumber voterNumber) {
       Contract.Requires(this.IsManager);
       Contract.Requires(this.Database[voterNumber] == BallotStatus.Received);
-      var cmd = new RevokeBallotCommand(this.Address, voterNumber, cpr);
+      var cmd = new RevokeBallotCommand(this.Address, voterNumber);
       this.Peers.Keys.ForEach(peer => this.Communicator.Send(cmd, peer));
       cmd.Execute(this);
       if (this.Logger != null) 
         this.Logger.Log("Announcing that this ballot should be revoked for voter number " + 
           voterNumber, Level.Warn);
     }
-
+      
+    /*
     /// <summary>
     /// Announce to all that they should revoke this update!
     /// </summary>
@@ -432,6 +433,7 @@ namespace Aegis_DVL {
         this.Logger.Log("Announcing that this ballot should be revoked " +
           "with master password: CPR " + cpr, Level.Warn);
     }
+    */
 
     /// <summary>
     ///   Announce to all stations that the election has started!
@@ -462,6 +464,7 @@ namespace Aegis_DVL {
           " as having received a ballot.", Level.Info);
     }
 
+    /*
     /// <summary>
     /// This voter received a ballot!
     /// </summary>
@@ -480,6 +483,7 @@ namespace Aegis_DVL {
       if (this.Logger != null) this.Logger.Log("Marking CPR " + cpr + 
         " with master password as having received a ballot.", Level.Info);
     }
+    */
 
     /// <summary>
     /// What machines on the network respond that they have the digital voter list software running?
@@ -590,6 +594,7 @@ namespace Aegis_DVL {
           voterNumber, Level.Info);
     }
 
+    /*
     /// <summary>
     /// Request a ballot for this voter!
     /// </summary>
@@ -609,6 +614,7 @@ namespace Aegis_DVL {
         this.Logger.Log("Requesting ballot with master password for CPR " + 
           cpr, Level.Info);
     }
+    */
 
     /// <summary>
     /// Revoke this ballot!
@@ -634,6 +640,7 @@ namespace Aegis_DVL {
     /// <param name="masterPassword">
     /// The master password that only the election secretary should know.
     /// </param>
+    /*
     public void RevokeBallot(CPR cpr, string masterPassword) {
       Contract.Requires(masterPassword != null);
       Contract.Requires(this.ValidMasterPassword(masterPassword));
@@ -644,7 +651,7 @@ namespace Aegis_DVL {
         this.Logger.Log("Revoking ballot with master password for voter with CPR " + 
           cpr, Level.Warn);
     }
-
+    */
     /// <summary>
     ///   The system is compromised, notify everyone and shut down the election!
     /// </summary>

@@ -64,6 +64,7 @@ namespace Tests {
     ///   Create some voter card data, insert it into the test DB,
     /// and check that various operations on said data hold.
     /// </summary>
+    /*
     [Test] public void Test() {
       IDatabase db = this.Station.Database;
       var vn = new VoterNumber(250000);
@@ -210,10 +211,12 @@ namespace Tests {
 
       Bytes.From(db.AllData.ToString()).ToFile("DECRYPTED_VOTERDATA");
     }
+     */
 
     /// <summary>
     /// The test master password db.
     /// </summary>
+    /*
     [Test] public void TestMasterPasswordDb() {
       IDatabase db = this.Station.Database;
       var vn = new VoterNumber(250000);
@@ -271,7 +274,7 @@ namespace Tests {
       db.AllData.ForEach(row => notNull = notNull & !Equals(row.VoterNumber, null));
       Assert.That(notNull);
     }
-
+      */
     #endregion
   }
 }

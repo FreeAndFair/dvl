@@ -12,12 +12,14 @@
 namespace UI {
   using System;
   using System.Collections.Generic;
+  using System.IO;
   using System.Net;
   using System.Windows;
 
   using Aegis_DVL;
   using Aegis_DVL.Cryptography;
   using Aegis_DVL.Data_Types;
+  using Aegis_DVL.Database;
   using Aegis_DVL.Util;
 
   using UI.ManagerWindows;
@@ -208,7 +210,7 @@ namespace UI {
     /// <param name="filePath">
     /// the file destination
     /// </param>
-    public void ExportData(IEnumerable<EncryptedVoterData> data, string filePath) { Bytes.From(data).ToFile(filePath); }
+    public void ExportData(IEnumerable<Voter> data, string filePath) { Bytes.From(data).ToFile(filePath); }
 
     /// <summary>
     /// When a manager wants to export voter data this is called
@@ -261,7 +263,8 @@ namespace UI {
     }
 
     /// <summary>
-    /// Import the election data from a serialized IEnumerable of EncryptedVoterData file
+    /// Import the election data from a |-delimited "CSV" file (note that this is
+    /// specific to the Dallas demo and will not work in general).
     /// </summary>
     /// <param name="filePath">
     /// the file path of the voter data
@@ -269,7 +272,86 @@ namespace UI {
     /// <returns>
     /// the voter data as a IEnumerable of EncryptedVoterData
     /// </returns>
-    public IEnumerable<EncryptedVoterData> ImportElectionData(string filePath) { return Bytes.FromFile(filePath, 30000000).To<IEnumerable<EncryptedVoterData>>(); }
+    public IEnumerable<Voter> ImportElectionData(string filePath) { 
+      List<Voter> result = new List<Voter>();
+      using (StreamReader sr = new StreamReader(filePath))
+      {
+        string line;
+        char[] delimiters = new char[] { '|' };
+        int count = 0;
+        line = sr.ReadLine(); // throw out the first line
+        try
+        {
+          while ((line = sr.ReadLine()) != null)
+          {
+            count = count + 1;
+            if (count % 1000 == 0) {
+              Console.WriteLine("Read {0} voters from input data", count);
+            }
+            string[] parts = line.Split(delimiters);
+            Voter v = new Voter();
+            // part 0 is "ID", skip it
+            v.VoterId = Int32.Parse(parts[1]);
+            // part 2 is "address_id"
+            v.Status = parts[3];
+            v.LastName = parts[4];
+            v.FirstName = parts[5];
+            v.MiddleName = parts[6];
+            v.Suffix = parts[7];
+            v.DateOfBirth = DateTime.Parse(parts[8]);
+            // part 9 is "dateofreg"
+            DateTime dt;
+            DateTime.TryParse(parts[10], out dt);
+            v.EligibleDate = dt;
+            // part 11 is "unit"
+            // part 12 is "unitno"
+            v.MustShowId = Boolean.Parse(parts[13]); // actually "registeredbymail"
+            v.Absentee = Boolean.Parse(parts[14]);
+            // part 15 is "protectedaddress"
+            // part 16 is "party"
+            // part 17 is "ssn"
+            // part 18 is "ssnrev"
+            v.DriversLicense = parts[19];
+            // part 20 is "dlrev"
+            // part 21 is "house"
+            // part 22 is "signature"
+            // part 23 is "signaturefilename"
+            v.Voted = Boolean.Parse(parts[24]);
+            // part 25 is "maildate"
+            // part 26 is "returndate"
+            v.ReturnStatus = parts[27];
+            Int32 bs;
+            if (Int32.TryParse(parts[28], out bs)) {
+              v.BallotStyle = bs;
+            } else {
+              v.BallotStyle = -1;
+            }
+            v.PrecinctSub = parts[29];
+            // part 30 is precinct
+            // part 31 is precsub
+            // part 32 is streetbldg
+            // part 33 is streetpredir
+            // part 34 is streetname
+            // part 35 is streettype
+            // part 36 is streetpostdir
+            // part 37 is municipality
+            // part 38 is zip
+            // part 39 is parcel_address
+            // part 40 is poll_code
+            // part 41 is election_code-sub
+            v.StateId = Int32.Parse(parts[42]);
+            result.Add(v);
+          }
+        }
+        catch (Exception e)
+        {
+          Console.Write(e);
+          throw e;
+        }
+      }
+
+      return result;
+    }
 
     /// <summary>
     /// Checks if a entered password matches the master password
@@ -408,7 +490,7 @@ namespace UI {
     /// the voternumber of the voter
     /// </param>
     public void RequestBallot(string voterNumber) {
-      var vn = new VoterNumber(uint.Parse(voterNumber));
+      var vn = new VoterNumber(Int32.Parse(voterNumber));
 
       if (this._station.Database[vn] == BallotStatus.NotReceived) this._station.RequestBallot(vn);
       else this.BallotRequestReply(false);
@@ -424,10 +506,11 @@ namespace UI {
     /// <param name="masterPassword">
     /// the systems master password
     /// </param>
+    // note that the master password is not used at all for this at the moment...
     public void RequestBallotOnlyCPR(string cpr, string masterPassword) {
-      var ncpr = new CPR(uint.Parse(cpr));
+      var ncpr = new VoterNumber(Int32.Parse(cpr));
 
-      if (this._station.Database[ncpr, masterPassword] == BallotStatus.NotReceived) this._station.RequestBallot(ncpr, masterPassword);
+      if (this._station.Database[ncpr] == BallotStatus.NotReceived) this._station.RequestBallot(ncpr);
       else this.BallotRequestReply(false);
     }
 

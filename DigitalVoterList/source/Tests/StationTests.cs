@@ -146,6 +146,7 @@ namespace Tests {
     /// <summary>
     /// The ballot received and revoked.
     /// </summary>
+    /*
     [Test] public void BallotReceivedAndRevoked() {
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
@@ -174,6 +175,7 @@ namespace Tests {
       this.Peer1.RevokeBallot(cpr, "yo boii");
       Assert.That(this.Peer1.Database[cpr, "yo boii"] == BallotStatus.NotReceived);
     }
+    */
 
     /// <summary>
     /// The discover peers test.
@@ -275,6 +277,7 @@ namespace Tests {
     /// <summary>
     /// The request ballot and announce ballot received and revoked test.
     /// </summary>
+    /*
     [Test] public void RequestBallotAndAnnounceBallotReceivedAndRevokedTest() {
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
@@ -328,6 +331,7 @@ namespace Tests {
       Assert.That(this.Peer3.Database[vn] == BallotStatus.NotReceived);
       Assert.That(this.Manager.Database[vn] == BallotStatus.NotReceived);
     }
+    */
 
     /// <summary>
     ///   SetUp test helper properties.

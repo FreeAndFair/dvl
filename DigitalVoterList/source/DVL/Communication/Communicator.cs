@@ -152,7 +152,7 @@ namespace Aegis_DVL.Communication {
     public void Send(ICommand command, IPEndPoint target) {
       if (this.Parent.Logger != null &&
           !(command is IsAliveCommand)) this.Parent.Logger.Log("Attempting to send " + command.GetType() + " to " + target, Level.Info);
-      bool isBallotReceived = command is BallotReceivedCommand || command is BallotReceivedCPROnlyCommand;
+      bool isBallotReceived = command is BallotReceivedCommand;
 
       if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand || command is CryptoCommand)) command = new CryptoCommand(this.Parent, target, command);
       try {
