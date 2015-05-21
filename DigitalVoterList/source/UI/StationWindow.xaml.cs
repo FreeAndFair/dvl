@@ -21,6 +21,9 @@
 namespace UI {
   using System;
   using System.ComponentModel;
+  using System.Linq;
+  using System.Net;
+  using System.Net.Sockets;
   using System.Windows;
 
   using Microsoft.Win32;
@@ -84,7 +87,7 @@ namespace UI {
         Environment.Exit(0);
       } else
         MessageBox.Show(
-          "Det kodeord du indtastede er ikke korret, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
+          "Master password entered incorrctly, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
     }
 
     /// <summary>
@@ -104,13 +107,13 @@ namespace UI {
           d.DialogResult == true) {
         if (d.IsCancel) return;
 
-        var saveDialog = new SaveFileDialog { Title = "Eksporter Valg Data" };
+        var saveDialog = new SaveFileDialog { Title = "Export Data" };
         saveDialog.Filter = "Data files (*.data)|*.data|All files (*.*)|*.*";
         saveDialog.ShowDialog();
         if (!saveDialog.FileName.Equals(string.Empty)) this._ui.ExportData(saveDialog.FileName);
       } else
         MessageBox.Show(
-          "Det kodeord du indtastede er ikke korrekt, prøv igen", "Forkert Master Kodeord", MessageBoxButton.OK);
+          "Master password entered incorrectly, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
     }
 
     /// <summary>

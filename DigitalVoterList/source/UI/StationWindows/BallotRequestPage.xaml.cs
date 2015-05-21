@@ -84,32 +84,35 @@ namespace UI.StationWindows {
     /// whether or not the ballot request was a success
     /// </param>
     public void BallotResponse(Voter voter, bool succes) {
-      this.WaitingLabel.Content = string.Empty;
-      string votername;
-      string middlename = " ";
-      if (voter.MiddleName != null && voter.MiddleName.Trim().Length != 0) {
-        middlename = " " + voter.MiddleName + " ";
-      }
-      votername = voter.FirstName + middlename + voter.LastName;
-
-      if (voter.Suffix != null && voter.Suffix.Trim().Length > 0) {
-        votername = votername + ", " + voter.Suffix;
-      }
-
-      if (succes) {
-        MessageBox.Show(
-          votername + " should be given a ballot. ", 
-          "Give Ballot", 
-          MessageBoxButton.OK, 
-          MessageBoxImage.Exclamation);
+      if (voter == null) {
+        MessageBox.Show("No voter matches that search criteria.");
       } else {
-        MessageBox.Show(
-          votername + " should NOT be given a ballot. ", 
-          "Do Not Give Ballot", 
-          MessageBoxButton.OK, 
-          MessageBoxImage.Stop);
-      }
+        this.WaitingLabel.Content = string.Empty;
+        string votername;
+        string middlename = " ";
+        if (voter.MiddleName != null && voter.MiddleName.Trim().Length != 0) {
+          middlename = " " + voter.MiddleName + " ";
+        }
+        votername = voter.FirstName + middlename + voter.LastName;
 
+        if (voter.Suffix != null && voter.Suffix.Trim().Length > 0) {
+          votername = votername + ", " + voter.Suffix;
+        }
+
+        if (succes) {
+          MessageBox.Show(
+            votername + " should be given a ballot. ",
+            "Give Ballot",
+            MessageBoxButton.OK,
+            MessageBoxImage.Exclamation);
+        } else {
+          MessageBox.Show(
+            votername + " should NOT be given a ballot. ",
+            "Do Not Give Ballot",
+            MessageBoxButton.OK,
+            MessageBoxImage.Stop);
+        }
+      }
       this.voterCardNumberTextbox.Text.Remove(0);
     }
 

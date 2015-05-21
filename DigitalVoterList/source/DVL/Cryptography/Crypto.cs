@@ -121,6 +121,8 @@ namespace Aegis_DVL.Cryptography {
         pwd = pwd.Replace(c, goodChars[number]);
       }
 
+      // for demo debugging purposes only!
+      pwd = "1234567890";
       return pwd;
     }
     // TODO refactor block processing

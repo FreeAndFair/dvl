@@ -13,7 +13,9 @@ namespace UI {
   using System;
   using System.Collections.Generic;
   using System.IO;
+  using System.Linq;
   using System.Net;
+  using System.Net.Sockets;
   using System.Windows;
 
   using Aegis_DVL;
@@ -56,6 +58,8 @@ namespace UI {
     /// </summary>
     public WaitingForManagerPage WaitingForManagerPage;
 
+    public readonly string IPAddressString;
+
     /// <summary>
     /// The _station window.
     /// </summary>
@@ -81,7 +85,11 @@ namespace UI {
     /// <param name="stationWindow">
     /// The station window.
     /// </param>
-    public UiHandler(StationWindow stationWindow) { this._stationWindow = stationWindow; }
+    public UiHandler(StationWindow stationWindow) { 
+      this._stationWindow = stationWindow;
+      IPAddressString = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
+        ip.AddressFamily == AddressFamily.InterNetwork).ToString();
+    }
 
     #endregion
 
