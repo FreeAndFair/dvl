@@ -205,6 +205,8 @@ namespace Aegis_DVL.Database {
     /// </param>
     public void Import(IEnumerable<Voter> data) { Contract.Requires(data != null); }
 
+    public Voter GetVoterByVoterNumber(VoterNumber vn) { Contract.Requires(vn != null); return default(Voter);  }
+
     #endregion
   }
 }
