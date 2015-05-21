@@ -93,29 +93,33 @@ namespace UI {
     /// </summary>
     public void AnnounceEndElection() { this._station.AnnounceEndElection(); }
 
+    public void BallotRequestReply(VoterNumber vn, bool handOutBallot) {
+      this.BallotRequestReply(this._station.Database.GetVoterByVoterNumber(vn), handOutBallot);
+    }
+
     /// <summary>
     /// The ballot request reply.
     /// </summary>
     /// <param name="handOutBallot">
     /// The hand out ballot.
     /// </param>
-    public void BallotRequestReply(bool handOutBallot) {
+    public void BallotRequestReply(Voter voter, bool handOutBallot) {
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.BallotResponse(handOutBallot); }));
+          new Action(delegate { this.BallotRequestPage.BallotResponse(voter, handOutBallot); }));
       }
 
       if (this.ManagerOverviewPage != null) {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.BallotResponse(handOutBallot); }));
+          new Action(delegate { this.ManagerOverviewPage.BallotResponse(voter, handOutBallot); }));
       }
 
       if (this.BallotCPRRequestWindow != null) {
         this.BallotCPRRequestWindow.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotCPRRequestWindow.BallotResponse(handOutBallot); }));
+          new Action(delegate { this.BallotCPRRequestWindow.BallotResponse(voter, handOutBallot); }));
       }
     }
 
@@ -493,9 +497,10 @@ namespace UI {
       var vn = new VoterNumber(Int32.Parse(voterNumber));
 
       if (this._station.Database[vn] == BallotStatus.NotReceived) this._station.RequestBallot(vn);
-      else this.BallotRequestReply(false);
+      else this.BallotRequestReply(this._station.Database.GetVoterByVoterNumber(vn), false);
     }
 
+    /*
     /// <summary>
     /// This method is called when an election offical wants to mark a voter by only using their CPR number.
     /// The election official will also need to enter the master password.
@@ -513,6 +518,7 @@ namespace UI {
       if (this._station.Database[ncpr] == BallotStatus.NotReceived) this._station.RequestBallot(ncpr);
       else this.BallotRequestReply(false);
     }
+    */
 
     /// <summary>
     /// The show password on manager.

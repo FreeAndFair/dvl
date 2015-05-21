@@ -117,7 +117,7 @@ namespace Aegis_DVL.Database {
     /// TODO: review for problems with complexity
     public BallotStatus this[VoterNumber voternumber] {
       get {
-        Voter voter = GetVoterByVoterId(voternumber.Value);
+        Voter voter = GetVoterByVoterNumber(voternumber);
         if (voter == null) return BallotStatus.Unavailable;
        
         return voter.Voted
@@ -279,6 +279,10 @@ namespace Aegis_DVL.Database {
     private Voter GetVoterByVoterId(Int32 vid) {
       IQueryable<Voter> res = this._db.Voters.Where(data => data.VoterId == vid);
       return !res.Any() ? null : res.Single();
+    }
+
+    public Voter GetVoterByVoterNumber(VoterNumber vn) {
+      return GetVoterByVoterId(vn.Value);
     }
 
     /// <summary>

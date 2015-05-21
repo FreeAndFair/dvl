@@ -79,6 +79,8 @@ namespace Aegis_DVL.Database {
     /// </param>
     void Import(IEnumerable<Voter> data);
 
+    Voter GetVoterByVoterNumber(VoterNumber voternumber);
+
     #endregion
   }
 

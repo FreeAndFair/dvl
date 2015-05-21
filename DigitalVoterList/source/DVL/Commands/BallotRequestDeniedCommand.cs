@@ -14,10 +14,21 @@ namespace Aegis_DVL.Commands {
   using System.Diagnostics.Contracts;
   using System.Net;
 
+  using Aegis_DVL.Data_Types;
+
   /// <summary>
   /// The ballot request denied command.
   /// </summary>
   [Serializable] public class BallotRequestDeniedCommand : ICommand {
+    #region Fields
+
+    /// <summary>
+    /// The _voternumber.
+    /// </summary>
+    private readonly VoterNumber _voternumber;
+
+    #endregion
+    
     #region Constructors and Destructors
 
     /// <summary>
@@ -27,9 +38,10 @@ namespace Aegis_DVL.Commands {
     /// <param name="sender">
     /// The address of the one sending the command.
     /// </param>
-    public BallotRequestDeniedCommand(IPEndPoint sender) {
+    public BallotRequestDeniedCommand(IPEndPoint sender, VoterNumber vn) {
       Contract.Requires(sender != null);
       this.Sender = sender;
+      _voternumber = vn;
     }
 
     #endregion
@@ -53,7 +65,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       if (!this.Sender.Equals(receiver.Manager)) return;
-      receiver.UI.BallotRequestReply(false);
+      receiver.UI.BallotRequestReply(_voternumber, false);
     }
 
     #endregion

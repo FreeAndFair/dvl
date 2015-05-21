@@ -24,6 +24,8 @@ namespace UI {
   using System.Windows.Controls;
   using System.Windows.Input;
 
+  using Aegis_DVL.Database;
+
   using UI.ManagerWindows;
 
   /// <summary>
@@ -68,7 +70,7 @@ namespace UI {
     /// <param name="succes">
     /// whether a ballot can be handed out or not 
     /// </param>
-    public void BallotResponse(bool succes) {
+    public void BallotResponse(Voter voter, bool succes) {
       this._ui.BallotCPRRequestWindow = null;
 
       if (succes) {
@@ -160,7 +162,7 @@ namespace UI {
           this.WaitingLabel.Content = "Waiting for reply...";
           this.doneButton.IsEnabled = false;
           this.CancelButton.IsEnabled = false;
-          this._ui.RequestBallotOnlyCPR(this.CPRTextbox.Text, d.TypedPassword);
+          // this._ui.RequestBallotOnlyCPR(this.CPRTextbox.Text, d.TypedPassword);
         }
       } else
         MessageBox.Show(

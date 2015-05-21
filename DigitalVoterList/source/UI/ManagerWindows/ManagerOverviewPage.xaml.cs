@@ -28,6 +28,8 @@ namespace UI.ManagerWindows {
   using System.Windows.Controls;
   using System.Windows.Input;
 
+  using Aegis_DVL.Database;
+
   using UI.Data;
   using UI.StationWindows;
 
@@ -103,18 +105,18 @@ namespace UI.ManagerWindows {
     /// <param name="succes">
     /// whether or not to hand out a ballot
     /// </param>
-    public void BallotResponse(bool succes) {
+    public void BallotResponse(Voter voter, bool succes) {
       this.WaitingLabel.Content = string.Empty;
 
       if (succes) {
         MessageBox.Show(
-          "Voter number " + this.voterCardNumberTextbox.Text + " should be given a ballot ", 
+          "Voter number " + this.voterCardNumberTextbox.Text + " should be given a ballot. ", 
           "Give Ballot", 
           MessageBoxButton.OK, 
           MessageBoxImage.Exclamation);
       } else {
         MessageBox.Show(
-          "Voter number " + this.voterCardNumberTextbox.Text + " should NOT be given a ballot ", 
+          "Voter number " + this.voterCardNumberTextbox.Text + " should NOT be given a ballot. ", 
           "Do Not Give Ballot", 
           MessageBoxButton.OK, 
           MessageBoxImage.Stop);
@@ -307,7 +309,7 @@ namespace UI.ManagerWindows {
               d.DialogResult == true) {
             if (d.IsCancel) return;
 
-            this._ui.RequestBallotOnlyCPR(this.CPRNumberTextbox.Text, d.TypedPassword);
+            // this._ui.RequestBallotOnlyCPR(this.CPRNumberTextbox.Text, d.TypedPassword);
           } else
             MessageBox.Show(
               "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButton.OK);

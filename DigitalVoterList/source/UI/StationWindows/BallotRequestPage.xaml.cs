@@ -24,6 +24,8 @@ namespace UI.StationWindows {
   using System.Windows.Controls;
   using System.Windows.Input;
 
+  using Aegis_DVL.Database;
+
   using UI.ManagerWindows;
 
   /// <summary>
@@ -81,18 +83,29 @@ namespace UI.StationWindows {
     /// <param name="succes">
     /// whether or not the ballot request was a success
     /// </param>
-    public void BallotResponse(bool succes) {
+    public void BallotResponse(Voter voter, bool succes) {
       this.WaitingLabel.Content = string.Empty;
+      string votername;
+      string middlename = " ";
+      if (voter.MiddleName != null && voter.MiddleName.Trim().Length != 0) {
+        middlename = " " + voter.MiddleName + " ";
+      }
+      votername = voter.FirstName + middlename + voter.LastName;
+
+      if (voter.Suffix != null && voter.Suffix.Trim().Length > 0) {
+        votername = votername + ", " + voter.Suffix;
+      }
+
       if (succes) {
         MessageBox.Show(
-          "Vælgeren " + this.voterCardNumberTextbox.Text + " må gives en stemmeseddel ", 
-          "Giv stemmeseddel", 
+          votername + " should be given a ballot. ", 
+          "Give Ballot", 
           MessageBoxButton.OK, 
           MessageBoxImage.Exclamation);
       } else {
         MessageBox.Show(
-          "Vælgeren " + this.voterCardNumberTextbox.Text + " må IKKE gives en stemmeseddel ", 
-          "Giv ikke stemmeseddel", 
+          votername + " should NOT be given a ballot. ", 
+          "Do Not Give Ballot", 
           MessageBoxButton.OK, 
           MessageBoxImage.Stop);
       }

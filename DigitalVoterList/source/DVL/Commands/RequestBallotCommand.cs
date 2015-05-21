@@ -72,7 +72,7 @@ namespace Aegis_DVL.Commands {
     public void Execute(Station receiver) {
       if (!receiver.IsManager) return;
       if (receiver.Database[this._voternumber] != BallotStatus.NotReceived) {
-        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address), this.Sender);
+        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address, this._voternumber), this.Sender);
         receiver.Logger.Log(
           "Attempted to request a ballot that had status " + receiver.Database[this._voternumber], Level.Info);
         return;
@@ -88,7 +88,7 @@ namespace Aegis_DVL.Commands {
                   new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber), peer));
 
       if (this.Sender.Equals(receiver.Manager)) {
-        receiver.UI.BallotRequestReply(true);
+        receiver.UI.BallotRequestReply(_voternumber, true);
         return;
       }
 

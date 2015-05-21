@@ -11,6 +11,8 @@
 
 namespace Aegis_DVL {
   using System.Net;
+  using Aegis_DVL.Data_Types;
+  using Aegis_DVL.Database;
 
   /// <summary>
   ///   A UI is used to interact with human beings. The UI must be able to support requirements to be able to interact with the Digital Voter List system.
@@ -24,7 +26,8 @@ namespace Aegis_DVL {
     /// <param name="handOutBallot">
     /// Whether or not the ballot should be handed out to the voter.
     /// </param>
-    void BallotRequestReply(bool handOutBallot);
+    void BallotRequestReply(VoterNumber vn, bool handOutBallot);
+    void BallotRequestReply(Voter v, bool handOutBallot);
 
     /// <summary>
     ///   Let the UI know that the election has ended!

@@ -84,7 +84,7 @@ namespace Aegis_DVL.Commands {
       if (!receiver.Manager.Equals(this.Sender) ||
           receiver.Database[_voterNumber] == BallotStatus.Received) return;
       receiver.Database[_voterNumber] = BallotStatus.Received;
-      if (receiver.Address.Equals(this._requester)) receiver.UI.BallotRequestReply(true);
+      if (receiver.Address.Equals(this._requester)) receiver.UI.BallotRequestReply(_voterNumber, true);
     }
 
     #endregion
