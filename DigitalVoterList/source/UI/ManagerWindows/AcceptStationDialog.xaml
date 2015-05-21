@@ -9,10 +9,10 @@
             <ColumnDefinition Width="35*"/>
             <ColumnDefinition Width="111*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Enter the password (shown on the Station)" Height="28" HorizontalAlignment="Left" Margin="20,12,0,0" Name="TitleLabel" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <Label Content="Enter the password (shown on the Station)" Height="28" HorizontalAlignment="Left" Margin="27,10,0,0" Name="TitleLabel" VerticalAlignment="Top" Grid.ColumnSpan="2" />
         <PasswordBox Height="45" HorizontalAlignment="Left" Margin="38,83,0,0" Name="PwTextbox" VerticalAlignment="Top" Width="206" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" PasswordChanged="PwTextboxPasswordChanged" Grid.ColumnSpan="2" />
         <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="49,184,0,0" Name="CancelButton" VerticalAlignment="Top" Width="75" Click="CancelButtonClick" IsCancel="True" Grid.ColumnSpan="2"/>
         <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="86,184,0,0" Name="OKButton" VerticalAlignment="Top" Width="75" Click="OkButtonClick" IsDefault="True" Grid.Column="1" />
-        <Label Content="Station Name" Height="28" HorizontalAlignment="Center" Margin="43,49,41,0" Name="StationLabel" VerticalAlignment="Top" Width="208" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" />
+        <Label Content="Station Name" Height="28" HorizontalAlignment="Center" Margin="36,50,48,0" Name="StationLabel" VerticalAlignment="Top" Width="208" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

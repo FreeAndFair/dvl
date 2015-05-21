@@ -14,6 +14,7 @@ namespace Aegis_DVL.Communication {
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.IO;
+  using System.Linq;
   using System.Net;
   using System.Net.Sockets;
   using System.Threading;
@@ -63,13 +64,17 @@ namespace Aegis_DVL.Communication {
     [Pure] public IEnumerable<IPEndPoint> DiscoverNetworkMachines() {
       var res = new List<IPEndPoint>();
       var cdEvent = new CountdownEvent(1);
+      string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
+                    ip.AddressFamily == AddressFamily.InterNetwork).ToString();
+      myip = myip.Substring(0, myip.LastIndexOf('.') + 1);
+      Console.WriteLine("my ip prefix is " + myip);
       using (cdEvent) {
         for (int i = 1; i < 255; i++) {
           cdEvent.AddCount();
           ThreadPool.QueueUserWorkItem(
             element => {
               var elem = (Tuple<int, CountdownEvent>)element;
-              var endpoint = new IPEndPoint(IPAddress.Parse("192.168.41." + elem.Item1), 62000);
+              var endpoint = new IPEndPoint(IPAddress.Parse(myip + elem.Item1), 62000);
               if (this.IsListening(endpoint)) res.Add(endpoint);
               elem.Item2.Signal();
             }, 
