@@ -65,7 +65,7 @@ namespace UI.ManagerWindows {
       this.Activate();
       this.PwTextbox.Focus();
       this.OKButton.IsEnabled = false;
-      this.Title = "Tilslut Station";
+      this.Title = "Accept Station";
     }
 
     #endregion
