@@ -75,7 +75,10 @@ namespace Aegis_DVL.Communication {
             element => {
               var elem = (Tuple<int, CountdownEvent>)element;
               var endpoint = new IPEndPoint(IPAddress.Parse(myip + elem.Item1), 62000);
-              if (this.IsListening(endpoint)) res.Add(endpoint);
+              if (this.IsListening(endpoint)) {
+                Console.WriteLine("Found a station at " + endpoint.Address);
+                res.Add(endpoint);
+              }
               elem.Item2.Signal();
             }, 
             new Tuple<int, CountdownEvent>(i, cdEvent));
@@ -86,6 +89,7 @@ namespace Aegis_DVL.Communication {
       }
 
       cdEvent.Dispose();
+      Console.WriteLine("Found a total of " + res.Count() + " stations.");
       return res;
     }
 
@@ -165,7 +169,7 @@ namespace Aegis_DVL.Communication {
           IAsyncResult ar = client.BeginConnect(target.Address, target.Port, null, null);
           WaitHandle wh = ar.AsyncWaitHandle;
           try {
-            if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(1000), false)) throw new SocketException();
+            if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(3000), false)) throw new SocketException();
             client.EndConnect(ar);
           } finally {
             wh.Close();

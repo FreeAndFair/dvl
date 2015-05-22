@@ -22,10 +22,10 @@ namespace UI.Data {
     /// Initializes a new instance of the <see cref="DesignTimeStationStatuses"/> class.
     /// </summary>
     public DesignTimeStationStatuses() {
-      this.Add(new StationStatus { IpAdress = "127.0.0.1", Connected = true });
-      this.Add(new StationStatus { IpAdress = "127.0.0.2", Connected = true });
-      this.Add(new StationStatus { IpAdress = "127.0.0.3", Connected = false });
-      this.Add(new StationStatus { IpAdress = "127.0.0.4", Connected = false });
+      this.Add(new StationStatus { IpAddress = "127.0.0.1", ConnectionState = "Ready" });
+      this.Add(new StationStatus { IpAddress = "127.0.0.2", ConnectionState = "Ready" });
+      this.Add(new StationStatus { IpAddress = "127.0.0.3", ConnectionState = "Not Connected" });
+      this.Add(new StationStatus { IpAddress = "127.0.0.4", ConnectionState = "Not Connected" });
     }
 
     #endregion

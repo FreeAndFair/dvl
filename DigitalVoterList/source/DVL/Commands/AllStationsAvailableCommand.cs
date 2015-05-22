@@ -52,8 +52,10 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
+
       if (receiver.Manager.Equals(this.Sender)) return;
       receiver.AllStationsAvailable = true;
+      receiver.UI.DoneSynchronizing(Sender);
     }
 
     #endregion

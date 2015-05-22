@@ -14,7 +14,7 @@
                 <DataGridTemplateColumn Header="IP Address" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding IpAdress}" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding IpAddress}" TextAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -22,7 +22,7 @@
                 <DataGridTemplateColumn Header="Connection State" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding Connected}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
+                            <TextBlock Text="{Binding ConnectionState}" TextAlignment="Left"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -34,7 +34,7 @@
             <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" />
             <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" />
             <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" />
-            <Button Margin="10" Content="End Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" />
+            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" />
         </WrapPanel>
         <Label Content="" Height="34" HorizontalAlignment="Left" Margin="48,10,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="411" FontFamily="Verdana" FontSize="16"/>
         <Label Content="" Height="28" HorizontalAlignment="Left" Margin="456,10,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="116" />

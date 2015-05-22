@@ -19,13 +19,22 @@ namespace UI.Data {
     /// <summary>
     /// Gets or sets a value indicating whether connected.
     /// </summary>
-    public bool Connected { get; set; }
+    public string ConnectionState { get; set; }
 
     /// <summary>
     /// Gets or sets the ip adress.
     /// </summary>
-    public string IpAdress { get; set; }
+    public string IpAddress { get; set; }
 
     #endregion
+
+    public bool Connected() {
+      return !ConnectionState.Equals("Not Connected");
+    }
+
+    public bool Ready() {
+      return ConnectionState.Equals("Ready");
+    }
+
   }
 }

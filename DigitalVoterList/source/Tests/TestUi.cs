@@ -152,6 +152,8 @@ namespace Tests {
     /// </summary>
     public void StationRemoved() { this.UIRemovePeer = true; }
 
+    public void SyncComplete() { }
+
     #endregion
   }
 }

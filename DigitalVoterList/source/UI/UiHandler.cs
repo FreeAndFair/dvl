@@ -20,6 +20,7 @@ namespace UI {
   using System.Windows;
 
   using Aegis_DVL;
+  using Aegis_DVL.Commands;
   using Aegis_DVL.Cryptography;
   using Aegis_DVL.Data_Types;
   using Aegis_DVL.Database;
@@ -689,6 +690,42 @@ namespace UI {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.BallotRequestPage.StationRemoved(); }));
+      }
+    }
+
+    public void Synchronizing(IPEndPoint ip) {
+      if (OverviewPage != null) {
+        OverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { OverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
+      }
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { ManagerOverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
+      }
+    }
+
+    public void DoneSynchronizing(IPEndPoint ip) {
+      if (OverviewPage != null) {
+        OverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { OverviewPage.MakeStationReady(ip); }));
+      }
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { ManagerOverviewPage.MakeStationReady(ip); }));
+        if (_station.ElectionInProgress) {
+          /*
+                    while (!receiver.AllStationsAvailable)
+                    {
+                        /*Wait for the station to be ready
+                    }
+                    */
+          _station.Communicator.Send(new StartElectionCommand(_station.Address), ip);
+        }
+
       }
     }
 

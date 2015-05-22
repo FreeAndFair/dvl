@@ -109,6 +109,9 @@ namespace Aegis_DVL {
     /// Called when a peer has been removed by a Manager.
     void StationRemoved();
 
+    void Synchronizing(IPEndPoint ip);
+    void DoneSynchronizing(IPEndPoint ip);
+
     /// <summary>
     /// Called when a station is done processing a SyncCommand, handled contextually.
     /// </summary>

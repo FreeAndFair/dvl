@@ -92,17 +92,9 @@ namespace Aegis_DVL.Commands {
 
       if (this._isReply) {
         // Done with key-exchange, synchronize new peer
+        receiver.UI.Synchronizing(Sender);
         receiver.Communicator.Send(new SyncCommand(receiver), this.Sender);
         receiver.AnnounceAddPeer(this.Sender, receiver.Peers[this.Sender]);
-        if (receiver.ElectionInProgress) {
-          /*
-                    while (!receiver.AllStationsAvailable)
-                    {
-                        /*Wait for the station to be ready
-                    }
-                    */
-          receiver.Communicator.Send(new StartElectionCommand(receiver.Address), this.Sender);
-        }
 
         return;
       }
