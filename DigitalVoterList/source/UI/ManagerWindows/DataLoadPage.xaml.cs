@@ -117,8 +117,8 @@ namespace UI.ManagerWindows {
     private void KeyBrowseButtonClick(object sender, RoutedEventArgs e) {
       // Create OpenFileDialog
       var dlg = new Microsoft.Win32.OpenFileDialog {
-        DefaultExt = ".key", 
-        Filter = "Key Files (.key)|*.key|All Files|*.*"
+        DefaultExt = ".data",
+        Filter = "Data files (.data)|*.data|All Files|*.*",
       };
 
       // Display OpenFileDialog by calling ShowDialog method

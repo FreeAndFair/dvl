@@ -119,12 +119,6 @@ namespace UI {
           new Action(delegate { this.BallotRequestPage.BallotResponse(voter, handOutBallot); }));
       }
 
-      if (this.ManagerOverviewPage != null) {
-        this.ManagerOverviewPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.BallotResponse(voter, handOutBallot); }));
-      }
-
       if (this.BallotCPRRequestWindow != null) {
         this.BallotCPRRequestWindow.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
@@ -194,9 +188,6 @@ namespace UI {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.ManagerOverviewPage.Blocked = false; }));
-        this.ManagerOverviewPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.WaitingLabel.Content = string.Empty; }));
       }
     }
 
@@ -556,13 +547,6 @@ namespace UI {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.ManagerOverviewPage.Blocked = true; }));
-        this.ManagerOverviewPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.checkValidityButton.IsEnabled = false; }));
-        this.ManagerOverviewPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(
-            delegate { this.ManagerOverviewPage.WaitingLabel.Content = "There are not enough stations connected"; }));
       }
     }
 
