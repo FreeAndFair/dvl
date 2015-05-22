@@ -56,6 +56,8 @@ namespace Aegis_DVL.Commands {
     /// </summary>
     private readonly Voter[] _voterData;
 
+    private readonly Precinct[] _precinctData;
+
     #endregion
 
     #region Constructors and Destructors
@@ -71,6 +73,7 @@ namespace Aegis_DVL.Commands {
       Contract.Requires(parent != null);
       this._sender = parent.Address.ToString();
       this._voterData = parent.Database.AllVoters.ToArray();
+      this._precinctData = parent.Database.AllPrecincts.ToArray();
       this._addresses = parent.Peers.Keys.Select(endpoint => endpoint.ToString()).ToArray();
       this._publicKeys = parent.Peers.Values.Select(key => key.Value.ToBytes()).ToArray();
       this._masterPwHash = Bytes.FromFile("Master.pw");
@@ -119,6 +122,7 @@ namespace Aegis_DVL.Commands {
       }
 
       receiver.Database.Import(_voterData);
+      receiver.Database.Import(_precinctData);
       receiver.Logger.Log("Synchronized by " + this.Sender, Level.Info);
       receiver.Communicator.Send(new AllStationsAvailable(receiver.Address), receiver.Manager);
     }
