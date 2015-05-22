@@ -154,6 +154,10 @@ namespace Tests {
 
     public void SyncComplete() { }
 
+    public void Synchronizing(IPEndPoint ip) { }
+
+    public void DoneSynchronizing(IPEndPoint ip) { } 
+
     #endregion
   }
 }

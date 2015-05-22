@@ -17,5 +17,6 @@
         <TextBox Height="28" HorizontalAlignment="Left" Margin="132,201,0,0" Name="keyPathTextBox" VerticalAlignment="Top" Width="319" />
         <Button Content="Browse" Height="28" HorizontalAlignment="Left" Margin="457,201,0,0" Name="keyBrowseButton" VerticalAlignment="Top" Width="100" Click="KeyBrowseButtonClick" />
         <Label Content="Precinct data" Height="28" HorizontalAlignment="Left" Margin="39,201,0,0" Name="keyBrowseLabel" VerticalAlignment="Top" />
+        <Label HorizontalAlignment="Center" Name="LoadingLabel" Margin="0,351,0,0" Content="Loading Data..." VerticalAlignment="Top" Height="49" Width="299" FontSize="18"/>
     </Grid>
 </Page>

@@ -234,6 +234,8 @@ namespace Aegis_DVL {
       }
     }
 
+    public PollingPlace PollingPlace { [Pure] get; set; }
+
     /// <summary>
     ///   How can I manipulate my database?
     /// </summary>

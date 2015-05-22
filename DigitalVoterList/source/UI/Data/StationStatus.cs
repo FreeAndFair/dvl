@@ -10,6 +10,8 @@
 #endregion
 
 namespace UI.Data {
+  using System.Collections.Generic;
+
   /// <summary>
   /// The station status.
   /// </summary>

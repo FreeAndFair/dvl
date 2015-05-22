@@ -23,7 +23,7 @@
                 <DataGridTemplateColumn Header="Connection State" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding Connected}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
+                            <TextBlock Text="{Binding ConnectionState}" TextAlignment="Left"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

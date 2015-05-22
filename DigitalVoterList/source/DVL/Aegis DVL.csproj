@@ -172,6 +172,7 @@
     <Compile Include="Data Types\Core.cs" />
     <Compile Include="Data Types\Level.cs" />
     <Compile Include="Data Types\LogEntry.cs" />
+    <Compile Include="Data Types\PollingPlace.cs" />
     <Compile Include="Data Types\PublicKeyWrapper.cs" />
     <Compile Include="Data Types\TheOnlyException.cs" />
     <Compile Include="Cryptography\Crypto.cs" />

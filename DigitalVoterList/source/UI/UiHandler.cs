@@ -55,6 +55,8 @@ namespace UI {
     /// </summary>
     public OverviewPage OverviewPage;
 
+    public PrecinctChoicePage PrecinctChoicePage;
+
     /// <summary>
     /// The waiting for manager page.
     /// </summary>
@@ -75,7 +77,7 @@ namespace UI {
     /// <summary>
     /// The _station.
     /// </summary>
-    private Station _station;
+    public Station _station;
 
     private bool _hasData = false;
 
@@ -181,10 +183,9 @@ namespace UI {
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.Blocked = false; }));
-        this.BallotRequestPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.WaitingLabel.Content = string.Empty; }));
+          new Action(delegate { this.BallotRequestPage.Blocked = false;
+          BallotRequestPage.WaitingLabel.Content = ""; 
+        }));
       }
 
       if (this.ManagerOverviewPage != null) {
@@ -537,14 +538,11 @@ namespace UI {
 
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.Blocked = true; }));
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { this.BallotRequestPage.Blocked = true; BallotRequestPage.WaitingLabel.Content = "Not Enough Stations"; }));
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.BallotRequestPage.checkValidityButton.IsEnabled = false; }));
-        this.BallotRequestPage.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.WaitingLabel.Content = "There are not enough stations connected"; }));
       }
 
       if (this.ManagerOverviewPage != null) {

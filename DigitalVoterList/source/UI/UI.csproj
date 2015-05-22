@@ -136,6 +136,9 @@
     <Compile Include="ManagerWindows\CheckMasterPasswordDialog.xaml.cs">
       <DependentUpon>CheckMasterPasswordDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ManagerWindows\PrecinctChoicePage.xaml.cs">
+      <DependentUpon>PrecinctChoicePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="StationWindows\AcceptManagerDialog.xaml.cs">
       <DependentUpon>AcceptManagerDialog.xaml</DependentUpon>
@@ -185,6 +188,10 @@
     <Page Include="ManagerWindows\CheckMasterPasswordDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ManagerWindows\PrecinctChoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationWindows\AcceptManagerDialog.xaml">
       <SubType>Designer</SubType>
