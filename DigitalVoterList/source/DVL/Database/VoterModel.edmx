@@ -7,6 +7,7 @@
       <Schema Namespace="VoterModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="VoterModelStoreContainer">
           <EntitySet Name="Voters" EntityType="VoterModel.Store.Voters" store:Type="Tables" />
+          <EntitySet Name="Precincts" EntityType="VoterModel.Store.Precincts" store:Type="Tables" />
         </EntityContainer>
         <EntityType Name="Voters">
           <Key>
@@ -22,12 +23,26 @@
           <Property Name="EligibleDate" Type="datetime" Nullable="false" />
           <Property Name="MustShowId" Type="bit" Nullable="false" />
           <Property Name="Absentee" Type="bit" Nullable="false" />
+          <Property Name="ProtectedAddress" Type="bit" Nullable="false" />
           <Property Name="DriversLicense" Type="nvarchar" Nullable="true" />
           <Property Name="Voted" Type="bit" Nullable="false" />
           <Property Name="ReturnStatus" Type="nvarchar" Nullable="false" />
           <Property Name="BallotStyle" Type="int" Nullable="false" />
           <Property Name="PrecinctSub" Type="nvarchar" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" />
+          <Property Name="Municipality" Type="nvarchar" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar" Nullable="false" />
           <Property Name="StateId" Type="int" Nullable="true" />
+          <Property Name="PollbookStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Precincts">
+          <Key>
+            <PropertyRef Name="PrecinctSplitId" />
+          </Key>
+          <Property Name="PrecinctSplitId" Type="nvarchar" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" />
+          <Property Name="CityStateZIP" Type="nvarchar" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:StorageModels>
@@ -36,6 +51,7 @@
       <Schema Namespace="VoterModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Voters" EntityType="VoterModel.Voter" />
+          <EntitySet Name="Precincts" EntityType="VoterModel.Precinct" />
         </EntityContainer>
         <EntityType Name="Voter">
           <Key>
@@ -51,12 +67,26 @@
           <Property Type="DateTime" Name="EligibleDate" Nullable="false" />
           <Property Type="Boolean" Name="MustShowId" Nullable="false" />
           <Property Type="Boolean" Name="Absentee" Nullable="false" />
+          <Property Type="Boolean" Name="ProtectedAddress" Nullable="false" />
           <Property Type="String" Name="DriversLicense" Nullable="true" />
           <Property Type="Boolean" Name="Voted" Nullable="false" />
           <Property Type="String" Name="ReturnStatus" Nullable="false" />
           <Property Type="Int32" Name="BallotStyle" Nullable="false" />
           <Property Type="String" Name="PrecinctSub" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" />
+          <Property Type="String" Name="Municipality" Nullable="false" />
+          <Property Type="String" Name="ZipCode" Nullable="false" />
           <Property Type="Int32" Name="StateId" Nullable="true" />
+          <Property Type="Int32" Name="PollbookStatus" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Precinct">
+          <Key>
+            <PropertyRef Name="PrecinctSplitId" />
+          </Key>
+          <Property Type="String" Name="PrecinctSplitId" Nullable="false" />
+          <Property Type="String" Name="LocationName" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" />
+          <Property Type="String" Name="CityStateZIP" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -77,12 +107,27 @@
                 <ScalarProperty Name="EligibleDate" ColumnName="EligibleDate" />
                 <ScalarProperty Name="MustShowId" ColumnName="MustShowId" />
                 <ScalarProperty Name="Absentee" ColumnName="Absentee" />
+                <ScalarProperty Name="ProtectedAddress" ColumnName="ProtectedAddress" />
                 <ScalarProperty Name="DriversLicense" ColumnName="DriversLicense" />
                 <ScalarProperty Name="Voted" ColumnName="Voted" />
                 <ScalarProperty Name="ReturnStatus" ColumnName="ReturnStatus" />
                 <ScalarProperty Name="BallotStyle" ColumnName="BallotStyle" />
                 <ScalarProperty Name="PrecinctSub" ColumnName="PrecinctSub"/>
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="PollbookStatus" ColumnName="PollbookStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Precincts">
+            <EntityTypeMapping TypeName="VoterModel.Precinct">
+              <MappingFragment StoreEntitySet="Precincts">
+                <ScalarProperty Name="PrecinctSplitId" ColumnName="PrecinctSplitId" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityStateZIP" ColumnName="CityStateZIP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

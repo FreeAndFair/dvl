@@ -27,7 +27,9 @@ namespace Aegis_DVL.Database {
     /// <summary>
     ///   What does the entire database look like?
     /// </summary>
-    IEnumerable<Voter> AllData { [Pure] get; }
+    IEnumerable<Voter> AllVoters { [Pure] get; }
+
+    IEnumerable<Precinct> AllPrecincts { [Pure] get; }
 
     /// <summary>
     ///   Who is my parent station?
@@ -78,8 +80,11 @@ namespace Aegis_DVL.Database {
     /// A dataset to be imported.
     /// </param>
     void Import(IEnumerable<Voter> data);
+    void Import(IEnumerable<Precinct> data);
 
     Voter GetVoterByVoterNumber(VoterNumber voternumber);
+
+    Precinct GetPrecinctBySplitId(string sid);
 
     #endregion
   }
@@ -93,10 +98,17 @@ namespace Aegis_DVL.Database {
     /// <summary>
     /// Gets the all data.
     /// </summary>
-    public IEnumerable<Voter> AllData {
+    public IEnumerable<Voter> AllVoters {
       get {
         Contract.Ensures(Contract.Result<IEnumerable<Voter>>() != null);
         return default(IEnumerable<Voter>);
+      }
+    }
+
+    public IEnumerable<Precinct> AllPrecincts {
+      get {
+        Contract.Ensures(Contract.Result<IEnumerable<Precinct>>() != null);
+        return default(IEnumerable<Precinct>);
       }
     }
 
@@ -204,8 +216,10 @@ namespace Aegis_DVL.Database {
     /// The data.
     /// </param>
     public void Import(IEnumerable<Voter> data) { Contract.Requires(data != null); }
+    public void Import(IEnumerable<Precinct> data) { Contract.Requires(data != null); }
 
     public Voter GetVoterByVoterNumber(VoterNumber vn) { Contract.Requires(vn != null); return default(Voter);  }
+    public Precinct GetPrecinctBySplitId(string sid) { Contract.Requires(sid != null); return default(Precinct); }
 
     #endregion
   }

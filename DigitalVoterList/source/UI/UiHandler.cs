@@ -16,6 +16,7 @@ namespace UI {
   using System.Linq;
   using System.Net;
   using System.Net.Sockets;
+  using System.Text;
   using System.Windows;
 
   using Aegis_DVL;
@@ -231,7 +232,7 @@ namespace UI {
     /// the destination filepath
     /// </param>
     public void ExportData(string filePath) {
-      if (this._station != null) this.ExportData(this._station.Database.AllData, filePath);
+      if (this._station != null) this.ExportData(this._station.Database.AllVoters, filePath);
       else MessageBox.Show("You can not export data at this time.", "Operation Not Allowed", MessageBoxButton.OK);
     }
 
@@ -253,21 +254,35 @@ namespace UI {
     /// <summary>
     /// When a manager wants to import voter data this is called
     /// </summary>
-    /// <param name="dataPath">
+    /// <param name="voterDataPath">
     /// the file path of the data to be imported
     /// </param>
-    /// <param name="keyPath">
+    /// <param name="precinctDataPath">
     /// the file path of the encryption key
     /// </param>
     /// <returns>
     /// whether or not the import was succesful
     /// </returns>
-    public bool ImportData(string dataPath, string keyPath) {
-      this._station = this._station ?? new Station(this, keyPath, this._masterPassword);
+    public bool ImportData(string voterDataPath, string precinctDataPath) {
+      AsymmetricKey key = new AsymmetricKey(
+        KeyUtil.ToKey(new byte[] {0x30, 0x81, 0x9F, 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 
+          0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x81, 0x8D, 0x00, 0x30, 0x81, 
+          0x89, 0x02, 0x81, 0x81, 0x00, 0xA4, 0x1A, 0xB3, 0xC6, 0x86, 0x85, 0x5D, 0xF4, 0xBC, 
+          0x59, 0xC0, 0xBE, 0x89, 0xC4, 0x32, 0xA3, 0x9C, 0x21, 0xEC, 0x4D, 0x4D, 0xD3, 0x2C, 
+          0x53, 0x0E, 0xEA, 0xAB, 0xA5, 0x9A, 0x96, 0xCA, 0x1C, 0xB2, 0xE3, 0xBF, 0x70, 0x52, 
+          0x99, 0xE9, 0x39, 0xD8, 0x25, 0x61, 0x9C, 0x10, 0xBA, 0x5A, 0xAB, 0x86, 0x4C, 0xF7, 
+          0xD0, 0x73, 0xCD, 0xEF, 0x59, 0x9A, 0xE8, 0xE7, 0xBC, 0xEA, 0xF1, 0xAF, 0xA0, 0x90, 
+          0x9D, 0x57, 0xF1, 0x0C, 0x3E, 0x82, 0xC2, 0x2C, 0xF0, 0x1A, 0xDA, 0x6D, 0x40, 0xD4, 
+          0x29, 0xBE, 0x42, 0x4B, 0xA6, 0x09, 0x31, 0x28, 0xA1, 0xBD, 0x58, 0x00, 0x69, 0x89, 
+          0xDA, 0xD6, 0x80, 0x72, 0x93, 0xE1, 0x7D, 0x2E, 0xB7, 0xFD, 0xC3, 0x40, 0x0A, 0xAE, 
+          0x52, 0x44, 0xC1, 0x3D, 0x7F, 0x6A, 0x77, 0x59, 0x72, 0xA4, 0xD1, 0x77, 0x93, 0x17, 
+          0x1F, 0xAB, 0x99, 0xB1, 0x26, 0x81, 0xD5, 0x02, 0x03, 0x01, 0x00, 0x01 }));
+      this._station = this._station ?? new Station(this, key, this._masterPassword);
       this._masterPassword = null;
 
       try {
-        this._station.Database.Import(this.ImportElectionData(dataPath));
+        this._station.Database.Import(this.ImportVoterData(voterDataPath));
+        this._station.Database.Import(this.ImportPrecinctData(precinctDataPath));
         return true;
       } catch (Exception) {
         return false;
@@ -284,7 +299,7 @@ namespace UI {
     /// <returns>
     /// the voter data as a IEnumerable of EncryptedVoterData
     /// </returns>
-    public IEnumerable<Voter> ImportElectionData(string filePath) { 
+    public IEnumerable<Voter> ImportVoterData(string filePath) { 
       List<Voter> result = new List<Voter>();
       using (StreamReader sr = new StreamReader(filePath))
       {
@@ -319,13 +334,17 @@ namespace UI {
             // part 12 is "unitno"
             v.MustShowId = Boolean.Parse(parts[13]); // actually "registeredbymail"
             v.Absentee = Boolean.Parse(parts[14]);
-            // part 15 is "protectedaddress"
+            v.ProtectedAddress = Boolean.Parse(parts[15]);
             // part 16 is "party"
             // part 17 is "ssn"
             // part 18 is "ssnrev"
             v.DriversLicense = parts[19];
             // part 20 is "dlrev"
-            // part 21 is "house"
+            Int32 house;
+            StringBuilder address = new StringBuilder();
+            if (Int32.TryParse(parts[21], out house)) {
+              address.Append(house.ToString());
+            }
             // part 22 is "signature"
             // part 23 is "signaturefilename"
             v.Voted = Boolean.Parse(parts[24]);
@@ -341,22 +360,82 @@ namespace UI {
             v.PrecinctSub = parts[29];
             // part 30 is precinct
             // part 31 is precsub
-            // part 32 is streetbldg
-            // part 33 is streetpredir
-            // part 34 is streetname
-            // part 35 is streettype
-            // part 36 is streetpostdir
-            // part 37 is municipality
-            // part 38 is zip
+            string bldg = parts[32];
+            string predir = parts[33];
+            string streetname = parts[34];
+            string streettype = parts[35];
+            string postdir = parts[36];
+            // now we can make the address
+            if (bldg.Length > 0) {
+              if (address.Length > 0) { address.Append(" "); }
+              address.Append(bldg);
+            }
+            if (predir.Length > 0) {
+              if (address.Length > 0) { address.Append(" "); }
+              address.Append(predir);
+            }
+            if (streetname.Length > 0) {
+              if (address.Length > 0) { address.Append(" "); }
+              address.Append(streetname);
+            }
+            if (streettype.Length > 0) {
+              if (address.Length > 0) { address.Append(" "); }
+              address.Append(streettype);
+            }
+            if (postdir.Length > 0) {
+              if (address.Length > 0) { address.Append(" "); }
+              address.Append(postdir);
+            }
+            v.Address = address.ToString();
+            v.Municipality = parts[37];
+            v.ZipCode = parts[38];
             // part 39 is parcel_address
             // part 40 is poll_code
             // part 41 is election_code-sub
             v.StateId = Int32.Parse(parts[42]);
+            v.PollbookStatus = 0;
             result.Add(v);
           }
         }
         catch (Exception e)
         {
+          Console.Write(e);
+          throw e;
+        }
+      }
+
+      return result;
+    }
+
+    public IEnumerable<Precinct> ImportPrecinctData(string filePath) {
+      List<Precinct> result = new List<Precinct>();
+      using (StreamReader sr = new StreamReader(filePath)) {
+        string line;
+        char[] delimiters = new char[] { '|' };
+        int count = 0;
+        line = sr.ReadLine(); // throw out the first line
+        try {
+          while ((line = sr.ReadLine()) != null) {
+            count = count + 1;
+            if (count % 50 == 0) {
+              Console.WriteLine("Read {0} precincts from input data", count);
+            }
+            string[] parts = line.Split(delimiters);
+            Precinct p = new Precinct();
+            // part 0 is "Index", skip it
+            // part 1 is "ElectionID", skip it
+            p.PrecinctSplitId = parts[2];
+            // part 3 is "Precinct", skip it
+            // part 4 is "SubGroup", skip it
+            // part 5 is "MPCT", skip it
+            p.LocationName = parts[6];
+            p.Address = parts[7];
+            p.CityStateZIP = parts[8] + ", " + parts[9] + "  " + parts[10];
+            // everything else gets skipped
+
+            result.Add(p);
+          }
+        } catch (Exception e) {
           Console.Write(e);
           throw e;
         }

@@ -95,7 +95,7 @@ namespace Aegis_DVL {
     /// <param name="port">
     /// The network port the station is communicating over. Defaults to 62000.
     /// </param>
-    /// <param name="voterDbName">
+    /// <param name="dbName">
     /// The name of the voter database. Defaults to Voters.sqlite.
     /// </param>
     /// <param name="logName">
@@ -105,12 +105,12 @@ namespace Aegis_DVL {
                    AsymmetricKey voterDataEncryptionKey, 
                    string masterPassword, 
                    int port = 62000, 
-                   string voterDbName = "Voters.sqlite", 
+                   string dbName = "ElectionData.sqlite", 
                    string logName = "Log.sqlite")
-      : this(ui, port, voterDbName) {
+      : this(ui, port, dbName) {
       Contract.Requires(ui != null);
       Contract.Requires(masterPassword != null);
-      Contract.Requires(voterDbName != null);
+      Contract.Requires(dbName != null);
       Contract.Requires(logName != null);
 
       this.Crypto = new Crypto(voterDataEncryptionKey);
@@ -143,6 +143,7 @@ namespace Aegis_DVL {
     /// <param name="logName">
     /// The name of the logging database. Defaults to Log.sqlite.
     /// </param>
+    
     public Station(IDvlUi ui, 
                    string keyPath, 
                    string masterPassword, 
@@ -161,7 +162,7 @@ namespace Aegis_DVL {
       Contract.Requires(voterDbName != null);
       Contract.Requires(logName != null);
     }
-
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="Station"/> class. 
     /// Can I have a new Station?

@@ -89,10 +89,17 @@ namespace Aegis_DVL.Database {
     /// <summary>
     /// Gets the all data.
     /// </summary>
-    public IEnumerable<Voter> AllData {
+    public IEnumerable<Voter> AllVoters {
       get {
         return
           this._db.Voters.ToArray();
+      }
+    }
+
+    public IEnumerable<Precinct> AllPrecincts {
+      get {
+        return
+          this._db.Precincts.ToArray();
       }
     }
 
@@ -206,7 +213,21 @@ namespace Aegis_DVL.Database {
         transaction.Commit();
       }
 
-      if (this.Parent.Logger != null) this.Parent.Logger.Log("Importing data. " + c + " entries.", Level.Info);
+      if (this.Parent.Logger != null) this.Parent.Logger.Log("Importing voters. " + c + " entries.", Level.Info);
+    }
+
+    public void Import(IEnumerable<Precinct> data) {
+      int c = 0;
+      using (DbTransaction transaction = this._db.Connection.BeginTransaction()) {
+        data.ForEach(
+          row => {
+            this.Add(row);
+            c++;
+          });
+        transaction.Commit();
+      }
+
+      if (this.Parent.Logger != null) this.Parent.Logger.Log("Importing precincts. " + c + " entries.", Level.Info);
     }
 
     #endregion
@@ -235,10 +256,18 @@ namespace Aegis_DVL.Database {
             "Status nvarchar not null, LastName nvarchar not null, FirstName nvarchar not null, " +
             "MiddleName nvarchar, Suffix nvarchar, DateOfBirth datetime not null, " +
             "EligibleDate datetime not null, MustShowId bit not null, Absentee bit not null, " +
-            "DriversLicense nvarchar, Voted bit not null, ReturnStatus nvarchar, " + 
-            "BallotStyle int not null, PrecinctSub nvarchar not null, StateId int not null)";
+            "ProtectedAddress bit not null, DriversLicense nvarchar, Voted bit not null, ReturnStatus nvarchar, " + 
+            "BallotStyle int not null, PrecinctSub nvarchar not null, Address nvarchar not null, " +
+            "Municipality nvarchar not null, ZipCode nvarchar not null, StateId int not null, PollbookStatus int not null)";
           cmd.ExecuteNonQuery();
         }
+        using (SQLiteCommand cmd = db.CreateCommand()) {
+          cmd.CommandText =
+            "CREATE TABLE Precincts(PrecinctSplitId nvarchar not null primary key desc, " +
+            "LocationName nvarchar not null, Address nvarchar not null, CityStateZip nvarchar not null)";
+          cmd.ExecuteNonQuery();
+        }
+
       }
     }
 
@@ -256,6 +285,12 @@ namespace Aegis_DVL.Database {
       this._db.SaveChanges();
     }
 
+    private void Add(Precinct data) {
+      Contract.Requires(!Equals(data, null));
+      this._db.Precincts.AddObject(data);
+      this._db.SaveChanges();
+    }
+
     /// <summary>
     /// The dispose.
     /// </summary>
@@ -267,6 +302,11 @@ namespace Aegis_DVL.Database {
       if (disposing) this._db.Dispose();
     }
 
+    public Precinct GetPrecinctBySplitId(string sid) {
+      IQueryable<Precinct> res = this._db.Precincts.Where(data => data.PrecinctSplitId.Equals(sid));
+      return !res.Any() ? null : res.Single();
+    }
+
     /// <summary>
     /// The get voter.
     /// </summary>
@@ -276,7 +316,7 @@ namespace Aegis_DVL.Database {
     /// <returns>
     /// The <see cref="Voter"/>.
     /// </returns>
-    private Voter GetVoterByVoterId(Int32 vid) {
+    public Voter GetVoterByVoterId(Int32 vid) {
       IQueryable<Voter> res = this._db.Voters.Where(data => data.VoterId == vid);
       return !res.Any() ? null : res.Single();
     }

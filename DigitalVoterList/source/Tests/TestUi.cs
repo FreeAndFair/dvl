@@ -13,6 +13,8 @@ namespace Tests {
   using System.Net;
 
   using Aegis_DVL;
+  using Aegis_DVL.Data_Types;
+  using Aegis_DVL.Database;
 
   /// <summary>
   ///   The test ui.
@@ -74,7 +76,8 @@ namespace Tests {
     /// <param name="handOutBallot">
     /// The hand out ballot.
     /// </param>
-    public void BallotRequestReply(bool handOutBallot) { this.HandOutBallot = handOutBallot; }
+    public void BallotRequestReply(VoterNumber vn, bool handOutBallot) { this.HandOutBallot = handOutBallot; }
+    public void BallotRequestReply(Voter v, bool handOutBallot) { this.HandOutBallot = handOutBallot; }
 
     /// <summary>
     ///   The election ended.

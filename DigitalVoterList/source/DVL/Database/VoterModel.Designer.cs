@@ -80,6 +80,22 @@ namespace Aegis_DVL.Database
             }
         }
         private ObjectSet<Voter> _Voters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Precinct> Precincts
+        {
+            get
+            {
+                if ((_Precincts == null))
+                {
+                    _Precincts = base.CreateObjectSet<Precinct>("Precincts");
+                }
+                return _Precincts;
+            }
+        }
+        private ObjectSet<Precinct> _Precincts;
 
         #endregion
 
@@ -92,6 +108,14 @@ namespace Aegis_DVL.Database
         {
             base.AddObject("Voters", voter);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Precincts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPrecincts(Precinct precinct)
+        {
+            base.AddObject("Precincts", precinct);
+        }
 
         #endregion
 
@@ -100,6 +124,141 @@ namespace Aegis_DVL.Database
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VoterModel", Name="Precinct")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Precinct : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Precinct object.
+        /// </summary>
+        /// <param name="precinctSplitId">Initial value of the PrecinctSplitId property.</param>
+        /// <param name="locationName">Initial value of the LocationName property.</param>
+        /// <param name="address">Initial value of the Address property.</param>
+        /// <param name="cityStateZIP">Initial value of the CityStateZIP property.</param>
+        public static Precinct CreatePrecinct(global::System.String precinctSplitId, global::System.String locationName, global::System.String address, global::System.String cityStateZIP)
+        {
+            Precinct precinct = new Precinct();
+            precinct.PrecinctSplitId = precinctSplitId;
+            precinct.LocationName = locationName;
+            precinct.Address = address;
+            precinct.CityStateZIP = cityStateZIP;
+            return precinct;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PrecinctSplitId
+        {
+            get
+            {
+                return _PrecinctSplitId;
+            }
+            set
+            {
+                if (_PrecinctSplitId != value)
+                {
+                    OnPrecinctSplitIdChanging(value);
+                    ReportPropertyChanging("PrecinctSplitId");
+                    _PrecinctSplitId = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("PrecinctSplitId");
+                    OnPrecinctSplitIdChanged();
+                }
+            }
+        }
+        private global::System.String _PrecinctSplitId;
+        partial void OnPrecinctSplitIdChanging(global::System.String value);
+        partial void OnPrecinctSplitIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LocationName
+        {
+            get
+            {
+                return _LocationName;
+            }
+            set
+            {
+                OnLocationNameChanging(value);
+                ReportPropertyChanging("LocationName");
+                _LocationName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LocationName");
+                OnLocationNameChanged();
+            }
+        }
+        private global::System.String _LocationName;
+        partial void OnLocationNameChanging(global::System.String value);
+        partial void OnLocationNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CityStateZIP
+        {
+            get
+            {
+                return _CityStateZIP;
+            }
+            set
+            {
+                OnCityStateZIPChanging(value);
+                ReportPropertyChanging("CityStateZIP");
+                _CityStateZIP = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CityStateZIP");
+                OnCityStateZIPChanged();
+            }
+        }
+        private global::System.String _CityStateZIP;
+        partial void OnCityStateZIPChanging(global::System.String value);
+        partial void OnCityStateZIPChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -122,11 +281,16 @@ namespace Aegis_DVL.Database
         /// <param name="eligibleDate">Initial value of the EligibleDate property.</param>
         /// <param name="mustShowId">Initial value of the MustShowId property.</param>
         /// <param name="absentee">Initial value of the Absentee property.</param>
+        /// <param name="protectedAddress">Initial value of the ProtectedAddress property.</param>
         /// <param name="voted">Initial value of the Voted property.</param>
         /// <param name="returnStatus">Initial value of the ReturnStatus property.</param>
         /// <param name="ballotStyle">Initial value of the BallotStyle property.</param>
         /// <param name="precinctSub">Initial value of the PrecinctSub property.</param>
-        public static Voter CreateVoter(global::System.Int32 voterId, global::System.String status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean mustShowId, global::System.Boolean absentee, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle, global::System.String precinctSub)
+        /// <param name="address">Initial value of the Address property.</param>
+        /// <param name="municipality">Initial value of the Municipality property.</param>
+        /// <param name="zipCode">Initial value of the ZipCode property.</param>
+        /// <param name="pollbookStatus">Initial value of the PollbookStatus property.</param>
+        public static Voter CreateVoter(global::System.Int32 voterId, global::System.String status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean mustShowId, global::System.Boolean absentee, global::System.Boolean protectedAddress, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle, global::System.String precinctSub, global::System.String address, global::System.String municipality, global::System.String zipCode, global::System.Int32 pollbookStatus)
         {
             Voter voter = new Voter();
             voter.VoterId = voterId;
@@ -137,10 +301,15 @@ namespace Aegis_DVL.Database
             voter.EligibleDate = eligibleDate;
             voter.MustShowId = mustShowId;
             voter.Absentee = absentee;
+            voter.ProtectedAddress = protectedAddress;
             voter.Voted = voted;
             voter.ReturnStatus = returnStatus;
             voter.BallotStyle = ballotStyle;
             voter.PrecinctSub = precinctSub;
+            voter.Address = address;
+            voter.Municipality = municipality;
+            voter.ZipCode = zipCode;
+            voter.PollbookStatus = pollbookStatus;
             return voter;
         }
 
@@ -394,6 +563,30 @@ namespace Aegis_DVL.Database
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean ProtectedAddress
+        {
+            get
+            {
+                return _ProtectedAddress;
+            }
+            set
+            {
+                OnProtectedAddressChanging(value);
+                ReportPropertyChanging("ProtectedAddress");
+                _ProtectedAddress = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProtectedAddress");
+                OnProtectedAddressChanged();
+            }
+        }
+        private global::System.Boolean _ProtectedAddress;
+        partial void OnProtectedAddressChanging(global::System.Boolean value);
+        partial void OnProtectedAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String DriversLicense
@@ -514,6 +707,78 @@ namespace Aegis_DVL.Database
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Municipality
+        {
+            get
+            {
+                return _Municipality;
+            }
+            set
+            {
+                OnMunicipalityChanging(value);
+                ReportPropertyChanging("Municipality");
+                _Municipality = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Municipality");
+                OnMunicipalityChanged();
+            }
+        }
+        private global::System.String _Municipality;
+        partial void OnMunicipalityChanging(global::System.String value);
+        partial void OnMunicipalityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ZipCode
+        {
+            get
+            {
+                return _ZipCode;
+            }
+            set
+            {
+                OnZipCodeChanging(value);
+                ReportPropertyChanging("ZipCode");
+                _ZipCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ZipCode");
+                OnZipCodeChanged();
+            }
+        }
+        private global::System.String _ZipCode;
+        partial void OnZipCodeChanging(global::System.String value);
+        partial void OnZipCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public Nullable<global::System.Int32> StateId
@@ -534,6 +799,30 @@ namespace Aegis_DVL.Database
         private Nullable<global::System.Int32> _StateId;
         partial void OnStateIdChanging(Nullable<global::System.Int32> value);
         partial void OnStateIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PollbookStatus
+        {
+            get
+            {
+                return _PollbookStatus;
+            }
+            set
+            {
+                OnPollbookStatusChanging(value);
+                ReportPropertyChanging("PollbookStatus");
+                _PollbookStatus = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PollbookStatus");
+                OnPollbookStatusChanged();
+            }
+        }
+        private global::System.Int32 _PollbookStatus;
+        partial void OnPollbookStatusChanging(global::System.Int32 value);
+        partial void OnPollbookStatusChanged();
 
         #endregion
 

@@ -70,7 +70,7 @@ namespace Aegis_DVL.Commands {
     public SyncCommand(Station parent) {
       Contract.Requires(parent != null);
       this._sender = parent.Address.ToString();
-      this._voterData = parent.Database.AllData.ToArray();
+      this._voterData = parent.Database.AllVoters.ToArray();
       this._addresses = parent.Peers.Keys.Select(endpoint => endpoint.ToString()).ToArray();
       this._publicKeys = parent.Peers.Values.Select(key => key.Value.ToBytes()).ToArray();
       this._masterPwHash = Bytes.FromFile("Master.pw");
