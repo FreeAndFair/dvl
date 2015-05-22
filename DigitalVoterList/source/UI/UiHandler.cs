@@ -76,6 +76,8 @@ namespace UI {
     /// </summary>
     private Station _station;
 
+    private bool _hasData = false;
+
     #endregion
 
     #region Constructors and Destructors
@@ -274,6 +276,7 @@ namespace UI {
       try {
         this._station.Database.Import(this.ImportVoterData(voterDataPath));
         this._station.Database.Import(this.ImportPrecinctData(precinctDataPath));
+        _hasData = true;
         return true;
       } catch (Exception) {
         return false;
@@ -686,6 +689,17 @@ namespace UI {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.BallotRequestPage.StationRemoved(); }));
+      }
+    }
+
+    public void SyncComplete() {
+      if (!_hasData) {
+        _hasData = true;
+        if (WaitingForManagerPage != null) {
+          WaitingForManagerPage.CenterLabel.Dispatcher.Invoke(
+            System.Windows.Threading.DispatcherPriority.Normal,
+              new Action(delegate { WaitingForManagerPage.CenterLabel.Content = "Waiting for election to start..."; }));
+        }
       }
     }
 

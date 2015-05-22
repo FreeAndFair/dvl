@@ -3,13 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" Title="OverviewPage" Height="401" Width="607">
+      mc:Ignorable="d" Title="OverviewPage" Height="400" Width="600">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="522*" />
-            <ColumnDefinition Width="85*" />
-        </Grid.ColumnDefinitions>
-        <DataGrid AutoGenerateColumns="False" Height="263" HorizontalAlignment="Left" Margin="32,43,0,0" Name="stationGrid" VerticalAlignment="Top" Width="533" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2" SelectionChanged="StationGridSelectionChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="175*"/>
+            <RowDefinition Height="232*"/>
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" Height="260" HorizontalAlignment="Center" Margin="0, 0, 0, 85" Name="stationGrid" VerticalAlignment="Bottom" Width="545" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="IP Address" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
@@ -19,7 +19,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Connnection State" Width="*" IsReadOnly="True" >
+                <DataGridTemplateColumn Header="Connection State" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding Connected}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
@@ -29,15 +29,15 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Margin="32,325,12,12" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Update"  Margin="20,20,10,20" Height="23" Name="RefreshButton" Width="75" Click="RefreshButtonClick" />
-            <Button Content="Back"  Margin="20,20,10,20" Height="23" Name="BackButton" Width="75" Click="BackButtonClick" />
-            <Button Content="Add" Margin="20,20,10,20" Height="23" Name="AddButton" Width="75" Click="AddButtonClick" />
-            <Button Content="Remove" Margin="20,20,10,20" Height="23" Name="RemoveButton" Width="75" Click="RemoveButtonClick" />
-            <Button Content="Start Election" Margin="20,20,10,20" Height="23" Name="StartEndElectionButton" Width="98" Click="StartEndElectionButtonClick" />
-        </StackPanel>
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="32,12,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="426" FontFamily="Verdana" FontSize="16"/>
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="464,0,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="101" Grid.ColumnSpan="2" />
-        <ProgressBar Height="9" HorizontalAlignment="Left" Margin="465,31,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2" />
+        <WrapPanel Orientation="Horizontal" Margin="28,148,28,24" Grid.Row="1" HorizontalAlignment="Center">
+            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" />
+            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" />
+            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" />
+            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" />
+            <Button Margin="10" Content="End Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" />
+        </WrapPanel>
+        <Label Content="" Height="34" HorizontalAlignment="Left" Margin="48,10,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="411" FontFamily="Verdana" FontSize="16"/>
+        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="456,10,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="116" />
+        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="456,40,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="116" />
     </Grid>
 </Page>

@@ -125,6 +125,7 @@ namespace Aegis_DVL.Commands {
       receiver.Database.Import(_precinctData);
       receiver.Logger.Log("Synchronized by " + this.Sender, Level.Info);
       receiver.Communicator.Send(new AllStationsAvailable(receiver.Address), receiver.Manager);
+      receiver.UI.SyncComplete();
     }
 
     #endregion
