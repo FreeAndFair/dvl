@@ -164,15 +164,15 @@ namespace Aegis_DVL.Communication {
                     ip.AddressFamily == AddressFamily.InterNetwork);
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
         byte[] buffer = new byte[128];
-        IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
-        EndPoint serverRemote = (EndPoint)server;
+        EndPoint server = new IPEndPoint(IPAddress.Any, 0);
 
-        udpSocket.Bind(new IPEndPoint(IPAddress.Any, 62000));
+        udpSocket.Bind(new IPEndPoint(myip, 62000));
         try {
-          udpSocket.ReceiveFrom(buffer, ref serverRemote);
-          if (!server.Address.Equals(myip)) {
-            udpSocket.SendTo(buffer, serverRemote);
-            Console.WriteLine("pinged by " + server.Address);
+          udpSocket.ReceiveFrom(buffer, ref server);
+          IPEndPoint ips = (IPEndPoint)server;
+          if (!ips.Address.Equals(myip)) {
+            udpSocket.SendTo(buffer, server);
+            Console.WriteLine("pinged by " + ips.Address);
           }
         } catch (Exception e) {
           // we timed out, so no more packets
