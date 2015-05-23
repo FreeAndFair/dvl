@@ -172,7 +172,7 @@ namespace Aegis_DVL.Communication {
           udpSocket.ReceiveFrom(buffer, ref serverRemote);
           if (!server.Address.Equals(myip)) {
             udpSocket.SendTo(buffer, serverRemote);
-            Console.WriteLine("pinged by " + serverRemote.Address);
+            Console.WriteLine("pinged by " + server.Address);
           }
         } catch (Exception e) {
           // we timed out, so no more packets
