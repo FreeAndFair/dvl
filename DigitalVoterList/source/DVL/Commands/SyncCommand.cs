@@ -58,6 +58,8 @@ namespace Aegis_DVL.Commands {
 
     private readonly Precinct[] _precinctData;
 
+    private readonly PollingPlace _pollingplace;
+
     #endregion
 
     #region Constructors and Destructors
@@ -74,6 +76,7 @@ namespace Aegis_DVL.Commands {
       this._sender = parent.Address.ToString();
       this._voterData = parent.Database.AllVoters.ToArray();
       this._precinctData = parent.Database.AllPrecincts.ToArray();
+      this._pollingplace = parent.PollingPlace;
       this._addresses = parent.Peers.Keys.Select(endpoint => endpoint.ToString()).ToArray();
       this._publicKeys = parent.Peers.Values.Select(key => key.Value.ToBytes()).ToArray();
       this._masterPwHash = Bytes.FromFile("Master.pw");
@@ -123,6 +126,7 @@ namespace Aegis_DVL.Commands {
 
       receiver.Database.Import(_voterData);
       receiver.Database.Import(_precinctData);
+      receiver.PollingPlace = _pollingplace;
       receiver.Logger.Log("Synchronized by " + this.Sender, Level.Info);
       receiver.Communicator.Send(new AllStationsAvailable(receiver.Address), receiver.Manager);
       receiver.UI.SyncComplete();
