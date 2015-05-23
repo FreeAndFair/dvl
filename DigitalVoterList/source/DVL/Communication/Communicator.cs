@@ -98,8 +98,9 @@ namespace Aegis_DVL.Communication {
       }
 
       potentials.Remove(new IPEndPoint(IPAddress.Parse(myip), 62000));
-      Console.WriteLine(potentials.Count + " possible stations found on network");
+      Console.WriteLine(potentials.Count + " possible stations found");
 
+      /*
       using (cdEvent) {
         int i = 0;
         foreach (IPEndPoint endpoint in potentials) {
@@ -122,6 +123,15 @@ namespace Aegis_DVL.Communication {
       }
 
       cdEvent.Dispose();
+      */
+
+      foreach (IPEndPoint endpoint in potentials) {
+        if (IsListening(endpoint)) {
+          Console.WriteLine("Found a station at " + endpoint.Address);
+          res.Add(endpoint);
+        }
+      }
+
       Console.WriteLine("Found a total of " + res.Count() + " stations.");
       return res;
     }
@@ -146,6 +156,8 @@ namespace Aegis_DVL.Communication {
     }
 
     public void HandlePing() {
+      IPAddress myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
+                    ip.AddressFamily == AddressFamily.InterNetwork);
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
         byte[] buffer = new byte[128];
         IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
@@ -154,7 +166,10 @@ namespace Aegis_DVL.Communication {
         udpSocket.Bind(new IPEndPoint(IPAddress.Any, 62000));
         try {
           udpSocket.ReceiveFrom(buffer, ref serverRemote);
-          udpSocket.SendTo(buffer, serverRemote);
+          if (!server.Address.Equals(myip)) {
+            udpSocket.SendTo(buffer, serverRemote);
+            Console.WriteLine("pinged by " + serverRemote);
+          }
         } catch (Exception e) {
           // we timed out, so no more packets
         }
