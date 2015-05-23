@@ -18,8 +18,6 @@ namespace UI.StationWindows {
   /// Interaction logic for ConfirmSingleVoterDialog.xaml
   /// </summary>
   public partial class ConfirmSingleVoterDialog : Window {
-    public bool IsCancel = false;
-
     public ConfirmSingleVoterDialog(Voter v) {
       InitializeComponent();
 
@@ -40,7 +38,12 @@ namespace UI.StationWindows {
         Address.Content = v.Address;
         MunicipalityAndZIP.Content = v.Municipality + ", TX  " + v.ZipCode;
       }
-      DateOfBirth.Content = "Date Of Birth: " + v.DateOfBirth;
+      DateOfBirth.Content = "Date Of Birth: " + v.DateOfBirth.Date.ToString("MM/dd/yyyy");
+      if (v.DriversLicense.Length > 0) {
+        DriversLicense.Content = "Drivers License: " + v.DriversLicense;
+      } else {
+        DriversLicense.Content = "Drivers License: Not On File";
+      }
     }
 
     private void OKClick(object sender, RoutedEventArgs e) {
@@ -49,8 +52,7 @@ namespace UI.StationWindows {
     }
 
     private void CancelClick(object sender, RoutedEventArgs e) {
-      DialogResult = true;
-      IsCancel = true;
+      DialogResult = false;
       Close();
     }
   }

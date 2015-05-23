@@ -243,9 +243,10 @@ namespace UI.ManagerWindows {
     /// </param>
     private void AddButtonClick(object sender, RoutedEventArgs e) {
       if (this.stationGrid.SelectedCells.Count != 0) {
-        this._ui.ExchangeKeys(
-          new IPEndPoint(IPAddress.Parse(((StationStatus)this.stationGrid.SelectedItem).IpAddress), 62000));
-        this.RemoveButton.IsEnabled = true;
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(((StationStatus)this.stationGrid.SelectedItem).IpAddress), 62000);
+        if (!_ui.GetPeerlist().Contains(ipep)) {
+          this._ui.ExchangeKeys(ipep);
+        }
       }
     }
 
@@ -309,8 +310,8 @@ namespace UI.ManagerWindows {
     private void StartEndElectionButtonClick(object sender, RoutedEventArgs e) {
       if (!this._ui.EnoughStations()) {
         MessageBox.Show(
-          "Du er ikke forbundet til nok stationer", 
-          "Ikke nok stationer", 
+          "You are not connected to enough stations to start the election.", 
+          "Not Enough Stations", 
           MessageBoxButton.OK, 
           MessageBoxImage.Information);
         return;
@@ -330,7 +331,7 @@ namespace UI.ManagerWindows {
         this._parent.Navigate(new ManagerOverviewPage(this._parent, this._ui));
       } else
         MessageBox.Show(
-          "Det indtastede kodeord er ikke korrekt, prøv igen", "Forkert master kodeord", MessageBoxButton.OK);
+          "Incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
     }
 
     /// <summary>

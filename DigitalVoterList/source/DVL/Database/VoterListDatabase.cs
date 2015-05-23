@@ -14,12 +14,23 @@ namespace Aegis_DVL.Database {
   using System.Collections.Generic;
   using System.Data.Common;
   using System.Data.SQLite;
-  using System.Diagnostics.Contracts;
+  using System.Data.Objects;
+  using System.Data.Objects.DataClasses;
   using System.Linq;
+  using System.Linq.Expressions;
+  using System.Reflection;
+  using System.Diagnostics.Contracts;
 
   using Aegis_DVL.Cryptography;
   using Aegis_DVL.Data_Types;
   using Aegis_DVL.Util;
+
+  public static class LinqExtensions {
+  [System.Data.Objects.DataClasses.EdmFunction( "VoterModel", "String_Like")]
+    public static Boolean Like(this String searchingIn, String lookingFor) {
+      throw new Exception("Not implemented");
+    }
+  }
 
   /// <summary>
   /// The sq lite database.
@@ -340,20 +351,16 @@ namespace Aegis_DVL.Database {
 
     public List<Voter> GetVotersBySearchStrings(string lastname, string firstname, string middlename,
                                          string address, string municipality, string zipcode) {
-      lastname = lastname.ToLower();
-      firstname = firstname.ToLower();
-      middlename = middlename.ToLower();
-      address = address.ToLower();
-      municipality = municipality.ToLower();
-      zipcode = zipcode.ToLower();
-
-      IQueryable<Voter> res =
-        this._db.Voters.Where(data => data.LastName.ToLower().StartsWith(lastname)); /* &&
-                                      data.FirstName.ToLower().StartsWith(firstname) &&
-                                      data.MiddleName.ToLower().StartsWith(middlename) &&
-                                      data.Address.ToLower().StartsWith(address) &&
-                                      data.Municipality.ToLower().StartsWith(municipality) &&
-                                      data.ZipCode.ToLower().StartsWith(zipcode)); */
+      IQueryable<Voter> res = 
+        this._db.Voters.Where(data => data.LastName.Like(lastname + "%") &&
+                                      data.FirstName.Like(firstname + "%") &&
+                                      data.MiddleName.Like(middlename + "%") &&
+                                      data.Address.Like(address + "%") &&
+                                      data.Municipality.Like(address + "%") &&
+                                      data.ZipCode.Like(address + "%"))
+                       .OrderBy(data => data.LastName) 
+                       .ThenBy(data => data.FirstName)
+                       .ThenBy(data => data.MiddleName);
 
       Console.WriteLine("Results: " + res.Count());
       return !res.Any() ? null : res.ToList();

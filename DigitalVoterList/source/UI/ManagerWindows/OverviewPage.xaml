@@ -9,7 +9,12 @@
             <RowDefinition Height="175*"/>
             <RowDefinition Height="232*"/>
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" Height="260" HorizontalAlignment="Center" Margin="0, 0, 0, 85" Name="stationGrid" VerticalAlignment="Bottom" Width="545" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" Grid.RowSpan="2">
+        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="260" HorizontalAlignment="Center" Margin="0, 0, 0, 85" Name="stationGrid" VerticalAlignment="Bottom" Width="545" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" Grid.RowSpan="2">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="AddButtonClick"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="IP Address" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>

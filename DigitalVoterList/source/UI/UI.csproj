@@ -133,6 +133,7 @@
     <Compile Include="BallotCPRRequestWindow.xaml.cs">
       <DependentUpon>BallotCPRRequestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\VoterListing.cs" />
     <Compile Include="ManagerWindows\CheckMasterPasswordDialog.xaml.cs">
       <DependentUpon>CheckMasterPasswordDialog.xaml</DependentUpon>
     </Compile>
@@ -173,6 +174,9 @@
     </Compile>
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StationWindows\ConfirmMultiVoterDialog.xaml.cs">
+      <DependentUpon>ConfirmMultiVoterDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="StationWindows\ConfirmSingleVoterDialog.xaml.cs">
       <DependentUpon>ConfirmSingleVoterDialog.xaml</DependentUpon>
@@ -229,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationWindows\ConfirmMultiVoterDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

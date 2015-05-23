@@ -79,7 +79,7 @@ namespace Aegis_DVL.Communication {
           byte[] buffer = new byte[32];
           IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
           EndPoint serverRemote = (EndPoint) server;
-          udpSocket.ReceiveTimeout = 8000;
+          udpSocket.ReceiveTimeout = 2000;
           udpSocket.SendTo(new byte[] { 0 }, new IPEndPoint(IPAddress.Parse(myipprefix + "255"), 62000));
           while (!done) {
             try {

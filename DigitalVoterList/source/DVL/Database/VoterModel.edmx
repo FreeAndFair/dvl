@@ -49,6 +49,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VoterModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <Function Name="String_Like" ReturnType="Edm.Boolean">
+          <Parameter Name="searchingIn" Type="Edm.String" />
+          <Parameter Name="lookingFor" Type="Edm.String" />
+          <DefiningExpression>
+            searchingIn LIKE lookingFor
+          </DefiningExpression>
+        </Function>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Voters" EntityType="VoterModel.Voter" />
           <EntitySet Name="Precincts" EntityType="VoterModel.Precinct" />

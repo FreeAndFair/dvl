@@ -1,15 +1,20 @@
 ﻿<Window x:Name="ConfirmSingleVoter" x:Class="UI.StationWindows.ConfirmSingleVoterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Confirm Voter" Height="300" Width="300">
+        Title="Confirm Voter" Height="300" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" FontSize="16">
     <Grid>
-        <Label Content="Attempt to Check In This Voter?" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="NameBox" Content="Name" HorizontalAlignment="Left" Margin="28,56,0,0" VerticalAlignment="Top" FontSize="14" Width="226"/>
-        <Label x:Name="Address" Content="Address" HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top" FontSize="14" Width="226"/>
-        <Label x:Name="MunicipalityAndZIP" Content="Municipality and ZIP" HorizontalAlignment="Left" Margin="28,112,0,0" VerticalAlignment="Top" FontSize="14" Width="226"/>
-        <Label x:Name="DateOfBirth" Content="Date of Birth: " HorizontalAlignment="Left" Margin="28,141,0,0" VerticalAlignment="Top" FontSize="14" Width="226"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="164,210,0,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="16" IsDefault="True"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="55,210,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="16"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="185*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Attempt to Check In This Voter?" HorizontalAlignment="Center" Margin="28,10,28,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
+        <Label x:Name="NameBox" Content="Name" HorizontalAlignment="Left" Margin="28,56,0,0" VerticalAlignment="Top" FontSize="14" Width="226" Grid.ColumnSpan="2"/>
+        <Label x:Name="Address" Content="Address" HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top" FontSize="14" Width="226" Grid.ColumnSpan="2"/>
+        <Label x:Name="MunicipalityAndZIP" Content="Municipality and ZIP" HorizontalAlignment="Left" Margin="28,112,0,0" VerticalAlignment="Top" FontSize="14" Width="226" Grid.ColumnSpan="2"/>
+        <Label x:Name="DateOfBirth" Content="Date of Birth: " HorizontalAlignment="Left" Margin="28,141,0,0" VerticalAlignment="Top" FontSize="14" Width="226" Grid.ColumnSpan="2"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="57,219,0,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="16" IsDefault="True" Grid.Column="1"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="55,219,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="16" Grid.ColumnSpan="2"/>
+        <Label x:Name="DriversLicense" Content="Drivers License: " HorizontalAlignment="Left" Margin="28,170,0,0" VerticalAlignment="Top" FontSize="14" Width="226" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
