@@ -83,8 +83,8 @@ namespace Aegis_DVL.Communication {
           udpSocket.SendTo(new byte[] { 0 }, new IPEndPoint(IPAddress.Parse(myipprefix + "255"), 62000));
           while (!done) {
             try {
-              udpSocket.ReceiveFrom(buffer, ref serverRemote);
-              IPEndPoint responder = new IPEndPoint(IPAddress.Parse(System.Text.Encoding.ASCII.GetString(buffer)), 62000);
+              int length = udpSocket.ReceiveFrom(buffer, ref serverRemote);
+              IPEndPoint responder = new IPEndPoint(IPAddress.Parse(System.Text.Encoding.ASCII.GetString(buffer, 0, length)), 62000);
               potentials.Add(responder);
               Console.WriteLine("got response from " + responder.Address);
             } catch (Exception e) {
