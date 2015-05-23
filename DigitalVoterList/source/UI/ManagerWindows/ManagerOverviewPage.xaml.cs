@@ -108,6 +108,7 @@ namespace UI.ManagerWindows {
     /// </returns>
     public string IncomingReply(IPEndPoint ip) {
       var acd = new AcceptStationDialog(ip, this._ui);
+      acd.Owner = Application.Current.MainWindow;
       var result = acd.ShowDialog();
 
       if (result.HasValue &&

@@ -4,7 +4,43 @@
         Title="Select a Voter" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Label Name="Count" Content="99999 Matching Voters - Select a Voter to Check In" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <DataGrid x:Name="VoterGrid" SelectionMode="Single" ItemsSource="{Binding}" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="420" Width="720" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False"/>
+        <DataGrid x:Name="VoterGrid" SelectionMode="Single" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="420" Width="740" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="OKClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" TextAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Address" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Address}" TextAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Date of Birth" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateOfBirth}" TextAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Drivers License" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DriversLicense}" TextAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="OK" HorizontalAlignment="Left" Margin="417,504,0,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="16" IsDefault="True"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="300,504,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="16"/>
     </Grid>

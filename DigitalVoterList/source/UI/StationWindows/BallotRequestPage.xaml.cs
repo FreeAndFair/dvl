@@ -86,25 +86,21 @@ namespace UI.StationWindows {
     /// whether or not the ballot request was a success
     /// </param>
     public void BallotResponse(Voter voter, bool succes) {
-      if (voter == null) {
-        MessageBox.Show("No voter matches that search criteria.");
-      } else {
-        this.WaitingLabel.Content = string.Empty;
-        String votername = GetFormattedName(voter);
-        if (succes) {
-          MessageBox.Show(
-            votername + " should be given a ballot. ",
-            "Give Ballot",
-            MessageBoxButton.OK,
-            MessageBoxImage.Exclamation);
-        } else {
-          MessageBox.Show(
-            votername + " should NOT be given a ballot. ",
-            "Do Not Give Ballot",
-            MessageBoxButton.OK,
-            MessageBoxImage.Stop);
-        }
+      switch ((VoterStatus) voter.PollbookStatus) {
+        case VoterStatus.SuspendedVoter:
+        case VoterStatus.OutOfCounty:
+        case VoterStatus.MailBallotNotReturned:
+        case VoterStatus.ActiveVoter:
+        case VoterStatus.Provisional:
+          var bd = new GiveBallotDialog(voter);
+          bd.ShowDialog();
+          break;
+
+        default:
+          break;
       }
+ 
+      this.WaitingLabel.Content = string.Empty;
     }
 
     /// <summary>
@@ -215,17 +211,26 @@ namespace UI.StationWindows {
           VoterStatus newstatus = GetNewVoterStatus(choice);
           if (newstatus != (VoterStatus) choice.PollbookStatus) {
             switch (newstatus) {
+              case VoterStatus.Ineligible:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " is not eligible to vote until " + choice.EligibleDate.Date.ToString("MM/dd/yyyy"));
+                break;
               case VoterStatus.WrongLocation:
                 Precinct p = _ui._station.Database.GetPrecinctBySplitId(choice.PrecinctSub);
-                var wrd = new WrongLocationDialog(choice, p);
-                var result = wrd.ShowDialog();
-                if (result.HasValue && result == true) {
-                  string here = _ui._station.PollingPlace.Address + ", " + _ui._station.PollingPlace.CityStateZIP;
-                  string there = p.Address + ", " + p.CityStateZIP;
-                  MessageBox.Show("Directions from " + here + " to " + there + " are not available in this demo, " +
-                    "but will be available in the final product.");
+                if (p.Address.Trim().Length > 0) {
+                  var wrd = new WrongLocationDialog(choice, p);
+                  var result = wrd.ShowDialog();
+                  if (result.HasValue && result == true) {
+                    string here = _ui._station.PollingPlace.Address + ", " + _ui._station.PollingPlace.CityStateZIP;
+                    string there = p.Address + ", " + p.CityStateZIP;
+                    MessageBox.Show("Directions from " + here + " to " + there + " are not available in this demo, " +
+                      "but will be available in the final product.");
+                  }
+                } else {
+                  newstatus = VoterStatus.Ineligible;
+                  MessageBox.Show("The precinct where " + GetFormattedName(choice) + " is registered is" +
+                    " not participating in this election.");
                 }
-
                 break;
               case VoterStatus.VotedByMail:
                 MessageBox.Show("According to our records, " + GetFormattedName(choice) +
@@ -256,17 +261,6 @@ namespace UI.StationWindows {
                 break;
             }
 
-            switch (newstatus) {
-              case VoterStatus.SuspendedVoter:
-              case VoterStatus.OutOfCounty:
-              case VoterStatus.MailBallotNotReturned:
-              case VoterStatus.ActiveVoter:
-                // show ballot information
-                break;
-
-              default:
-                break;
-            }
             WaitingLabel.Content = "Waiting for confirmation from manager...";
             _ui.RequestStatusChange(choice, newstatus);
           }
@@ -290,7 +284,10 @@ namespace UI.StationWindows {
     private VoterStatus GetNewVoterStatus(Voter voter) {
       // let's figure out what the voter's status should be
       VoterStatus result = VoterStatus.Unavailable;
-      if (!_ui._station.PollingPlace.PrecinctIds.Contains(voter.PrecinctSub)) {
+      if (voter.EligibleDate.Date > DateTime.Today.Date) {
+        // voter is ineligible
+        result = VoterStatus.Ineligible;
+      } else if (!_ui._station.PollingPlace.PrecinctIds.Contains(voter.PrecinctSub)) {
         // voter doesn't belong here
         result = VoterStatus.WrongLocation;
       } else if (voter.Status.ToUpper().Equals("A")) {

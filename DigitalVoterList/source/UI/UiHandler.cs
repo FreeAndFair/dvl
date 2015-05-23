@@ -62,7 +62,7 @@ namespace UI {
     /// <summary>
     /// The _station window.
     /// </summary>
-    private readonly StationWindow _stationWindow;
+    public readonly StationWindow _stationWindow;
 
     /// <summary>
     /// The _master password.

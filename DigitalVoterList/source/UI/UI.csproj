@@ -179,6 +179,9 @@
     <Compile Include="StationWindows\ConfirmSingleVoterDialog.xaml.cs">
       <DependentUpon>ConfirmSingleVoterDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StationWindows\GiveBallotDialog.xaml.cs">
+      <DependentUpon>GiveBallotDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationWindows\WrongLocationDialog.xaml.cs">
       <DependentUpon>WrongLocationDialog.xaml</DependentUpon>
     </Compile>
@@ -238,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationWindows\ConfirmSingleVoterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationWindows\GiveBallotDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

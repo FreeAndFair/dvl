@@ -78,6 +78,7 @@ namespace UI {
     /// </param>
     private void ExitClick(object sender, RoutedEventArgs e) {
       var d = new CheckMasterPasswordDialog(this._ui);
+      d.Owner = this;
       d.ShowDialog();
 
       if (d.DialogResult.HasValue &&
@@ -101,6 +102,7 @@ namespace UI {
     /// </param>
     private void ExportDataClick(object sender, RoutedEventArgs e) {
       var d = new CheckMasterPasswordDialog(this._ui);
+      d.Owner = this;
       d.ShowDialog();
 
       if (d.DialogResult.HasValue &&

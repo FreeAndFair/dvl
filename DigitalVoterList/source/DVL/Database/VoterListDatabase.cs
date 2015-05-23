@@ -144,7 +144,7 @@ namespace Aegis_DVL.Database {
       set {
         if (this.Parent.Logger != null) {
           this.Parent.Logger.Log(
-            "Setting status for voternumber=" +
+            "Setting status for voter number" +
             voternumber + " to " + value, 
             Level.Info);
         }

@@ -582,7 +582,8 @@ namespace Aegis_DVL.Data_Types {
     OutOfCounty = 7,
     Provisional = 8,
     WrongLocation = 9,
-    Unavailable = 10 
+    Unavailable = 10, 
+    Ineligible = 11
   }
   public static class VoterStatusExtensions {
     public static bool GotBallot(this VoterStatus vs) {
