@@ -76,7 +76,7 @@ namespace Aegis_DVL.Communication {
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
         try {
           bool done = false;
-          byte[] buffer = new byte[16];
+          byte[] buffer = new byte[32];
           IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
           EndPoint serverRemote = (EndPoint) server;
           udpSocket.ReceiveTimeout = 8000;
@@ -88,6 +88,7 @@ namespace Aegis_DVL.Communication {
               potentials.Add(responder);
               Console.WriteLine("got response from " + responder.Address);
             } catch (Exception e) {
+              Console.WriteLine(e);
               done = true;
             }
           }
@@ -164,7 +165,7 @@ namespace Aegis_DVL.Communication {
       IPAddress myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork);
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
-        byte[] buffer = new byte[16];
+        byte[] buffer = new byte[32];
         byte[] myipbytes = System.Text.Encoding.ASCII.GetBytes(myip.ToString());
         EndPoint server = new IPEndPoint(IPAddress.Any, 0);
 
