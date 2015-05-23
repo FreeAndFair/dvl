@@ -164,7 +164,8 @@ namespace Aegis_DVL.Communication {
       IPAddress myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork);
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
-        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(myip.ToString());
+        byte[] buffer = new byte[16];
+        byte[] myipbytes = System.Text.Encoding.ASCII.GetBytes(myip.ToString());
         EndPoint server = new IPEndPoint(IPAddress.Any, 0);
 
         udpSocket.Bind(new IPEndPoint(myip, 62000));
@@ -172,7 +173,7 @@ namespace Aegis_DVL.Communication {
           udpSocket.ReceiveFrom(buffer, ref server);
           IPEndPoint ips = (IPEndPoint)server;
           if (!ips.Address.Equals(myip)) {
-            udpSocket.SendTo(buffer, server);
+            udpSocket.SendTo(myipbytes, server);
             Console.WriteLine("pinged by " + ips.Address);
           }
         } catch (Exception e) {
