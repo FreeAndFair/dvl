@@ -116,6 +116,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -178,6 +179,9 @@
     <Compile Include="StationWindows\ConfirmSingleVoterDialog.xaml.cs">
       <DependentUpon>ConfirmSingleVoterDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StationWindows\WrongLocationDialog.xaml.cs">
+      <DependentUpon>WrongLocationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TypeChoicePage.xaml.cs">
       <DependentUpon>TypeChoicePage.xaml</DependentUpon>
     </Compile>
@@ -234,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationWindows\ConfirmSingleVoterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationWindows\WrongLocationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -72,7 +72,7 @@ namespace UI.StationWindows {
       this.InitializeComponent();
       this.checkValidityButton.IsEnabled = false;
       this.WaitingLabel.Content = string.Empty;
-      this.DriversLicense.Focus();
+      this.LastName.Focus();
     }
 
     #endregion
@@ -90,17 +90,7 @@ namespace UI.StationWindows {
         MessageBox.Show("No voter matches that search criteria.");
       } else {
         this.WaitingLabel.Content = string.Empty;
-        string votername;
-        string middlename = " ";
-        if (voter.MiddleName != null && voter.MiddleName.Trim().Length != 0) {
-          middlename = " " + voter.MiddleName + " ";
-        }
-        votername = voter.FirstName + middlename + voter.LastName;
-
-        if (voter.Suffix != null && voter.Suffix.Trim().Length > 0) {
-          votername = votername + ", " + voter.Suffix;
-        }
-
+        String votername = GetFormattedName(voter);
         if (succes) {
           MessageBox.Show(
             votername + " should be given a ballot. ",
@@ -197,7 +187,7 @@ namespace UI.StationWindows {
       Voter choice = null;
 
       if (results == null || results.Count == 0) {
-        MessageBox.Show("No voters match that search criteria.");
+        MessageBox.Show("No voters match your search. Please try again or have the voter register for a provisional ballot.");
       } else if (results.Count == 1) {
         var dialog = new ConfirmSingleVoterDialog(results[0]);
         var result = dialog.ShowDialog();
@@ -215,12 +205,115 @@ namespace UI.StationWindows {
       }
 
       if (choice != null) {
-        // figure out what the new status should be
-        // for now...
-        VoterStatus newstatus = VoterStatus.ActiveVoter;
-        WaitingLabel.Content = "Waiting for reply...";
-        _ui.RequestStatusChange(choice, newstatus);
+        if ((VoterStatus) choice.PollbookStatus != VoterStatus.NotSeenToday) {
+          MessageBox.Show(
+            GetFormattedName(choice) + " has already checked in at this location today.",
+            "Already Checked In",
+            MessageBoxButton.OK,
+            MessageBoxImage.Stop);
+        } else {
+          VoterStatus newstatus = GetNewVoterStatus(choice);
+          if (newstatus != (VoterStatus) choice.PollbookStatus) {
+            switch (newstatus) {
+              case VoterStatus.WrongLocation:
+                Precinct p = _ui._station.Database.GetPrecinctBySplitId(choice.PrecinctSub);
+                var wrd = new WrongLocationDialog(choice, p);
+                var result = wrd.ShowDialog();
+                if (result.HasValue && result == true) {
+                  string here = _ui._station.PollingPlace.Address + ", " + _ui._station.PollingPlace.CityStateZIP;
+                  string there = p.Address + ", " + p.CityStateZIP;
+                  MessageBox.Show("Directions from " + here + " to " + there + " are not available in this demo, " +
+                    "but will be available in the final product.");
+                }
+
+                break;
+              case VoterStatus.VotedByMail:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " has already submitted a vote by mail and should not receive a ballot.");
+                break;
+              case VoterStatus.SuspendedVoter:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " is a suspense voter and requires special processing before receiving a ballot.");
+                break;
+              case VoterStatus.OutOfCounty:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " is an out-of-county voter.");
+                break;
+              case VoterStatus.EarlyVotedInPerson:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " has already voted at an early voting location.");
+                break;
+              case VoterStatus.AbsenteeVotedInPerson:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " registered as an absentee voter but did not receive their ballot.");
+                break;
+              case VoterStatus.MailBallotNotReturned:
+                MessageBox.Show("According to our records, " + GetFormattedName(choice) +
+                  " was sent an absentee ballot and has not yet returned it. Please obtain " +
+                  " the appropriate affidavit before providing a ballot.");
+                break;
+              default:
+                break;
+            }
+
+            switch (newstatus) {
+              case VoterStatus.SuspendedVoter:
+              case VoterStatus.OutOfCounty:
+              case VoterStatus.MailBallotNotReturned:
+              case VoterStatus.ActiveVoter:
+                // show ballot information
+                break;
+
+              default:
+                break;
+            }
+            WaitingLabel.Content = "Waiting for confirmation from manager...";
+            _ui.RequestStatusChange(choice, newstatus);
+          }
+        }
+        ClearFields();
       }
+    }
+
+    private void ClearFields() {
+      LastName.Text = "";
+      FirstName.Text = "";
+      MiddleName.Text = "";
+      Address.Text = "";
+      Municipality.Text = "";
+      ZipCode.Text = "";
+      DriversLicense.Text = "";
+      StateId.Text = "";
+      LastName.Focus();
+    }
+
+    private VoterStatus GetNewVoterStatus(Voter voter) {
+      // let's figure out what the voter's status should be
+      VoterStatus result = VoterStatus.Unavailable;
+      if (!_ui._station.PollingPlace.PrecinctIds.Contains(voter.PrecinctSub)) {
+        // voter doesn't belong here
+        result = VoterStatus.WrongLocation;
+      } else if (voter.Status.ToUpper().Equals("A")) {
+        // active voter
+        if (voter.Voted) {
+          result = VoterStatus.EarlyVotedInPerson;
+        } else if (voter.Absentee && voter.ReturnStatus.ToUpper().Equals("PB")) {
+          result = VoterStatus.VotedByMail;
+        } else if (voter.Absentee && voter.ReturnStatus.Trim().Length == 0) {
+          result = VoterStatus.MailBallotNotReturned;
+        } else if (voter.Absentee) {
+          result = VoterStatus.AbsenteeVotedInPerson;
+        } else if (voter.PrecinctSub.StartsWith("0")) {
+          result = VoterStatus.OutOfCounty;
+        } else {
+          result = VoterStatus.ActiveVoter;
+        }
+      } else {
+        // suspended voter
+        result = VoterStatus.SuspendedVoter;
+      }
+
+      return result;
     }
 
     /// <summary>
@@ -254,6 +347,20 @@ namespace UI.StationWindows {
       if (this.WaitingLabel.Content.Equals(string.Empty) &&
           !this.Blocked) this.checkValidityButton.IsEnabled = true;
       else this.checkValidityButton.IsEnabled = false;
+    }
+
+    private string GetFormattedName(Voter voter) {
+      string votername;
+      string middlename = " ";
+      if (voter.MiddleName != null && voter.MiddleName.Trim().Length != 0) {
+        middlename = " " + voter.MiddleName + " ";
+      }
+      votername = voter.FirstName + middlename + voter.LastName;
+
+      if (voter.Suffix != null && voter.Suffix.Trim().Length > 0) {
+        votername = votername + ", " + voter.Suffix;
+      }
+      return votername;
     }
 
     #endregion

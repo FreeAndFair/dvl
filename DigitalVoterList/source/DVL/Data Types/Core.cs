@@ -576,11 +576,13 @@ namespace Aegis_DVL.Data_Types {
     ActiveVoter = 1,
     SuspendedVoter = 2,
     EarlyVotedInPerson = 3,
-    MailBallotNotReturned = 4,
-    OutOfCounty = 5,
-    Provisional = 6,
-    WrongLocation = 7,
-    Unavailable = 8
+    AbsenteeVotedInPerson = 4,
+    VotedByMail = 5, 
+    MailBallotNotReturned = 6,
+    OutOfCounty = 7,
+    Provisional = 8,
+    WrongLocation = 9,
+    Unavailable = 10 
   }
   public static class VoterStatusExtensions {
     public static bool GotBallot(this VoterStatus vs) {

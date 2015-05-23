@@ -1,0 +1,13 @@
+﻿<Window x:Name="Wrong_Location" x:Class="UI.StationWindows.WrongLocationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wrong Location" Height="300" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Label Name="VoterName" Content="Voter Name" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Center" Margin="20,50,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16"><Run Text="is at the incorrect polling location. "/><LineBreak/><Run Text="The correct location is:"/></TextBlock>
+        <TextBlock Name="LocationAddress" HorizontalAlignment="Center" Margin="20,110,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16"><Run Text="LOCATION" /></TextBlock>
+        <Button Content="Show Directions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Click="DirectionsClick" FontSize="16" Margin="50,224,0,0"/>
+        <Button Content="Continue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Click="ContinueClick" FontSize="16" IsDefault="True" Margin="250,224,0,0"/>
+
+    </Grid>
+</Window>
