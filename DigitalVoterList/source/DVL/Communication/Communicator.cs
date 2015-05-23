@@ -85,6 +85,7 @@ namespace Aegis_DVL.Communication {
             try {
               udpSocket.ReceiveFrom(buffer, ref serverRemote);
               potentials.Add(new IPEndPoint(server.Address, 62000));
+              Console.WriteLine("got response from " + server.Address);
             } catch (Exception e) {
               done = true;
             }
@@ -126,9 +127,12 @@ namespace Aegis_DVL.Communication {
       */
 
       foreach (IPEndPoint endpoint in potentials) {
+        Console.WriteLine("Checking for station at " + endpoint.Address);
         if (IsListening(endpoint)) {
-          Console.WriteLine("Found a station at " + endpoint.Address);
+          Console.WriteLine("Found station at " + endpoint.Address);
           res.Add(endpoint);
+        } else {
+          Console.WriteLine("No response at " + endpoint.Address);
         }
       }
 
@@ -168,7 +172,7 @@ namespace Aegis_DVL.Communication {
           udpSocket.ReceiveFrom(buffer, ref serverRemote);
           if (!server.Address.Equals(myip)) {
             udpSocket.SendTo(buffer, serverRemote);
-            Console.WriteLine("pinged by " + serverRemote);
+            Console.WriteLine("pinged by " + serverRemote.Address);
           }
         } catch (Exception e) {
           // we timed out, so no more packets
