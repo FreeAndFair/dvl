@@ -7,6 +7,7 @@ using System.Text;
 using Aegis_DVL.Database;
 
 namespace Aegis_DVL.Data_Types {
+  [Serializable]
   public class PollingPlace : IComparable {
     public string LocationName { get; set; }
     public string Address { get; set; }
