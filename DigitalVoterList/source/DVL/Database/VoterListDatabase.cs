@@ -325,24 +325,38 @@ namespace Aegis_DVL.Database {
       return GetVoterByVoterId(vn.Value);
     }
 
-    /// <summary>
-    /// The get voter.
-    /// </summary>
-    /// <param name="voterNumber">
-    /// The voter number.
-    /// </param>
-    /// <returns>
-    /// The <see cref="Voter"/>.
-    /// </returns>
-    private Voter GetVoterByDriversLicense(String dl) {
-      IQueryable<Voter> res = this._db.Voters.Where(
-        data => data.DriversLicense.Equals(dl, StringComparison.CurrentCulture));
+    public Voter GetVoterByStateId(Int32 sid) {
+      IQueryable<Voter> res = this._db.Voters.Where(data => data.StateId == sid);
       return !res.Any() ? null : res.Single();
     }
 
-    private Voter GetVoterByStateId(Int32 sid) {
-      IQueryable<Voter> res = this._db.Voters.Where(data => data.StateId == sid);
+    public Voter GetVoterByDLNumber(string dlnumber) {
+      dlnumber = dlnumber.ToLower();
+      IQueryable <Voter> res = this._db.Voters.Where(
+        data => data.DriversLicense.Equals(dlnumber, StringComparison.CurrentCulture));
       return !res.Any() ? null : res.Single();
+      return !res.Any() ? null : res.Single();
+    }
+
+    public List<Voter> GetVotersBySearchStrings(string lastname, string firstname, string middlename,
+                                         string address, string municipality, string zipcode) {
+      lastname = lastname.ToLower();
+      firstname = firstname.ToLower();
+      middlename = middlename.ToLower();
+      address = address.ToLower();
+      municipality = municipality.ToLower();
+      zipcode = zipcode.ToLower();
+
+      IQueryable<Voter> res =
+        this._db.Voters.Where(data => data.LastName.ToLower().StartsWith(lastname)); /* &&
+                                      data.FirstName.ToLower().StartsWith(firstname) &&
+                                      data.MiddleName.ToLower().StartsWith(middlename) &&
+                                      data.Address.ToLower().StartsWith(address) &&
+                                      data.Municipality.ToLower().StartsWith(municipality) &&
+                                      data.ZipCode.ToLower().StartsWith(zipcode)); */
+
+      Console.WriteLine("Results: " + res.Count());
+      return !res.Any() ? null : res.ToList();
     }
 
     #endregion

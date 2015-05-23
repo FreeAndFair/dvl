@@ -55,6 +55,8 @@ namespace Aegis_DVL {
     /// </summary>
     private Thread _listenerThread;
 
+    private Thread _pingThread;
+
     /// <summary>
     /// The _logger.
     /// </summary>
@@ -688,6 +690,9 @@ namespace Aegis_DVL {
       this._listenerThread = new Thread(this.LoopListen);
       this._listenerThread.SetApartmentState(ApartmentState.STA);
       this._listenerThread.Start();
+      this._pingThread = new Thread(this.PingListen);
+      this._pingThread.SetApartmentState(ApartmentState.STA);
+      this._pingThread.Start();
       while (!this.StationActive(this.Address)) ;
     }
 
@@ -780,6 +785,8 @@ namespace Aegis_DVL {
     /// The loop listen.
     /// </summary>
     private void LoopListen() { while (this.Listening) this.Communicator.ReceiveAndHandle(); }
+
+    private void PingListen() { while (this.Listening) Communicator.HandlePing(); } 
 
     /// <summary>
     /// The object invariant.

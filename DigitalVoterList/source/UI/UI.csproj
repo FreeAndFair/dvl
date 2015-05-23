@@ -174,6 +174,9 @@
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StationWindows\ConfirmSingleVoterDialog.xaml.cs">
+      <DependentUpon>ConfirmSingleVoterDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TypeChoicePage.xaml.cs">
       <DependentUpon>TypeChoicePage.xaml</DependentUpon>
     </Compile>
@@ -226,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationWindows\ConfirmSingleVoterDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

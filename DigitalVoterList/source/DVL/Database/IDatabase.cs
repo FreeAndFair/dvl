@@ -83,6 +83,10 @@ namespace Aegis_DVL.Database {
     void Import(IEnumerable<Precinct> data);
 
     Voter GetVoterByVoterNumber(VoterNumber voternumber);
+    Voter GetVoterByDLNumber(string dlnumber);
+    Voter GetVoterByStateId(Int32 stateid);
+    List<Voter> GetVotersBySearchStrings(string lastname, string firstname, string middlename,
+                                         string address, string municipality, string zipcode);
 
     Precinct GetPrecinctBySplitId(string sid);
 
@@ -218,9 +222,11 @@ namespace Aegis_DVL.Database {
     public void Import(IEnumerable<Voter> data) { Contract.Requires(data != null); }
     public void Import(IEnumerable<Precinct> data) { Contract.Requires(data != null); }
 
-    public Voter GetVoterByVoterNumber(VoterNumber vn) { Contract.Requires(vn != null); return default(Voter);  }
+    public Voter GetVoterByVoterNumber(VoterNumber vn) { return default(Voter);  }
+    public Voter GetVoterByDLNumber(string dlnumber) { Contract.Requires(dlnumber != null); return default(Voter); }
+    public Voter GetVoterByStateId(Int32 sid) { return default(Voter); }
     public Precinct GetPrecinctBySplitId(string sid) { Contract.Requires(sid != null); return default(Precinct); }
-
+    public List<Voter> GetVotersBySearchStrings(string a, string b, string c, string d, string e, string f) { return default(List<Voter>); }
     #endregion
   }
 }

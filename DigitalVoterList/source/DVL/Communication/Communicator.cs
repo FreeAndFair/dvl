@@ -18,6 +18,7 @@ namespace Aegis_DVL.Communication {
   using System.Net;
   using System.Net.Sockets;
   using System.Threading;
+  using System.Threading.Tasks;
 
   using Aegis_DVL.Commands;
   using Aegis_DVL.Data_Types;
@@ -66,15 +67,46 @@ namespace Aegis_DVL.Communication {
       var cdEvent = new CountdownEvent(1);
       string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-      myip = myip.Substring(0, myip.LastIndexOf('.') + 1);
+      string myipprefix = myip.Substring(0, myip.LastIndexOf('.') + 1);
       Console.WriteLine("my ip prefix is " + myip);
+
+      // narrow down possible targets
+      var potentials = new List<IPEndPoint>();
+
+      using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
+        try {
+          bool done = false;
+          byte[] buffer = new byte[128];
+          IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
+          EndPoint serverRemote = (EndPoint) server;
+          udpSocket.ReceiveTimeout = 8000;
+          udpSocket.SendTo(new byte[] { 0 }, new IPEndPoint(IPAddress.Parse(myipprefix + "255"), 62000));
+          while (!done) {
+            try {
+              udpSocket.ReceiveFrom(buffer, ref serverRemote);
+              potentials.Add(new IPEndPoint(server.Address, 62000));
+            } catch (Exception e) {
+              done = true;
+            }
+          }
+        } catch (Exception e) {
+          // something went wrong so fall back to the old way of doing things
+          for (int i = 1; i < 255; i++) {
+            potentials.Add(new IPEndPoint(IPAddress.Parse(myipprefix + i), 62000));
+          }
+        }
+      }
+
+      potentials.Remove(new IPEndPoint(IPAddress.Parse(myip), 62000));
+      Console.WriteLine(potentials.Count + " possible stations found on network");
+
       using (cdEvent) {
-        for (int i = 1; i < 255; i++) {
+        int i = 0;
+        foreach (IPEndPoint endpoint in potentials) {
           cdEvent.AddCount();
           ThreadPool.QueueUserWorkItem(
             element => {
               var elem = (Tuple<int, CountdownEvent>)element;
-              var endpoint = new IPEndPoint(IPAddress.Parse(myip + elem.Item1), 62000);
               if (this.IsListening(endpoint)) {
                 Console.WriteLine("Found a station at " + endpoint.Address);
                 res.Add(endpoint);
@@ -82,6 +114,7 @@ namespace Aegis_DVL.Communication {
               elem.Item2.Signal();
             }, 
             new Tuple<int, CountdownEvent>(i, cdEvent));
+          i++;
         }
 
         cdEvent.Signal();
@@ -110,6 +143,22 @@ namespace Aegis_DVL.Communication {
       }
 
       return true;
+    }
+
+    public void HandlePing() {
+      using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
+        byte[] buffer = new byte[128];
+        IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
+        EndPoint serverRemote = (EndPoint)server;
+
+        udpSocket.Bind(new IPEndPoint(IPAddress.Any, 62000));
+        try {
+          udpSocket.ReceiveFrom(buffer, ref serverRemote);
+          udpSocket.SendTo(buffer, serverRemote);
+        } catch (Exception e) {
+          // we timed out, so no more packets
+        }
+      }
     }
 
     /// <summary>
@@ -169,7 +218,7 @@ namespace Aegis_DVL.Communication {
           IAsyncResult ar = client.BeginConnect(target.Address, target.Port, null, null);
           WaitHandle wh = ar.AsyncWaitHandle;
           try {
-            if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(3000), false)) throw new SocketException();
+            if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(1000), false)) throw new SocketException();
             client.EndConnect(ar);
           } finally {
             wh.Close();

@@ -53,6 +53,8 @@ namespace Aegis_DVL.Communication {
     /// </summary>
     void ReceiveAndHandle();
 
+    void HandlePing();
+
     /// <summary>
     /// Send this command securely to this target!
     /// </summary>
@@ -117,6 +119,8 @@ namespace Aegis_DVL.Communication {
     /// The receive and handle.
     /// </summary>
     public void ReceiveAndHandle() { }
+
+    public void HandlePing() { } 
 
     /// <summary>
     /// The send.
