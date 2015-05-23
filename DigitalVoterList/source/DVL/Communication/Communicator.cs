@@ -68,7 +68,7 @@ namespace Aegis_DVL.Communication {
       string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork).ToString();
       string myipprefix = myip.Substring(0, myip.LastIndexOf('.') + 1);
-      Console.WriteLine("my ip prefix is " + myip);
+      Console.WriteLine("my ip address is " + myip);
 
       // narrow down possible targets
       var potentials = new List<IPEndPoint>();
@@ -76,7 +76,7 @@ namespace Aegis_DVL.Communication {
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
         try {
           bool done = false;
-          byte[] buffer = new byte[128];
+          byte[] buffer = new byte[16];
           IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
           EndPoint serverRemote = (EndPoint) server;
           udpSocket.ReceiveTimeout = 8000;
@@ -84,8 +84,9 @@ namespace Aegis_DVL.Communication {
           while (!done) {
             try {
               udpSocket.ReceiveFrom(buffer, ref serverRemote);
-              potentials.Add(new IPEndPoint(server.Address, 62000));
-              Console.WriteLine("got response from " + server.Address);
+              IPEndPoint responder = new IPEndPoint(IPAddress.Parse(System.Text.Encoding.ASCII.GetString(buffer)), 62000);
+              potentials.Add(responder);
+              Console.WriteLine("got response from " + responder.Address);
             } catch (Exception e) {
               done = true;
             }
@@ -163,7 +164,7 @@ namespace Aegis_DVL.Communication {
       IPAddress myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork);
       using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
-        byte[] buffer = new byte[128];
+        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(myip.ToString());
         EndPoint server = new IPEndPoint(IPAddress.Any, 0);
 
         udpSocket.Bind(new IPEndPoint(myip, 62000));
