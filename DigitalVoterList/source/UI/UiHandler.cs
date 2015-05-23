@@ -36,11 +36,6 @@ namespace UI {
     #region Fields
 
     /// <summary>
-    /// The ballot cpr request window.
-    /// </summary>
-    public BallotCPRRequestWindow BallotCPRRequestWindow;
-
-    /// <summary>
     /// The ballot request page.
     /// </summary>
     public BallotRequestPage BallotRequestPage;
@@ -114,20 +109,14 @@ namespace UI {
     /// <summary>
     /// The ballot request reply.
     /// </summary>
-    /// <param name="handOutBallot">
+    /// <param name="successful">
     /// The hand out ballot.
     /// </param>
-    public void BallotRequestReply(Voter voter, bool handOutBallot) {
+    public void BallotRequestReply(Voter voter, bool successful) {
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.BallotResponse(voter, handOutBallot); }));
-      }
-
-      if (this.BallotCPRRequestWindow != null) {
-        this.BallotCPRRequestWindow.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotCPRRequestWindow.BallotResponse(voter, handOutBallot); }));
+          new Action(delegate { this.BallotRequestPage.BallotResponse(voter, successful); }));
       }
     }
 
@@ -176,10 +165,6 @@ namespace UI {
     /// The enough peers.
     /// </summary>
     public void EnoughPeers() {
-      this._stationWindow.Dispatcher.Invoke(
-        System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this._stationWindow.MarkVoterMenuItem.IsEnabled = true; }));
-
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
@@ -532,10 +517,6 @@ namespace UI {
     /// The not enough peers.
     /// </summary>
     public void NotEnoughPeers() {
-      this._stationWindow.Dispatcher.Invoke(
-        System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this._stationWindow.MarkVoterMenuItem.IsEnabled = false; }));
-
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
@@ -566,11 +547,8 @@ namespace UI {
     /// <param name="voterNumber">
     /// the voternumber of the voter
     /// </param>
-    public void RequestBallot(string voterNumber) {
-      var vn = new VoterNumber(Int32.Parse(voterNumber));
-
-      if (this._station.Database[vn] == BallotStatus.NotReceived) this._station.RequestBallot(vn);
-      else this.BallotRequestReply(this._station.Database.GetVoterByVoterNumber(vn), false);
+    public void RequestStatusChange(Voter voter, VoterStatus voterStatus) {
+      this._station.RequestStatusChange(voter, voterStatus);
     }
 
     /*

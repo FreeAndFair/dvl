@@ -63,7 +63,6 @@ namespace UI.ManagerWindows {
         wnd.Width = 600;
         wnd.ExitMenuItem.IsEnabled = false;
         wnd.ExportDataMenuItem.IsEnabled = false;
-        wnd.MarkVoterMenuItem.IsEnabled = false;
       }
 
       this.InitializeComponent();

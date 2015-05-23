@@ -8,7 +8,6 @@
     <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
         <Menu IsMainMenu="True" Width="Auto" Height="Auto" DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="Mark voter" Click="MarkVoterClick" Name="MarkVoterMenuItem"/>
                 <MenuItem Header="Export data" Click="ExportDataClick" Name="ExportDataMenuItem"/>
                 <MenuItem Header="Exit" Click="ExitClick" Name="ExitMenuItem"/>
             </MenuItem>

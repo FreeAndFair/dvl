@@ -88,7 +88,6 @@ namespace Aegis_DVL.Communication {
               potentials.Add(responder);
               Console.WriteLine("got response from " + responder.Address);
             } catch (Exception e) {
-              Console.WriteLine(e);
               done = true;
             }
           }
@@ -168,7 +167,7 @@ namespace Aegis_DVL.Communication {
         byte[] buffer = new byte[32];
         byte[] myipbytes = System.Text.Encoding.ASCII.GetBytes(myip.ToString());
         EndPoint server = new IPEndPoint(IPAddress.Any, 0);
-
+        udpSocket.ReceiveTimeout = 2000;
         udpSocket.Bind(new IPEndPoint(myip, 62000));
         try {
           udpSocket.ReceiveFrom(buffer, ref server);
@@ -232,7 +231,7 @@ namespace Aegis_DVL.Communication {
     public void Send(ICommand command, IPEndPoint target) {
       if (this.Parent.Logger != null &&
           !(command is IsAliveCommand)) this.Parent.Logger.Log("Attempting to send " + command.GetType() + " to " + target, Level.Info);
-      bool isBallotReceived = command is BallotReceivedCommand;
+      bool isBallotReceived = command is StatusChangedCommand;
 
       if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand || command is CryptoCommand)) command = new CryptoCommand(this.Parent, target, command);
       try {

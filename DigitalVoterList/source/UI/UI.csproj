@@ -130,9 +130,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BallotCPRRequestWindow.xaml.cs">
-      <DependentUpon>BallotCPRRequestWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Data\VoterListing.cs" />
     <Compile Include="ManagerWindows\CheckMasterPasswordDialog.xaml.cs">
       <DependentUpon>CheckMasterPasswordDialog.xaml</DependentUpon>
@@ -188,10 +185,6 @@
     <Compile Include="StationWindows\WaitingForManagerPage.xaml.cs">
       <DependentUpon>WaitingForManagerPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="BallotCPRRequestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ManagerWindows\CheckMasterPasswordDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -130,29 +130,27 @@ namespace Aegis_DVL.Database {
     /// The voternumber.
     /// </param>
     /// <returns>
-    /// The <see cref="BallotStatus"/>.
+    /// The <see cref="VoterStatus"/>.
     /// </returns>
     /// TODO: review for problems with complexity
-    public BallotStatus this[VoterNumber voternumber] {
+    public VoterStatus this[VoterNumber voternumber] {
       get {
         Voter voter = GetVoterByVoterNumber(voternumber);
-        if (voter == null) return BallotStatus.Unavailable;
+        if (voter == null) return VoterStatus.Unavailable;
        
-        return voter.Voted
-                 ? BallotStatus.Received
-                 : BallotStatus.NotReceived;
+        return (VoterStatus) voter.PollbookStatus;
       }
 
       set {
         if (this.Parent.Logger != null) {
           this.Parent.Logger.Log(
-            "Setting ballotstatus for voternumber=" +
+            "Setting status for voternumber=" +
             voternumber + " to " + value, 
             Level.Info);
         }
 
         Voter voter = GetVoterByVoterId(voternumber.Value);
-        voter.Voted = (value == BallotStatus.Received);
+        voter.PollbookStatus = (int) value;
         this._db.SaveChanges();
       }
     }
@@ -167,7 +165,7 @@ namespace Aegis_DVL.Database {
     /// The master password.
     /// </param>
     /// <returns>
-    /// The <see cref="BallotStatus"/>.
+    /// The <see cref="VoterStatus"/>.
     /// </returns>
     /// TODO: review for problems with complexity
     /*

@@ -19,7 +19,7 @@ namespace Aegis_DVL.Commands {
   /// <summary>
   /// The ballot received command.
   /// </summary>
-  [Serializable] public class BallotReceivedCommand : ICommand {
+  [Serializable] public class StatusChangedCommand : ICommand {
     #region Fields
 
     /// <summary>
@@ -32,12 +32,15 @@ namespace Aegis_DVL.Commands {
     /// </summary>
     private readonly VoterNumber _voterNumber;
 
+    private readonly VoterStatus _oldStatus;
+    private readonly VoterStatus _newStatus;
+
     #endregion
 
     #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BallotReceivedCommand"/> class. 
+    /// Initializes a new instance of the <see cref="StatusChangedCommand"/> class. 
     /// May I have a new command that tells the target that a ballot should be handed out and be marked as received?
     /// </summary>
     /// <param name="sender">
@@ -52,12 +55,14 @@ namespace Aegis_DVL.Commands {
     /// <param name="cpr">
     /// The CPR-number of the ballot to be handed out and to be marked as received.
     /// </param>
-    public BallotReceivedCommand(IPEndPoint sender, IPEndPoint requester, VoterNumber voterNumber) {
+    public StatusChangedCommand(IPEndPoint sender, IPEndPoint requester, VoterNumber voterNumber, VoterStatus oldStatus, VoterStatus newStatus) {
       Contract.Requires(sender != null);
       Contract.Requires(requester != null);
 
       this._requester = requester;
       this._voterNumber = voterNumber;
+      this._oldStatus = oldStatus;
+      this._newStatus = newStatus;
       this.Sender = sender;
     }
 
@@ -82,8 +87,8 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       if (!receiver.Manager.Equals(this.Sender) ||
-          receiver.Database[_voterNumber] == BallotStatus.Received) return;
-      receiver.Database[_voterNumber] = BallotStatus.Received;
+          receiver.Database[_voterNumber] == _newStatus) return;
+      receiver.Database[_voterNumber] = _newStatus;
       if (receiver.Address.Equals(this._requester)) receiver.UI.BallotRequestReply(_voterNumber, true);
     }
 

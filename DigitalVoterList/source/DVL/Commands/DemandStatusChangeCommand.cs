@@ -22,20 +22,21 @@ namespace Aegis_DVL.Commands {
   /// <summary>
   /// The request ballot command.
   /// </summary>
-  [Serializable] public class RequestBallotCommand : ICommand {
+  [Serializable] public class DemandStatusChangeCommand : ICommand {
     #region Fields
 
     /// <summary>
     /// The _voternumber.
     /// </summary>
     private readonly VoterNumber _voternumber;
+    private readonly VoterStatus _newstatus;
 
     #endregion
 
     #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RequestBallotCommand"/> class. 
+    /// Initializes a new instance of the <see cref="RequestStatusChangeCommand"/> class. 
     /// May I have a new command that requests a ballot of the target?
     /// </summary>
     /// <param name="sender">
@@ -44,10 +45,11 @@ namespace Aegis_DVL.Commands {
     /// <param name="voternumber">
     /// The voternumber to request a ballot for.
     /// </param>
-    public RequestBallotCommand(IPEndPoint sender, VoterNumber voternumber) {
+    public DemandStatusChangeCommand(IPEndPoint sender, VoterNumber voternumber, VoterStatus newstatus) {
       Contract.Requires(sender != null);
       this.Sender = sender;
       this._voternumber = voternumber;
+      this._newstatus = newstatus;
     }
 
     #endregion
@@ -70,35 +72,8 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!receiver.IsManager) return;
-      if (receiver.Database[this._voternumber] != BallotStatus.NotReceived) {
-        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address, this._voternumber), this.Sender);
-        receiver.Logger.Log(
-          "Attempted to request a ballot that had status " + receiver.Database[this._voternumber], Level.Info);
-        return;
-      }
-
-      receiver.BallotReceived(this._voternumber);
-
-      // Send to all but requester
-      receiver.Peers.Keys.Where(peer => !peer.Equals(this.Sender))
-              .ForEach(
-                peer =>
-                receiver.Communicator.Send(
-                  new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber), peer));
-
-      if (this.Sender.Equals(receiver.Manager)) {
-        receiver.UI.BallotRequestReply(_voternumber, true);
-        return;
-      }
-
-      // Send to requester last.
-      try {
-        receiver.Communicator.Send(
-          new BallotReceivedCommand(receiver.Address, this.Sender, this._voternumber), this.Sender);
-      } catch (SocketException) {
-        receiver.AnnounceRevokeBallot(this._voternumber);
-      }
+      if (receiver.IsManager || !receiver.Manager.Equals(Sender)) return;
+      receiver.Database.GetVoterByVoterNumber(_voternumber).PollbookStatus = (int) _newstatus;
     }
 
     #endregion

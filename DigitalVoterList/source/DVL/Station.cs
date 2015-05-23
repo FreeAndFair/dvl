@@ -404,15 +404,14 @@ namespace Aegis_DVL {
     /// <param name="cpr">
     /// The CPR number to revoke a ballot for.
     /// </param>
-    public void AnnounceRevokeBallot(VoterNumber voterNumber) {
+    public void AnnounceRevokeBallot(Voter voter, VoterStatus oldStatus) {
       Contract.Requires(this.IsManager);
-      Contract.Requires(this.Database[voterNumber] == BallotStatus.Received);
-      var cmd = new RevokeBallotCommand(this.Address, voterNumber);
+      var cmd = new DemandStatusChangeCommand(this.Address, new VoterNumber(voter.VoterId), oldStatus);
       this.Peers.Keys.ForEach(peer => this.Communicator.Send(cmd, peer));
       cmd.Execute(this);
       if (this.Logger != null) 
-        this.Logger.Log("Announcing that this ballot should be revoked for voter number " + 
-          voterNumber, Level.Warn);
+        this.Logger.Log("Announcing that this status change should be revoked for voter number " + 
+          voter.VoterId, Level.Warn);
     }
       
     /*
@@ -460,13 +459,12 @@ namespace Aegis_DVL {
     /// <param name="voterNumber">
     /// The voternumber to request a ballot for.
     /// </param>
-    public void BallotReceived(VoterNumber voterNumber) {
-      Contract.Requires(this.Database[voterNumber] == BallotStatus.NotReceived);
-      Contract.Ensures(this.Database[voterNumber] == BallotStatus.Received);
-      this.Database[voterNumber] = BallotStatus.Received;
+    public void BallotReceived(VoterNumber voterNumber, VoterStatus voterStatus) {
+      Contract.Ensures(this.Database[voterNumber] == voterStatus);
+      this.Database[voterNumber] = voterStatus;
       if (this.Logger != null) 
-        this.Logger.Log("Marking voternumber=" + voterNumber + 
-          " as having received a ballot.", Level.Info);
+        this.Logger.Log("Changing voter number " + voterNumber + 
+          " status to " + voterStatus + ".", Level.Info);
     }
 
     /*
@@ -591,12 +589,11 @@ namespace Aegis_DVL {
     /// <param name="voterNumber">
     /// The voternumber to request a ballot for.
     /// </param>
-    public void RequestBallot(VoterNumber voterNumber) {
-      Contract.Requires(this.Database[voterNumber] == BallotStatus.NotReceived);
-      this.Communicator.Send(new RequestBallotCommand(this.Address, voterNumber), this.Manager);
+    public void RequestStatusChange(Voter voter, VoterStatus voterStatus) {
+      this.Communicator.Send(new RequestStatusChangeCommand(this.Address, new VoterNumber(voter.VoterId), (VoterStatus) voter.PollbookStatus, voterStatus), this.Manager);
       if (this.Logger != null) 
-        this.Logger.Log("Requesting ballot for: voter number " + 
-          voterNumber, Level.Info);
+        this.Logger.Log("Requesting status change for voter number " + 
+          voter.VoterId + " to " + voterStatus, Level.Info);
     }
 
     /*
@@ -620,21 +617,6 @@ namespace Aegis_DVL {
           cpr, Level.Info);
     }
     */
-
-    /// <summary>
-    /// Revoke this ballot!
-    /// </summary>
-    /// <param name="voterNumber">
-    /// The voternumber to revoke a ballot for.
-    /// </param>
-    public void RevokeBallot(VoterNumber voterNumber) {
-      Contract.Requires(this.Database[voterNumber] == BallotStatus.Received);
-      Contract.Ensures(this.Database[voterNumber] == BallotStatus.NotReceived);
-      this.Database[voterNumber] = BallotStatus.NotReceived;
-      if (this.Logger != null) 
-        this.Logger.Log("Revoking ballot for voter with voter number " + 
-          voterNumber, Level.Warn);
-    }
 
     /// <summary>
     /// Revoke this ballot!
@@ -779,12 +761,13 @@ namespace Aegis_DVL {
       this._logger = null;
       this._crypto = null;
       this.Database = null;
+      _pingThread.Join();
     }
 
     /// <summary>
     /// The loop listen.
     /// </summary>
-    private void LoopListen() { while (this.Listening) this.Communicator.ReceiveAndHandle(); }
+    private void LoopListen() { while (this.Listening) Communicator.ReceiveAndHandle(); }
 
     private void PingListen() { while (this.Listening) Communicator.HandlePing(); } 
 

@@ -25,6 +25,7 @@ namespace UI.StationWindows {
   using System.Windows.Controls;
   using System.Windows.Input;
 
+  using Aegis_DVL.Data_Types;
   using Aegis_DVL.Database;
 
   using UI.ManagerWindows;
@@ -214,8 +215,11 @@ namespace UI.StationWindows {
       }
 
       if (choice != null) {
+        // figure out what the new status should be
+        // for now...
+        VoterStatus newstatus = VoterStatus.ActiveVoter;
         WaitingLabel.Content = "Waiting for reply...";
-        _ui.RequestBallot(choice.VoterId.ToString());
+        _ui.RequestStatusChange(choice, newstatus);
       }
     }
 

@@ -41,12 +41,14 @@ namespace Tests {
     ///   The ballot status test.
     /// </summary>
     [Test] public void BallotStatusTest() {
-      var bs = BallotStatus.NotReceived;
+      /*
+      var bs = VoterStatus.NotReceived;
       Assert.That((uint)bs == 11);
-      bs = BallotStatus.Received;
+      bs = VoterStatus.Received;
       Assert.That((uint)bs == 7);
-      bs = BallotStatus.Unavailable;
+      bs = VoterStatus.Unavailable;
       Assert.That((uint)bs == 13);
+       */
     }
 
       /*

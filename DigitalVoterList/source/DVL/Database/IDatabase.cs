@@ -51,7 +51,7 @@ namespace Aegis_DVL.Database {
     /// <returns>
     /// The BallotStatus for the voternumber/cpr combination.
     /// </returns>
-    BallotStatus this[VoterNumber voternumber] { [Pure] get; set; }
+    VoterStatus this[VoterNumber voternumber] { [Pure] get; set; }
 
     /// <summary>
     /// Has this voter received a ballot?
@@ -137,28 +137,18 @@ namespace Aegis_DVL.Database {
     /// The voternumber.
     /// </param>
     /// <returns>
-    /// The <see cref="BallotStatus"/>.
+    /// The <see cref="VoterStatus"/>.
     /// </returns>
-    public BallotStatus this[VoterNumber voternumber] {
-      get { return default(BallotStatus); }
+    public VoterStatus this[VoterNumber voternumber] {
+      get { return default(VoterStatus); }
       set {
         // You can't set a ballot as unavailable. If it's in the DB, 
         // it's either received or not received.
-        Contract.Requires(value != BallotStatus.Unavailable);
+        Contract.Requires(value != VoterStatus.Unavailable);
 
         // When you're setting a value, it must be in the DB
-        Contract.Requires(this[voternumber] != BallotStatus.Unavailable);
+        Contract.Requires(this[voternumber] != VoterStatus.Unavailable);
 
-        // You can only hand out or revoke ballots if they have the opposite state
-        // If it's not handed out, you can hand it out
-        Contract.Requires(
-          value != BallotStatus.Received || this[voternumber] ==
-          BallotStatus.NotReceived);
-
-        // If it's handed out, you can revoke it.
-        Contract.Requires(
-          value != BallotStatus.NotReceived || this[voternumber] ==
-          BallotStatus.Received);
         Contract.Ensures(this[voternumber] == value);
       }
     }
@@ -173,7 +163,7 @@ namespace Aegis_DVL.Database {
     /// The master password.
     /// </param>
     /// <returns>
-    /// The <see cref="BallotStatus"/>.
+    /// The <see cref="VoterStatus"/>.
     /// </returns>
     /*
     public BallotStatus this[CPR cpr, string masterPassword] {

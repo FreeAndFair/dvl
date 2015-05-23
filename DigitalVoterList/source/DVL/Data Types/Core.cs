@@ -571,21 +571,24 @@ namespace Aegis_DVL.Data_Types {
   ///   wheither status that indicates whether the ballot has been handed out, not handed out, or
   ///   if it is unavailable at the given election venue."
   /// </summary>
-  public enum BallotStatus {
-    /// <summary>
-    /// The received.
-    /// </summary>
-    Received = 7, 
-
-    /// <summary>
-    /// The not received.
-    /// </summary>
-    NotReceived = 11, 
-
-    /// <summary>
-    /// The unavailable.
-    /// </summary>
-    Unavailable = 13
+  public enum VoterStatus {
+    NotSeenToday = 0,
+    ActiveVoter = 1,
+    SuspendedVoter = 2,
+    EarlyVotedInPerson = 3,
+    MailBallotNotReturned = 4,
+    OutOfCounty = 5,
+    Provisional = 6,
+    WrongLocation = 7,
+    Unavailable = 8
+  }
+  public static class VoterStatusExtensions {
+    public static bool GotBallot(this VoterStatus vs) {
+      return vs == VoterStatus.ActiveVoter ||
+             vs == VoterStatus.SuspendedVoter ||
+             vs == VoterStatus.OutOfCounty ||
+             vs == VoterStatus.Provisional;
+    }
   }
 
   #endregion

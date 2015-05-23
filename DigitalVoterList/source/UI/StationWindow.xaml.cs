@@ -127,20 +127,6 @@ namespace UI {
     /// </param>
     private void HelpClick(object sender, RoutedEventArgs e) { System.Diagnostics.Process.Start(@"Manual.pdf"); }
 
-    /// <summary>
-    /// Called when File -&gt; Mark voter is clicked
-    /// </summary>
-    /// <param name="sender">
-    /// auto generated
-    /// </param>
-    /// <param name="e">
-    /// auto generated
-    /// </param>
-    private void MarkVoterClick(object sender, RoutedEventArgs e) {
-      var ballotCPRRequestWindow = new BallotCPRRequestWindow(this._ui);
-      ballotCPRRequestWindow.ShowDialog();
-    }
-
     #endregion
   }
 }
