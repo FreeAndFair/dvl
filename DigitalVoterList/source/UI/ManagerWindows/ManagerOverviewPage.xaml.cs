@@ -229,6 +229,15 @@ namespace UI.ManagerWindows {
       this.ManagerstationGrid.Items.Refresh();
     }
 
+    public void ConvertToStation() {
+      Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(delegate {
+        if (this._activeUpdateThread != null) this._activeUpdateThread.Abort();
+        this._ui.ManagerOverviewPage = null;
+        this._parent.Navigate(new BallotRequestPage(this._ui, this._parent));
+      }));
+    }
     #endregion
 
     #region Methods
@@ -309,14 +318,6 @@ namespace UI.ManagerWindows {
             this._ui.MakeManager(
               new IPEndPoint(IPAddress.Parse(((StationStatus)this.ManagerstationGrid.SelectedItem).IpAddress), 62000))) {
           if (d.IsCancel) return;
-
-          if (this._activeUpdateThread != null) this._activeUpdateThread.Abort();
-
-          var wnd = (StationWindow)Window.GetWindow(this._parent);
-          if (wnd != null) wnd.Width = 600;
-
-          this._ui.ManagerOverviewPage = null;
-          this._parent.Navigate(new BallotRequestPage(this._ui, this._parent));
         } else {
           if (d.IsCancel) return;
 

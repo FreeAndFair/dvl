@@ -443,7 +443,10 @@ namespace UI {
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.BecomeManager(); }));
+          new Action(delegate {
+            MessageBox.Show("Unable to contact the manager. This station will now become the manager.");
+            this.BallotRequestPage.BecomeManager(); 
+          }));
       }
     }
 
@@ -474,6 +477,12 @@ namespace UI {
       }
 
       return false;
+    }
+
+    public void ConvertToStation() {
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.ConvertToStation();
+      }
     }
 
     /// <summary>

@@ -34,10 +34,12 @@ namespace Aegis_DVL.Communication {
     private Socket udpSocket;
     private BlockingCollection<ICommand> incomingQueue;
     private BlockingCollection<Tuple<IPEndPoint, ICommand, int>> outgoingQueue;
+    private BlockingCollection<TcpClient> incomingConnectionQueue;
 
     private int maxTries = 5;
 
     private Thread receiveThread;
+    private Thread acceptThread;
     private Thread sendThread;
     private Thread dequeueThread;
     private Thread pingThread;
@@ -45,6 +47,7 @@ namespace Aegis_DVL.Communication {
     private Dictionary<IPEndPoint, DateTime> responseTimes = new Dictionary<IPEndPoint, DateTime>();
 
     private int lengthOfCount = 4;
+    private int TCPTimeout = 40000;
 
     #region Constructors and Destructors
 
@@ -60,6 +63,7 @@ namespace Aegis_DVL.Communication {
       this.Parent = parent;
       incomingQueue = new BlockingCollection<ICommand>(new ConcurrentQueue<ICommand>());
       outgoingQueue = new BlockingCollection<Tuple<IPEndPoint, ICommand, int>>(new ConcurrentQueue<Tuple<IPEndPoint, ICommand, int>>());
+      incomingConnectionQueue = new BlockingCollection<TcpClient>(new ConcurrentQueue<TcpClient>());
     }
 
     #endregion
@@ -153,9 +157,10 @@ namespace Aegis_DVL.Communication {
           if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2000), false)) throw new SocketException();
           client.EndConnect(ar);
         } catch (SocketException e) {
-          Console.WriteLine(e);
           if (this.Parent.Logger != null) {
-            this.Parent.Logger.Log("Could not connect to " + address + ", assuming down.", Level.Error);
+            this.Parent.Logger.Log("Could not connect to " + address + ", assuming down. " + e, Level.Error);
+          } else {
+            Console.WriteLine("Could not connect to " + address + ", assuming down. " + e);
           }
           result = false;
         } finally {
@@ -171,18 +176,11 @@ namespace Aegis_DVL.Communication {
             try {
               stream.Write(lengthBytes, 0, lengthBytes.Count());
               stream.Write(bytes, 0, bytes.Count());
-              byte[] received = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
-              var ack = BitConverter.ToInt32(received, 0);
-              if (ack != bytes.Count()) {
-                if (this.Parent.Logger != null) {
-                  this.Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down.", Level.Error);
-                }
-                result = false;
-              }
             } catch (Exception e) {
-              Console.WriteLine(e);
               if (this.Parent.Logger != null) {
-                this.Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down.", Level.Error);
+                this.Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down." + e, Level.Error);
+              } else {
+                Console.WriteLine("Could not send IsAlive command to " + address + ", assuming down." + e);
               }
               result = false;
             }
@@ -220,30 +218,45 @@ namespace Aegis_DVL.Communication {
       }
     }
 
-    /// <summary>
-    /// The receive and handle.
-    /// </summary>
-    /// TODO: review for problems with complexity
-    public void NetworkReceiveThread() {
+    public void AcceptConnectionThread() {
       if (tcpListener == null) {
         tcpListener = new TcpListener(this.Parent.Address);
         tcpListener.Start();
       }
 
-      TcpClient client;
-
       while (true) {
         try {
-          client = tcpListener.AcceptTcpClient();
-        } catch (SocketException e) {
+          TcpClient client = tcpListener.AcceptTcpClient();
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Accepted connection from " + client.Client.RemoteEndPoint, Level.Info);
+          } else {
+            Console.WriteLine("Accepted connection from " + client.Client.RemoteEndPoint);
+          }
+
+          incomingConnectionQueue.Add(client);
+        } catch (Exception e) {
           // the socket was closed, or some other problem happened that we can't survive
-          return;
         }
+      }
+    }
+
+    /// <summary>
+    /// The receive and handle.
+    /// </summary>
+    /// TODO: review for problems with complexity
+    public void NetworkReceiveThread() {
+      while (true) {
+        TcpClient client = incomingConnectionQueue.Take();
         IPEndPoint clientEndpoint = null;
         try {
           using (NetworkStream stream = client.GetStream()) {
             clientEndpoint = (IPEndPoint) client.Client.RemoteEndPoint;
-            client.Client.ReceiveTimeout = 5000;
+            if (Parent.Logger != null) {
+              Parent.Logger.Log("Handling connection from " + clientEndpoint, Level.Info);
+            } else {
+              Console.WriteLine("Handling connection from " + clientEndpoint);
+            }
+            client.Client.ReceiveTimeout = TCPTimeout;
             byte[] lengthBytes = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
             var length = BitConverter.ToInt32(lengthBytes, 0);
             if (length == 0) {
@@ -257,7 +270,6 @@ namespace Aegis_DVL.Communication {
             byte[] cmdBytes = null;
             try {
               cmdBytes = Bytes.FromNetworkStreamWithSize(stream, length);
-              stream.Write(lengthBytes, 0, lengthOfCount);
             } catch (Exception e) {
               if (Parent.Logger != null) {
                 Parent.Logger.Log("Failed to receive message from " + clientEndpoint + ": " + e, Level.Info);
@@ -268,13 +280,17 @@ namespace Aegis_DVL.Communication {
               return;
             }
             var cmd = cmdBytes.To<ICommand>();
+            Type cmdType = cmd.GetType();
+            if (cmd is CryptoCommand) {
+              cmdType = ((CryptoCommand)cmd).GetEncapsulatedType();
+            }
             if (cmd is PublicKeyExchangeCommand ||
                 cmd is CryptoCommand ||
                 cmd is IsAliveCommand) {
                   if (this.Parent.Logger != null && !(cmd is IsAliveCommand)) {
-                    this.Parent.Logger.Log("Received " + cmd.GetType() + " from " + cmd.Sender, Level.Info);
+                    this.Parent.Logger.Log("Received " + cmdType + " from " + cmd.Sender, Level.Info);
                   } else {
-                    Console.WriteLine("Received " + cmd.GetType() + " from " + cmd.Sender);
+                    Console.WriteLine("Received " + cmdType + " from " + cmd.Sender);
                   }
               // enqueue the command
               incomingQueue.Add(cmd);
@@ -345,12 +361,17 @@ namespace Aegis_DVL.Communication {
         ICommand command = message.Item2;
         int tries = message.Item3;
         int attempt = maxTries - tries + 1;
-
         bool retry = false;
+
+        Type commandType = command.GetType();
+        if (command is CryptoCommand) {
+          CryptoCommand c = (CryptoCommand)command;
+          commandType = c.GetEncapsulatedType();
+        }
 
         if (tries > 0) {
           if (this.Parent.Logger != null && !(command is IsAliveCommand)) {
-            this.Parent.Logger.Log("Attempt #" + attempt + " to send " + command.GetType() + " to " + target, Level.Info);
+            this.Parent.Logger.Log("Attempt #" + attempt + " to send " + commandType + " to " + target, Level.Info);
           }
           if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand || command is CryptoCommand)) {
             if (Parent.Peers.ContainsKey(target)) {
@@ -362,7 +383,7 @@ namespace Aegis_DVL.Communication {
           }
 
           TcpClient client = new TcpClient();
-          client.ReceiveTimeout = 10000;
+          client.ReceiveTimeout = TCPTimeout;
           WaitHandle wh = null;
 
           try {
@@ -391,35 +412,27 @@ namespace Aegis_DVL.Communication {
               try {
                 stream.Write(length, 0, length.Count());
                 stream.Write(commandBytes, 0, commandBytes.Count());
-                byte[] received = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
-                var ack = BitConverter.ToInt32(received, 0);
 
-                if (ack == commandBytes.Count()) {
-                  if (!(command is IsAliveCommand)) {
-                    if (Parent.Logger != null) {
-                      Parent.Logger.Log(command.GetType() + " successfully sent to " + target + " on attempt #" + attempt, Level.Info);
-                    } else {
-                      Console.WriteLine(command.GetType() + " successfully sent to " + target + " on attempt #" + attempt);
-                    }
-                  }
+                if (Parent.Logger != null) {
+                  Parent.Logger.Log(commandType + " successfully sent to " + target + " on attempt #" + attempt, Level.Info);
                 } else {
-                  if (Parent.Logger != null) {
-                    Parent.Logger.Log(command.GetType() + " failed to " + target + " on attempt #" + attempt, Level.Info);
-                  } else {
-                    Console.WriteLine(command.GetType() + " failed to " + target + " on attempt #" + attempt);
-                  }
-                  retry = true;
+                  Console.WriteLine(commandType + " successfully sent to " + target + " on attempt #" + attempt);
                 }
               } catch (Exception e) {
-                Console.WriteLine(e);
-                if (this.Parent.Logger != null) this.Parent.Logger.Log("Problem sending due to Exception, retrying.", Level.Error);
+                if (Parent.Logger != null) {
+                  Parent.Logger.Log(commandType + " failed to " + target + " on attempt #" + attempt, Level.Info);
+                } else {
+                  Console.WriteLine(commandType + " failed to " + target + " on attempt #" + attempt);
+                }
                 retry = true;
-              } 
+              }
             }
           }
         } else {
           if (Parent.Logger != null) {
             Parent.Logger.Log("Maximum number of retries reached, recording absent host " + target, Level.Error);
+          } else {
+            Console.WriteLine("Maximum number of retries reached, recording absent host " + target);
           }
           if (Parent.IsManager && Parent.Peers.ContainsKey(target)) {
             Parent.AnnounceRemovePeer(target);
@@ -438,6 +451,7 @@ namespace Aegis_DVL.Communication {
 
     public void StopThreads() {
       if (ThreadsStarted) {
+        acceptThread.Abort();
         receiveThread.Abort();
         dequeueThread.Abort();
         sendThread.Abort();
@@ -451,6 +465,7 @@ namespace Aegis_DVL.Communication {
           udpSocket.Close();
         }
 
+        acceptThread = null;
         receiveThread = null;
         dequeueThread = null;
         sendThread = null;
@@ -462,6 +477,9 @@ namespace Aegis_DVL.Communication {
 
     public void StartThreads() {
       if (!ThreadsStarted) {
+        acceptThread = new Thread(AcceptConnectionThread);
+        acceptThread.Name = "Accept";
+        acceptThread.SetApartmentState(ApartmentState.STA);
         receiveThread = new Thread(NetworkReceiveThread);
         receiveThread.SetApartmentState(ApartmentState.STA);
         receiveThread.Name = "Receive";
@@ -475,6 +493,7 @@ namespace Aegis_DVL.Communication {
         pingThread.SetApartmentState(ApartmentState.STA);
         pingThread.Name = "PingResponder";
 
+        acceptThread.Start();
         receiveThread.Start();
         dequeueThread.Start();
         sendThread.Start();

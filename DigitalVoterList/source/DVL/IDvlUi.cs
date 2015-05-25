@@ -29,6 +29,8 @@ namespace Aegis_DVL {
     void BallotRequestReply(VoterNumber vn, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus);
     void BallotRequestReply(Voter v, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus);
 
+    void ConvertToStation();
+
     /// <summary>
     ///   Let the UI know that the election has ended!
     /// </summary>

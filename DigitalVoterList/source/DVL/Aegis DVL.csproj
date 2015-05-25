@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="Commands\AddPeerCommand.cs" />
     <Compile Include="Commands\BallotRequestDeniedCommand.cs" />
+    <Compile Include="Commands\AcceptedPromotionCommand.cs" />
     <Compile Include="Commands\DemandStatusChangeCommand.cs" />
     <Compile Include="Commands\DisconnectStationCommand.cs" />
     <Compile Include="Commands\ElectNewManagerCommand.cs" />

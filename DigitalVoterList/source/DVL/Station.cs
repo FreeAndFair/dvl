@@ -70,6 +70,8 @@ namespace Aegis_DVL {
     /// </summary>
     internal bool IsMasterPasswordInUse = false;
 
+    private IPEndPoint PromotedStation = null;
+
     #endregion
 
     #region Constructors and Destructors
@@ -240,6 +242,8 @@ namespace Aegis_DVL {
     ///   What is the status of the election?
     /// </summary>
     public bool ElectionInProgress { [Pure] get; private set; }
+
+    public bool PromotionInProgress { [Pure] get; private set; }
 
     /// <summary>
     ///   Is there enough active stations in the group to continue operations?
@@ -514,8 +518,9 @@ namespace Aegis_DVL {
       this.Manager = candidates.First();
       if (this.IsManager) {
         this.UI.IsNowManager();
+      } else {
+        UI.ResetBallotRequestPage();
       }
-      UI.ResetBallotRequestPage();
       if (this.Logger != null) 
         this.Logger.Log("Elected new manager: " + this.Manager, Level.Warn);
     }
@@ -551,14 +556,35 @@ namespace Aegis_DVL {
     /// The station who is to be the new manager.
     /// </param>
     public void PromoteNewManager(IPEndPoint newManager) {
+      Contract.Requires(!PromotionInProgress);
       Contract.Requires(this.IsManager);
       Contract.Requires(newManager != null);
-      this.Peers.Keys.ForEach(
-        peer => this.Communicator.Send(new PromoteNewManagerCommand(this.Address, newManager), peer));
-      this.Manager = newManager;
+      Communicator.Send(new PromoteNewManagerCommand(Address, newManager), newManager);
+      PromotedStation = newManager;
+      PromotionInProgress = true;
       if (this.Logger != null) 
         this.Logger.Log("Promoting " + newManager + " to be the manager", 
           Level.Warn);
+    }
+
+    public void FinishPromotion(IPEndPoint newManager) {
+      if (PromotionInProgress && PromotedStation.Equals(newManager)) {
+        Manager = newManager;
+        PromotionInProgress = false;
+        PromotedStation = null;
+        var others = Peers.Keys.Where(peer => !peer.Equals(newManager));
+        others.ForEach(
+          peer => Communicator.Send(new PromoteNewManagerCommand(this.Address, newManager), peer));
+        UI.ConvertToStation();
+        if (Logger != null) {
+          Logger.Log("Promotion of " + newManager + " complete", Level.Warn);
+        }
+      } else {
+        if (this.Logger != null) {
+          Logger.Log("Erroneous promotion claim by " + newManager + ", ending election", Level.Fatal);
+          ShutDownElection();
+        }
+      }
     }
 
     /// <summary>

@@ -27,6 +27,8 @@ namespace Aegis_DVL.Commands {
     /// </summary>
     private Message _content;
 
+    private Type _type;
+
     #endregion
 
     #region Constructors and Destructors
@@ -49,6 +51,8 @@ namespace Aegis_DVL.Commands {
       Contract.Requires(parent != null);
       Contract.Requires(receiver != null);
       Contract.Requires(innerCommand != null);
+
+      _type = innerCommand.GetType();
 
       Sender = parent.Address;
       var crypto = parent.Crypto;
@@ -120,6 +124,10 @@ namespace Aegis_DVL.Commands {
       } catch (Exception e) {
         Console.WriteLine("Exception when decrypting message from " + Sender + ": " + e);
       }
+    }
+
+    public Type GetEncapsulatedType() {
+      return _type;
     }
 
     #endregion

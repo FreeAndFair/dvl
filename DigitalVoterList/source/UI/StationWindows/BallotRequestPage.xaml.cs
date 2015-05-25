@@ -41,6 +41,8 @@ namespace UI.StationWindows {
     /// </summary>
     public bool Blocked;
 
+    private bool Waiting;
+
     /// <summary>
     /// The _parent.
     /// </summary>
@@ -73,6 +75,8 @@ namespace UI.StationWindows {
       this.checkValidityButton.IsEnabled = false;
       this.WaitingLabel.Content = string.Empty;
       this.LastName.Focus();
+      Blocked = false;
+      Waiting = false;
     }
 
     #endregion
@@ -163,6 +167,7 @@ namespace UI.StationWindows {
       this.EnableFields(true);
       this.ClearFields();
       this.WaitingLabel.Content = string.Empty;
+      Waiting = false;
     }
 
     /// <summary>
@@ -194,10 +199,11 @@ namespace UI.StationWindows {
     }
 
     public void RecoverFromManagerChange() {
-      if (!FirstName.IsEnabled) {
+      if (Waiting) {
         // we were in the middle of a query to which an answer is not going to come
         EnableFields(true);
-        WaitingLabel.Content = "Could not reach manager, please try again.";
+        WaitingLabel.Content = "Manager changed to " + _ui._station.Manager.Address + ", please try again.";
+        Waiting = false;
         UpdateButtonState();
       }
     }
@@ -275,6 +281,7 @@ namespace UI.StationWindows {
       if (choice != null) {
         WaitingLabel.Content = "Waiting for response from manager...";
         EnableFields(false);
+        Waiting = true;
         VoterStatus vs = GetNewVoterStatus(choice);
         if (vs == (VoterStatus) choice.PollbookStatus) {
           BallotResponse(choice, false, vs, vs);
@@ -356,8 +363,7 @@ namespace UI.StationWindows {
     }
 
     private void UpdateButtonState() {
-      if (this.WaitingLabel.Content.Equals(string.Empty) &&
-          !this.Blocked) this.checkValidityButton.IsEnabled = true;
+      if (!this.Blocked && !this.Waiting) this.checkValidityButton.IsEnabled = true;
       else this.checkValidityButton.IsEnabled = false;
     }
 

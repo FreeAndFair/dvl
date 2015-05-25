@@ -15,15 +15,10 @@ namespace Aegis_DVL.Commands {
   using System.Net;
 
   /// <summary>
-  /// The promote new manager command.
+  /// The accepted promotion command.
   /// </summary>
-  [Serializable] public class PromoteNewManagerCommand : ICommand {
+  [Serializable] public class AcceptedPromotionCommand : ICommand {
     #region Fields
-
-    /// <summary>
-    /// The _new manager.
-    /// </summary>
-    private readonly IPEndPoint _newManager;
 
     #endregion
 
@@ -39,10 +34,8 @@ namespace Aegis_DVL.Commands {
     /// <param name="newManager">
     /// The address of the station that should be the new manager.
     /// </param>
-    public PromoteNewManagerCommand(IPEndPoint sender, IPEndPoint newManager) {
+    public AcceptedPromotionCommand(IPEndPoint sender) {
       Contract.Requires(sender != null);
-      Contract.Requires(newManager != null);
-      this._newManager = newManager;
       this.Sender = sender;
     }
 
@@ -66,14 +59,7 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!receiver.Manager.Equals(this.Sender)) return;
-      receiver.Manager = this._newManager;
-      if (_newManager.Equals(receiver.Address)) {
-        receiver.UI.IsNowManager();
-        receiver.Communicator.Send(new AcceptedPromotionCommand(receiver.Address), Sender);
-      } else {
-        receiver.UI.ResetBallotRequestPage();
-      }
+      receiver.FinishPromotion(this.Sender);
     }
 
     #endregion
