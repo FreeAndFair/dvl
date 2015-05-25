@@ -85,7 +85,7 @@ namespace UI.ManagerWindows {
       if (this.filePathTextbox.Text.Length > 0) {
         this._ui.ExportData(this.filePathTextbox.Text);
         Environment.Exit(0);
-      } else MessageBox.Show("Du har ikke valgt en fil sti", "Ingen fil sti", MessageBoxButton.OK);
+      } else MessageBox.Show("You have not selected an output file path.", "No File Path", MessageBoxButton.OK);
     }
 
     /// <summary>

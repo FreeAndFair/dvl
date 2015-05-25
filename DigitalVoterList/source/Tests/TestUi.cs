@@ -76,8 +76,8 @@ namespace Tests {
     /// <param name="handOutBallot">
     /// The hand out ballot.
     /// </param>
-    public void BallotRequestReply(VoterNumber vn, bool handOutBallot) { this.HandOutBallot = handOutBallot; }
-    public void BallotRequestReply(Voter v, bool handOutBallot) { this.HandOutBallot = handOutBallot; }
+    public void BallotRequestReply(VoterNumber vn, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { this.HandOutBallot = handOutBallot; }
+    public void BallotRequestReply(Voter v, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { this.HandOutBallot = handOutBallot; }
 
     /// <summary>
     ///   The election ended.
@@ -156,7 +156,9 @@ namespace Tests {
 
     public void Synchronizing(IPEndPoint ip) { }
 
-    public void DoneSynchronizing(IPEndPoint ip) { } 
+    public void DoneSynchronizing(IPEndPoint ip) { }
+
+    public void ResetBallotRequestPage() { }
 
     #endregion
   }

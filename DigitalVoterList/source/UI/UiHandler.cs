@@ -102,8 +102,8 @@ namespace UI {
     /// </summary>
     public void AnnounceEndElection() { this._station.AnnounceEndElection(); }
 
-    public void BallotRequestReply(VoterNumber vn, bool handOutBallot) {
-      this.BallotRequestReply(this._station.Database.GetVoterByVoterNumber(vn), handOutBallot);
+    public void BallotRequestReply(VoterNumber vn, bool success, VoterStatus oldStatus, VoterStatus newStatus) {
+      this.BallotRequestReply(this._station.Database.GetVoterByVoterNumber(vn), success, oldStatus, newStatus);
     }
 
     /// <summary>
@@ -112,11 +112,11 @@ namespace UI {
     /// <param name="successful">
     /// The hand out ballot.
     /// </param>
-    public void BallotRequestReply(Voter voter, bool successful) {
+    public void BallotRequestReply(Voter voter, bool success, VoterStatus oldStatus, VoterStatus newStatus) {
       if (this.BallotRequestPage != null) {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.BallotResponse(voter, successful); }));
+          new Action(delegate { this.BallotRequestPage.BallotResponse(voter, success, oldStatus, newStatus); }));
       }
     }
 
@@ -551,26 +551,6 @@ namespace UI {
       this._station.RequestStatusChange(voter, voterStatus);
     }
 
-    /*
-    /// <summary>
-    /// This method is called when an election offical wants to mark a voter by only using their CPR number.
-    /// The election official will also need to enter the master password.
-    /// </summary>
-    /// <param name="cpr">
-    /// the CPR number of the voter
-    /// </param>
-    /// <param name="masterPassword">
-    /// the systems master password
-    /// </param>
-    // note that the master password is not used at all for this at the moment...
-    public void RequestBallotOnlyCPR(string cpr, string masterPassword) {
-      var ncpr = new VoterNumber(Int32.Parse(cpr));
-
-      if (this._station.Database[ncpr] == BallotStatus.NotReceived) this._station.RequestBallot(ncpr);
-      else this.BallotRequestReply(false);
-    }
-    */
-
     /// <summary>
     /// The show password on manager.
     /// </summary>
@@ -673,12 +653,12 @@ namespace UI {
       if (OverviewPage != null) {
         OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { OverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
+          new Action(delegate { OverviewPage.SetPasswordLabel(string.Empty);  OverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
       }
       if (ManagerOverviewPage != null) {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { ManagerOverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
+          new Action(delegate { ManagerOverviewPage.SetPasswordLabel(string.Empty); ManagerOverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
       }
     }
 
@@ -693,12 +673,6 @@ namespace UI {
           System.Windows.Threading.DispatcherPriority.Normal,
           new Action(delegate { ManagerOverviewPage.MakeStationReady(ip); }));
         if (_station.ElectionInProgress) {
-          /*
-                    while (!receiver.AllStationsAvailable)
-                    {
-                        /*Wait for the station to be ready
-                    }
-                    */
           _station.Communicator.Send(new StartElectionCommand(_station.Address), ip);
         }
 
@@ -706,13 +680,19 @@ namespace UI {
     }
 
     public void SyncComplete() {
-      if (!_hasData) {
-        _hasData = true;
-        if (WaitingForManagerPage != null) {
-          WaitingForManagerPage.CenterLabel.Dispatcher.Invoke(
-            System.Windows.Threading.DispatcherPriority.Normal,
-              new Action(delegate { WaitingForManagerPage.CenterLabel.Content = "Waiting for election to start..."; }));
-        }
+      _hasData = true;
+      if (WaitingForManagerPage != null) {
+        WaitingForManagerPage.CenterLabel.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+            new Action(delegate { WaitingForManagerPage.CenterLabel.Content = "Waiting for election to start..."; }));
+      }
+    }
+
+    public void ResetBallotRequestPage() {
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { BallotRequestPage.RecoverFromManagerChange(); }));
       }
     }
 

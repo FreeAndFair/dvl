@@ -82,8 +82,9 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       // Don't perform key exchange when we have a manager
-      // if (!_isReply && receiver.Manager != null)
-      // receiver.ShutDownElection();
+      if (!_isReply && receiver.Manager != null) {
+        return;
+      }
       try {
         this.GetPassword(receiver);
       } catch (TaskCanceledException) {

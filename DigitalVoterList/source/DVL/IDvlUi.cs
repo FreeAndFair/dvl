@@ -26,8 +26,8 @@ namespace Aegis_DVL {
     /// <param name="handOutBallot">
     /// Whether or not the ballot should be handed out to the voter.
     /// </param>
-    void BallotRequestReply(VoterNumber vn, bool handOutBallot);
-    void BallotRequestReply(Voter v, bool handOutBallot);
+    void BallotRequestReply(VoterNumber vn, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus);
+    void BallotRequestReply(Voter v, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus);
 
     /// <summary>
     ///   Let the UI know that the election has ended!
@@ -52,6 +52,8 @@ namespace Aegis_DVL {
     /// </summary>
     // Called on a station to signal that it has now become the new manager.
     void IsNowManager();
+
+    void ResetBallotRequestPage();
 
     /// <summary>
     /// What is the password the user typed in to respond to the manager initiating a key-exchange?

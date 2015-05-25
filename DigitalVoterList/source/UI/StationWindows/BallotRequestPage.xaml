@@ -9,22 +9,22 @@
     <Grid Margin="0,10,0,77">
         <Label Content="Enter partial voter information to search." HorizontalAlignment="Center" Margin="0,21,0,0" Name="PromptLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="18" />
         <Label Content="Last Name" Height="30" HorizontalAlignment="Left" Margin="22,60,0,0" x:Name="LastNameLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="22,95,381,0" x:Name="LastName" VerticalAlignment="Top" Width="197" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
-        <Button Content="Search" HorizontalAlignment="Center" Margin="233,0,247,-52" Name="checkValidityButton" VerticalAlignment="Bottom" Click="CheckValidityButtonClick" FontSize="18" Width="70" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="22,95,381,0" x:Name="LastName" VerticalAlignment="Top" Width="197" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
+        <Button Content="Search" HorizontalAlignment="Center" Margin="233,0,247,-52" Name="checkValidityButton" VerticalAlignment="Bottom" Click="CheckValidityButtonClick" FontSize="18" Width="70" IsDefault="True" />
         <Label Content="First Name" Height="30" HorizontalAlignment="Left" Margin="233,60,0,0" x:Name="FirstNameLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="233,95,204,0" x:Name="FirstName" VerticalAlignment="Top" Width="163" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="233,95,204,0" x:Name="FirstName" VerticalAlignment="Top" Width="163" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
         <Label Content="Middle Name" Height="30" HorizontalAlignment="Left" Margin="413,60,0,0" x:Name="MiddleNameLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="413,95,24,0" x:Name="MiddleName" VerticalAlignment="Top" Width="163" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="413,95,24,0" x:Name="MiddleName" VerticalAlignment="Top" Width="163" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
         <Label Content="Street Address" Height="30" HorizontalAlignment="Left" Margin="22,144,0,0" x:Name="AddressLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="22,179,321,0" x:Name="Address" VerticalAlignment="Top" Width="257" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="22,179,321,0" x:Name="Address" VerticalAlignment="Top" Width="257" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
         <Label Content="Municipality" Height="30" HorizontalAlignment="Left" Margin="284,144,0,0" x:Name="MunicipalityLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="286,179,134,0" x:Name="Municipality" VerticalAlignment="Top" Width="180" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="286,179,134,0" x:Name="Municipality" VerticalAlignment="Top" Width="180" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
         <Label Content="ZIP Code" Height="30" HorizontalAlignment="Left" Margin="476,144,0,0" x:Name="ZipCodeLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="478,179,24,0" x:Name="ZipCode" VerticalAlignment="Top" Width="98" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="478,179,24,0" x:Name="ZipCode" VerticalAlignment="Top" Width="98" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
         <Label Content="Drivers License Number" Height="30" HorizontalAlignment="Left" Margin="22,222,0,0" x:Name="DriversLicenseLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="22,257,321,0" x:Name="DriversLicense" VerticalAlignment="Top" Width="257" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="22,257,321,0" x:Name="DriversLicense" VerticalAlignment="Top" Width="257" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
         <Label Content="Voter ID Number" Height="30" HorizontalAlignment="Left" Margin="284,222,0,0" x:Name="StateIdLabel" VerticalAlignment="Top" FontSize="16" />
-        <TextBox Height="30" HorizontalAlignment="Center" Margin="286,257,134,0" x:Name="StateId" VerticalAlignment="Top" Width="180" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" TextChanged="TextChanged" AcceptsReturn="True" FontSize="16" />
-        <Label Content="Waiting for reply..." HorizontalAlignment="Center" Margin="135,341,134,-31" x:Name="WaitingLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="18" />
+        <TextBox Height="30" HorizontalAlignment="Center" Margin="286,257,134,0" x:Name="StateId" VerticalAlignment="Top" Width="180" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="16" />
+        <Label Content="Waiting for reply..." HorizontalAlignment="Center" Margin="0,341,0,-31" x:Name="WaitingLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="18" />
     </Grid>
 </Page>

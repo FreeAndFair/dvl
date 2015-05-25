@@ -26,6 +26,8 @@ namespace Aegis_DVL.Commands {
     /// The _voternumber.
     /// </summary>
     private readonly VoterNumber _voternumber;
+    private readonly VoterStatus _oldStatus;
+    private readonly VoterStatus _newStatus;
 
     #endregion
     
@@ -38,10 +40,12 @@ namespace Aegis_DVL.Commands {
     /// <param name="sender">
     /// The address of the one sending the command.
     /// </param>
-    public BallotRequestDeniedCommand(IPEndPoint sender, VoterNumber vn) {
+    public BallotRequestDeniedCommand(IPEndPoint sender, VoterNumber vn, VoterStatus oldStatus, VoterStatus newStatus) {
       Contract.Requires(sender != null);
       this.Sender = sender;
       _voternumber = vn;
+      _oldStatus = oldStatus;
+      _newStatus = newStatus;
     }
 
     #endregion
@@ -65,7 +69,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       if (!this.Sender.Equals(receiver.Manager)) return;
-      receiver.UI.BallotRequestReply(_voternumber, false);
+      receiver.UI.BallotRequestReply(_voternumber, false, _oldStatus, _newStatus);
     }
 
     #endregion

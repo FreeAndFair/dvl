@@ -98,24 +98,28 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       var crypto = receiver.Crypto;
-      var symmetricKey = crypto.AsymmetricDecrypt(_content.SymmetricKey, 
+      var symmetricKey = crypto.AsymmetricDecrypt(_content.SymmetricKey,
         new AsymmetricKey(crypto.KeyPair.Private));
       crypto.Iv = _content.Iv;
 
-      var cmd = crypto.SymmetricDecrypt(_content.Command, 
-        new SymmetricKey(symmetricKey)).To<ICommand>();
+      try {
+        var cmd = crypto.SymmetricDecrypt(_content.Command,
+          new SymmetricKey(symmetricKey)).To<ICommand>();
 
-      // Do we "know" the sender?
-      if ((receiver.Peers.ContainsKey(cmd.Sender) || Sender.Equals(receiver.Address)) &&
-          Sender.Equals(cmd.Sender)) {
-        var key = receiver.Peers.ContainsKey(cmd.Sender) ? 
-          receiver.Peers[Sender] : 
-          receiver.Crypto.KeyPair.Public;
-        var senderHash = crypto.AsymmetricDecrypt(_content.SenderHash, new AsymmetricKey(key));
-        if (crypto.Hash(Bytes.From(cmd)).IsIdenticalTo(senderHash))
-          cmd.Execute(receiver);
-        else receiver.ShutDownElection();
-      } else receiver.ShutDownElection();
+        // Do we "know" the sender?
+        if ((receiver.Peers.ContainsKey(cmd.Sender) || Sender.Equals(receiver.Address)) &&
+            Sender.Equals(cmd.Sender)) {
+          var key = receiver.Peers.ContainsKey(cmd.Sender) ?
+            receiver.Peers[Sender] :
+            receiver.Crypto.KeyPair.Public;
+          var senderHash = crypto.AsymmetricDecrypt(_content.SenderHash, new AsymmetricKey(key));
+          if (crypto.Hash(Bytes.From(cmd)).IsIdenticalTo(senderHash))
+            cmd.Execute(receiver);
+          else receiver.ShutDownElection();
+        } else receiver.ShutDownElection();
+      } catch (Exception e) {
+        Console.WriteLine("Exception when decrypting message from " + Sender + ": " + e);
+      }
     }
 
     #endregion

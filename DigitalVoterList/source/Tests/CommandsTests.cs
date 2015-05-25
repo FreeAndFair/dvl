@@ -119,11 +119,11 @@ namespace Tests
     [Test]
     public void BallotRequestDeniedTest()
     {
-      var cmd = new BallotRequestDeniedCommand(this.Manager.Address, new VoterNumber(0));
+      var cmd = new BallotRequestDeniedCommand(this.Manager.Address, new VoterNumber(0), VoterStatus.NotSeenToday, VoterStatus.ActiveVoter);
       Assert.That(cmd.Sender.Equals(this.Manager.Address));
       cmd.Execute(this.Station);
       Assert.That(!((TestUi)this.Manager.UI).HandOutBallot);
-      cmd = new BallotRequestDeniedCommand(this.Station.Address, new VoterNumber(0));
+      cmd = new BallotRequestDeniedCommand(this.Station.Address, new VoterNumber(0), VoterStatus.NotSeenToday, VoterStatus.ActiveVoter);
       cmd.Execute(this.Station);
     }
 

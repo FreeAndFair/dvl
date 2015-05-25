@@ -395,11 +395,12 @@ namespace Tests {
       this.Peer3.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
       this.Peer3.AddPeer(this.Peer1.Address, new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
       this.Peer3.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
-
-      this.ManagerListener = this.Manager.Communicator.ReceiveAndHandle;
-      this.Peer1Listener = this.Peer1.Communicator.ReceiveAndHandle;
-      this.Peer2Listener = this.Peer2.Communicator.ReceiveAndHandle;
-      this.Peer3Listener = this.Peer3.Communicator.ReceiveAndHandle;
+      /*
+      this.ManagerListener = this.Manager.Communicator.NetworkReceiveThread;
+      this.Peer1Listener = this.Peer1.Communicator.NetworkReceiveThread;
+      this.Peer2Listener = this.Peer2.Communicator.NetworkReceiveThread;
+      this.Peer3Listener = this.Peer3.Communicator.NetworkReceiveThread;
+       * */
     }
 
     /// <summary>

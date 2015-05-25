@@ -116,6 +116,20 @@ namespace Aegis_DVL.Util {
       }
     }
 
+    [Pure]
+    public static byte[] FromNetworkStreamWithSize(NetworkStream stream, int bytesToRead) {
+      var buffer = new byte[bytesToRead];
+      int bytesRead = 0;
+      int totalBytesRead = 0;
+      while (totalBytesRead < bytesToRead) {
+        if ((bytesRead = stream.Read(buffer, totalBytesRead, bytesToRead - totalBytesRead)) == 0) {
+          throw new IOException("Socket closed after reading only " + totalBytesRead + " of " + bytesToRead + " bytes.");
+        }
+        totalBytesRead += bytesRead;
+      }
+      return buffer;
+    }
+
     /// <summary>
     /// What are the bytes in this stream?
     /// </summary>

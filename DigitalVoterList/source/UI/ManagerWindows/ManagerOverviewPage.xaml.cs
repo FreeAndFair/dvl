@@ -108,7 +108,6 @@ namespace UI.ManagerWindows {
     /// </returns>
     public string IncomingReply(IPEndPoint ip) {
       var acd = new AcceptStationDialog(ip, this._ui);
-      acd.Owner = Application.Current.MainWindow;
       var result = acd.ShowDialog();
 
       if (result.HasValue &&
@@ -157,12 +156,10 @@ namespace UI.ManagerWindows {
     /// Populates the list with the appropiate machines
     /// </summary>
     public void PopulateList() {
+      if (this._activeUpdateThread != null) return;
       this.EndElectionButton.IsEnabled = false;
-
-      if (this._activeUpdateThread != null) this._activeUpdateThread.Abort();
-
       this.RefreshButton.IsEnabled = false;
-      Thread oThread = new Thread(() => this.PopulateListThread(this));
+      Thread oThread = new Thread(PopulateListThread);
       this._activeUpdateThread = oThread;
       oThread.Start();
     }
@@ -173,11 +170,11 @@ namespace UI.ManagerWindows {
     /// <param name="mvp">
     /// this manager overview page
     /// </param>
-    public void PopulateListThread(ManagerOverviewPage mvp) {
-      mvp.Dispatcher.Invoke(
+    public void PopulateListThread() {
+      Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
-      mvp.Dispatcher.Invoke(
+      Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
       IEnumerable<IPEndPoint> peerlist = this._ui.GetPeerlist();
@@ -193,25 +190,26 @@ namespace UI.ManagerWindows {
           where !peerlist.Contains(ip)
           select new StationStatus { IpAddress = ip.Address.ToString(), ConnectionState = "Not Connected" });
 
-        mvp.Dispatcher.Invoke(
+        Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.ManagerstationGrid.ItemsSource = dataSource; }));
-        mvp.Dispatcher.Invoke(
+        Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.ManagerstationGrid.Items.Refresh(); }));
       }
 
-      mvp.Dispatcher.Invoke(
+      Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.UpdateLabel.Content = string.Empty; }));
-      mvp.Dispatcher.Invoke(
+      Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Hidden; }));
-      mvp.Dispatcher.Invoke(
+      Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.RefreshButton.IsEnabled = true; }));
-      mvp.Dispatcher.Invoke(
+      Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.EndElectionButton.IsEnabled = true; }));
+      _activeUpdateThread = null;
     }
 
     /// <summary>

@@ -86,10 +86,9 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!receiver.Manager.Equals(this.Sender) ||
-          receiver.Database[_voterNumber] == _newStatus) return;
+      if (!receiver.Manager.Equals(this.Sender)) return;
       receiver.Database[_voterNumber] = _newStatus;
-      if (receiver.Address.Equals(this._requester)) receiver.UI.BallotRequestReply(_voterNumber, true);
+      if (receiver.Address.Equals(this._requester)) receiver.UI.BallotRequestReply(_voterNumber, true, _oldStatus, _newStatus);
     }
 
     #endregion

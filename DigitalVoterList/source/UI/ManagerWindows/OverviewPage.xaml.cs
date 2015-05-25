@@ -137,6 +137,12 @@ namespace UI.ManagerWindows {
     /// this overview page
     /// </param>
     public void PopulateListThread(OverviewPage ovp) {
+      StationStatus selected = null;
+
+      ovp.Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(delegate { selected = (StationStatus)stationGrid.SelectedItem; }));
+
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
@@ -161,6 +167,10 @@ namespace UI.ManagerWindows {
           new Action(delegate { this.stationGrid.ItemsSource = dataSource; }));
         ovp.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.stationGrid.Items.Refresh(); }));
+        if (dataSource.Contains(selected)) {
+          ovp.Dispatcher.Invoke(
+            System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { stationGrid.SelectedItem = selected; }));
+        }
       }
 
       ovp.Dispatcher.Invoke(
@@ -169,11 +179,8 @@ namespace UI.ManagerWindows {
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Hidden; }));
       ovp.Dispatcher.Invoke(
-        System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.RefreshButton.IsEnabled = true; }));
-      ovp.Dispatcher.Invoke(
-        System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.StartEndElectionButton.IsEnabled = true; }));
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(delegate { this.RefreshButton.IsEnabled = true; UpdateControls(); }));
     }
 
     /// <summary>

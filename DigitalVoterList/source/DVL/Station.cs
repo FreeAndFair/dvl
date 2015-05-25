@@ -51,13 +51,6 @@ namespace Aegis_DVL {
     private bool _isDisposed;
 
     /// <summary>
-    /// The _listener thread.
-    /// </summary>
-    private Thread _listenerThread;
-
-    private Thread _pingThread;
-
-    /// <summary>
     /// The _logger.
     /// </summary>
     private ILogger _logger;
@@ -252,7 +245,7 @@ namespace Aegis_DVL {
     ///   Is there enough active stations in the group to continue operations?
     /// </summary>
     public bool EnoughStations { [Pure] get {
-      return this.Peers.Keys.Count(this.StationActive) >= 0; 
+      return this.Peers.Keys.Count(this.StationActive) > 0; 
       // TODO: Correct to '>' when not testing
     }}
 
@@ -463,7 +456,7 @@ namespace Aegis_DVL {
       Contract.Ensures(this.Database[voterNumber] == voterStatus);
       this.Database[voterNumber] = voterStatus;
       if (this.Logger != null) 
-        this.Logger.Log("Changing voter number " + voterNumber + 
+        this.Logger.Log("Changed voter number " + voterNumber + 
           " status to " + voterStatus + ".", Level.Info);
     }
 
@@ -496,10 +489,9 @@ namespace Aegis_DVL {
     /// </returns>
     [Pure] public IEnumerable<IPEndPoint> DiscoverPeers() {
       Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>() != null);
-      Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>().
-        All(x => x != null));
-      return this.Communicator.DiscoverNetworkMachines().Where(address => 
-        !address.Equals(this.Address));
+      Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>().All(x => x != null));
+      HashSet<IPEndPoint> result = new HashSet<IPEndPoint>(Communicator.DiscoverNetworkMachines().Concat(Peers.Keys));
+      return result.Where(address => Communicator.IsListening(address));
     }
 
     /// <summary>
@@ -514,14 +506,16 @@ namespace Aegis_DVL {
     ///   Elect a new manager!
     /// </summary>
     public void ElectNewManager() {
-      Contract.Requires(!this.StationActive(this.Manager));
-      Contract.Ensures(!this.Manager.Equals(Contract.OldValue(this.Manager)));
+      Contract.Ensures(this.Manager != null);
       this.RemovePeer(this.Manager);
       var candidates = new SortedSet<IPEndPoint>(new IPEndPointComparer()) { this.Address };
       this.Peers.Keys.Where(this.StationActive).ForEach(candidate => 
         candidates.Add(candidate));
       this.Manager = candidates.First();
-      if (this.IsManager) this.UI.IsNowManager();
+      if (this.IsManager) {
+        this.UI.IsNowManager();
+      }
+      UI.ResetBallotRequestPage();
       if (this.Logger != null) 
         this.Logger.Log("Elected new manager: " + this.Manager, Level.Warn);
     }
@@ -544,7 +538,7 @@ namespace Aegis_DVL {
     /// </param>
     public void ExchangePublicKeys(IPEndPoint target) {
       Contract.Requires(target != null);
-      Contract.Requires(this.StationActive(target));
+      //Contract.Requires(this.StationActive(target));
       this.Communicator.Send(new PublicKeyExchangeCommand(this), target);
       if (this.Logger != null) 
         this.Logger.Log("Exchanging public keys with " + target, Level.Info);
@@ -575,7 +569,6 @@ namespace Aegis_DVL {
     /// </param>
     public void RemovePeer(IPEndPoint peer) {
       Contract.Requires(peer != null);
-      Contract.Requires(this.Peers.ContainsKey(peer));
       Contract.Ensures(!this.Peers.ContainsKey(peer));
       this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(this.Manager.Address, 62000), peer), peer);
       this.Peers.Remove(peer);
@@ -656,7 +649,6 @@ namespace Aegis_DVL {
     ///   Start the election!
     /// </summary>
     public void StartElection() {
-      Contract.Requires(!this.ElectionInProgress);
       Contract.Ensures(this.ElectionInProgress);
       this.ElectionInProgress = true;
       if (this.Logger != null) this.Logger.Log("Election started", Level.Info);
@@ -668,14 +660,8 @@ namespace Aegis_DVL {
     public void StartListening() {
       Contract.Requires(!this.Listening);
       Contract.Ensures(this.Listening);
-      this.Listening = true;
-      this._listenerThread = new Thread(this.LoopListen);
-      this._listenerThread.SetApartmentState(ApartmentState.STA);
-      this._listenerThread.Start();
-      this._pingThread = new Thread(this.PingListen);
-      this._pingThread.SetApartmentState(ApartmentState.STA);
-      this._pingThread.Start();
-      while (!this.StationActive(this.Address)) ;
+      Listening = true;
+      Communicator.StartThreads();
     }
 
     /// <summary>
@@ -701,6 +687,7 @@ namespace Aegis_DVL {
     /// </returns>
     [Pure] public bool StationActive(IPEndPoint target) {
       Contract.Requires(target != null);
+      Contract.Requires(Listening);
       return this.Communicator.IsListening(target);
     }
 
@@ -710,10 +697,8 @@ namespace Aegis_DVL {
     public void StopListening() {
       Contract.Requires(this.Listening);
       Contract.Ensures(!this.Listening);
+      Communicator.StopThreads();
       this.Listening = false;
-      while (this.StationActive(this.Address)) ;
-      if (this._listenerThread != null) this._listenerThread.Abort();
-      this._listenerThread = null;
       if (this.Logger != null) 
         this.Logger.Log("Stopped listening", Level.Info);
     }
@@ -761,15 +746,10 @@ namespace Aegis_DVL {
       this._logger = null;
       this._crypto = null;
       this.Database = null;
-      _pingThread.Join();
+      Communicator.StopThreads();
+      Communicator = null;
+      Console.WriteLine("Station " + this + " disposed."); 
     }
-
-    /// <summary>
-    /// The loop listen.
-    /// </summary>
-    private void LoopListen() { while (this.Listening) Communicator.ReceiveAndHandle(); }
-
-    private void PingListen() { while (this.Listening) Communicator.HandlePing(); } 
 
     /// <summary>
     /// The object invariant.

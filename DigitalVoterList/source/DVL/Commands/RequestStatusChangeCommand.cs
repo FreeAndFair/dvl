@@ -76,7 +76,7 @@ namespace Aegis_DVL.Commands {
     public void Execute(Station receiver) {
       if (!receiver.IsManager) return;
       if (receiver.Database[this._voternumber] != _oldstatus) {
-        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address, this._voternumber), this.Sender);
+        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address, this._voternumber, _oldstatus, _newstatus), this.Sender);
         receiver.Logger.Log(
           "Attempted to change a voter's status incorrectly", Level.Info);
         return;
@@ -92,7 +92,7 @@ namespace Aegis_DVL.Commands {
                   new StatusChangedCommand(receiver.Address, this.Sender, this._voternumber, this._oldstatus, this._newstatus), peer));
 
       if (this.Sender.Equals(receiver.Manager)) {
-        receiver.UI.BallotRequestReply(_voternumber, true);
+        receiver.UI.BallotRequestReply(_voternumber, true, _oldstatus, _newstatus);
         return;
       }
 

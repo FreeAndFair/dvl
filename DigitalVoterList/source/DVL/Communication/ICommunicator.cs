@@ -27,6 +27,8 @@ namespace Aegis_DVL.Communication {
     /// </summary>
     Station Parent { get; }
 
+    bool ThreadsStarted { get; }
+
     #endregion
 
     #region Public Methods and Operators
@@ -49,13 +51,6 @@ namespace Aegis_DVL.Communication {
     bool IsListening(IPEndPoint address);
 
     /// <summary>
-    ///   Receive and handle all commands!
-    /// </summary>
-    void ReceiveAndHandle();
-
-    void HandlePing();
-
-    /// <summary>
     /// Send this command securely to this target!
     /// </summary>
     /// <param name="command">
@@ -65,6 +60,9 @@ namespace Aegis_DVL.Communication {
     /// The target that should receive and execute the command.
     /// </param>
     void Send(ICommand command, IPEndPoint target);
+
+    void StartThreads();
+    void StopThreads(); 
 
     #endregion
   }
@@ -82,6 +80,13 @@ namespace Aegis_DVL.Communication {
       get {
         Contract.Ensures(Contract.Result<Station>() != null);
         return default(Station);
+      }
+    }
+
+    public bool ThreadsStarted {
+      get {
+        Contract.Ensures(Contract.Result<bool>() != null);
+        return default(bool);
       }
     }
 
@@ -112,15 +117,9 @@ namespace Aegis_DVL.Communication {
     /// </returns>
     public bool IsListening(IPEndPoint address) {
       Contract.Requires(address != null);
+      Contract.Requires(ThreadsStarted);
       return default(bool);
     }
-
-    /// <summary>
-    /// The receive and handle.
-    /// </summary>
-    public void ReceiveAndHandle() { }
-
-    public void HandlePing() { } 
 
     /// <summary>
     /// The send.
@@ -134,6 +133,14 @@ namespace Aegis_DVL.Communication {
     public void Send(ICommand command, IPEndPoint target) {
       Contract.Requires(target != null);
       Contract.Requires(command != null);
+    }
+
+    public void StartThreads() {
+      Contract.Ensures(ThreadsStarted);
+    }
+
+    public void StopThreads() {
+      Contract.Ensures(!ThreadsStarted);
     }
 
     #endregion

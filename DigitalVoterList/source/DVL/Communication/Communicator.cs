@@ -11,6 +11,7 @@
 
 namespace Aegis_DVL.Communication {
   using System;
+  using System.Collections.Concurrent;
   using System.Collections.Generic;
   using System.Diagnostics.Contracts;
   using System.IO;
@@ -28,6 +29,23 @@ namespace Aegis_DVL.Communication {
   /// The communicator.
   /// </summary>
   public class Communicator : ICommunicator {
+
+    private TcpListener tcpListener;
+    private Socket udpSocket;
+    private BlockingCollection<ICommand> incomingQueue;
+    private BlockingCollection<Tuple<IPEndPoint, ICommand, int>> outgoingQueue;
+
+    private int maxTries = 5;
+
+    private Thread receiveThread;
+    private Thread sendThread;
+    private Thread dequeueThread;
+    private Thread pingThread;
+
+    private Dictionary<IPEndPoint, DateTime> responseTimes = new Dictionary<IPEndPoint, DateTime>();
+
+    private int lengthOfCount = 4;
+
     #region Constructors and Destructors
 
     /// <summary>
@@ -40,6 +58,8 @@ namespace Aegis_DVL.Communication {
     public Communicator(Station parent) {
       Contract.Requires(parent != null);
       this.Parent = parent;
+      incomingQueue = new BlockingCollection<ICommand>(new ConcurrentQueue<ICommand>());
+      outgoingQueue = new BlockingCollection<Tuple<IPEndPoint, ICommand, int>>(new ConcurrentQueue<Tuple<IPEndPoint, ICommand, int>>());
     }
 
     #endregion
@@ -50,6 +70,8 @@ namespace Aegis_DVL.Communication {
     /// Gets the parent.
     /// </summary>
     public Station Parent { get; private set; }
+
+    public bool ThreadsStarted { get; private set; }
 
     #endregion
 
@@ -63,7 +85,6 @@ namespace Aegis_DVL.Communication {
     /// The <see cref="IEnumerable"/>.
     /// </returns>
     [Pure] public IEnumerable<IPEndPoint> DiscoverNetworkMachines() {
-      var res = new List<IPEndPoint>();
       var cdEvent = new CountdownEvent(1);
       string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork).ToString();
@@ -100,45 +121,8 @@ namespace Aegis_DVL.Communication {
       }
 
       potentials.Remove(new IPEndPoint(IPAddress.Parse(myip), 62000));
-      Console.WriteLine(potentials.Count + " possible stations found");
-
-      /*
-      using (cdEvent) {
-        int i = 0;
-        foreach (IPEndPoint endpoint in potentials) {
-          cdEvent.AddCount();
-          ThreadPool.QueueUserWorkItem(
-            element => {
-              var elem = (Tuple<int, CountdownEvent>)element;
-              if (this.IsListening(endpoint)) {
-                Console.WriteLine("Found a station at " + endpoint.Address);
-                res.Add(endpoint);
-              }
-              elem.Item2.Signal();
-            }, 
-            new Tuple<int, CountdownEvent>(i, cdEvent));
-          i++;
-        }
-
-        cdEvent.Signal();
-        cdEvent.Wait();
-      }
-
-      cdEvent.Dispose();
-      */
-
-      foreach (IPEndPoint endpoint in potentials) {
-        Console.WriteLine("Checking for station at " + endpoint.Address);
-        if (IsListening(endpoint)) {
-          Console.WriteLine("Found station at " + endpoint.Address);
-          res.Add(endpoint);
-        } else {
-          Console.WriteLine("No response at " + endpoint.Address);
-        }
-      }
-
-      Console.WriteLine("Found a total of " + res.Count() + " stations.");
-      return res;
+      Console.WriteLine("Found a total of " + potentials.Count() + " possible stations.");
+      return potentials;
     }
 
     /// <summary>
@@ -151,33 +135,87 @@ namespace Aegis_DVL.Communication {
     /// The <see cref="bool"/>.
     /// </returns>
     [Pure] public bool IsListening(IPEndPoint address) {
-      try {
-        this.Send(new IsAliveCommand(this.Parent.Address), address);
-      } catch (SocketException) {
-        return false;
-      }
+      bool result = true;
 
-      return true;
+      if (responseTimes.ContainsKey(address) &&
+          DateTime.Now.Subtract(responseTimes[address]).TotalMinutes < 1) {
+        // we've heard from this station within the last minute
+        result = true;
+      } else {
+        // we haven't heard from this station in a minute, or ever, let's ping it
+        TcpClient client = new TcpClient();
+        WaitHandle wh = null;
+
+        try {
+          IAsyncResult ar = client.BeginConnect(address.Address, address.Port, null, null);
+          wh = ar.AsyncWaitHandle;
+
+          if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2000), false)) throw new SocketException();
+          client.EndConnect(ar);
+        } catch (SocketException e) {
+          Console.WriteLine(e);
+          if (this.Parent.Logger != null) {
+            this.Parent.Logger.Log("Could not connect to " + address + ", assuming down.", Level.Error);
+          }
+          result = false;
+        } finally {
+          if (wh != null) {
+            wh.Close();
+          }
+        }
+
+        if (result) {
+          byte[] bytes = Bytes.From(new IsAliveCommand(Parent.Address));
+          byte[] lengthBytes = BitConverter.GetBytes(bytes.Count());
+          using (NetworkStream stream = client.GetStream()) {
+            try {
+              stream.Write(lengthBytes, 0, lengthBytes.Count());
+              stream.Write(bytes, 0, bytes.Count());
+              byte[] received = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
+              var ack = BitConverter.ToInt32(received, 0);
+              if (ack != bytes.Count()) {
+                if (this.Parent.Logger != null) {
+                  this.Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down.", Level.Error);
+                }
+                result = false;
+              }
+            } catch (Exception e) {
+              Console.WriteLine(e);
+              if (this.Parent.Logger != null) {
+                this.Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down.", Level.Error);
+              }
+              result = false;
+            }
+          }
+        }
+      }
+      return result;
     }
 
-    public void HandlePing() {
-      IPAddress myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
-                    ip.AddressFamily == AddressFamily.InterNetwork);
-      using (var udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
-        byte[] buffer = new byte[32];
-        byte[] myipbytes = System.Text.Encoding.ASCII.GetBytes(myip.ToString());
-        EndPoint server = new IPEndPoint(IPAddress.Any, 0);
-        udpSocket.ReceiveTimeout = 2000;
-        udpSocket.Bind(new IPEndPoint(myip, 62000));
+    public void PingThread() {
+      if (udpSocket == null) {
+        udpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        udpSocket.Bind(Parent.Address);
+      }
+      byte[] buffer = new byte[32];
+      byte[] myipbytes = System.Text.Encoding.ASCII.GetBytes(Parent.Address.Address.ToString());
+      EndPoint server = new IPEndPoint(IPAddress.Any, 0);
+      while (true) {
         try {
           udpSocket.ReceiveFrom(buffer, ref server);
-          IPEndPoint ips = (IPEndPoint)server;
-          if (!ips.Address.Equals(myip)) {
+        } catch (SocketException e) {
+          // the socket was closed, or some other problem happened that we can't survive
+          return;
+        }
+        IPEndPoint ips = (IPEndPoint)server;
+        try {
+          if (!ips.Address.Equals(Parent.Address.Address)) {
             udpSocket.SendTo(myipbytes, server);
             Console.WriteLine("pinged by " + ips.Address);
           }
-        } catch (Exception e) {
-          // we timed out, so no more packets
+        } catch (SocketException e) {
+          // something odd happened when sending a packet, but the socket
+          // should still be ok for receiving, so let's try again
         }
       }
     }
@@ -186,34 +224,81 @@ namespace Aegis_DVL.Communication {
     /// The receive and handle.
     /// </summary>
     /// TODO: review for problems with complexity
-    public void ReceiveAndHandle() {
-      var listener = new TcpListener(this.Parent.Address);
-      listener.Start();
-      try {
-        using (TcpClient client = listener.AcceptTcpClient())
-        using (NetworkStream stream = client.GetStream()) {
-          byte[] bytes = Bytes.FromNetworkStream(stream);
-          if (bytes.Length == 0) return;
-          var cmd = bytes.To<ICommand>();
-          if (cmd is PublicKeyExchangeCommand ||
-              cmd is CryptoCommand ||
-              cmd is IsAliveCommand) {
-            if (this.Parent.Logger != null &&
-                !(cmd is IsAliveCommand)) this.Parent.Logger.Log("Received " + cmd.GetType() + " from " + cmd.Sender, Level.Info);
-            cmd.Execute(this.Parent);
-          } else {
-            if (this.Parent.Logger != null) {
-              this.Parent.Logger.Log(
-                "Received a command that wasn't PublicKeyExchangeCommand, CryptoCommand or IsAliveCommand from " +
-                client.Client.RemoteEndPoint + ". Shutting down.", 
-                Level.Fatal);
-            }
+    public void NetworkReceiveThread() {
+      if (tcpListener == null) {
+        tcpListener = new TcpListener(this.Parent.Address);
+        tcpListener.Start();
+      }
 
-            this.Parent.ShutDownElection();
-          }
+      TcpClient client;
+
+      while (true) {
+        try {
+          client = tcpListener.AcceptTcpClient();
+        } catch (SocketException e) {
+          // the socket was closed, or some other problem happened that we can't survive
+          return;
         }
-      } finally {
-        listener.Stop();
+        IPEndPoint clientEndpoint = null;
+        try {
+          using (NetworkStream stream = client.GetStream()) {
+            clientEndpoint = (IPEndPoint) client.Client.RemoteEndPoint;
+            client.Client.ReceiveTimeout = 5000;
+            byte[] lengthBytes = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
+            var length = BitConverter.ToInt32(lengthBytes, 0);
+            if (length == 0) {
+              if (Parent.Logger != null) {
+                Parent.Logger.Log("Received empty message from " + clientEndpoint, Level.Info);
+              } else {
+                Console.WriteLine("Received empty message from " + clientEndpoint);
+              }
+              return;
+            }
+            byte[] cmdBytes = null;
+            try {
+              cmdBytes = Bytes.FromNetworkStreamWithSize(stream, length);
+              stream.Write(lengthBytes, 0, lengthOfCount);
+            } catch (Exception e) {
+              if (Parent.Logger != null) {
+                Parent.Logger.Log("Failed to receive message from " + clientEndpoint + ": " + e, Level.Info);
+              } else {
+                Console.WriteLine("Failed to receive message from " + clientEndpoint + ": " + e);
+              }
+              stream.Write(new byte[lengthOfCount], 0, lengthOfCount);
+              return;
+            }
+            var cmd = cmdBytes.To<ICommand>();
+            if (cmd is PublicKeyExchangeCommand ||
+                cmd is CryptoCommand ||
+                cmd is IsAliveCommand) {
+                  if (this.Parent.Logger != null && !(cmd is IsAliveCommand)) {
+                    this.Parent.Logger.Log("Received " + cmd.GetType() + " from " + cmd.Sender, Level.Info);
+                  } else {
+                    Console.WriteLine("Received " + cmd.GetType() + " from " + cmd.Sender);
+                  }
+              // enqueue the command
+              incomingQueue.Add(cmd);
+              responseTimes[cmd.Sender] = DateTime.Now;
+            } else {
+              if (this.Parent.Logger != null) {
+                this.Parent.Logger.Log(
+                  "Received a command that wasn't PublicKeyExchangeCommand, CryptoCommand or IsAliveCommand from " +
+                  clientEndpoint + ". Shutting down.",
+                  Level.Fatal);
+              } else {
+                Console.WriteLine(
+                  "Received a command that wasn't PublicKeyExchangeCommand, CryptoCommand or IsAliveCommand from " +
+                  clientEndpoint + ". Shutting down.");
+              }
+
+              this.Parent.ShutDownElection();
+            }
+          }
+        } catch (Exception e) {
+          // there was a problem reading a message, but the socket should be OK
+          // so we live to try another day
+          Console.WriteLine("Exception while reading from " + clientEndpoint + ": " + e);
+        }
       }
     }
 
@@ -229,49 +314,174 @@ namespace Aegis_DVL.Communication {
     /// <exception cref="SocketException">
     /// </exception>
     public void Send(ICommand command, IPEndPoint target) {
-      if (this.Parent.Logger != null &&
-          !(command is IsAliveCommand)) this.Parent.Logger.Log("Attempting to send " + command.GetType() + " to " + target, Level.Info);
-      bool isBallotReceived = command is StatusChangedCommand;
+      Send(command, target, maxTries);
+    }
 
-      if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand || command is CryptoCommand)) command = new CryptoCommand(this.Parent, target, command);
-      try {
-        using (var client = new TcpClient()) {
-          IAsyncResult ar = client.BeginConnect(target.Address, target.Port, null, null);
-          WaitHandle wh = ar.AsyncWaitHandle;
-          try {
-            if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(1000), false)) throw new SocketException();
-            client.EndConnect(ar);
-          } finally {
-            wh.Close();
+    private void Send(ICommand command, IPEndPoint target, int tries) {
+      outgoingQueue.Add(Tuple.Create<IPEndPoint, ICommand, int>(target, command, tries));
+    }
+
+    public void ReceivedMessageDequeueThread() {
+      bool running = true;
+      while (running) {
+        ICommand command = null;
+        try {
+          command = incomingQueue.Take();
+        } catch (Exception e) {
+          // the only way this can happen is if something has gone wrong
+          running = false;
+        }
+        if (command != null) {
+          command.Execute(Parent);
+        }
+      }
+    }
+
+    public void MessageSendThread() {
+      bool running = true;
+      while (running) {
+        Tuple<IPEndPoint, ICommand, int> message = outgoingQueue.Take();
+        IPEndPoint target = message.Item1;
+        ICommand command = message.Item2;
+        int tries = message.Item3;
+        int attempt = maxTries - tries + 1;
+
+        bool retry = false;
+
+        if (tries > 0) {
+          if (this.Parent.Logger != null && !(command is IsAliveCommand)) {
+            this.Parent.Logger.Log("Attempt #" + attempt + " to send " + command.GetType() + " to " + target, Level.Info);
           }
-
-          byte[] bytes = Bytes.From(command);
-          const int packetSize = 2048;
-          var packetAmount = (int)Math.Ceiling((double)bytes.Length / packetSize);
-          using (NetworkStream stream = client.GetStream()) {
-            for (int i = 0; i < packetAmount; i++) {
-              int offset = i * packetSize;
-              int size = i == packetAmount - 1 ? bytes.Length % packetSize : packetSize;
-              stream.Write(bytes, offset, size);
+          if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand || command is CryptoCommand)) {
+            if (Parent.Peers.ContainsKey(target)) {
+              command = new CryptoCommand(this.Parent, target, command);
+            } else {
+              if (this.Parent.Logger != null) this.Parent.Logger.Log("Attempt to send a message to non-peer " + target, Level.Error);
+              return;
             }
           }
+
+          TcpClient client = new TcpClient();
+          client.ReceiveTimeout = 10000;
+          WaitHandle wh = null;
+
+          try {
+            IAsyncResult ar = client.BeginConnect(target.Address, target.Port, null, null);
+            wh = ar.AsyncWaitHandle;
+
+            if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2000), false)) throw new SocketException();
+            client.EndConnect(ar);
+          } catch (SocketException e) {
+            if (this.Parent.Logger != null) {
+              this.Parent.Logger.Log("Problem sending due to SocketException " + e + ", retrying.", Level.Error);
+            } else {
+              Console.WriteLine("Problem sending due to SocketException " + e + ", retrying.");
+            }
+            retry = true;
+          } finally {
+            if (wh != null) {
+              wh.Close();
+            }
+          }
+
+          if (!retry) {
+            byte[] commandBytes = Bytes.From(command);
+            byte[] length = BitConverter.GetBytes(commandBytes.Count());
+            using (NetworkStream stream = client.GetStream()) {
+              try {
+                stream.Write(length, 0, length.Count());
+                stream.Write(commandBytes, 0, commandBytes.Count());
+                byte[] received = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
+                var ack = BitConverter.ToInt32(received, 0);
+
+                if (ack == commandBytes.Count()) {
+                  if (!(command is IsAliveCommand)) {
+                    if (Parent.Logger != null) {
+                      Parent.Logger.Log(command.GetType() + " successfully sent to " + target + " on attempt #" + attempt, Level.Info);
+                    } else {
+                      Console.WriteLine(command.GetType() + " successfully sent to " + target + " on attempt #" + attempt);
+                    }
+                  }
+                } else {
+                  if (Parent.Logger != null) {
+                    Parent.Logger.Log(command.GetType() + " failed to " + target + " on attempt #" + attempt, Level.Info);
+                  } else {
+                    Console.WriteLine(command.GetType() + " failed to " + target + " on attempt #" + attempt);
+                  }
+                  retry = true;
+                }
+              } catch (Exception e) {
+                Console.WriteLine(e);
+                if (this.Parent.Logger != null) this.Parent.Logger.Log("Problem sending due to Exception, retrying.", Level.Error);
+                retry = true;
+              } 
+            }
+          }
+        } else {
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Maximum number of retries reached, recording absent host " + target, Level.Error);
+          }
+          if (Parent.IsManager && Parent.Peers.ContainsKey(target)) {
+            Parent.AnnounceRemovePeer(target);
+          } else if (target.Equals(Parent.Manager)) {
+            Parent.StartNewManagerElection();
+          } else if (Parent.Peers.ContainsKey(target)) {
+            Parent.RemovePeer(target);
+          }
         }
-      } catch (SocketException) {
-        if (command is IsAliveCommand || isBallotReceived) throw;
-        if (this.Parent.Logger != null) this.Parent.Logger.Log("SocketException thrown while sending, attempting to handle.", Level.Error);
-        if (this.Parent.IsManager &&
-            this.Parent.Peers.ContainsKey(target)) this.Parent.AnnounceRemovePeer(target);
-        else {
-          if (target.Equals(this.Parent.Manager)) {
-            this.Parent.StartNewManagerElection();
-            this.Send(command, target);
-          } else
-            if (this.Parent.Peers.ContainsKey(target)) this.Parent.RemovePeer(target);
+
+        if (retry) {
+          Send(command, target, tries - 1);
         }
-      } catch (IOException) {
-        if (this.Parent.Logger != null) this.Parent.Logger.Log("Problem sending due to IOException, retrying send.", Level.Error);
-        this.Send(command, target);
       }
+    }
+
+    public void StopThreads() {
+      if (ThreadsStarted) {
+        receiveThread.Abort();
+        dequeueThread.Abort();
+        sendThread.Abort();
+        pingThread.Abort();
+
+        if (tcpListener != null) {
+          tcpListener.Stop();
+        }
+
+        if (udpSocket != null) {
+          udpSocket.Close();
+        }
+
+        receiveThread = null;
+        dequeueThread = null;
+        sendThread = null;
+        pingThread = null;
+      }
+
+      ThreadsStarted = false;
+    }
+
+    public void StartThreads() {
+      if (!ThreadsStarted) {
+        receiveThread = new Thread(NetworkReceiveThread);
+        receiveThread.SetApartmentState(ApartmentState.STA);
+        receiveThread.Name = "Receive";
+        dequeueThread = new Thread(ReceivedMessageDequeueThread);
+        dequeueThread.SetApartmentState(ApartmentState.STA);
+        dequeueThread.Name = "Dequeue";
+        sendThread = new Thread(MessageSendThread);
+        sendThread.SetApartmentState(ApartmentState.STA);
+        sendThread.Name = "Send";
+        pingThread = new Thread(PingThread);
+        pingThread.SetApartmentState(ApartmentState.STA);
+        pingThread.Name = "PingResponder";
+
+        receiveThread.Start();
+        dequeueThread.Start();
+        sendThread.Start();
+        pingThread.Start();
+      }
+
+      ThreadsStarted = true;
     }
 
     #endregion

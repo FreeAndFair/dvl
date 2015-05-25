@@ -165,7 +165,7 @@
     <Compile Include="Commands\CryptoCommand.cs" />
     <Compile Include="Commands\ShutDownElectionCommand.cs" />
     <Compile Include="Commands\StartElectionCommand.cs" />
-    <Compile Include="Commands\BallotReceivedCommand.cs" />
+    <Compile Include="Commands\StatusChangedCommand.cs" />
     <Compile Include="Commands\AllStationsAvailableCommand.cs" />
     <Compile Include="Commands\SyncCommand.cs" />
     <Compile Include="Communication\Communicator.cs" />
