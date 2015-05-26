@@ -8,7 +8,7 @@
 	Title="PrecinctChoicePage">
 
     <Grid>
-        <DataGrid Name="PrecinctGrid" SelectionMode="Single" HeadersVisibility="None" HorizontalAlignment="Center" Margin="212,161,212,0" VerticalAlignment="Top" Height="400" Width="600" AutoGenerateColumns="False" FrozenColumnCount="1" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="PrecinctGridSelectionChanged" FontSize="16">
+        <DataGrid Name="PrecinctGrid" SelectionMode="Single" HeadersVisibility="None" HorizontalAlignment="Center" Margin="0,160,0,0" VerticalAlignment="Top" Height="400" Width="600" AutoGenerateColumns="False" FrozenColumnCount="1" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="PrecinctGridSelectionChanged" FontSize="16">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="SelectClick"/>

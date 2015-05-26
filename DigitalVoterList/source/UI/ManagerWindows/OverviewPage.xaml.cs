@@ -75,7 +75,7 @@ namespace UI.ManagerWindows {
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
       this.StartEndElectionButton.IsEnabled = false;
-      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.0", ui._station.Address.Address.ToString());
+      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", ui._station.Address.Address.ToString());
       stationGrid.ItemsSource = _ui._station.PeerStatuses.Values;
       this.PopulateList();
     }

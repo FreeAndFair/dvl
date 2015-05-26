@@ -239,7 +239,7 @@ namespace UI.StationWindows {
     private void CheckValidityButtonClick(object sender, RoutedEventArgs e) {
       List<Voter> results = new List<Voter>();
       Int32 stateId;
-      bool stateIdParsed = Int32.TryParse(StateId.Text, out stateId);
+      bool stateIdParsed = Int32.TryParse(StateId.Text.Trim().TrimEnd(System.Environment.NewLine.ToCharArray()), out stateId);
 
       if (!DriversLicense.Text.Equals(string.Empty)) {       
         // check driver's license first
