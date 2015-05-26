@@ -11,6 +11,7 @@
 
 namespace UI.Data {
   using System.Collections.Generic;
+  using Aegis_DVL.Data_Types;
 
   /// <summary>
   /// The design time station statuses.
@@ -22,10 +23,10 @@ namespace UI.Data {
     /// Initializes a new instance of the <see cref="DesignTimeStationStatuses"/> class.
     /// </summary>
     public DesignTimeStationStatuses() {
-      this.Add(new StationStatus { IpAddress = "127.0.0.1", ConnectionState = "Ready" });
-      this.Add(new StationStatus { IpAddress = "127.0.0.2", ConnectionState = "Ready" });
-      this.Add(new StationStatus { IpAddress = "127.0.0.3", ConnectionState = "Not Connected" });
-      this.Add(new StationStatus { IpAddress = "127.0.0.4", ConnectionState = "Not Connected" });
+      this.Add(new StationStatus("127.0.0.1", "Ready"));
+      this.Add(new StationStatus("127.0.0.2", "Ready"));
+      this.Add(new StationStatus("127.0.0.3", "Not Connected"));
+      this.Add(new StationStatus("127.0.0.4", "Not Connected"));
     }
 
     #endregion

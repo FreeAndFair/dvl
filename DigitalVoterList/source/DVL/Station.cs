@@ -180,8 +180,8 @@ namespace Aegis_DVL {
       Contract.Requires(databaseFile != null);
 
       this.Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
+      this.PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
       this.ElectionInProgress = false;
-      this.AllStationsAvailable = true;
       this.Address =
         new IPEndPoint(
           Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip => 
@@ -207,11 +207,6 @@ namespace Aegis_DVL {
     ///   What is my ip address?
     /// </summary>
     public IPEndPoint Address { [Pure] get; private set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether all stations available.
-    /// </summary>
-    public bool AllStationsAvailable { [Pure] get; set; }
 
     /// <summary>
     ///   How can I communicate with my group?
@@ -313,6 +308,10 @@ namespace Aegis_DVL {
       [Pure] get; private set;
     }
 
+    public SortedDictionary<IPEndPoint, StationStatus> PeerStatuses {
+      [Pure] get; private set;
+    }
+
     /// <summary>
     ///   How can the user interact with me?
     /// </summary>
@@ -333,9 +332,14 @@ namespace Aegis_DVL {
     /// </param>
     public void AddPeer(IPEndPoint peer, AsymmetricKey peerPublicAsymmetricKey) {
       Contract.Requires(peer != null);
-      Contract.Requires(!this.Peers.ContainsKey(peer));
-      Contract.Ensures(this.Peers.ContainsKey(peer));
-      this.Peers.Add(peer, peerPublicAsymmetricKey);
+      Contract.Requires(!Peers.ContainsKey(peer));
+      Contract.Ensures(Peers.ContainsKey(peer));
+      Peers.Add(peer, peerPublicAsymmetricKey);
+      if (PeerStatuses.ContainsKey(peer)) {
+        PeerStatuses[peer].ConnectionState = "Connected";
+      } else {
+        PeerStatuses.Add(peer, new StationStatus(peer.Address.ToString(), "Connected"));
+      }
       if (this.EnoughStations) this.UI.EnoughPeers();
       if (this.Logger != null) this.Logger.Log("Peer added: " + peer, Level.Info);
     }
@@ -410,31 +414,6 @@ namespace Aegis_DVL {
         this.Logger.Log("Announcing that this status change should be revoked for voter number " + 
           voter.VoterId, Level.Warn);
     }
-      
-    /*
-    /// <summary>
-    /// Announce to all that they should revoke this update!
-    /// </summary>
-    /// <param name="cpr">
-    /// The CPR number to revoke a ballot for.
-    /// </param>
-    /// <param name="masterPassword">
-    /// The master password that only the election secretary should know.
-    /// </param>
-    public void AnnounceRevokeBallot(CPR cpr, string masterPassword) {
-      Contract.Requires(masterPassword != null);
-      Contract.Requires(this.ValidMasterPassword(masterPassword));
-      Contract.Requires(this.Database[cpr, masterPassword] == 
-        BallotStatus.Received);
-      Contract.Requires(this.IsManager);
-      var cmd = new RevokeBallotCPROnlyCommand(this.Address, cpr, masterPassword);
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(cmd, peer));
-      cmd.Execute(this);
-      if (this.Logger != null)
-        this.Logger.Log("Announcing that this ballot should be revoked " +
-          "with master password: CPR " + cpr, Level.Warn);
-    }
-    */
 
     /// <summary>
     ///   Announce to all stations that the election has started!
@@ -464,38 +443,23 @@ namespace Aegis_DVL {
           " status to " + voterStatus + ".", Level.Info);
     }
 
-    /*
-    /// <summary>
-    /// This voter received a ballot!
-    /// </summary>
-    /// <param name="cpr">
-    /// The CPR number to request a ballot for.
-    /// </param>
-    /// <param name="password">
-    /// The master password.
-    /// </param>
-    public void BallotReceived(CPR cpr, string password) {
-      Contract.Requires(password != null);
-      Contract.Requires(this.ValidMasterPassword(password));
-      Contract.Requires(this.Database[cpr, password] == BallotStatus.NotReceived);
-      Contract.Ensures(this.Database[cpr, password] == BallotStatus.Received);
-      this.Database[cpr, password] = BallotStatus.Received;
-      if (this.Logger != null) this.Logger.Log("Marking CPR " + cpr + 
-        " with master password as having received a ballot.", Level.Info);
-    }
-    */
-
     /// <summary>
     /// What machines on the network respond that they have the digital voter list software running?
     /// </summary>
     /// <returns>
     /// The <see cref="IEnumerable"/>.
     /// </returns>
-    [Pure] public IEnumerable<IPEndPoint> DiscoverPeers() {
-      Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>() != null);
-      Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>().All(x => x != null));
-      HashSet<IPEndPoint> result = new HashSet<IPEndPoint>(Communicator.DiscoverNetworkMachines().Concat(Peers.Keys));
-      return result.Where(address => Communicator.IsListening(address));
+    [Pure] public void DiscoverPeers() {
+      HashSet<IPEndPoint> potentials = new HashSet<IPEndPoint>(Communicator.DiscoverNetworkMachines().Concat(Peers.Keys));
+
+      foreach (IPEndPoint peer in potentials) {
+        bool listening = Communicator.IsListening(peer);
+        if (listening && !Peers.Keys.Contains(peer)) {
+          PeerStatuses[peer] = new StationStatus(peer.Address.ToString(), "Not Connected");
+        } else if (!listening) {
+          RemovePeer(peer);
+        }
+      }
     }
 
     /// <summary>
@@ -543,7 +507,6 @@ namespace Aegis_DVL {
     /// </param>
     public void ExchangePublicKeys(IPEndPoint target) {
       Contract.Requires(target != null);
-      //Contract.Requires(this.StationActive(target));
       this.Communicator.Send(new PublicKeyExchangeCommand(this), target);
       if (this.Logger != null) 
         this.Logger.Log("Exchanging public keys with " + target, Level.Info);
@@ -598,6 +561,7 @@ namespace Aegis_DVL {
       Contract.Ensures(!this.Peers.ContainsKey(peer));
       this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(this.Manager.Address, 62000), peer), peer);
       this.Peers.Remove(peer);
+      PeerStatuses.Remove(peer);
       if (!this.EnoughStations) this.UI.NotEnoughPeers();
       if (this.Logger != null) this.Logger.Log("Peer removed: " + peer, Level.Info);
     }
@@ -615,49 +579,16 @@ namespace Aegis_DVL {
           voter.VoterId + " to " + voterStatus, Level.Info);
     }
 
-    /*
-    /// <summary>
-    /// Request a ballot for this voter!
-    /// </summary>
-    /// <param name="cpr">
-    /// The CPR number to request a ballot for.
-    /// </param>
-    /// <param name="password">
-    /// The master password.
-    /// </param>
-    public void RequestBallot(CPR cpr, string password) {
-      Contract.Requires(password != null);
-      Contract.Requires(this.ValidMasterPassword(password));
-      Contract.Requires(this.Database[cpr, password] == BallotStatus.NotReceived);
-      this.Communicator.Send(new RequestBallotCPROnlyCommand(this.Address, cpr,
-        password), this.Manager);
-      if (this.Logger != null) 
-        this.Logger.Log("Requesting ballot with master password for CPR " + 
-          cpr, Level.Info);
+    public void MakePeerAvailableAndRefresh(IPEndPoint peer) {
+      UI.DoneSynchronizing(peer);
     }
-    */
 
-    /// <summary>
-    /// Revoke this ballot!
-    /// </summary>
-    /// <param name="cpr">
-    /// The CPR number to revoke a ballot for.
-    /// </param>
-    /// <param name="masterPassword">
-    /// The master password that only the election secretary should know.
-    /// </param>
-    /*
-    public void RevokeBallot(CPR cpr, string masterPassword) {
-      Contract.Requires(masterPassword != null);
-      Contract.Requires(this.ValidMasterPassword(masterPassword));
-      Contract.Requires(this.Database[cpr, masterPassword] == BallotStatus.Received);
-      Contract.Ensures(this.Database[cpr, masterPassword] == BallotStatus.NotReceived);
-      this.Database[cpr, masterPassword] = BallotStatus.NotReceived;
-      if (this.Logger != null) 
-        this.Logger.Log("Revoking ballot with master password for voter with CPR " + 
-          cpr, Level.Warn);
+    public void SetPeerStatus(IPEndPoint peer, string status) {
+      if (PeerStatuses.ContainsKey(peer)) {
+        PeerStatuses[peer].ConnectionState = status;
+      }
     }
-    */
+
     /// <summary>
     ///   The system is compromised, notify everyone and shut down the election!
     /// </summary>

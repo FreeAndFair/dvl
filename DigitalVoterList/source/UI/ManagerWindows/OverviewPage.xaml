@@ -3,13 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" Title="OverviewPage" Height="400" Width="600">
+      mc:Ignorable="d" Title="OverviewPage" Height="768" Width="1024">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="175*"/>
-            <RowDefinition Height="232*"/>
-        </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="260" HorizontalAlignment="Center" Margin="0, 0, 0, 85" Name="stationGrid" VerticalAlignment="Bottom" Width="545" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" Grid.RowSpan="2">
+        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="450" HorizontalAlignment="Center" Margin="150,0,150,150" Name="stationGrid" VerticalAlignment="Bottom" Width="545" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" Grid.RowSpan="2" FontSize="16">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="AddButtonClick"/>
@@ -34,15 +30,15 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <WrapPanel Orientation="Horizontal" Margin="28,148,28,24" Grid.Row="1" HorizontalAlignment="Center">
-            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" />
-            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" />
-            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" />
-            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" />
-            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" />
+        <WrapPanel Orientation="Horizontal" Margin="0,600,0,50" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="16" />
+            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" FontSize="16" />
+            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="16" />
+            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="16" />
+            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" FontSize="16" />
         </WrapPanel>
-        <Label Content="" Height="34" HorizontalAlignment="Left" Margin="48,10,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="411" FontFamily="Verdana" FontSize="16"/>
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="456,10,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="116" />
-        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="456,40,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="116" />
+        <Label Content="" Height="60" HorizontalAlignment="Center" Margin="0,40,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="411" FontFamily="Verdana" FontSize="16"/>
+        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="668,119,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="116" />
+        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="668,153,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="116" />
     </Grid>
 </Page>

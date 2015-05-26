@@ -178,15 +178,6 @@ namespace Tests {
     */
 
     /// <summary>
-    /// The discover peers test.
-    /// </summary>
-    [Test] public void DiscoverPeersTest() {
-      IPEndPoint[] peers = this.Manager.DiscoverPeers().ToArray();
-      Assert.That(peers.Count() >= 0);
-      foreach (IPEndPoint peer in peers) Console.WriteLine(peer);
-    }
-
-    /// <summary>
     /// The elect new manager.
     /// </summary>
     [Test] public void ElectNewManager() {

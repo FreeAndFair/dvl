@@ -11,6 +11,7 @@
 
 namespace UI.Data {
   using System.Collections.Generic;
+  using Aegis_DVL.Data_Types;
 
   /// <summary>
   /// The station statuses.

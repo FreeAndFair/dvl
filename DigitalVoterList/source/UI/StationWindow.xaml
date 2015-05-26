@@ -1,7 +1,7 @@
 ﻿<Window x:Name="ePollbook" x:Class="UI.StationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Galois Electronic Pollbook" Height="800" Width="1200"
+        Title="Galois Electronic Pollbook" Height="768" Width="1024"
         WindowStartupLocation="CenterScreen"
         Icon="Icon.ico" FontSize="48" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     

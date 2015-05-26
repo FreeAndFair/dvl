@@ -81,7 +81,6 @@ namespace Aegis_DVL.Commands {
       this._publicKeys = parent.Peers.Values.Select(key => key.Value.ToBytes()).ToArray();
       this._masterPwHash = Bytes.FromFile("Master.pw");
       this._electionDataKey = parent.Crypto.VoterDataEncryptionKey.Value.ToBytes();
-      parent.AllStationsAvailable = false;
     }
 
     #endregion
@@ -128,7 +127,7 @@ namespace Aegis_DVL.Commands {
       receiver.Database.Import(_precinctData);
       receiver.PollingPlace = _pollingplace;
       receiver.Logger.Log("Synchronized by " + this.Sender, Level.Info);
-      receiver.Communicator.Send(new AllStationsAvailable(receiver.Address), receiver.Manager);
+      receiver.Communicator.Send(new StationAvailable(receiver.Address), receiver.Manager);
       receiver.UI.SyncComplete();
     }
 

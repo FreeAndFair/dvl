@@ -17,17 +17,17 @@ namespace Aegis_DVL.Commands {
   /// <summary>
   /// The all stations available.
   /// </summary>
-  [Serializable] public class AllStationsAvailable : ICommand {
+  [Serializable] public class StationAvailable : ICommand {
     #region Constructors and Destructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AllStationsAvailable"/> class. 
+    /// Initializes a new instance of the <see cref="StationAvailable"/> class. 
     /// This station is available!
     /// </summary>
     /// <param name="sender">
     /// The address of the one sending the command.
     /// </param>
-    public AllStationsAvailable(IPEndPoint sender) {
+    public StationAvailable(IPEndPoint sender) {
       Contract.Requires(sender != null);
       this.Sender = sender;
     }
@@ -52,10 +52,8 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-
-      if (receiver.Manager.Equals(this.Sender)) return;
-      receiver.AllStationsAvailable = true;
-      receiver.UI.DoneSynchronizing(Sender);
+      if (receiver.Manager.Equals(Sender)) return;
+      receiver.MakePeerAvailableAndRefresh(Sender);
     }
 
     #endregion

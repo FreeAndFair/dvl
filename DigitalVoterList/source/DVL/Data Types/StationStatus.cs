@@ -9,7 +9,7 @@
 // // -----------------------------------------------------------------------
 #endregion
 
-namespace UI.Data {
+namespace Aegis_DVL.Data_Types {
   using System.Collections.Generic;
 
   /// <summary>
@@ -29,6 +29,11 @@ namespace UI.Data {
     public string IpAddress { get; set; }
 
     #endregion
+
+    public StationStatus(string station, string status) {
+      IpAddress = station;
+      ConnectionState = status;
+    }
 
     public bool Connected() {
       return !ConnectionState.Equals("Not Connected");

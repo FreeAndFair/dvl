@@ -123,7 +123,9 @@ namespace Aegis_DVL.Commands {
         if (deObfuscationPassword == string.Empty) throw new TaskCanceledException();
         var key = this._wrapper.GetKey(receiver.Crypto, deObfuscationPassword);
         receiver.AddPeer(this.Sender, key);
+        Console.WriteLine("Peer " + Sender + " added by GetPassword");
       } catch (Exception e) {
+        Console.WriteLine(e);
         if (e is ArgumentException ||
             e is IOException ||
             e is Asn1ParsingException) this.GetPassword(receiver);

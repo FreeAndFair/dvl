@@ -29,6 +29,7 @@ namespace UI.ManagerWindows {
   using System.Windows.Input;
 
   using Aegis_DVL.Database;
+  using Aegis_DVL.Data_Types;
 
   using UI.Data;
   using UI.StationWindows;
@@ -84,6 +85,7 @@ namespace UI.ManagerWindows {
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
       this.EndElectionButton.IsEnabled = false;
+      ManagerstationGrid.ItemsSource = _ui._station.PeerStatuses.Values;
 
       // Change the width of the window
       var wnd = Window.GetWindow(this._parent);
@@ -122,33 +124,8 @@ namespace UI.ManagerWindows {
     /// <param name="ip">
     /// the ip address of the machine
     /// </param>
-    public void MarkAsConnected(IPEndPoint ip) {
-      foreach (StationStatus s in this.ManagerstationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString()) {
-          s.ConnectionState = "Connected";
-        }
-      }
-
-      this.ManagerstationGrid.Items.Refresh();
-    }
-
-    public void SetSelectedStationStatus(IPEndPoint ip, string status) {
-      foreach (StationStatus s in this.ManagerstationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString()) {
-          s.ConnectionState = status;
-        }
-      }
-
-      this.ManagerstationGrid.Items.Refresh();
-    }
-
-    public void MakeStationReady(IPEndPoint ip) {
-      foreach (StationStatus s in this.ManagerstationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString() && !s.Ready()) {
-          s.ConnectionState = "Ready";
-        }
-      }
-      this.ManagerstationGrid.Items.Refresh();
+    public void RefreshGrid() {
+      ManagerstationGrid.Items.Refresh();
       UpdateControls();
     }
 
@@ -177,27 +154,11 @@ namespace UI.ManagerWindows {
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
-      IEnumerable<IPEndPoint> peerlist = this._ui.GetPeerlist();
 
-      if (peerlist != null) {
-        var dataSource = (from ip in peerlist
-                          where this._ui.IsStationActive(ip)
-                          select new StationStatus { IpAddress = ip.Address.ToString(), ConnectionState = "Connected" }).ToList();
-        IEnumerable<IPEndPoint> currentpeers = _ui.DiscoverPeers();
-        Console.WriteLine(currentpeers.Count() + " peers discovered");
-        dataSource.AddRange(
-          from ip in currentpeers
-          where !peerlist.Contains(ip)
-          select new StationStatus { IpAddress = ip.Address.ToString(), ConnectionState = "Not Connected" });
-
-        Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerstationGrid.ItemsSource = dataSource; }));
-        Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerstationGrid.Items.Refresh(); }));
-      }
-
+      _ui.DiscoverPeers();
+      Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(delegate { this.ManagerstationGrid.Items.Refresh(); }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.UpdateLabel.Content = string.Empty; }));
       Dispatcher.Invoke(

@@ -129,7 +129,7 @@ namespace UI {
     /// Gets he IP adresses of the machines in the local network running this application
     /// </summary>
     /// <returns>a list of IP adresses</returns>
-    public IEnumerable<IPEndPoint> DiscoverPeers() { return this._station.DiscoverPeers(); }
+    public void DiscoverPeers() { _station.DiscoverPeers(); }
 
     /// <summary>
     /// disposes the current station
@@ -509,16 +509,17 @@ namespace UI {
     /// the p address of the station
     /// </param>
     public void MarkAsConnected(IPEndPoint ip) {
+      _station.SetPeerStatus(ip, "Connected");
       if (this.OverviewPage != null) {
         this.OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.OverviewPage.MarkAsConnected(ip); }));
+          new Action(delegate { this.OverviewPage.RefreshGrid(); }));
       }
 
       if (this.ManagerOverviewPage != null) {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.MarkAsConnected(ip); }));
+          new Action(delegate { this.ManagerOverviewPage.RefreshGrid(); }));
       }
     }
 
@@ -659,28 +660,30 @@ namespace UI {
     }
 
     public void Synchronizing(IPEndPoint ip) {
+      _station.SetPeerStatus(ip, "Synchronizing Election Data");
       if (OverviewPage != null) {
         OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { OverviewPage.SetPasswordLabel(string.Empty);  OverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
+          new Action(delegate { OverviewPage.RefreshGrid(); }));
       }
       if (ManagerOverviewPage != null) {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { ManagerOverviewPage.SetPasswordLabel(string.Empty); ManagerOverviewPage.SetSelectedStationStatus(ip, "Synchronizing Election Data"); }));
+          new Action(delegate { ManagerOverviewPage.RefreshGrid(); }));
       }
     }
 
     public void DoneSynchronizing(IPEndPoint ip) {
+      _station.SetPeerStatus(ip, "Ready");
       if (OverviewPage != null) {
         OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { OverviewPage.MakeStationReady(ip); }));
+          new Action(delegate { OverviewPage.RefreshGrid(); }));
       }
       if (ManagerOverviewPage != null) {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { ManagerOverviewPage.MakeStationReady(ip); }));
+          new Action(delegate { ManagerOverviewPage.RefreshGrid(); }));
         if (_station.ElectionInProgress) {
           _station.Communicator.Send(new StartElectionCommand(_station.Address), ip);
         }

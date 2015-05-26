@@ -159,7 +159,6 @@
       <DependentUpon>DataLoadPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\DesignTimeStationStatuses.cs" />
-    <Compile Include="Data\StationStatus.cs" />
     <Compile Include="Data\StationStatuses.cs" />
     <Compile Include="ManagerWindows\EndedElectionPage.xaml.cs">
       <DependentUpon>EndedElectionPage.xaml</DependentUpon>

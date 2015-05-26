@@ -27,6 +27,7 @@ namespace UI.ManagerWindows {
   using System.Windows;
   using System.Windows.Controls;
 
+  using Aegis_DVL.Data_Types;
   using UI.Data;
 
   /// <summary>
@@ -74,6 +75,7 @@ namespace UI.ManagerWindows {
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
       this.StartEndElectionButton.IsEnabled = false;
+      stationGrid.ItemsSource = _ui._station.PeerStatuses.Values;
       this.PopulateList();
     }
 
@@ -107,12 +109,7 @@ namespace UI.ManagerWindows {
     /// <param name="ip">
     /// the IP address of the station to mark
     /// </param>
-    public void MarkAsConnected(IPEndPoint ip) {
-      foreach (StationStatus s in this.stationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString()) {
-          s.ConnectionState = "Connected";
-        }
-      }
+    public void RefreshGrid() {
       this.stationGrid.Items.Refresh();
     }
 
@@ -149,30 +146,11 @@ namespace UI.ManagerWindows {
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
-      IEnumerable<IPEndPoint> peerlist = this._ui.GetPeerlist();
+      _ui.DiscoverPeers();
 
-      if (peerlist != null) {
-        var dataSource = (from ip in peerlist
-                          where this._ui.IsStationActive(ip)
-                          select new StationStatus { IpAddress = ip.Address.ToString(), ConnectionState = "Connected" }).ToList();
-        IEnumerable<IPEndPoint> currentpeers = _ui.DiscoverPeers();
-        Console.WriteLine(currentpeers.Count() + " peers discovered");
-        dataSource.AddRange(
-          from ip in currentpeers
-          where !peerlist.Contains(ip)
-          select new StationStatus { IpAddress = ip.Address.ToString(), ConnectionState = "Not Connected" });
-
-        ovp.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.stationGrid.ItemsSource = dataSource; }));
-        ovp.Dispatcher.Invoke(
-          System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.stationGrid.Items.Refresh(); }));
-        if (dataSource.Contains(selected)) {
-          ovp.Dispatcher.Invoke(
-            System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { stationGrid.SelectedItem = selected; }));
-        }
-      }
-
+      ovp.Dispatcher.Invoke(
+         System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.stationGrid.Items.Refresh(); }));
+        
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.UpdateLabel.Content = string.Empty; }));
       ovp.Dispatcher.Invoke(
@@ -190,50 +168,6 @@ namespace UI.ManagerWindows {
     /// the string to set the label to
     /// </param>
     public void SetPasswordLabel(string content) { this.PasswordLabel.Content = content; }
-
-    /// <summary>
-    /// Unmark a connected station in the list
-    /// </summary>
-    /// <param name="ip">
-    /// the IP address of the station to unmark
-    /// </param>
-    public void UnmarkSelectedStation(IPEndPoint ip) {
-      foreach (StationStatus s in this.stationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString()) {
-          s.ConnectionState = "Not Connected";
-        }
-      }
-      this.stationGrid.Items.Refresh();
-    }
-
-    public void SetSelectedStationStatus(IPEndPoint ip, string status) {
-      foreach (StationStatus s in this.stationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString()) {
-          s.ConnectionState = status;
-        }
-      }
-      this.stationGrid.Items.Refresh();
-      UpdateControls();
-    }
-
-    public void MakeStationReady(IPEndPoint ip) {
-      foreach (StationStatus s in this.stationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString() && !s.Ready()) {
-          s.ConnectionState = "Ready";
-        }
-      }
-      this.stationGrid.Items.Refresh();
-      UpdateControls();
-    }
-
-    public string GetSelectedStationStatus(IPEndPoint ip) {
-      foreach (StationStatus s in this.stationGrid.Items) {
-        if (s.IpAddress == ip.Address.ToString()) {
-          return s.ConnectionState;
-        }
-      }
-      return null;
-    }
 
     #endregion
 
@@ -298,8 +232,6 @@ namespace UI.ManagerWindows {
       if (this.stationGrid.SelectedItem != null) {
         if (((StationStatus)this.stationGrid.SelectedItem).Connected()) {
           this._ui.RemoveStation(((StationStatus)this.stationGrid.SelectedItem).IpAddress);
-          this.UnmarkSelectedStation(
-            new IPEndPoint(IPAddress.Parse(((StationStatus)this.stationGrid.SelectedItem).IpAddress), 62000));
           this.PopulateList();
         }
       }
