@@ -267,7 +267,7 @@ namespace Aegis_DVL.Database {
             "EligibleDate datetime not null, MustShowId bit not null, Absentee bit not null, " +
             "ProtectedAddress bit not null, DriversLicense nvarchar, Voted bit not null, ReturnStatus nvarchar, " + 
             "BallotStyle int not null, PrecinctSub nvarchar not null, Address nvarchar not null, " +
-            "Municipality nvarchar not null, ZipCode nvarchar not null, StateId int not null, PollbookStatus int not null)";
+            "Municipality nvarchar not null, ZipCode nvarchar not null, StateId bigint not null, PollbookStatus int not null)";
           cmd.ExecuteNonQuery();
         }
         using (SQLiteCommand cmd = db.CreateCommand()) {

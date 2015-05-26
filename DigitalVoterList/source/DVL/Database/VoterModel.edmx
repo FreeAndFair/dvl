@@ -32,7 +32,7 @@
           <Property Name="Address" Type="nvarchar" Nullable="false" />
           <Property Name="Municipality" Type="nvarchar" Nullable="false" />
           <Property Name="ZipCode" Type="nvarchar" Nullable="false" />
-          <Property Name="StateId" Type="int" Nullable="true" />
+          <Property Name="StateId" Type="integer" Nullable="true" />
           <Property Name="PollbookStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Precincts">
