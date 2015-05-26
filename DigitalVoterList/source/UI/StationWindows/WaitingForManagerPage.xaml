@@ -6,9 +6,9 @@
       mc:Ignorable="d" Title="WaitingForManagerPage" Height="768" Width="1024">
 
     <Grid>
-        <Label Content="Waiting for the Manager" HorizontalAlignment="Center" Name="CenterLabel" VerticalAlignment="Center" FontSize="16" Margin="420,514,420,222" />
-        <Button Content="Back" HorizontalAlignment="Center" Margin="474,392,474,0" Name="BackButton" VerticalAlignment="Top" Width="76" Click="BackButtonClick" FontSize="16"/>
-        <Label Content="" HorizontalAlignment="Center" Margin="362,266,362,0" Name="PasswordLabel" VerticalAlignment="Top" Width="300" HorizontalContentAlignment="Center" FontSize="16"/>
-        <Label Content="This is Station 255.255.255.255" HorizontalAlignment="Center" Margin="372,186,372,0" Name="IPLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20"/>
+        <Label Content="Waiting for the Manager" HorizontalAlignment="Center" Name="CenterLabel" VerticalAlignment="Center" FontSize="16" Margin="0,514,0,222" />
+        <Button Content="Back" HorizontalAlignment="Center" Margin="0,392,0,0" Name="BackButton" VerticalAlignment="Top" Width="76" Click="BackButtonClick" FontSize="16"/>
+        <Label Content="" HorizontalAlignment="Center" Margin="0,266,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="300" HorizontalContentAlignment="Center" FontSize="16"/>
+        <Label Content="This is Station 255.255.255.255" HorizontalAlignment="Center" Margin="0,186,0,0" Name="IPLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20"/>
     </Grid>
 </Page>
