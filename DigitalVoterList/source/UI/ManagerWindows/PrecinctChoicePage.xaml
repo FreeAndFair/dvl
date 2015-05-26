@@ -25,9 +25,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock HorizontalAlignment="Center" Margin="344,108,344,0" TextWrapping="Wrap" Text="Which polling location are you managing?" VerticalAlignment="Top" FontSize="18"/>
-        <WrapPanel HorizontalAlignment="Center" Height="42" Margin="357,594,357,0" VerticalAlignment="Top">
+        <WrapPanel HorizontalAlignment="Center" Height="42" Margin="0,594,0,0" VerticalAlignment="Top">
             <Button Margin="20, 0, 20, 0" Content="Cancel Setup" Click="BackClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" FontSize="18" RenderTransformOrigin="-0.54,0.196"/>
-            <Button Margin="20, 0, 20, 0" Name="SelectButton" Content="Select" Click="SelectClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" FontSize="18" RenderTransformOrigin="-0.54,0.196" IsDefault="True" IsEnabled="False"/>
+            <Button Margin="20, 0, 20, 0" Content="Vote Center" Click="VoteCenterClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" FontSize="18" RenderTransformOrigin="-0.54,0.196"/>
+            <Button Margin="20, 0, 20, 0" Name="SelectButton" Content="Select Location" Click="SelectClick" HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" FontSize="18" RenderTransformOrigin="-0.54,0.196" IsDefault="True" IsEnabled="False"/>
         </WrapPanel>
     </Grid>
 </Page>

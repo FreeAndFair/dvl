@@ -353,8 +353,8 @@ namespace Aegis_DVL.Database {
                                       data.FirstName.Like(firstname + "%") &&
                                       data.MiddleName.Like(middlename + "%") &&
                                       data.Address.Like(address + "%") &&
-                                      data.Municipality.Like(address + "%") &&
-                                      data.ZipCode.Like(address + "%"))
+                                      data.Municipality.Like(municipality + "%") &&
+                                      data.ZipCode.Like(zipcode + "%"))
                        .OrderBy(data => data.LastName) 
                        .ThenBy(data => data.FirstName)
                        .ThenBy(data => data.MiddleName);

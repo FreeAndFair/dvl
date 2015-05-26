@@ -15,6 +15,12 @@ namespace Aegis_DVL.Data_Types {
 
     public readonly List<string> PrecinctIds = new List<string>();
 
+    public PollingPlace() {
+      LocationName = "Vote Center";
+      Address = "Vote Center";
+      CityStateZIP = "Dallas, TX  75XXX";
+    }
+
     public PollingPlace(Precinct p) {
       LocationName = p.LocationName;
       Address = p.Address;

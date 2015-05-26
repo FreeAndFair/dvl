@@ -50,6 +50,17 @@
       this._parent.Navigate(new OverviewPage(this._parent, this._ui));
     }
 
+    private void VoteCenterClick(object sender, RoutedEventArgs e) {
+      _ui._station.PollingPlace = new PollingPlace();
+      HashSet<string> allPrecincts = new HashSet<string>();
+      foreach (Precinct p in _ui._station.Database.AllPrecincts) {
+        allPrecincts.Add(p.PrecinctSplitId);
+      }
+      foreach (string s in allPrecincts) {
+        _ui._station.PollingPlace.PrecinctIds.Add(s);
+      }
+    }
+
     private void BackClick(object sender, RoutedEventArgs e) {
       this._parent.Navigate(new TypeChoicePage(this._parent, this._ui));
       this._ui.DisposeStation();
