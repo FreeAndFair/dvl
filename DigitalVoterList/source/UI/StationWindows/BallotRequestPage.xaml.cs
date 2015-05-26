@@ -102,8 +102,8 @@ namespace UI.StationWindows {
 
       switch (newStatus) {
         case VoterStatus.Ineligible:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " is not eligible to vote until " + voter.EligibleDate.Date.ToString("MM/dd/yyyy"));
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            "\nis not eligible to vote until " + voter.EligibleDate.Date.ToString("MM/dd/yyyy"));
           break;
         case VoterStatus.WrongLocation:
           Precinct p = _ui._station.Database.GetPrecinctBySplitId(voter.PrecinctSub);
@@ -113,37 +113,37 @@ namespace UI.StationWindows {
             if (result.HasValue && result == true) {
               string here = _ui._station.PollingPlace.Address + ", " + _ui._station.PollingPlace.CityStateZIP;
               string there = p.Address + ", " + p.CityStateZIP;
-              FlexibleMessageBox.Show("Directions from " + here + " to " + there + " are not available in this demo, " +
-                "but will be available in the final product.");
+              string url = "https://maps.google.com/maps/dir/" + here.Replace(" ", "+") + "/" + there.Replace(" ", "+");
+              System.Diagnostics.Process.Start(url);
             }
           } else {
-            FlexibleMessageBox.Show("The precinct where " + GetFormattedName(voter) + " is registered is" +
-              " not participating in this election.");
+            FlexibleMessageBox.Show("The precinct where\n" + GetFormattedName(voter) + "\nis registered is" +
+              " not participating\nin this election.");
           }
           break;
         case VoterStatus.VotedByMail:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " has already submitted a vote by mail and should not receive a ballot.");
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            "\nhas already submitted a vote by mail\nand should not receive a ballot.");
           break;
         case VoterStatus.SuspendedVoter:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " is a suspense voter and must sign a statement of residence before receiving a ballot.");
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            " is a suspense voter and must sign a statement\nof residence before receiving a ballot.");
           break;
         case VoterStatus.OutOfCounty:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " is an out-of-county voter.");
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            "\nis an out-of-county voter.");
           break;
         case VoterStatus.EarlyVotedInPerson:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " has already voted at an early voting location.");
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            "\nhas already voted at an early voting location.");
           break;
         case VoterStatus.AbsenteeVotedInPerson:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " registered as an absentee voter but did not receive their ballot.");
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            "\nregistered as an absentee voter but did not receive their ballot.");
           break;
         case VoterStatus.MailBallotNotReturned:
-          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " was sent an absentee ballot and has not yet returned it. Please obtain " +
+          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+            " was sent an absentee ballot and has not yet returned it.\nPlease obtain " +
             " the appropriate affidavit before providing a ballot.");
           break;
         default:

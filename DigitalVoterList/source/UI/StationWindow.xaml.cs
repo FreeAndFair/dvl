@@ -155,7 +155,8 @@ namespace UI {
     }
 
     private void VideoClick(object sender, RoutedEventArgs e) {
-      FlexibleMessageBox.Show("Training videos are not available in this demo,\nbut will be listed in and playable from this window in the final product.");
+      System.Diagnostics.Process.Start("fighting_cats4.wmv");
+      FlexibleMessageBox.Show("Actual training videos are not available in this demo,\nbut will be listed in and playable from this window in the final product.");
     }
 
     private void FAQClick(object sender, RoutedEventArgs e) {

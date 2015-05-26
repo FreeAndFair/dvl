@@ -269,6 +269,7 @@ namespace Aegis_DVL.Communication {
     public void NetworkReceiveThread() {
       while (true) {
         TcpClient client = incomingConnectionQueue.Take();
+        client.ReceiveTimeout = 3000;
         IPEndPoint clientEndpoint = null;
         try {
           using (NetworkStream stream = client.GetStream()) {
@@ -320,13 +321,11 @@ namespace Aegis_DVL.Communication {
             } else {
               if (this.Parent.Logger != null) {
                 this.Parent.Logger.Log(
-                  "Received a command that wasn't PublicKeyExchangeCommand, CryptoCommand or IsAliveCommand from " +
-                  clientEndpoint + ". Shutting down.",
+                  "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.",
                   Level.Fatal);
               } else {
                 Console.WriteLine(
-                  "Received a command that wasn't PublicKeyExchangeCommand, CryptoCommand or IsAliveCommand from " +
-                  clientEndpoint + ". Shutting down.");
+                  "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.");
               }
 
               this.Parent.ShutDownElection();
