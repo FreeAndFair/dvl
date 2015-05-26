@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" Title="OverviewPage" Height="768" Width="1024">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="450" HorizontalAlignment="Center" Margin="150,0,150,150" Name="stationGrid" VerticalAlignment="Bottom" Width="545" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" Grid.RowSpan="2" FontSize="16">
+        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="450" HorizontalAlignment="Center" Margin="240,0,240,121" Name="stationGrid" VerticalAlignment="Bottom" Width="544" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="StationGridSelectionChanged" FontSize="16">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="AddButtonClick"/>
@@ -30,15 +30,16 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <WrapPanel Orientation="Horizontal" Margin="0,600,0,50" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <WrapPanel Orientation="Horizontal" Margin="262,663,262,55" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="16" />
             <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" FontSize="16" />
             <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="16" />
             <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="16" />
             <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" FontSize="16" />
         </WrapPanel>
-        <Label Content="" Height="60" HorizontalAlignment="Center" Margin="0,40,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="411" FontFamily="Verdana" FontSize="16"/>
-        <Label Content="" Height="28" HorizontalAlignment="Left" Margin="668,119,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="116" />
-        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="668,153,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="116" />
+        <Label Content="" Height="60" HorizontalAlignment="Center" Margin="304,82,308,0" Name="PasswordLabel" VerticalAlignment="Top" Width="412" FontFamily="Verdana" FontSize="16"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="643,143,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="140" FontSize="16" />
+        <ProgressBar Height="10" HorizontalAlignment="Left" Margin="643,182,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="140" />
+        <Label Name="IPLabel" Content="This is manager 255.255.255.0" HorizontalAlignment="Center" Margin="375,30,375,0" VerticalAlignment="Top" FontSize="20"/>
     </Grid>
 </Page>

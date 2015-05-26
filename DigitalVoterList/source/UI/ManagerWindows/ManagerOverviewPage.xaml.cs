@@ -85,6 +85,7 @@ namespace UI.ManagerWindows {
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
       this.EndElectionButton.IsEnabled = false;
+      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.0", ui._station.Address.Address.ToString());
       ManagerstationGrid.ItemsSource = _ui._station.PeerStatuses.Values;
 
       // Change the width of the window

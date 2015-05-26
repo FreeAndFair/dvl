@@ -696,7 +696,8 @@ namespace UI {
       if (WaitingForManagerPage != null) {
         WaitingForManagerPage.CenterLabel.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-            new Action(delegate { WaitingForManagerPage.CenterLabel.Content = "Waiting for election to start..."; }));
+            new Action(delegate { WaitingForManagerPage.CenterLabel.Content = "Waiting for election to start..."; 
+              WaitingForManagerPage.PasswordLabel.Content = String.Empty;  }));
       }
     }
 

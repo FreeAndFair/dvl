@@ -142,7 +142,7 @@ namespace Aegis_DVL.Communication {
       bool result = true;
 
       if (responseTimes.ContainsKey(address) &&
-          DateTime.Now.Subtract(responseTimes[address]).TotalMinutes < 1) {
+          DateTime.Now.Subtract(responseTimes[address]).TotalSeconds < 30) {
         // we've heard from this station within the last minute
         result = true;
       } else {

@@ -4,10 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1200"
+      d:DesignHeight="768" d:DesignWidth="1024"
 	Title="TypeChoicePage">
 
-    <Grid Height="800" Width="1200">
+    <Grid Height="768" Width="1024">
         <Rectangle Height="400" HorizontalAlignment="Center" Margin="0,0,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Center" Width="400" />
         <Label Content="Welcome to the Galois Electronic Pollbook System" HorizontalAlignment="Center" Margin="0,80,0,0" Name="WelcomeLabel" FontSize="20"></Label>
         <Label Content="Choose a Machine Type" HorizontalAlignment="Center" Margin="0,120,0,0" Name="TitleLabel" FontSize="20"></Label>

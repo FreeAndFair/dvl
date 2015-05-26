@@ -455,7 +455,11 @@ namespace Aegis_DVL {
       foreach (IPEndPoint peer in potentials) {
         bool listening = Communicator.IsListening(peer);
         if (listening && !Peers.Keys.Contains(peer)) {
-          PeerStatuses[peer] = new StationStatus(peer.Address.ToString(), "Not Connected");
+          if (PeerStatuses.Keys.Contains(peer)) {
+            PeerStatuses[peer].ConnectionState = "Not Connected";
+          } else {
+            PeerStatuses[peer] = new StationStatus(peer.Address.ToString(), "Not Connected");
+          }
         } else if (!listening) {
           RemovePeer(peer);
         }
