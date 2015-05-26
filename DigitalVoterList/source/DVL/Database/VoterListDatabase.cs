@@ -334,7 +334,7 @@ namespace Aegis_DVL.Database {
       return GetVoterByVoterId(vn.Value);
     }
 
-    public Voter GetVoterByStateId(Int32 sid) {
+    public Voter GetVoterByStateId(Int64 sid) {
       IQueryable<Voter> res = this._db.Voters.Where(data => data.StateId == sid);
       return !res.Any() ? null : res.Single();
     }
@@ -343,7 +343,6 @@ namespace Aegis_DVL.Database {
       dlnumber = dlnumber.ToLower();
       IQueryable <Voter> res = this._db.Voters.Where(
         data => data.DriversLicense.Equals(dlnumber, StringComparison.CurrentCulture));
-      return !res.Any() ? null : res.Single();
       return !res.Any() ? null : res.Single();
     }
 

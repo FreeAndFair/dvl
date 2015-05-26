@@ -79,6 +79,7 @@ namespace Tests {
     public void BallotRequestReply(VoterNumber vn, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { this.HandOutBallot = handOutBallot; }
     public void BallotRequestReply(Voter v, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { this.HandOutBallot = handOutBallot; }
     public void ConvertToStation() { }
+    public void RefreshStatistics() { }
 
     /// <summary>
     ///   The election ended.

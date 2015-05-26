@@ -84,7 +84,7 @@ namespace Aegis_DVL.Database {
 
     Voter GetVoterByVoterNumber(VoterNumber voternumber);
     Voter GetVoterByDLNumber(string dlnumber);
-    Voter GetVoterByStateId(Int32 stateid);
+    Voter GetVoterByStateId(Int64 stateid);
     List<Voter> GetVotersBySearchStrings(string lastname, string firstname, string middlename,
                                          string address, string municipality, string zipcode);
 
@@ -214,7 +214,7 @@ namespace Aegis_DVL.Database {
 
     public Voter GetVoterByVoterNumber(VoterNumber vn) { return default(Voter);  }
     public Voter GetVoterByDLNumber(string dlnumber) { Contract.Requires(dlnumber != null); return default(Voter); }
-    public Voter GetVoterByStateId(Int32 sid) { return default(Voter); }
+    public Voter GetVoterByStateId(Int64 sid) { return default(Voter); }
     public Precinct GetPrecinctBySplitId(string sid) { Contract.Requires(sid != null); return default(Precinct); }
     public List<Voter> GetVotersBySearchStrings(string a, string b, string c, string d, string e, string f) { return default(List<Voter>); }
     #endregion

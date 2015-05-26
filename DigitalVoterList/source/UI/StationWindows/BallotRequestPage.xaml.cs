@@ -238,8 +238,8 @@ namespace UI.StationWindows {
     /// </param>
     private void CheckValidityButtonClick(object sender, RoutedEventArgs e) {
       List<Voter> results = new List<Voter>();
-      Int32 stateId;
-      bool stateIdParsed = Int32.TryParse(StateId.Text.Trim().TrimEnd(System.Environment.NewLine.ToCharArray()), out stateId);
+      Int64 stateId;
+      bool stateIdParsed = Int64.TryParse(StateId.Text.Trim().TrimEnd(System.Environment.NewLine.ToCharArray()), out stateId);
 
       if (!DriversLicense.Text.Equals(string.Empty)) {       
         // check driver's license first

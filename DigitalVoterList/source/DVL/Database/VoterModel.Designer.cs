@@ -781,7 +781,7 @@ namespace Aegis_DVL.Database
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> StateId
+        public Nullable<global::System.Int64> StateId
         {
             get
             {
@@ -796,8 +796,8 @@ namespace Aegis_DVL.Database
                 OnStateIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _StateId;
-        partial void OnStateIdChanging(Nullable<global::System.Int32> value);
+        private Nullable<global::System.Int64> _StateId;
+        partial void OnStateIdChanging(Nullable<global::System.Int64> value);
         partial void OnStateIdChanged();
     
         /// <summary>

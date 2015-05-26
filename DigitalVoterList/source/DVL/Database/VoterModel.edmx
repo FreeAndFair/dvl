@@ -83,7 +83,7 @@
           <Property Type="String" Name="Address" Nullable="false" />
           <Property Type="String" Name="Municipality" Nullable="false" />
           <Property Type="String" Name="ZipCode" Nullable="false" />
-          <Property Type="Int32" Name="StateId" Nullable="true" />
+          <Property Type="Int64" Name="StateId" Nullable="true" />
           <Property Type="Int32" Name="PollbookStatus" Nullable="false" />
         </EntityType>
         <EntityType Name="Precinct">
