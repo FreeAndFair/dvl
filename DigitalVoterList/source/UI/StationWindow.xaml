@@ -1,18 +1,20 @@
-﻿<Window x:Class="UI.StationWindow"
+﻿<Window x:Name="ePollbook" x:Class="UI.StationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Galois Electronic Pollbook" Height="600" Width="600"
+        Title="Galois Electronic Pollbook" Height="800" Width="1200"
         WindowStartupLocation="CenterScreen"
-        Icon="Icon.ico">
+        Icon="Icon.ico" FontSize="48" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     
     <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
-        <Menu IsMainMenu="True" Width="Auto" Height="Auto" DockPanel.Dock="Top">
+        <Menu IsMainMenu="True" Width="Auto" Height="Auto" DockPanel.Dock="Top" FontSize="16">
             <MenuItem Header="_File">
-                <MenuItem Header="Export data" Click="ExportDataClick" Name="ExportDataMenuItem"/>
+                <MenuItem Header="Generate Reports" Click="ExportDataClick" Name="ExportDataMenuItem"/>
                 <MenuItem Header="Exit" Click="ExitClick" Name="ExitMenuItem"/>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="User manual" Click="HelpClick"/>
+                <MenuItem Header="Poll Worker Manual" Click="PollWorkerManualClick"/>
+                <MenuItem Header="Setup Manual" Click="SetupManualClick"/>
+                <MenuItem Header="Training Video" Click="VideoClick"/>
             </MenuItem>
         </Menu>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Width="Auto" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">

@@ -65,7 +65,11 @@ namespace UI {
     /// <param name="e">
     /// the event argument
     /// </param>
-    protected override void OnClosing(CancelEventArgs e) { e.Cancel = true; }
+    protected override void OnClosing(CancelEventArgs e) {
+      if (!CheckMasterPasswordForQuit()) {
+        e.Cancel = true;
+      }
+    }
 
     /// <summary>
     /// Called when File -&gt; Exit is clicked
@@ -77,18 +81,29 @@ namespace UI {
     /// auto generated
     /// </param>
     private void ExitClick(object sender, RoutedEventArgs e) {
-      var d = new CheckMasterPasswordDialog(this._ui);
-      d.Owner = this;
-      d.ShowDialog();
+      CheckMasterPasswordForQuit();
+    }
 
-      if (d.DialogResult.HasValue &&
-          d.DialogResult == true) {
-        if (d.IsCancel) return;
+    private bool CheckMasterPasswordForQuit() {
+      if (_ui._station != null) {
+        var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to shut down this station.");
+        d.Owner = this;
+        d.ShowDialog();
 
+        if (d.IsCancel) {
+          return false;
+        } else if (d.DialogResult.HasValue &&
+                   d.DialogResult == true) {
+          Environment.Exit(0);
+        } else {
+          MessageBox.Show(
+            "Master password entered incorrctly, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
+          return false;
+        }
+      } else {
         Environment.Exit(0);
-      } else
-        MessageBox.Show(
-          "Master password entered incorrctly, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
+      }
+      return true;
     }
 
     /// <summary>
@@ -101,7 +116,7 @@ namespace UI {
     /// auto generated
     /// </param>
     private void ExportDataClick(object sender, RoutedEventArgs e) {
-      var d = new CheckMasterPasswordDialog(this._ui);
+      var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to export election data.");
       d.Owner = this;
       d.ShowDialog();
 
@@ -109,8 +124,8 @@ namespace UI {
           d.DialogResult == true) {
         if (d.IsCancel) return;
 
-        var saveDialog = new SaveFileDialog { Title = "Export Data" };
-        saveDialog.Filter = "Data files (*.data)|*.data|All files (*.*)|*.*";
+        var saveDialog = new SaveFileDialog { Title = "Generate Reports" };
+        saveDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
         saveDialog.ShowDialog();
         if (!saveDialog.FileName.Equals(string.Empty)) this._ui.ExportData(saveDialog.FileName);
       } else
@@ -127,8 +142,25 @@ namespace UI {
     /// <param name="e">
     /// auto generated
     /// </param>
-    private void HelpClick(object sender, RoutedEventArgs e) { System.Diagnostics.Process.Start(@"Manual.pdf"); }
+    private void PollWorkerManualClick(object sender, RoutedEventArgs e) { 
+      // System.Diagnostics.Process.Start(@"Manual.pdf"); 
+      MessageBox.Show("The poll worker manual is not included in this demo, but will automatically open in a new window in the final product.");
+    }
 
+    private void SetupManualClick(object sender, RoutedEventArgs e)
+    {
+      // System.Diagnostics.Process.Start(@"Manual.pdf"); 
+      MessageBox.Show("The setup manual is not included in this demo, but will automatically open in a new window in the final product.");
+    }
+
+    private void VideoClick(object sender, RoutedEventArgs e) {
+      MessageBox.Show("Training videos are not available in this demo, but will be listed in and playable from in this window in the final product.");
+    }
     #endregion
+
+    private void ePollbook_Closing(object sender, CancelEventArgs e)
+    {
+
+    }
   }
 }

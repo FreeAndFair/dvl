@@ -4,14 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="373" d:DesignWidth="355"
+      d:DesignHeight="800" d:DesignWidth="1200"
 	Title="TypeChoicePage">
 
-    <Grid Height="373" Width="358">
-        <Rectangle Height="210" HorizontalAlignment="Left" Margin="75,75,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="200" />
-        <Label Content="Choose a machine type" Height="28" HorizontalAlignment="Left" Margin="90,30,0,0" Name="TitleLabel" VerticalAlignment="Top"></Label>
-        <Button Content="Station" Height="47" HorizontalAlignment="Left" Margin="107,105,0,0" Name="StationButton" VerticalAlignment="Top" Width="131" Click="StationButtonClick" />
-        <Button Content="Manager" Height="47" HorizontalAlignment="Left" Margin="107,0,0,122" Name="ManagerButton" VerticalAlignment="Bottom" Width="131" Click="ManagerButtonClick" />
-        <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="134,326,0,0" Name="ExitButton" VerticalAlignment="Top" Width="75" Click="ExitButtonClick" />
+    <Grid Height="800" Width="1200">
+        <Rectangle Height="400" HorizontalAlignment="Center" Margin="0,0,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Center" Width="400" />
+        <Label Content="Welcome to the Galois Electronic Pollbook System" HorizontalAlignment="Center" Margin="0,80,0,0" Name="WelcomeLabel" FontSize="20"></Label>
+        <Label Content="Choose a Machine Type" HorizontalAlignment="Center" Margin="0,120,0,0" Name="TitleLabel" FontSize="20"></Label>
+        <Button Content="Check-In Station" Height="80" Width="260" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,280,0,0" Name="StationButton" Click="StationButtonClick" FontSize="18" />
+        <Button Content="Manager" Height="80" Width="260" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,280" Name="ManagerButton" Click="ManagerButtonClick" FontSize="18"/>
+        <Button Content="Exit System" Height="50" Width="220" HorizontalAlignment="Center" Margin="0,0,0,100" Name="ExitButton" VerticalAlignment="Bottom" Click="ExitButtonClick" FontSize="18" />
     </Grid>
 </Page>

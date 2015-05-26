@@ -85,7 +85,6 @@ namespace Aegis_DVL.Communication {
 
     public bool ThreadsStarted {
       get {
-        Contract.Ensures(Contract.Result<bool>() != null);
         return default(bool);
       }
     }

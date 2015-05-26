@@ -112,11 +112,11 @@ namespace Aegis_DVL.Communication {
               IPEndPoint responder = new IPEndPoint(IPAddress.Parse(System.Text.Encoding.ASCII.GetString(buffer, 0, length)), 62000);
               potentials.Add(responder);
               Console.WriteLine("got response from " + responder.Address);
-            } catch (Exception e) {
+            } catch (Exception) {
               done = true;
             }
           }
-        } catch (Exception e) {
+        } catch (Exception) {
           // something went wrong so fall back to the old way of doing things
           for (int i = 1; i < 255; i++) {
             potentials.Add(new IPEndPoint(IPAddress.Parse(myipprefix + i), 62000));
@@ -203,6 +203,14 @@ namespace Aegis_DVL.Communication {
           udpSocket.ReceiveFrom(buffer, ref server);
         } catch (SocketException e) {
           // the socket was closed, or some other problem happened that we can't survive
+          if (Parent.Logger != null)
+          {
+            Parent.Logger.Log("Ping listener died with exception " + e, Level.Info);
+          }
+          else
+          {
+            Console.WriteLine("Ping listener died with exception " + e);
+          } 
           return;
         }
         IPEndPoint ips = (IPEndPoint)server;
@@ -212,8 +220,14 @@ namespace Aegis_DVL.Communication {
             Console.WriteLine("pinged by " + ips.Address);
           }
         } catch (SocketException e) {
-          // something odd happened when sending a packet, but the socket
-          // should still be ok for receiving, so let's try again
+          if (this.Parent.Logger != null)
+          {
+            this.Parent.Logger.Log("Ping listener encountered recoverable exception " + e, Level.Error);
+          }
+          else
+          {
+            Console.WriteLine("Ping listener encountered recoverable exception " + e);
+          }
         }
       }
     }
@@ -236,6 +250,14 @@ namespace Aegis_DVL.Communication {
           incomingConnectionQueue.Add(client);
         } catch (Exception e) {
           // the socket was closed, or some other problem happened that we can't survive
+          if (Parent.Logger != null)
+          {
+            Parent.Logger.Log("Listener died with exception " + e, Level.Info);
+          }
+          else
+          {
+            Console.WriteLine("Listener died with exception " + e);
+          }
         }
       }
     }
@@ -345,7 +367,14 @@ namespace Aegis_DVL.Communication {
           command = incomingQueue.Take();
         } catch (Exception e) {
           // the only way this can happen is if something has gone wrong
-          running = false;
+          if (Parent.Logger != null)
+          {
+            Parent.Logger.Log("Dequeue thread died with exception " + e, Level.Info);
+          }
+          else
+          {
+            Console.WriteLine("Dequeue thread died with exception " + e);
+          } running = false;
         }
         if (command != null) {
           command.Execute(Parent);
@@ -420,9 +449,9 @@ namespace Aegis_DVL.Communication {
                 }
               } catch (Exception e) {
                 if (Parent.Logger != null) {
-                  Parent.Logger.Log(commandType + " failed to " + target + " on attempt #" + attempt, Level.Info);
+                  Parent.Logger.Log(commandType + " failed to " + target + " on attempt #" + attempt + ": " + e, Level.Info);
                 } else {
-                  Console.WriteLine(commandType + " failed to " + target + " on attempt #" + attempt);
+                  Console.WriteLine(commandType + " failed to " + target + " on attempt #" + attempt + ": " + e);
                 }
                 retry = true;
               }

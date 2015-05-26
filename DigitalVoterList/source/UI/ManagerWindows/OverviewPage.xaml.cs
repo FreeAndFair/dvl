@@ -324,7 +324,7 @@ namespace UI.ManagerWindows {
         return;
       }
 
-      var d = new CheckMasterPasswordDialog(this._ui);
+      var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to start the election.");
       d.ShowDialog();
 
       if (d.DialogResult.HasValue &&
