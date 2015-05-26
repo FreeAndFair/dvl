@@ -1,10 +1,10 @@
 ﻿<Window x:Class="UI.StationWindows.GiveBallotDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       Title="Ballot Information" Height="300" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+       Title="Ballot Information" Height="300" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Label Name="VoterName" Content="Voter Name" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock x:Name="Precinct" HorizontalAlignment="Center" Margin="20,50,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" TextAlignment="Center" Text="has now been checked in to vote in precinct \\r\\nPSUB\\r\\nPlease give the voter the following ballot style:"/>
+        <TextBlock x:Name="Precinct" HorizontalAlignment="Center" Margin="20,50,20,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" TextAlignment="Center" Text="has now been checked in to vote in precinct \r\nPSUB\r\nPlease give the voter the following ballot style:"/>
         <TextBlock x:Name="BallotStyle" HorizontalAlignment="Center" Margin="0,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Text="BALLOTSTYLE"/>
         <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Click="ContinueClick" FontSize="16" IsDefault="True" Margin="0,200,0,0"/>
 

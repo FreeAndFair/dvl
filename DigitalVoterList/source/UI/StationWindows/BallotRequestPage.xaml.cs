@@ -77,6 +77,7 @@ namespace UI.StationWindows {
       this.LastName.Focus();
       Blocked = false;
       Waiting = false;
+      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", _ui._station.Address.Address.ToString());
     }
 
     #endregion

@@ -36,7 +36,7 @@
         <Label Content="" Height="34" HorizontalAlignment="Right" Margin="0,77,50,0" Name="PasswordLabel" VerticalAlignment="Top" Width="550" FontFamily="Verdana" FontSize="16"/>
         <Label Content="" HorizontalAlignment="Left" Margin="828,118,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="140" FontSize="16"/>
         <ProgressBar Height="10" HorizontalAlignment="Left" Margin="828,157,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="140" />
-        <Label x:Name="IPLabel" Content="This is manager 255.255.255.0" HorizontalAlignment="Center" Margin="558,24,192,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="IPLabel" Content="This is Manager 255.255.255.255" HorizontalAlignment="Center" Margin="424,24,56,0" VerticalAlignment="Top" FontSize="20" Width="544" HorizontalContentAlignment="Center"/>
         <Label Content="Election Statistics" HorizontalAlignment="Left" Margin="40,170,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Name="Known" Content="Known Voters: 0" HorizontalAlignment="Left" Margin="40,220,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Name="Eligible" Content="Registered To Vote Here: 0" HorizontalAlignment="Left" Margin="40,250,0,0" VerticalAlignment="Top" FontSize="16"/>

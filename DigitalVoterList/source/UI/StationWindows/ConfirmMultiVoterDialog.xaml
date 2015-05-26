@@ -1,7 +1,7 @@
 ﻿<Window x:Class="UI.StationWindows.ConfirmMultiVoterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Select a Voter" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="Select a Voter" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Name="Count" Content="99999 Matching Voters - Select a Voter to Check In" HorizontalAlignment="Center" Margin="289,18,289,0" VerticalAlignment="Top" FontSize="18"/>
         <DataGrid x:Name="VoterGrid" SelectionMode="Single" FontSize="14" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="420" Width="740" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
