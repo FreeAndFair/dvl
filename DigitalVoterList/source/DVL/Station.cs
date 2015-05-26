@@ -441,6 +441,7 @@ namespace Aegis_DVL {
       if (this.Logger != null) 
         this.Logger.Log("Changed voter number " + voterNumber + 
           " status to " + voterStatus + ".", Level.Info);
+      UI.RefreshStatistics();
     }
 
     /// <summary>

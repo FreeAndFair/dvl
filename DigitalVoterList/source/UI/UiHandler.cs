@@ -709,6 +709,14 @@ namespace UI {
       }
     }
 
+    public void RefreshStatistics() {
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { ManagerOverviewPage.RefreshStatistics(); }));
+      }
+    }
+
     #endregion
   }
 }

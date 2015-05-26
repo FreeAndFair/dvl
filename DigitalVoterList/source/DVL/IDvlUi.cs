@@ -121,6 +121,8 @@ namespace Aegis_DVL {
     /// </summary>
     void SyncComplete();
 
+    void RefreshStatistics();
+
     #endregion
   }
 }

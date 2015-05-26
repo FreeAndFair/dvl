@@ -85,7 +85,7 @@ namespace Aegis_DVL.Commands {
       receiver.BallotReceived(this._voternumber, this._newstatus);
 
       // Send to all but requester
-      receiver.Peers.Keys.Where(peer => !peer.Equals(this.Sender))
+      receiver.Peers.Keys
               .ForEach(
                 peer =>
                 receiver.Communicator.Send(
@@ -94,14 +94,6 @@ namespace Aegis_DVL.Commands {
       if (this.Sender.Equals(receiver.Manager)) {
         receiver.UI.BallotRequestReply(_voternumber, true, _oldstatus, _newstatus);
         return;
-      }
-
-      // Send to requester last.
-      try {
-        receiver.Communicator.Send(
-          new StatusChangedCommand(receiver.Address, this.Sender, this._voternumber, this._oldstatus, this._newstatus), this.Sender);
-      } catch (SocketException) {
-        receiver.AnnounceRevokeBallot(receiver.Database.GetVoterByVoterNumber(_voternumber), _oldstatus);
       }
     }
 

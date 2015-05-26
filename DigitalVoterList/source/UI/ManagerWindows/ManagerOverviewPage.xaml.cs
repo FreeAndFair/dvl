@@ -60,6 +60,8 @@ namespace UI.ManagerWindows {
     /// </summary>
     private Thread _activeUpdateThread;
 
+    private HashSet<int> _ballotStatuses = new HashSet<int>();
+
     #endregion
 
     #region Constructors and Destructors
@@ -91,8 +93,8 @@ namespace UI.ManagerWindows {
       // Change the width of the window
       var wnd = Window.GetWindow(this._parent);
       if (wnd != null) wnd.Width = 1000;
-
       this.PopulateList();
+      RefreshStatistics();
     }
 
     #endregion
@@ -200,6 +202,23 @@ namespace UI.ManagerWindows {
         this._parent.Navigate(new BallotRequestPage(this._ui, this._parent));
       }));
     }
+
+    public void RefreshStatistics() {
+      IEnumerable<Voter> voters = _ui._station.Database.AllVoters;
+
+      Known.Content = "Known Voters: " + voters.Count();
+      Eligible.Content = "Registered to Vote Here: " + voters.Where(voter => _ui._station.PollingPlace.PrecinctIds.Contains(voter.PrecinctSub)).Count();
+      CheckedIn.Content = "Checked In: " + voters.Where(voter => voter.PollbookStatus != (int)VoterStatus.NotSeenToday).Count();
+      Active.Content = "Active: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.ActiveVoter).Count();
+      Suspended.Content = "Suspended: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.SuspendedVoter).Count();
+      OutOfCounty.Content = "Out of County: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.OutOfCounty).Count();
+      WrongLocation.Content = "Wrong Location: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.WrongLocation).Count();
+      EarlyVoted.Content = "Already Voted Early: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.EarlyVotedInPerson).Count();
+      AbsenteeVoted.Content = "Already Voted Absentee: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.VotedByMail).Count();
+      MailBallot.Content = "Mail Ballot Not Returned: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.MailBallotNotReturned).Count();
+      Ineligible.Content = "Otherwise Ineligible: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.Ineligible).Count();
+    }
+
     #endregion
 
     #region Methods
