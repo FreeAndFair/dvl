@@ -75,7 +75,7 @@ namespace UI.StationWindows {
       this.InitializeComponent();
       this.checkValidityButton.IsEnabled = false;
       this.WaitingLabel.Content = string.Empty;
-      this.LastName.Focus();
+      this.StateId.Focus();
       Blocked = false;
       Waiting = false;
       IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", _ui._station.Address.Address.ToString());
@@ -385,5 +385,9 @@ namespace UI.StationWindows {
 
 
     #endregion
+
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+
+    }
   }
 }

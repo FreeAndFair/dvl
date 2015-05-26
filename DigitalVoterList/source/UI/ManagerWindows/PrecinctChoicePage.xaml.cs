@@ -59,6 +59,7 @@
       foreach (string s in allPrecincts) {
         _ui._station.PollingPlace.PrecinctIds.Add(s);
       }
+      this._parent.Navigate(new OverviewPage(this._parent, this._ui));
     }
 
     private void BackClick(object sender, RoutedEventArgs e) {
