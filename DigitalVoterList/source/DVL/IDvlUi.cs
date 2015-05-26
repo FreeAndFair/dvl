@@ -122,6 +122,7 @@ namespace Aegis_DVL {
     void SyncComplete();
 
     void RefreshStatistics();
+    void RefreshPeers();
 
     #endregion
   }

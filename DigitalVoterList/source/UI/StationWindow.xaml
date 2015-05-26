@@ -12,6 +12,7 @@
                 <MenuItem Header="Exit" Click="ExitClick" Name="ExitMenuItem"/>
             </MenuItem>
             <MenuItem Header="_Help">
+                <MenuItem Header="FAQ" Click="FAQClick"/>
                 <MenuItem Header="Poll Worker Manual" Click="PollWorkerManualClick"/>
                 <MenuItem Header="Setup Manual" Click="SetupManualClick"/>
                 <MenuItem Header="Training Video" Click="VideoClick"/>

@@ -17,7 +17,7 @@ namespace UI {
   using System.Net;
   using System.Net.Sockets;
   using System.Text;
-  using System.Windows;
+  using System.Windows.Forms;
 
   using Aegis_DVL;
   using Aegis_DVL.Commands;
@@ -213,7 +213,7 @@ namespace UI {
     /// </param>
     public void ExportData(string filePath) {
       if (this._station != null) this.ExportData(this._station.Database.AllVoters, filePath);
-      else MessageBox.Show("You can not export data at this time.", "Operation Not Allowed", MessageBoxButton.OK);
+      else FlexibleMessageBox.Show("You can not export data at this time.", "Operation Not Allowed", MessageBoxButtons.OK);
     }
 
     /// <summary>
@@ -444,7 +444,7 @@ namespace UI {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate {
-            MessageBox.Show("Unable to contact the manager. This station will now become the manager.");
+            FlexibleMessageBox.Show("Unable to contact the manager. This station will now become the manager.");
             this.BallotRequestPage.BecomeManager(); 
           }));
       }
@@ -602,11 +602,11 @@ namespace UI {
     /// The shutdown.
     /// </summary>
     public void Shutdown() {
-      MessageBox.Show(
+      FlexibleMessageBox.Show(
         "Something has gone wrong with the system, shutting down", 
         "Shutting Down", 
-        MessageBoxButton.OK, 
-        MessageBoxImage.Error);
+        MessageBoxButtons.OK, 
+        MessageBoxIcon.Error);
       Environment.Exit(0);
     }
 
@@ -641,11 +641,11 @@ namespace UI {
     /// The station removed.
     /// </summary>
     public void StationRemoved() {
-      MessageBox.Show(
+      FlexibleMessageBox.Show(
         "This station has been shut down by the manager", 
         "Station Shut Down", 
-        MessageBoxButton.OK, 
-        MessageBoxImage.Warning);
+        MessageBoxButtons.OK, 
+        MessageBoxIcon.Warning);
       if (this.WaitingForManagerPage != null) {
         this.WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
@@ -714,6 +714,19 @@ namespace UI {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
           new Action(delegate { ManagerOverviewPage.RefreshStatistics(); }));
+      }
+    }
+
+    public void RefreshPeers() {
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { ManagerOverviewPage.ManagerstationGrid.Items.Refresh(); }));
+      }
+      if (OverviewPage != null) {
+        OverviewPage.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(delegate { OverviewPage.stationGrid.Items.Refresh(); }));
       }
     }
 

@@ -25,6 +25,7 @@ namespace UI {
   using System.Net;
   using System.Net.Sockets;
   using System.Windows;
+  using System.Windows.Forms;
 
   using Microsoft.Win32;
 
@@ -96,8 +97,8 @@ namespace UI {
                    d.DialogResult == true) {
           Environment.Exit(0);
         } else {
-          MessageBox.Show(
-            "Master password entered incorrctly, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
+          FlexibleMessageBox.Show(
+            "Master password entered incorrctly, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
           return false;
         }
       } else {
@@ -124,13 +125,13 @@ namespace UI {
           d.DialogResult == true) {
         if (d.IsCancel) return;
 
-        var saveDialog = new SaveFileDialog { Title = "Generate Reports" };
+        var saveDialog = new Microsoft.Win32.SaveFileDialog { Title = "Generate Reports" };
         saveDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
         saveDialog.ShowDialog();
         if (!saveDialog.FileName.Equals(string.Empty)) this._ui.ExportData(saveDialog.FileName);
       } else
-        MessageBox.Show(
-          "Master password entered incorrectly, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
+        FlexibleMessageBox.Show(
+          "Master password entered incorrectly, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
     }
 
     /// <summary>
@@ -144,17 +145,22 @@ namespace UI {
     /// </param>
     private void PollWorkerManualClick(object sender, RoutedEventArgs e) { 
       // System.Diagnostics.Process.Start(@"Manual.pdf"); 
-      MessageBox.Show("The poll worker manual is not included in this demo, but will automatically open in a new window in the final product.");
+      FlexibleMessageBox.Show("The poll worker manual is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
 
     private void SetupManualClick(object sender, RoutedEventArgs e)
     {
       // System.Diagnostics.Process.Start(@"Manual.pdf"); 
-      MessageBox.Show("The setup manual is not included in this demo, but will automatically open in a new window in the final product.");
+      FlexibleMessageBox.Show("The setup manual is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
 
     private void VideoClick(object sender, RoutedEventArgs e) {
-      MessageBox.Show("Training videos are not available in this demo, but will be listed in and playable from in this window in the final product.");
+      FlexibleMessageBox.Show("Training videos are not available in this demo,\nbut will be listed in and playable from this window in the final product.");
+    }
+
+    private void FAQClick(object sender, RoutedEventArgs e) {
+      // System.Diagnostics.Process.Start(@"Manual.pdf"); 
+      FlexibleMessageBox.Show("The FAQ is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
     #endregion
 

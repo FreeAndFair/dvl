@@ -22,6 +22,7 @@ namespace UI.StationWindows {
   using System;
   using System.Collections.Generic;
   using System.Windows;
+  using System.Windows.Forms;
   using System.Windows.Controls;
   using System.Windows.Input;
 
@@ -92,16 +93,16 @@ namespace UI.StationWindows {
     /// </param>
     public void BallotResponse(Voter voter, bool success, VoterStatus oldStatus, VoterStatus newStatus) {
       if (!success && newStatus != VoterStatus.NotSeenToday) {
-        MessageBox.Show(
-          GetFormattedName(voter) + " has already checked in at this location today.",
+        FlexibleMessageBox.Show(
+          GetFormattedName(voter) + "\nhas already checked in at this location today.",
           "Already Checked In",
-          MessageBoxButton.OK,
-          MessageBoxImage.Stop);
+          MessageBoxButtons.OK,
+          MessageBoxIcon.Stop);
       }
 
       switch (newStatus) {
         case VoterStatus.Ineligible:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
             " is not eligible to vote until " + voter.EligibleDate.Date.ToString("MM/dd/yyyy"));
           break;
         case VoterStatus.WrongLocation:
@@ -112,36 +113,36 @@ namespace UI.StationWindows {
             if (result.HasValue && result == true) {
               string here = _ui._station.PollingPlace.Address + ", " + _ui._station.PollingPlace.CityStateZIP;
               string there = p.Address + ", " + p.CityStateZIP;
-              MessageBox.Show("Directions from " + here + " to " + there + " are not available in this demo, " +
+              FlexibleMessageBox.Show("Directions from " + here + " to " + there + " are not available in this demo, " +
                 "but will be available in the final product.");
             }
           } else {
-            MessageBox.Show("The precinct where " + GetFormattedName(voter) + " is registered is" +
+            FlexibleMessageBox.Show("The precinct where " + GetFormattedName(voter) + " is registered is" +
               " not participating in this election.");
           }
           break;
         case VoterStatus.VotedByMail:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
             " has already submitted a vote by mail and should not receive a ballot.");
           break;
         case VoterStatus.SuspendedVoter:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
-            " is a suspense voter and requires special processing before receiving a ballot.");
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
+            " is a suspense voter and must sign a statement of residence before receiving a ballot.");
           break;
         case VoterStatus.OutOfCounty:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
             " is an out-of-county voter.");
           break;
         case VoterStatus.EarlyVotedInPerson:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
             " has already voted at an early voting location.");
           break;
         case VoterStatus.AbsenteeVotedInPerson:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
             " registered as an absentee voter but did not receive their ballot.");
           break;
         case VoterStatus.MailBallotNotReturned:
-          MessageBox.Show("According to our records, " + GetFormattedName(voter) +
+          FlexibleMessageBox.Show("According to our records, " + GetFormattedName(voter) +
             " was sent an absentee ballot and has not yet returned it. Please obtain " +
             " the appropriate affidavit before providing a ballot.");
           break;
@@ -186,7 +187,7 @@ namespace UI.StationWindows {
     /// </summary>
     public void EndElection() {
       this._ui.BallotRequestPage = null;
-      MessageBox.Show("The election has ended. This station is shutting down.");
+      FlexibleMessageBox.Show("The election has ended. This station is shutting down.");
       Environment.Exit(0);
     }
 
@@ -262,7 +263,7 @@ namespace UI.StationWindows {
       Voter choice = null;
 
       if (results == null || results.Count == 0) {
-        MessageBox.Show("No voters match your search. Please try again or have the voter register for a provisional ballot.");
+        FlexibleMessageBox.Show("No voters match your search. Please try again or have the voter register for a provisional ballot.");
       } else if (results.Count == 1) {
         var dialog = new ConfirmSingleVoterDialog(results[0]);
         var result = dialog.ShowDialog();

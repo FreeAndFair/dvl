@@ -114,6 +114,7 @@
       <Private>True</Private>
       <HintPath>..\DVL\packages\System.Data.SQLite.Linq.1.0.96.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
@@ -131,6 +132,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FlexibleMessageBox.cs" />
     <Compile Include="Data\VoterListing.cs" />
     <Compile Include="ManagerWindows\CheckMasterPasswordDialog.xaml.cs">
       <DependentUpon>CheckMasterPasswordDialog.xaml</DependentUpon>

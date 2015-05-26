@@ -25,6 +25,7 @@ namespace UI.ManagerWindows {
   using System.Net;
   using System.Threading;
   using System.Windows;
+  using System.Windows.Forms;
   using System.Windows.Controls;
 
   using Aegis_DVL.Data_Types;
@@ -70,7 +71,7 @@ namespace UI.ManagerWindows {
       this._parent = parent;
       this._ui = ui;
       this._ui.OverviewPage = this;
-      this.LoadingBar.Visibility = Visibility.Hidden;
+      this.LoadingBar.Visibility = System.Windows.Visibility.Hidden;
       this.LoadingBar.Value = 100;
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
@@ -146,7 +147,7 @@ namespace UI.ManagerWindows {
         new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
+        new Action(delegate { this.LoadingBar.Visibility = System.Windows.Visibility.Visible; }));
       _ui.DiscoverPeers();
 
       ovp.Dispatcher.Invoke(
@@ -156,7 +157,7 @@ namespace UI.ManagerWindows {
         System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.UpdateLabel.Content = string.Empty; }));
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.LoadingBar.Visibility = Visibility.Hidden; }));
+        new Action(delegate { this.LoadingBar.Visibility = System.Windows.Visibility.Hidden; }));
       ovp.Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action(delegate { this.RefreshButton.IsEnabled = true; UpdateControls(); }));
@@ -249,11 +250,11 @@ namespace UI.ManagerWindows {
     /// </param>
     private void StartEndElectionButtonClick(object sender, RoutedEventArgs e) {
       if (!this._ui.EnoughStations()) {
-        MessageBox.Show(
+        FlexibleMessageBox.Show(
           "You are not connected to enough stations to start the election.", 
           "Not Enough Stations", 
-          MessageBoxButton.OK, 
-          MessageBoxImage.Information);
+          MessageBoxButtons.OK, 
+          MessageBoxIcon.Information);
         return;
       }
 
@@ -270,8 +271,8 @@ namespace UI.ManagerWindows {
         this._ui.ManagerAnnounceStartElection();
         this._parent.Navigate(new ManagerOverviewPage(this._parent, this._ui));
       } else
-        MessageBox.Show(
-          "Incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
+        FlexibleMessageBox.Show(
+          "Incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
     }
 
     /// <summary>

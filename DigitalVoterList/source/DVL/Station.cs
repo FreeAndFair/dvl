@@ -465,6 +465,8 @@ namespace Aegis_DVL {
           RemovePeer(peer);
         }
       }
+
+      UI.RefreshPeers();
     }
 
     /// <summary>

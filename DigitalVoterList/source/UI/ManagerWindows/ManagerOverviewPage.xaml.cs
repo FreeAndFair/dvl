@@ -25,6 +25,7 @@ namespace UI.ManagerWindows {
   using System.Net;
   using System.Threading;
   using System.Windows;
+  using System.Windows.Forms;
   using System.Windows.Controls;
   using System.Windows.Input;
 
@@ -82,7 +83,7 @@ namespace UI.ManagerWindows {
       this._ui = ui;
       this._ui.ManagerOverviewPage = this;
 
-      this.LoadingBar.Visibility = Visibility.Hidden;
+      this.LoadingBar.Visibility = System.Windows.Visibility.Hidden;
       this.LoadingBar.Value = 100;
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
@@ -156,7 +157,7 @@ namespace UI.ManagerWindows {
         new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.LoadingBar.Visibility = Visibility.Visible; }));
+        new Action(delegate { this.LoadingBar.Visibility = System.Windows.Visibility.Visible; }));
 
       _ui.DiscoverPeers();
       Dispatcher.Invoke(
@@ -166,7 +167,7 @@ namespace UI.ManagerWindows {
         System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.UpdateLabel.Content = string.Empty; }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.LoadingBar.Visibility = Visibility.Hidden; }));
+        new Action(delegate { this.LoadingBar.Visibility = System.Windows.Visibility.Hidden; }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
         new Action(delegate { this.RefreshButton.IsEnabled = true; }));
@@ -276,8 +277,8 @@ namespace UI.ManagerWindows {
           this._parent.Navigate(new EndedElectionPage(this._parent, this._ui));
         }
       } else
-          MessageBox.Show(
-            "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButton.OK);
+          FlexibleMessageBox.Show(
+            "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
     }
 
     /// <summary>
@@ -302,14 +303,14 @@ namespace UI.ManagerWindows {
         } else {
           if (d.IsCancel) return;
 
-          MessageBox.Show("Could not connect to the specified station", "No Connection", MessageBoxButton.OK);
+          FlexibleMessageBox.Show("Could not connect to the specified station", "No Connection", MessageBoxButtons.OK);
         }
       } else {
-        MessageBox.Show(
+        FlexibleMessageBox.Show(
           "You have entered an incorrect master password, please try again.", 
           "Incorrect Master Password", 
-          MessageBoxButton.OK, 
-          MessageBoxImage.Stop);
+          MessageBoxButtons.OK, 
+          MessageBoxIcon.Stop);
       }
     }
 

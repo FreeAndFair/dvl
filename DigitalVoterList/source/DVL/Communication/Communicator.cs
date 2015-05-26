@@ -402,7 +402,8 @@ namespace Aegis_DVL.Communication {
           if (this.Parent.Logger != null && !(command is IsAliveCommand)) {
             this.Parent.Logger.Log("Attempt #" + attempt + " to send " + commandType + " to " + target, Level.Info);
           }
-          if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand || command is CryptoCommand)) {
+          if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand ||
+                command is CryptoCommand || command is DisconnectStationCommand)) {
             if (Parent.Peers.ContainsKey(target)) {
               command = new CryptoCommand(this.Parent, target, command);
             } else {
