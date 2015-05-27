@@ -1,7 +1,7 @@
 ﻿<Window x:Name="ConfirmSingleVoter" x:Class="UI.StationWindows.ConfirmSingleVoterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Confirm Voter" Height="400" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontSize="16">
+        Title="Check In Voter" Height="400" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontSize="16">
     <Grid>
         <Label Content="Attempt to Check In This Voter?" HorizontalAlignment="Center" Margin="28,10,28,0" VerticalAlignment="Top" FontSize="24" Grid.ColumnSpan="2"/>
         <Label x:Name="NameBox" Content="Name" HorizontalAlignment="Left" Margin="62,70,0,0" VerticalAlignment="Top" FontSize="20" Grid.ColumnSpan="2"/>

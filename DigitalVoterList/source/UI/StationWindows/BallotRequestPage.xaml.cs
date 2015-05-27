@@ -264,10 +264,12 @@ namespace UI.StationWindows {
       } else if (results.Count == 1) {
         vs = GetNewVoterStatus(results[0]);
         Window dialog;
-        if (vs == VoterStatus.ActiveVoter || vs == VoterStatus.WrongLocation) {
-          dialog = new ConfirmSingleVoterDialog(results[0]);
-        } else {
+        if (((int) vs != results[0].PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) || 
+                                                      (vs == VoterStatus.MailBallotNotReturned) ||  
+                                                      (vs == VoterStatus.OutOfCounty))) {
           dialog = new ConfirmSingleVoterWithConditionsDialog(results[0], vs);
+        } else {
+          dialog = new ConfirmSingleVoterDialog(results[0]);
         }
         var result = dialog.ShowDialog();
 
@@ -279,16 +281,20 @@ namespace UI.StationWindows {
         var result = dialog.ShowDialog();
 
         if (result.HasValue && result == true) {
+          choice = dialog.SelectedVoter;
+          vs = GetNewVoterStatus(choice);
           Window dialog2;
-          if ((vs == VoterStatus.SuspendedVoter) || (vs == VoterStatus.MailBallotNotReturned) || (vs == VoterStatus.OutOfCounty)) {
-            dialog2 = new ConfirmSingleVoterWithConditionsDialog(results[0], vs);
+          if (((int) vs != choice.PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) || 
+                                                      (vs == VoterStatus.MailBallotNotReturned) ||  
+                                                      (vs == VoterStatus.OutOfCounty))) {
+            dialog2 = new ConfirmSingleVoterWithConditionsDialog(choice, vs);
           } else {
-            dialog2 = new ConfirmSingleVoterDialog(results[0]);
+            dialog2 = new ConfirmSingleVoterDialog(choice);
           }
           var result2 = dialog2.ShowDialog();
-          if (result2.HasValue && result2 == true) {
-            choice = dialog.SelectedVoter;
-            vs = GetNewVoterStatus(choice);
+          if (!(result2.HasValue && result2 == true)) {
+            choice = null;
+            vs = VoterStatus.Unavailable;
           }
         }
       }

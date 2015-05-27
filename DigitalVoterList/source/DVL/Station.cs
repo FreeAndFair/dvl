@@ -514,7 +514,7 @@ namespace Aegis_DVL {
     /// </param>
     public void ExchangePublicKeys(IPEndPoint target) {
       Contract.Requires(target != null);
-      this.Communicator.Send(new PublicKeyExchangeCommand(this), target);
+      this.Communicator.Send(new PublicKeyExchangeCommand(this, target), target);
       if (this.Logger != null) 
         this.Logger.Log("Exchanging public keys with " + target, Level.Info);
     }

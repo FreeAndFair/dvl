@@ -30,16 +30,16 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <WrapPanel Orientation="Horizontal" Margin="262,663,262,55" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="16" Focusable="False" />
-            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" FontSize="16" Focusable="False" />
-            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="16" Focusable="False" />
-            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="16" Focusable="False" />
-            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" FontSize="16" Focusable="False" />
+        <WrapPanel Orientation="Horizontal" Margin="0,663,0,55" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="130" FontSize="18" Focusable="False" />
         </WrapPanel>
-        <Label Content="" Height="60" HorizontalAlignment="Center" Margin="0,82,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="412" FontFamily="Verdana" FontSize="16"/>
+        <Label Content="" Height="60" HorizontalAlignment="Center" Margin="20,82,20,0" Name="PasswordLabel" VerticalAlignment="Top" FontFamily="Verdana" FontSize="20"/>
         <Label Content="" HorizontalAlignment="Left" Margin="643,143,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="140" FontSize="16" />
         <ProgressBar Height="10" HorizontalAlignment="Left" Margin="643,182,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="140" />
-        <Label Name="IPLabel" Content="This is Manager 255.255.255.255" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="IPLabel" Content="This is Manager 255.255.255.255" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="24"/>
     </Grid>
 </Page>

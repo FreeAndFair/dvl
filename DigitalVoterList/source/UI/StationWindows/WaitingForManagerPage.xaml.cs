@@ -64,7 +64,7 @@ namespace UI.StationWindows {
       this.InitializeComponent();
       Window.GetWindow(this._parent);
       this.IPLabel.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
-        new Action(delegate { this.IPLabel.Content = "This is station " + _ui.IPAddressString; }));
+        new Action(delegate { this.IPLabel.Content = "This is Station " + _ui.IPAddressString; }));
       this._ui.WaitingForManagerPage = this;
     }
 

@@ -8,7 +8,7 @@
     <Grid>
         <Label Content="Waiting for the Manager" HorizontalAlignment="Center" Name="CenterLabel" VerticalAlignment="Center" FontSize="24" Height="50" Margin="0,434,0,302" />
         <Button Content="Back" HorizontalAlignment="Center" Margin="0,620,0,0" Name="BackButton" VerticalAlignment="Top" Width="90" Click="BackButtonClick" FontSize="20"/>
-        <Label Content="" HorizontalAlignment="Center" Margin="0,300,0,0" Name="PasswordLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20"/>
+        <Label Content="" HorizontalAlignment="Center" Margin="0,300,0,0" Name="PasswordLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="24"/>
         <Label Content="This is Station 255.255.255.255" HorizontalAlignment="Center" Margin="0,186,0,0" Name="IPLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="28"/>
     </Grid>
 </Page>

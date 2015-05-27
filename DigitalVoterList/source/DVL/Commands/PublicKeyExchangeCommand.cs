@@ -51,13 +51,13 @@ namespace Aegis_DVL.Commands {
     /// <param name="isReply">
     /// Whether it's a reply from the target. Shouldn't be set manually. Set to false as default.
     /// </param>
-    public PublicKeyExchangeCommand(Station parent, bool isReply = false) {
+    public PublicKeyExchangeCommand(Station parent, IPEndPoint destination, bool isReply = false) {
       Contract.Requires(parent != null);
       this._isReply = isReply;
       this.Sender = parent.Address;
       var pswd = Crypto.GeneratePassword();
-      if (isReply) parent.UI.ShowPasswordOnStation(pswd, Sender.Address.ToString());
-      else parent.UI.ShowPasswordOnManager(pswd, Sender.Address.ToString());
+      if (isReply) parent.UI.ShowPasswordOnStation(pswd, destination.Address.ToString());
+      else parent.UI.ShowPasswordOnManager(pswd, destination.Address.ToString());
       this._wrapper = new PublicKeyWrapper(parent.Crypto, pswd);
     }
 
@@ -103,7 +103,7 @@ namespace Aegis_DVL.Commands {
       receiver.Manager = this.Sender;
 
       // Respond with own public key
-      var reply = new PublicKeyExchangeCommand(receiver, true);
+      var reply = new PublicKeyExchangeCommand(receiver, Sender, true);
       receiver.Communicator.Send(reply, this.Sender);
     }
 

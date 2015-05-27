@@ -309,7 +309,8 @@ namespace Aegis_DVL.Communication {
             }
             if (cmd is PublicKeyExchangeCommand ||
                 cmd is CryptoCommand ||
-                cmd is IsAliveCommand) {
+                cmd is IsAliveCommand ||
+                cmd is DisconnectStationCommand) {
                   if (this.Parent.Logger != null && !(cmd is IsAliveCommand)) {
                     this.Parent.Logger.Log("Received " + cmdType + " from " + cmd.Sender, Level.Info);
                   } else {

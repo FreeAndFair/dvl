@@ -237,7 +237,7 @@ namespace Tests
         var receiver = new Station(
           ui, SystemTestData.StationPort, 
           "CommandsTestPublicKeyExchangeCommandTestReceiverVoters.sqlite")) {
-        var cmd = new PublicKeyExchangeCommand(manager);
+        var cmd = new PublicKeyExchangeCommand(manager, receiver.Address);
         Assert.That(cmd.Sender.Equals(manager.Address));
         Assert.That(!receiver.Peers.ContainsKey(manager.Address));
         Assert.Null(receiver.Manager);
