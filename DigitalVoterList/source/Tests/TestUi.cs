@@ -124,7 +124,7 @@ namespace Tests {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnManager(string password) { this.PasswordFromManager = password; }
+    public void ShowPasswordOnManager(string password, string name) { this.PasswordFromManager = password; }
 
     /// <summary>
     /// The show password on station.
@@ -132,7 +132,7 @@ namespace Tests {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnStation(string password) { this.PasswordFromStation = password; }
+    public void ShowPasswordOnStation(string password, string name) { this.PasswordFromStation = password; }
 
     /// <summary>
     ///   The shutdown.

@@ -10,8 +10,8 @@
         <Label x:Name="DateOfBirth" Content="Date of Birth: " HorizontalAlignment="Left" Margin="62,160,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="DriversLicense" Content="Drivers License: " HorizontalAlignment="Left" Margin="62,220,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="VUID" Content="VUID: " HorizontalAlignment="Left" Margin="62,190,0,0" VerticalAlignment="Top" FontSize="20" Width="226"/>
-        <Button x:Name="OKButton"  Content="Yes" HorizontalAlignment="Right" Margin="0,500,143,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="20" IsDefault="True"/>
-        <Button Content="No" HorizontalAlignment="Left" Margin="145,500,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="20"/>
+        <Button x:Name="OKButton"  Content="Yes" HorizontalAlignment="Right" Margin="0,500,143,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="20" IsDefault="True" Focusable="False"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="145,500,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="20" Focusable="False"/>
         <TextBlock x:Name="VoterConditions" HorizontalAlignment="Center" Margin="60,260,60,160" TextWrapping="Wrap" Text="VoterConditions" VerticalAlignment="Center" FontSize="20"/>
         <CheckBox x:Name="Affidavits" Click="AffidavitsClick" Content="The voter has signed the required affidavits." HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" FontSize="20" VerticalContentAlignment="Center"/>
     </Grid>

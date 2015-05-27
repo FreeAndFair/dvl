@@ -9,10 +9,10 @@
 
     <Grid Height="768" Width="1024">
         <Rectangle Height="400" HorizontalAlignment="Center" Margin="0,0,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Center" Width="400" />
-        <Label Content="Welcome to the Galois Electronic Pollbook System" HorizontalAlignment="Center" Margin="0,80,0,0" Name="WelcomeLabel" FontSize="20"></Label>
-        <Label Content="Choose a Machine Type" HorizontalAlignment="Center" Margin="0,120,0,0" Name="TitleLabel" FontSize="20"></Label>
-        <Button Content="Check-In Station" Height="80" Width="260" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,280,0,0" Name="StationButton" Click="StationButtonClick" FontSize="18" />
-        <Button Content="Manager" Height="80" Width="260" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,280" Name="ManagerButton" Click="ManagerButtonClick" FontSize="18"/>
-        <Button Content="Exit System" Height="50" Width="220" HorizontalAlignment="Center" Margin="0,0,0,100" Name="ExitButton" VerticalAlignment="Bottom" Click="ExitButtonClick" FontSize="18" />
+        <Label Content="Welcome to the Galois Electronic Pollbook System" HorizontalAlignment="Center" Margin="0,50,0,0" Name="WelcomeLabel" FontSize="36"></Label>
+        <Label Content="Choose a Machine Type" HorizontalAlignment="Center" Margin="0,110,0,0" Name="TitleLabel" FontSize="24"></Label>
+        <Button Content="Check-In Station" Height="80" Width="260" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,280,0,0" Name="StationButton" Click="StationButtonClick" FontSize="24" Focusable="False" />
+        <Button Content="Manager" Height="80" Width="260" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,280" Name="ManagerButton" Click="ManagerButtonClick" FontSize="24" Focusable="False"/>
+        <Button Content="Exit System" Height="50" Width="220" HorizontalAlignment="Center" Margin="0,0,0,80" Name="ExitButton" VerticalAlignment="Bottom" Click="ExitButtonClick" FontSize="20" />
     </Grid>
 </Page>

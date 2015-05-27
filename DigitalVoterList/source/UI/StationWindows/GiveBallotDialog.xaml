@@ -7,7 +7,7 @@
         <TextBlock x:Name="Precinct" HorizontalAlignment="Center" Margin="0,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Text="PSUB"/>
 
         <TextBlock x:Name="BallotStyle" HorizontalAlignment="Center" Margin="0,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Text="BALLOTSTYLE"/>
-        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Click="ContinueClick" FontSize="20" IsDefault="True" Margin="0,300,0,0"/>
+        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Click="ContinueClick" FontSize="20" IsDefault="True" Margin="0,300,0,0" Focusable="False"/>
         <Image Width="80" Height="80" Name="Checkmark" HorizontalAlignment="Center" Margin="0,120,0,160" Source="checkmark.png"/>
         <Label Content="has now been checked in to vote in precinct" HorizontalAlignment="Center" Margin="0,50,0,0" FontSize="20" VerticalAlignment="Top"/>
         <Label Content="Please give the voter the following ballot style:" HorizontalAlignment="Center" Margin="0,210,0,0" FontSize="20" VerticalAlignment="Top"/>

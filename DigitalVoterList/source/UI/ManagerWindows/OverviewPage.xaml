@@ -12,7 +12,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="IP Address" Width="*" IsReadOnly="True" >
+                <DataGridTemplateColumn Header="Station Name" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding IpAddress}" TextAlignment="Center"/>
@@ -31,11 +31,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Orientation="Horizontal" Margin="262,663,262,55" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="16" />
-            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" FontSize="16" />
-            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="16" />
-            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="16" />
-            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" FontSize="16" />
+            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="16" Focusable="False" />
+            <Button Margin="10" Content="Back" x:Name="BackButton" Click="BackButtonClick" Width="60" FontSize="16" Focusable="False" />
+            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="16" Focusable="False" />
+            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="16" Focusable="False" />
+            <Button Margin="10" Content="Start Election" x:Name="StartEndElectionButton" Click="StartEndElectionButtonClick" Width="120" FontSize="16" Focusable="False" />
         </WrapPanel>
         <Label Content="" Height="60" HorizontalAlignment="Center" Margin="0,82,0,0" Name="PasswordLabel" VerticalAlignment="Top" Width="412" FontFamily="Verdana" FontSize="16"/>
         <Label Content="" HorizontalAlignment="Left" Margin="643,143,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="140" FontSize="16" />

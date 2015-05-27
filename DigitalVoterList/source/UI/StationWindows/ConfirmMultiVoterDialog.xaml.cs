@@ -30,6 +30,7 @@ namespace UI.StationWindows {
       _voterlistings = new List<VoterListing>();
       Count.Content = Count.Content.ToString().Replace("99999", _voters.Count.ToString());
       PopulateList();
+      OKButton.IsEnabled = false;
     }
 
     private void PopulateList() {
@@ -79,6 +80,10 @@ namespace UI.StationWindows {
     private void CancelClick(object sender, RoutedEventArgs e) {
       DialogResult = false;
       Close();
+    }
+
+    private void GridSelectionChanged(object sender, SelectionChangedEventArgs e) {
+      OKButton.IsEnabled = VoterGrid.SelectedItem != null;
     }
   }
 }

@@ -203,7 +203,92 @@ namespace UI {
     /// <param name="filePath">
     /// the file destination
     /// </param>
-    public void ExportData(IEnumerable<Voter> data, string filePath) { Bytes.From(data).ToFile(filePath); }
+    public void ExportData(IEnumerable<Voter> voters, string filePath) {
+      try {
+        using (StreamWriter file = new StreamWriter(filePath)) {
+          file.WriteLine("Election Report - Generated at " + DateTime.Now);
+          file.WriteLine();
+          file.WriteLine("Summary Information");
+          file.WriteLine("-------------------");
+          file.WriteLine();
+          file.WriteLine("Known Voters: " + voters.Count());
+          file.WriteLine("Registered to Vote Here: " + voters.Where(voter => _station.PollingPlace.PrecinctIds.Contains(voter.PrecinctSub)).Count());
+          file.WriteLine("Checked In: " + voters.Where(voter => voter.PollbookStatus != (int)VoterStatus.NotSeenToday).Count());
+          file.WriteLine();
+          file.WriteLine("Active: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.ActiveVoter).Count());
+          file.WriteLine("Suspended: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.SuspendedVoter).Count());
+          file.WriteLine("Out of County: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.OutOfCounty).Count());
+          file.WriteLine("Wrong Location: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.WrongLocation).Count());
+          file.WriteLine("Already Voted Early: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.EarlyVotedInPerson).Count());
+          file.WriteLine("Already Voted Absentee: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.VotedByMail).Count());
+          file.WriteLine("Mail Ballot Not Returned: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.MailBallotNotReturned).Count());
+          file.WriteLine("Otherwise Ineligible: " + voters.Where(voter => voter.PollbookStatus == (int)VoterStatus.Ineligible).Count());
+          file.WriteLine();
+          file.WriteLine("Voter Information");
+          file.WriteLine("-----------------");
+          file.WriteLine();
+          file.WriteLine("This list contains all the voters that have checked in as of this time, and their statuses.");
+          file.WriteLine("IMPORTANT: in the actual product, this output would be encrypted to protect voter privacy!");
+          file.WriteLine();
+          foreach (Voter v in voters) {
+            if (v.PollbookStatus != (int)VoterStatus.NotSeenToday) {
+              StringBuilder sb = new StringBuilder();
+              string votername;
+              string middlename = " ";
+              if (v.MiddleName != null && v.MiddleName.Trim().Length != 0) {
+                middlename = " " + v.MiddleName + " ";
+              }
+              votername = v.FirstName + middlename + v.LastName;
+              if (v.Suffix != null && v.Suffix.Trim().Length > 0) {
+                votername = votername + ", " + v.Suffix;
+              }
+              sb.Append(votername);
+              sb.Append(", ");
+              if (v.ProtectedAddress) {
+                sb.Append("Address Protected for Privacy, ");
+              } else {
+                sb.Append(v.Municipality + " " + v.ZipCode + ", ");
+              }
+              sb.Append("VUID " + v.StateId + ", ");
+              sb.Append("DOB " + v.DateOfBirth.Date.ToString("MM/dd/yyyy") + ", ");
+              if (v.DriversLicense.Length > 0) {
+                sb.Append("DL " + v.DriversLicense + ", Status: ");
+              } else {
+                sb.Append("DL Not On File, Status: ");
+              }
+              switch ((VoterStatus)v.PollbookStatus) {
+                case VoterStatus.ActiveVoter:
+                  sb.Append("Active"); break;
+                case VoterStatus.SuspendedVoter:
+                  sb.Append("Suspense"); break;
+                case VoterStatus.MailBallotNotReturned:
+                  sb.Append("Didn't Return Mailed Ballot"); break;
+                case VoterStatus.OutOfCounty:
+                  sb.Append("Out of County"); break;
+                case VoterStatus.Provisional:
+                  sb.Append("Provisional"); break;
+                case VoterStatus.VotedByMail:
+                  sb.Append("Voted by Mail"); break;
+                case VoterStatus.EarlyVotedInPerson:
+                  sb.Append("Voted Early In-Person"); break;
+                case VoterStatus.WrongLocation:
+                  sb.Append("Wrong Location"); break;
+                case VoterStatus.AbsenteeVotedInPerson:
+                  sb.Append("Absentee Voted In Person"); break;
+                case VoterStatus.Ineligible:
+                  sb.Append("Ineligible"); break;
+                default:
+                  sb.Append("Unknown"); break;
+              }
+              file.WriteLine(sb.ToString());
+            }
+          }
+          file.WriteLine();
+          file.WriteLine("END OF REPORT");
+        }
+      } catch (Exception) {
+      }
+    }
 
     /// <summary>
     /// When a manager wants to export voter data this is called
@@ -444,7 +529,7 @@ namespace UI {
         this.BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate {
-            FlexibleMessageBox.Show("Unable to contact the manager. This station will now become the manager.");
+            FlexibleMessageBox.Show("This station will now become the manager.");
             this.BallotRequestPage.BecomeManager(); 
           }));
       }
@@ -567,19 +652,19 @@ namespace UI {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnManager(string password) {
+    public void ShowPasswordOnManager(string password, string name) {
       if (this.OverviewPage != null) {
         this.OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.OverviewPage.SetPasswordLabel("Enter this password at the station: " + password); }));
+            delegate { this.OverviewPage.SetPasswordLabel("Enter this password at Station " + name +": " + password); }));
       }
 
       if (this.ManagerOverviewPage != null) {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.ManagerOverviewPage.SetPasswordLabel("Enter this password at the station: " + password); }));
+            delegate { this.ManagerOverviewPage.SetPasswordLabel("Enter this password at Station " + name + ": " + password); }));
       }
     }
 
@@ -589,12 +674,12 @@ namespace UI {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnStation(string password) {
+    public void ShowPasswordOnStation(string password, string name) {
       if (this.WaitingForManagerPage != null) {
         this.WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.WaitingForManagerPage.SetPasswordLabel("Enter this password at the manager: " + password); }));
+            delegate { this.WaitingForManagerPage.SetPasswordLabel("Enter this password at Manager " + name + ": " + password); }));
       }
     }
 

@@ -6,9 +6,9 @@
       mc:Ignorable="d" Title="OverviewPage" Height="768" Width="1024">
 
     <Grid>
-        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="450" HorizontalAlignment="Center" Margin="424,0,54,146" Name="ManagerstationGrid" VerticalAlignment="Bottom" Width="546" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="ManagerstationGridSelectionChanged" Grid.RowSpan="2" FontSize="16">
+        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" Height="450" HorizontalAlignment="Center" Margin="424,0,54,146" Name="ManagerstationGrid" VerticalAlignment="Bottom" Width="546" CanUserDeleteRows="False" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" SelectionChanged="ManagerstationGridSelectionChanged" Grid.RowSpan="2" FontSize="18">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="IP Address" Width="*" IsReadOnly="True" >
+                <DataGridTemplateColumn Header="Station Name" Width="*" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding IpAddress}" TextAlignment="Center"/>
@@ -27,13 +27,13 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Orientation="Horizontal" Margin="420,0,40,80" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="570">
-            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="16" />
-            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="16" />
-            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="16" />
-            <Button Margin="10" Content="Make Manager" x:Name="MakeManagerButton" Click="MakeManagerButtonClick" Width="130" FontSize="16" />
-            <Button Margin="10" Content="End Election" x:Name="EndElectionButton" Click="EndElectionButtonClick" Width="110" FontSize="16" />
+            <Button Margin="10" Content="Update" x:Name="RefreshButton" Click="RefreshButtonClick" BorderThickness="1" Width="80" Height="30" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Add" x:Name="AddButton" Click="AddButtonClick" Width="60" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Remove" x:Name="RemoveButton" Click="RemoveButtonClick" Width="80" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="Make Manager" x:Name="MakeManagerButton" Click="MakeManagerButtonClick" Width="130" FontSize="18" Focusable="False" />
+            <Button Margin="10" Content="End Election" x:Name="EndElectionButton" Click="EndElectionButtonClick" Width="110" FontSize="18" Focusable="False" />
         </WrapPanel>
-        <Label Content="" Height="34" HorizontalAlignment="Right" Margin="0,77,50,0" Name="PasswordLabel" VerticalAlignment="Top" Width="550" FontFamily="Verdana" FontSize="16"/>
+        <Label Content="" Height="34" HorizontalAlignment="Right" Margin="0,77,50,0" Name="PasswordLabel" VerticalAlignment="Top" Width="550" FontFamily="Verdana" FontSize="18"/>
         <Label Content="" HorizontalAlignment="Left" Margin="828,118,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="140" FontSize="16"/>
         <ProgressBar Height="10" HorizontalAlignment="Left" Margin="828,157,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="140" />
         <Label x:Name="IPLabel" Content="This is Manager 255.255.255.255" HorizontalAlignment="Center" Margin="424,24,56,0" VerticalAlignment="Top" FontSize="20" Width="544" HorizontalContentAlignment="Center"/>

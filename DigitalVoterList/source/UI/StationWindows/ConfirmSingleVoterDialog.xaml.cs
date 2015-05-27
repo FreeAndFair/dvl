@@ -36,7 +36,7 @@ namespace UI.StationWindows {
         MunicipalityAndZIP.Content = "";
       } else {
         Address.Content = v.Address;
-        MunicipalityAndZIP.Content = v.Municipality + ", TX  " + v.ZipCode;
+        MunicipalityAndZIP.Content = v.Municipality + "  " + v.ZipCode;
       }
       VUID.Content = "VUID: " + v.StateId;
       DateOfBirth.Content = "Date Of Birth: " + v.DateOfBirth.Date.ToString("MM/dd/yyyy");

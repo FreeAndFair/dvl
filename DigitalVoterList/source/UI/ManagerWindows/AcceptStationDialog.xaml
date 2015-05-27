@@ -1,14 +1,14 @@
 ﻿<Window x:Class="UI.ManagerWindows.AcceptStationDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Accept Station" Height="300" Width="400"
+        Title="Accept Station" Height="300" Width="500"
         WindowStartupLocation="CenterScreen"
         Icon="../Icon.ico">
     <Grid>
-        <Label Content="Enter the password (shown on the Station)" FontSize="18" HorizontalAlignment="Center" Margin="0,10,0,0" Name="TitleLabel" VerticalAlignment="Top" />
-        <PasswordBox Height="45" HorizontalAlignment="Center" Margin="0,100,0,0" Name="PwTextbox" VerticalAlignment="Top" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" PasswordChanged="PwTextboxPasswordChanged" FontSize="16" BorderThickness="2" />
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="100,184,0,0" Name="CancelButton" VerticalAlignment="Top" Width="80" Click="CancelButtonClick" IsCancel="True" FontSize="16"/>
-        <Button Content="OK" HorizontalAlignment="Right" Margin="0,184,100,0" Name="OKButton" VerticalAlignment="Top" Width="80" Click="OkButtonClick" IsDefault="True" FontSize="16" />
-        <Label Content="Station Name" HorizontalAlignment="Center" Margin="0,50,0,0" Name="StationLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="16" />
+        <Label Content="Enter the password shown on Station" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Name="TitleLabel" VerticalAlignment="Top" />
+        <PasswordBox Height="45" FontSize="20" HorizontalAlignment="Center" Margin="0,120,0,0" Name="PwTextbox" VerticalAlignment="Top" Width="240" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" PasswordChanged="PwTextboxPasswordChanged" BorderThickness="2" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="100,200,0,0" Name="CancelButton" VerticalAlignment="Top" Width="90" Click="CancelButtonClick" IsCancel="True" FontSize="20" Focusable="False"/>
+        <Button Content="OK" HorizontalAlignment="Right" Margin="0,200,100,0" Name="OKButton" VerticalAlignment="Top" Width="90" Click="OkButtonClick" IsDefault="True" FontSize="20" Focusable="False" />
+        <Label Content="Station Name" HorizontalAlignment="Center" Margin="0,50,0,0" Name="StationLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="24" />
     </Grid>
 </Window>

@@ -10,7 +10,7 @@
         <Label x:Name="DateOfBirth" Content="Date of Birth: " HorizontalAlignment="Left" Margin="62,160,0,0" VerticalAlignment="Top" FontSize="20" Grid.ColumnSpan="2"/>
         <Label x:Name="DriversLicense" Content="Drivers License: " HorizontalAlignment="Left" Margin="62,220,0,0" VerticalAlignment="Top" FontSize="20" Grid.ColumnSpan="2"/>
         <Label x:Name="VUID" Content="VUID: " HorizontalAlignment="Left" Margin="62,190,0,0" VerticalAlignment="Top" FontSize="20" Width="226" Grid.ColumnSpan="2"/>
-        <Button Content="Yes" HorizontalAlignment="Right" Margin="0,300,145,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="20" IsDefault="True" Grid.Column="1"/>
-        <Button Content="No" HorizontalAlignment="Left" Margin="145,300,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="20"/>
+        <Button Content="Yes" HorizontalAlignment="Right" Margin="0,300,145,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="20" IsDefault="True" Grid.Column="1" Focusable="False"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="145,300,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="20" Focusable="False"/>
     </Grid>
 </Window>

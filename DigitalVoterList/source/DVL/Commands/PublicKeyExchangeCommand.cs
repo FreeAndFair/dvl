@@ -56,8 +56,8 @@ namespace Aegis_DVL.Commands {
       this._isReply = isReply;
       this.Sender = parent.Address;
       var pswd = Crypto.GeneratePassword();
-      if (isReply) parent.UI.ShowPasswordOnStation(pswd);
-      else parent.UI.ShowPasswordOnManager(pswd);
+      if (isReply) parent.UI.ShowPasswordOnStation(pswd, Sender.Address.ToString());
+      else parent.UI.ShowPasswordOnManager(pswd, Sender.Address.ToString());
       this._wrapper = new PublicKeyWrapper(parent.Crypto, pswd);
     }
 

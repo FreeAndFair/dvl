@@ -23,7 +23,7 @@
         <TextBox HorizontalAlignment="Center" Margin="544,479,242,0" x:Name="Municipality" VerticalAlignment="Top" Width="238" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
         <Label Content="ZIP Code" HorizontalAlignment="Left" Margin="800,446,0,0" x:Name="ZipCodeLabel" VerticalAlignment="Top" FontSize="20" />
         <TextBox HorizontalAlignment="Center" Margin="804,479,95,0" x:Name="ZipCode" VerticalAlignment="Top" Width="125" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
-        <Button Content="Search" HorizontalAlignment="Center" Margin="477,0,477,91" Name="checkValidityButton" VerticalAlignment="Bottom" Click="CheckValidityButtonClick" FontSize="20" Width="70" IsDefault="True" />
+        <Button Content="Search" HorizontalAlignment="Center" Margin="477,0,477,91" Name="checkValidityButton" VerticalAlignment="Bottom" Click="CheckValidityButtonClick" FontSize="20" Width="70" IsDefault="True" Focusable="False" />
         <Label Content="Waiting for reply..." HorizontalAlignment="Center" Margin="0,633,0,0" x:Name="WaitingLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="24" />
         <Label Content="This is Station 255.255.255.255" HorizontalAlignment="Center" Margin="0,32,0,0" x:Name="IPLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="28"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Text="Enter a VUID, a Drivers License Number, or partial voter information to search."/>

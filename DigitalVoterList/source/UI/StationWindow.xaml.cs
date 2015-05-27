@@ -117,6 +117,10 @@ namespace UI {
     /// auto generated
     /// </param>
     private void ExportDataClick(object sender, RoutedEventArgs e) {
+      if (_ui._station == null) {
+        FlexibleMessageBox.Show("There is no election data to report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
+      }
       var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to export election data.");
       d.Owner = this;
       d.ShowDialog();
@@ -129,6 +133,7 @@ namespace UI {
         saveDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
         saveDialog.ShowDialog();
         if (!saveDialog.FileName.Equals(string.Empty)) this._ui.ExportData(saveDialog.FileName);
+        System.Diagnostics.Process.Start(saveDialog.FileName);
       } else
         FlexibleMessageBox.Show(
           "Master password entered incorrectly, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
@@ -166,10 +171,5 @@ namespace UI {
       FlexibleMessageBox.Show("The FAQ is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
     #endregion
-
-    private void ePollbook_Closing(object sender, CancelEventArgs e)
-    {
-
-    }
   }
 }

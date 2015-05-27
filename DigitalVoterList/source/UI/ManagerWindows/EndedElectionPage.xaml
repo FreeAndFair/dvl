@@ -7,10 +7,14 @@
       Height="768" Width="1024"
 	Title="EndedElectionPage">
 
-    <Grid Height="252" Width="515">
-        <TextBox Height="28" HorizontalAlignment="Left" Margin="36,93,0,0" Name="filePathTextbox" VerticalAlignment="Top" Width="319" />
-        <Button Content="Browse" Height="28" HorizontalAlignment="Right" Margin="0,93,35,0" Name="fileBrowseButton" VerticalAlignment="Top" Width="100" Click="FileBrowseButtonClick" />
-        <Label Content="Election data output destination" Height="28" HorizontalAlignment="Left" Margin="36,48,0,0" Name="fileBrowseLabel" VerticalAlignment="Top" />
-        <Button Content="Export" Height="28" HorizontalAlignment="Left" IsEnabled="False" Margin="202,185,0,0" Name="ExportButton" VerticalAlignment="Top" Width="100" Click="ExportButtonClick" />
+    <Grid>
+        <Grid Margin="0,360,0,200" HorizontalAlignment="Center" Width="650">
+            <TextBox HorizontalAlignment="Left" Margin="0,45,0,0" x:Name="filePathTextbox" FontSize="24" VerticalAlignment="Top" Width="500" />
+            <Button Content="Browse" FontSize="24" HorizontalAlignment="Right" Margin="0,43,0,0" x:Name="fileBrowseButton" VerticalAlignment="Top" Width="120" Click="FileBrowseButtonClick" Focusable="False" />
+            <Label Content="Election data output destination" HorizontalAlignment="Left" x:Name="fileBrowseLabel" VerticalAlignment="Top" FontSize="24"/>
+        </Grid>
+        <Button Content="Export Data" HorizontalAlignment="Center" IsEnabled="False" Margin="0,0,0,100" x:Name="ExportButton" VerticalAlignment="Bottom" FontSize="24" Width="160" Click="ExportButtonClick" Focusable="False" />
+        <Label HorizontalAlignment="Center" Margin="50,100,50,0" Content="The Election Has Ended" VerticalAlignment="Top" FontSize="36"/>
+        <Label HorizontalAlignment="Center" Margin="50,240,50,0" Content="Export Data in an Election Report" VerticalAlignment="Top" FontSize="32"/>
     </Grid>
 </Page>
