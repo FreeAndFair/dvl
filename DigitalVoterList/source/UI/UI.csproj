@@ -180,6 +180,9 @@
     <Compile Include="StationWindows\ConfirmSingleVoterDialog.xaml.cs">
       <DependentUpon>ConfirmSingleVoterDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StationWindows\ConfirmSingleVoterWithConditionsDialog.xaml.cs">
+      <DependentUpon>ConfirmSingleVoterWithConditionsDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationWindows\GiveBallotDialog.xaml.cs">
       <DependentUpon>GiveBallotDialog.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationWindows\ConfirmSingleVoterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationWindows\ConfirmSingleVoterWithConditionsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,6 +330,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StationWindows\checkmark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

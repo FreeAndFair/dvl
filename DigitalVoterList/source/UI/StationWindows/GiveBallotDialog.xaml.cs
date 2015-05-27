@@ -22,7 +22,6 @@ namespace UI.StationWindows {
       InitializeComponent();
       VoterName.Content = GetFormattedName(voter);
       Precinct.Text = Precinct.Text.Replace("PSUB", voter.PrecinctSub);
-      Precinct.Text = Precinct.Text.Replace("\\r\\n", Environment.NewLine);
       BallotStyle.Text = voter.BallotStyle.ToString();
     }
 

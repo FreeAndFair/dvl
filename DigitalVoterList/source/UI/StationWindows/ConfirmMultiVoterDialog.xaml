@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Select a Voter" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Name="Count" Content="99999 Matching Voters - Select a Voter to Check In" HorizontalAlignment="Center" Margin="289,18,289,0" VerticalAlignment="Top" FontSize="18"/>
-        <DataGrid x:Name="VoterGrid" SelectionMode="Single" FontSize="14" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="420" Width="740" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
+        <Label Name="Count" Content="99999 Matching Voters - Select a Voter to Check In" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <DataGrid x:Name="VoterGrid" SelectionMode="Single" FontSize="16" HorizontalAlignment="Center" Margin="10,62,10,0" VerticalAlignment="Top" Height="420" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="OKClick"/>
@@ -32,6 +32,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="VUID" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StateId}" TextAlignment="Left"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Drivers License" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -41,7 +48,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="OK" HorizontalAlignment="Right" Margin="0,504,375,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="16" IsDefault="True"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="375,504,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="16"/>
+        <Button Name="OKButton" Content="Select" HorizontalAlignment="Right" Margin="0,504,375,0" VerticalAlignment="Top" Width="75" Click="OKClick" FontSize="20" IsDefault="True"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="375,504,0,0" VerticalAlignment="Top" Width="75" Click="CancelClick" FontSize="20"/>
     </Grid>
 </Window>

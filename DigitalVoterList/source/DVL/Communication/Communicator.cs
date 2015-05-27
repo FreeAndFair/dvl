@@ -453,7 +453,9 @@ namespace Aegis_DVL.Communication {
                 } else {
                   Console.WriteLine(commandType + " failed to " + target + " on attempt #" + attempt + ": " + e);
                 }
-                retry = true;
+                if (!(command is DisconnectStationCommand)) {
+                  retry = true;
+                }
               }
             }
           }

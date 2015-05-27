@@ -92,9 +92,18 @@ namespace UI.StationWindows {
     /// whether or not the ballot request was a success
     /// </param>
     public void BallotResponse(Voter voter, bool success, VoterStatus oldStatus, VoterStatus newStatus) {
-      if (!success && newStatus != VoterStatus.NotSeenToday) {
+      if (!success && newStatus != VoterStatus.NotSeenToday && newStatus != VoterStatus.WrongLocation) {
+        string message;
+        if (newStatus == VoterStatus.ActiveVoter || newStatus == VoterStatus.SuspendedVoter ||
+            newStatus == VoterStatus.OutOfCounty || newStatus == VoterStatus.MailBallotNotReturned) {
+          message = GetFormattedName(voter) + "\nhas already checked in and received a ballot\n(style " +
+            voter.BallotStyle + ") at this location today.";
+        } else {
+          message = GetFormattedName(voter) + "\nhas already checked in and did not receive a ballot\n" +
+            "at this location today.";
+        }
         FlexibleMessageBox.Show(
-          GetFormattedName(voter) + "\nhas already checked in at this location today.",
+          message,
           "Already Checked In",
           MessageBoxButtons.OK,
           MessageBoxIcon.Stop);
@@ -125,14 +134,6 @@ namespace UI.StationWindows {
           FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
             "\nhas already submitted a vote by mail\nand should not receive a ballot.");
           break;
-        case VoterStatus.SuspendedVoter:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
-            " is a suspense voter and must sign a statement\nof residence before receiving a ballot.");
-          break;
-        case VoterStatus.OutOfCounty:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
-            "\nis an out-of-county voter.");
-          break;
         case VoterStatus.EarlyVotedInPerson:
           FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
             "\nhas already voted at an early voting location.");
@@ -140,11 +141,6 @@ namespace UI.StationWindows {
         case VoterStatus.AbsenteeVotedInPerson:
           FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
             "\nregistered as an absentee voter but did not receive their ballot.");
-          break;
-        case VoterStatus.MailBallotNotReturned:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
-            " was sent an absentee ballot and has not yet returned it.\nPlease obtain " +
-            " the appropriate affidavit before providing a ballot.");
           break;
         default:
           break;
@@ -261,11 +257,18 @@ namespace UI.StationWindows {
       }
 
       Voter choice = null;
+      VoterStatus vs = VoterStatus.Unavailable;
 
       if (results == null || results.Count == 0) {
         FlexibleMessageBox.Show("No voters match your search. Please try again or have the voter register for a provisional ballot.");
       } else if (results.Count == 1) {
-        var dialog = new ConfirmSingleVoterDialog(results[0]);
+        vs = GetNewVoterStatus(results[0]);
+        Window dialog;
+        if (vs == VoterStatus.ActiveVoter || vs == VoterStatus.WrongLocation) {
+          dialog = new ConfirmSingleVoterDialog(results[0]);
+        } else {
+          dialog = new ConfirmSingleVoterWithConditionsDialog(results[0], vs);
+        }
         var result = dialog.ShowDialog();
 
         if (result.HasValue && result == true) {
@@ -276,7 +279,17 @@ namespace UI.StationWindows {
         var result = dialog.ShowDialog();
 
         if (result.HasValue && result == true) {
-          choice = dialog.SelectedVoter;
+          Window dialog2;
+          if ((vs == VoterStatus.SuspendedVoter) || (vs == VoterStatus.MailBallotNotReturned) || (vs == VoterStatus.OutOfCounty)) {
+            dialog2 = new ConfirmSingleVoterWithConditionsDialog(results[0], vs);
+          } else {
+            dialog2 = new ConfirmSingleVoterDialog(results[0]);
+          }
+          var result2 = dialog2.ShowDialog();
+          if (result2.HasValue && result2 == true) {
+            choice = dialog.SelectedVoter;
+            vs = GetNewVoterStatus(choice);
+          }
         }
       }
 
@@ -284,7 +297,6 @@ namespace UI.StationWindows {
         WaitingLabel.Content = "Waiting for response from manager...";
         EnableFields(false);
         Waiting = true;
-        VoterStatus vs = GetNewVoterStatus(choice);
         if (vs == (VoterStatus) choice.PollbookStatus) {
           BallotResponse(choice, false, vs, vs);
         } else {
@@ -314,7 +326,7 @@ namespace UI.StationWindows {
       ZipCode.Text = "";
       DriversLicense.Text = "";
       StateId.Text = "";
-      LastName.Focus();
+      StateId.Focus();
     }
 
     private VoterStatus GetNewVoterStatus(Voter voter) {

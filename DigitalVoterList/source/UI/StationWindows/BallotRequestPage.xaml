@@ -7,6 +7,10 @@
     Title="BallotRequestPage" Height="768" Width="1024">
 
     <Grid Margin="0,10,0,77">
+        <Label Content="VUID" HorizontalAlignment="Left" Margin="70,270,0,0" x:Name="StateIdLabel" VerticalAlignment="Top" FontSize="20" />
+        <TextBox HorizontalAlignment="Center" Margin="73,312,537,0" x:Name="StateId" VerticalAlignment="Top" Width="414" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
+        <Label Content="Drivers License Number" HorizontalAlignment="Left" Margin="498,270,0,0" x:Name="DriversLicenseLabel" VerticalAlignment="Top" FontSize="20" />
+        <TextBox HorizontalAlignment="Center" Margin="508,312,94,0" x:Name="DriversLicense" VerticalAlignment="Top" Width="422" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="71,355,0,0" x:Name="LastNameLabel" VerticalAlignment="Top" FontSize="20" />
         <TextBox HorizontalAlignment="Center" Margin="73,398,614,0" x:Name="LastName" VerticalAlignment="Top" Width="337" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
         <Label Content="First Name" HorizontalAlignment="Left" Margin="436,355,0,0" x:Name="FirstNameLabel" VerticalAlignment="Top" FontSize="20" />
@@ -19,10 +23,6 @@
         <TextBox HorizontalAlignment="Center" Margin="544,479,242,0" x:Name="Municipality" VerticalAlignment="Top" Width="238" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
         <Label Content="ZIP Code" HorizontalAlignment="Left" Margin="800,446,0,0" x:Name="ZipCodeLabel" VerticalAlignment="Top" FontSize="20" />
         <TextBox HorizontalAlignment="Center" Margin="804,479,95,0" x:Name="ZipCode" VerticalAlignment="Top" Width="125" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
-        <Label Content="Drivers License Number" HorizontalAlignment="Left" Margin="498,270,0,0" x:Name="DriversLicenseLabel" VerticalAlignment="Top" FontSize="20" />
-        <TextBox HorizontalAlignment="Center" Margin="508,312,94,0" x:Name="DriversLicense" VerticalAlignment="Top" Width="422" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
-        <Label Content="VUID" HorizontalAlignment="Left" Margin="70,270,0,0" x:Name="StateIdLabel" VerticalAlignment="Top" FontSize="20" />
-        <TextBox HorizontalAlignment="Center" Margin="73,312,537,0" x:Name="StateId" VerticalAlignment="Top" Width="414" PreviewTextInput="PreviewTextInputHandler" TextChanged="TextChanged" FontSize="20" />
         <Button Content="Search" HorizontalAlignment="Center" Margin="477,0,477,91" Name="checkValidityButton" VerticalAlignment="Bottom" Click="CheckValidityButtonClick" FontSize="20" Width="70" IsDefault="True" />
         <Label Content="Waiting for reply..." HorizontalAlignment="Center" Margin="0,633,0,0" x:Name="WaitingLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="24" />
         <Label Content="This is Station 255.255.255.255" HorizontalAlignment="Center" Margin="0,32,0,0" x:Name="IPLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="28"/>

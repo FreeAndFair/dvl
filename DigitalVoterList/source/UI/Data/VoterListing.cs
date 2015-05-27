@@ -12,6 +12,7 @@ namespace UI.Data {
     public string Address { get; set; }
     public string DateOfBirth { get; set; }
     public string DriversLicense { get; set; }
+    public string VUID { get; set; }
 
     #endregion
   }

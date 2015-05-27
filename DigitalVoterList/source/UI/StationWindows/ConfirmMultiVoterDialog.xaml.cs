@@ -48,7 +48,7 @@ namespace UI.StationWindows {
         if (v.ProtectedAddress) {
           vl.Address = "Address Protected for Privacy";
         } else {
-          vl.Address = v.Address + ", " + v.Municipality + ", TX  " + v.ZipCode;
+          vl.Address = v.Address + ", " + v.Municipality;
         }
         vl.DateOfBirth = v.DateOfBirth.Date.ToString("MM/dd/yyyy");
         if (v.DriversLicense.Length > 0) {
@@ -67,6 +67,9 @@ namespace UI.StationWindows {
     }
 
     private void OKClick(object sender, RoutedEventArgs e) {
+      if (VoterGrid.SelectedItem == null) {
+        return;
+      }
       DialogResult = true;
       int i = _voterlistings.IndexOf((VoterListing)VoterGrid.SelectedItem);
       SelectedVoter = _voters[i];
