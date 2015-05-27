@@ -37,17 +37,17 @@
         <Label Content="" HorizontalAlignment="Left" Margin="828,118,0,0" Name="UpdateLabel" VerticalAlignment="Top" Width="140" FontSize="16"/>
         <ProgressBar Height="10" HorizontalAlignment="Left" Margin="828,157,0,0" Name="LoadingBar" VerticalAlignment="Top" Width="140" />
         <Label x:Name="IPLabel" Content="This is Manager 255.255.255.255" HorizontalAlignment="Center" Margin="424,24,56,0" VerticalAlignment="Top" FontSize="24" Width="544" HorizontalContentAlignment="Center"/>
-        <Label Content="Election Statistics" HorizontalAlignment="Left" Margin="40,170,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Label Name="Known" Content="Known Voters: 0" HorizontalAlignment="Left" Margin="40,220,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="Eligible" Content="Registered To Vote Here: 0" HorizontalAlignment="Left" Margin="40,250,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="CheckedIn" Content="Total Voters Checked In: 0" HorizontalAlignment="Left" Margin="40,330,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="Active" Content="Active: 0" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="Suspended" Content="Suspended: 0" HorizontalAlignment="Left" Margin="40,390,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="OutOfCounty" Content="Out of County: 0" HorizontalAlignment="Left" Margin="40,420,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="WrongLocation" Content="Wrong Location: 0" HorizontalAlignment="Left" Margin="40,450,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="EarlyVoted" Content="Already Voted Early: 0" HorizontalAlignment="Left" Margin="40,480,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="AbsenteeVoted" Content="Already Voted Absentee: 0" HorizontalAlignment="Left" Margin="40,510,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="MailBallot" Content="Mail Ballot Not Returned: 0" HorizontalAlignment="Left" Margin="40,540,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Name="Ineligible" Content="Otherwise Ineligible: 0" HorizontalAlignment="Left" Margin="40,570,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Election Statistics" HorizontalAlignment="Left" Margin="40,170,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label Name="Known" Content="Known Voters: 0" HorizontalAlignment="Left" Margin="40,220,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="Eligible" Content="Registered To Vote Here: 0" HorizontalAlignment="Left" Margin="40,250,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="CheckedIn" Content="Total Voters Checked In: 0" HorizontalAlignment="Left" Margin="40,330,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="Active" Content="Active: 0" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="Suspended" Content="Suspended: 0" HorizontalAlignment="Left" Margin="40,390,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="OutOfCounty" Content="Out of County: 0" HorizontalAlignment="Left" Margin="40,420,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="WrongLocation" Content="Wrong Location: 0" HorizontalAlignment="Left" Margin="40,450,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="EarlyVoted" Content="Already Voted Early: 0" HorizontalAlignment="Left" Margin="40,480,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="AbsenteeVoted" Content="Already Voted Absentee: 0" HorizontalAlignment="Left" Margin="40,510,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="MailBallot" Content="Mail Ballot Not Returned: 0" HorizontalAlignment="Left" Margin="40,540,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="Ineligible" Content="Otherwise Ineligible: 0" HorizontalAlignment="Left" Margin="40,570,0,0" VerticalAlignment="Top" FontSize="20"/>
     </Grid>
 </Page>

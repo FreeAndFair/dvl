@@ -100,7 +100,7 @@ namespace UI.ManagerWindows {
     /// </param>
     private void FileBrowseButtonClick(object sender, RoutedEventArgs e) {
       var saveDialog = new Microsoft.Win32.SaveFileDialog { Title = "Export Election Data" };
-      saveDialog.Filter = "Data files (*.data)|*.data|All files (*.*)|*.*";
+      saveDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
       saveDialog.ShowDialog();
 
       this.filePathTextbox.Text = saveDialog.FileName;

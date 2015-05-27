@@ -92,8 +92,8 @@ namespace UI.ManagerWindows {
     private void FileBrowseButtonClick(object sender, RoutedEventArgs e) {
       // Create OpenFileDialog
       var dlg = new Microsoft.Win32.OpenFileDialog {
-        DefaultExt = ".data", 
-        Filter = "Data files (.data)|*.data|All Files|*.*", 
+        DefaultExt = ".txt",
+        Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*", 
       };
 
       // Display OpenFileDialog by calling ShowDialog method
@@ -121,8 +121,8 @@ namespace UI.ManagerWindows {
     private void KeyBrowseButtonClick(object sender, RoutedEventArgs e) {
       // Create OpenFileDialog
       var dlg = new Microsoft.Win32.OpenFileDialog {
-        DefaultExt = ".data",
-        Filter = "Data files (.data)|*.data|All Files|*.*",
+        DefaultExt = ".txt",
+        Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
       };
 
       // Display OpenFileDialog by calling ShowDialog method
