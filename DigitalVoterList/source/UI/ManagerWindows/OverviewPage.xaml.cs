@@ -191,6 +191,7 @@ namespace UI.ManagerWindows {
           this._ui.ExchangeKeys(ipep);
         }
       }
+      UpdateControls();
     }
 
     /// <summary>
@@ -237,6 +238,7 @@ namespace UI.ManagerWindows {
           this.PopulateList();
         }
       }
+      UpdateControls();
     }
 
     /// <summary>
@@ -298,11 +300,11 @@ namespace UI.ManagerWindows {
         this.RemoveButton.IsEnabled = false;
       }
 
-      StartEndElectionButton.IsEnabled = true;
+      StartEndElectionButton.IsEnabled = false;
 
       foreach (StationStatus s in stationGrid.ItemsSource) {
-        if (s.ConnectionState.Equals("Synchronizing Election Data")) {
-          StartEndElectionButton.IsEnabled = false;
+        if (s.Connected()) {
+          StartEndElectionButton.IsEnabled = true;
         }
       }
     }

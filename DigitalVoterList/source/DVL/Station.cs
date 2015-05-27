@@ -566,7 +566,10 @@ namespace Aegis_DVL {
     public void RemovePeer(IPEndPoint peer) {
       Contract.Requires(peer != null);
       Contract.Ensures(!this.Peers.ContainsKey(peer));
-      this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(this.Manager.Address, 62000), peer), peer);
+      if (Manager.Equals(Address)) {
+        // only the manager should disconnect stations explicitly
+        this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(this.Manager.Address, 62000), peer), peer);
+      }
       this.Peers.Remove(peer);
       PeerStatuses.Remove(peer);
       if (!this.EnoughStations) this.UI.NotEnoughPeers();

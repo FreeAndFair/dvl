@@ -34,12 +34,10 @@ namespace Aegis_DVL.Communication {
     private Socket udpSocket;
     private BlockingCollection<ICommand> incomingQueue;
     private BlockingCollection<Tuple<IPEndPoint, ICommand, int>> outgoingQueue;
-    private BlockingCollection<TcpClient> incomingConnectionQueue;
 
     private int maxTries = 5;
 
     private Thread receiveThread;
-    private Thread acceptThread;
     private Thread sendThread;
     private Thread dequeueThread;
     private Thread pingThread;
@@ -47,7 +45,7 @@ namespace Aegis_DVL.Communication {
     private Dictionary<IPEndPoint, DateTime> responseTimes = new Dictionary<IPEndPoint, DateTime>();
 
     private int lengthOfCount = 4;
-    private int TCPTimeout = 40000;
+    private int TCPTimeout = 10000;
 
     #region Constructors and Destructors
 
@@ -63,7 +61,6 @@ namespace Aegis_DVL.Communication {
       this.Parent = parent;
       incomingQueue = new BlockingCollection<ICommand>(new ConcurrentQueue<ICommand>());
       outgoingQueue = new BlockingCollection<Tuple<IPEndPoint, ICommand, int>>(new ConcurrentQueue<Tuple<IPEndPoint, ICommand, int>>());
-      incomingConnectionQueue = new BlockingCollection<TcpClient>(new ConcurrentQueue<TcpClient>());
     }
 
     #endregion
@@ -247,7 +244,7 @@ namespace Aegis_DVL.Communication {
             Console.WriteLine("Accepted connection from " + client.Client.RemoteEndPoint);
           }
 
-          incomingConnectionQueue.Add(client);
+          ProcessConnection(client);
         } catch (Exception e) {
           // the socket was closed, or some other problem happened that we can't survive
           if (Parent.Logger != null)
@@ -266,10 +263,9 @@ namespace Aegis_DVL.Communication {
     /// The receive and handle.
     /// </summary>
     /// TODO: review for problems with complexity
-    public void NetworkReceiveThread() {
+    public void ProcessConnection(TcpClient client) {
       while (true) {
-        TcpClient client = incomingConnectionQueue.Take();
-        client.ReceiveTimeout = 3000;
+        client.ReceiveTimeout = TCPTimeout;
         IPEndPoint clientEndpoint = null;
         try {
           using (NetworkStream stream = client.GetStream()) {
@@ -483,7 +479,6 @@ namespace Aegis_DVL.Communication {
 
     public void StopThreads() {
       if (ThreadsStarted) {
-        acceptThread.Abort();
         receiveThread.Abort();
         dequeueThread.Abort();
         sendThread.Abort();
@@ -497,7 +492,6 @@ namespace Aegis_DVL.Communication {
           udpSocket.Close();
         }
 
-        acceptThread = null;
         receiveThread = null;
         dequeueThread = null;
         sendThread = null;
@@ -509,10 +503,7 @@ namespace Aegis_DVL.Communication {
 
     public void StartThreads() {
       if (!ThreadsStarted) {
-        acceptThread = new Thread(AcceptConnectionThread);
-        acceptThread.Name = "Accept";
-        acceptThread.SetApartmentState(ApartmentState.STA);
-        receiveThread = new Thread(NetworkReceiveThread);
+        receiveThread = new Thread(AcceptConnectionThread);
         receiveThread.SetApartmentState(ApartmentState.STA);
         receiveThread.Name = "Receive";
         dequeueThread = new Thread(ReceivedMessageDequeueThread);
@@ -525,7 +516,6 @@ namespace Aegis_DVL.Communication {
         pingThread.SetApartmentState(ApartmentState.STA);
         pingThread.Name = "PingResponder";
 
-        acceptThread.Start();
         receiveThread.Start();
         dequeueThread.Start();
         sendThread.Start();

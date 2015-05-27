@@ -247,7 +247,7 @@ namespace UI {
               if (v.ProtectedAddress) {
                 sb.Append("Address Protected for Privacy, ");
               } else {
-                sb.Append(v.Municipality + " " + v.ZipCode + ", ");
+                sb.Append(v.Address + ", " + v.Municipality + " " + v.ZipCode + ", ");
               }
               sb.Append("VUID " + v.StateId + ", ");
               sb.Append("DOB " + v.DateOfBirth.Date.ToString("MM/dd/yyyy") + ", ");
@@ -343,7 +343,6 @@ namespace UI {
           0x52, 0x44, 0xC1, 0x3D, 0x7F, 0x6A, 0x77, 0x59, 0x72, 0xA4, 0xD1, 0x77, 0x93, 0x17, 
           0x1F, 0xAB, 0x99, 0xB1, 0x26, 0x81, 0xD5, 0x02, 0x03, 0x01, 0x00, 0x01 }));
       this._station = this._station ?? new Station(this, key, this._masterPassword);
-      this._masterPassword = null;
 
       try {
         this._station.Database.Import(this.ImportVoterData(voterDataPath));

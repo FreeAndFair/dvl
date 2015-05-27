@@ -235,18 +235,19 @@ namespace UI.StationWindows {
     /// </param>
     private void CheckValidityButtonClick(object sender, RoutedEventArgs e) {
       List<Voter> results = new List<Voter>();
-      Int64 stateId;
+      Int64 stateId = -1;
       bool stateIdParsed = Int64.TryParse(StateId.Text.Trim().TrimEnd(System.Environment.NewLine.ToCharArray()), out stateId);
 
-      if (!DriversLicense.Text.Equals(string.Empty)) {       
-        // check driver's license first
-        Voter v = _ui._station.Database.GetVoterByDLNumber(DriversLicense.Text);
+      if (!StateId.Text.Equals(string.Empty)) {
+        // check state id first
+        Voter v = _ui._station.Database.GetVoterByStateId(stateId);
         if (v != null) {
           results.Add(v);
         }
-      } else if (!StateId.Text.Equals(string.Empty) && stateIdParsed) {
-        // check state id next
-        Voter v = _ui._station.Database.GetVoterByStateId(stateId);
+      }
+      else if (!DriversLicense.Text.Equals(string.Empty)) {       
+        // check driver's license first
+        Voter v = _ui._station.Database.GetVoterByDLNumber(DriversLicense.Text);
         if (v != null) {
           results.Add(v);
         }
@@ -260,7 +261,7 @@ namespace UI.StationWindows {
       VoterStatus vs = VoterStatus.Unavailable;
 
       if (results == null || results.Count == 0) {
-        FlexibleMessageBox.Show("No voters match your search. Please try again or have the voter register for a provisional ballot.");
+        FlexibleMessageBox.Show("No voters match your search. Please try again\nor have the voter register for a provisional ballot.");
       } else if (results.Count == 1) {
         vs = GetNewVoterStatus(results[0]);
         Window dialog;

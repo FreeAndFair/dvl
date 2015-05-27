@@ -35,7 +35,7 @@
                 <DataGridTemplateColumn Header="VUID" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding StateId}" TextAlignment="Left"/>
+                            <TextBlock Text="{Binding VUID}" TextAlignment="Left"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

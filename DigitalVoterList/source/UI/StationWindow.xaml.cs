@@ -161,7 +161,7 @@ namespace UI {
 
     private void VideoClick(object sender, RoutedEventArgs e) {
       try {
-        System.Diagnostics.Process.Start("fighting_cats4.wmv");
+        System.Diagnostics.Process.Start("Clip.mp4");
       } catch (Exception) { }
       FlexibleMessageBox.Show("Actual training videos are not available in this demo,\nbut will be listed in and playable from this window in the final product.");
     }
