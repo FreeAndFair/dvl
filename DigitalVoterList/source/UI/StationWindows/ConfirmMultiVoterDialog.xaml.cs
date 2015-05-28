@@ -57,6 +57,11 @@ namespace UI.StationWindows {
         } else {
           vl.DriversLicense = "Not On File";
         }
+        if (v.StateId != null) {
+          vl.VUID = v.StateId.ToString();
+        } else {
+          vl.VUID = "Not On File";
+        }
         _voterlistings.Add(vl);
       }
       Dispatcher.Invoke(

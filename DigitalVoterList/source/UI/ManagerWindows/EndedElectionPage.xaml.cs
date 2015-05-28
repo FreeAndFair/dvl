@@ -23,6 +23,7 @@ namespace UI.ManagerWindows {
   using System.Windows;
   using System.Windows.Forms;
   using System.Windows.Controls;
+  using System.Threading;
 
   using Microsoft.Win32;
 
@@ -85,6 +86,7 @@ namespace UI.ManagerWindows {
     private void ExportButtonClick(object sender, RoutedEventArgs e) {
       if (this.filePathTextbox.Text.Length > 0) {
         this._ui.ExportData(this.filePathTextbox.Text);
+        Thread.Sleep(10000);
         Environment.Exit(0);
       } else FlexibleMessageBox.Show("You have not selected an output file path.", "No File Path", MessageBoxButtons.OK);
     }

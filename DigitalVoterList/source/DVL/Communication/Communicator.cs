@@ -263,76 +263,74 @@ namespace Aegis_DVL.Communication {
     /// The receive and handle.
     /// </summary>
     /// TODO: review for problems with complexity
-    public void ProcessConnection(TcpClient client) {
-      while (true) {
-        client.ReceiveTimeout = TCPTimeout;
-        IPEndPoint clientEndpoint = null;
-        try {
-          using (NetworkStream stream = client.GetStream()) {
-            clientEndpoint = (IPEndPoint) client.Client.RemoteEndPoint;
-            if (Parent.Logger != null) {
-              Parent.Logger.Log("Handling connection from " + clientEndpoint, Level.Info);
-            } else {
-              Console.WriteLine("Handling connection from " + clientEndpoint);
-            }
-            client.Client.ReceiveTimeout = TCPTimeout;
-            byte[] lengthBytes = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
-            var length = BitConverter.ToInt32(lengthBytes, 0);
-            if (length == 0) {
-              if (Parent.Logger != null) {
-                Parent.Logger.Log("Received empty message from " + clientEndpoint, Level.Info);
-              } else {
-                Console.WriteLine("Received empty message from " + clientEndpoint);
-              }
-              return;
-            }
-            byte[] cmdBytes = null;
-            try {
-              cmdBytes = Bytes.FromNetworkStreamWithSize(stream, length);
-            } catch (Exception e) {
-              if (Parent.Logger != null) {
-                Parent.Logger.Log("Failed to receive message from " + clientEndpoint + ": " + e, Level.Info);
-              } else {
-                Console.WriteLine("Failed to receive message from " + clientEndpoint + ": " + e);
-              }
-              stream.Write(new byte[lengthOfCount], 0, lengthOfCount);
-              return;
-            }
-            var cmd = cmdBytes.To<ICommand>();
-            Type cmdType = cmd.GetType();
-            if (cmd is CryptoCommand) {
-              cmdType = ((CryptoCommand)cmd).GetEncapsulatedType();
-            }
-            if (cmd is PublicKeyExchangeCommand ||
-                cmd is CryptoCommand ||
-                cmd is IsAliveCommand ||
-                cmd is DisconnectStationCommand) {
-                  if (this.Parent.Logger != null && !(cmd is IsAliveCommand)) {
-                    this.Parent.Logger.Log("Received " + cmdType + " from " + cmd.Sender, Level.Info);
-                  } else {
-                    Console.WriteLine("Received " + cmdType + " from " + cmd.Sender);
-                  }
-              // enqueue the command
-              incomingQueue.Add(cmd);
-              responseTimes[cmd.Sender] = DateTime.Now;
-            } else {
-              if (this.Parent.Logger != null) {
-                this.Parent.Logger.Log(
-                  "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.",
-                  Level.Fatal);
-              } else {
-                Console.WriteLine(
-                  "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.");
-              }
-
-              this.Parent.ShutDownElection();
-            }
+    private void ProcessConnection(TcpClient client) {
+      client.ReceiveTimeout = TCPTimeout;
+      IPEndPoint clientEndpoint = null;
+      try {
+        using (NetworkStream stream = client.GetStream()) {
+          clientEndpoint = (IPEndPoint)client.Client.RemoteEndPoint;
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Handling connection from " + clientEndpoint, Level.Info);
+          } else {
+            Console.WriteLine("Handling connection from " + clientEndpoint);
           }
-        } catch (Exception e) {
-          // there was a problem reading a message, but the socket should be OK
-          // so we live to try another day
-          Console.WriteLine("Exception while reading from " + clientEndpoint + ": " + e);
+          client.Client.ReceiveTimeout = TCPTimeout;
+          byte[] lengthBytes = Bytes.FromNetworkStreamWithSize(stream, lengthOfCount);
+          var length = BitConverter.ToInt32(lengthBytes, 0);
+          if (length == 0) {
+            if (Parent.Logger != null) {
+              Parent.Logger.Log("Received empty message from " + clientEndpoint, Level.Info);
+            } else {
+              Console.WriteLine("Received empty message from " + clientEndpoint);
+            }
+            return;
+          }
+          byte[] cmdBytes = null;
+          try {
+            cmdBytes = Bytes.FromNetworkStreamWithSize(stream, length);
+          } catch (Exception e) {
+            if (Parent.Logger != null) {
+              Parent.Logger.Log("Failed to receive message from " + clientEndpoint + ": " + e, Level.Info);
+            } else {
+              Console.WriteLine("Failed to receive message from " + clientEndpoint + ": " + e);
+            }
+            stream.Write(new byte[lengthOfCount], 0, lengthOfCount);
+            return;
+          }
+          var cmd = cmdBytes.To<ICommand>();
+          Type cmdType = cmd.GetType();
+          if (cmd is CryptoCommand) {
+            cmdType = ((CryptoCommand)cmd).GetEncapsulatedType();
+          }
+          if (cmd is PublicKeyExchangeCommand ||
+              cmd is CryptoCommand ||
+              cmd is IsAliveCommand ||
+              cmd is DisconnectStationCommand) {
+            if (this.Parent.Logger != null && !(cmd is IsAliveCommand)) {
+              this.Parent.Logger.Log("Received " + cmdType + " from " + cmd.Sender, Level.Info);
+            } else {
+              Console.WriteLine("Received " + cmdType + " from " + cmd.Sender);
+            }
+            // enqueue the command
+            incomingQueue.Add(cmd);
+            responseTimes[cmd.Sender] = DateTime.Now;
+          } else {
+            if (this.Parent.Logger != null) {
+              this.Parent.Logger.Log(
+                "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.",
+                Level.Fatal);
+            } else {
+              Console.WriteLine(
+                "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.");
+            }
+
+            this.Parent.ShutDownElection();
+          }
         }
+      } catch (Exception e) {
+        // there was a problem reading a message, but the socket should be OK
+        // so we live to try another day
+        Console.WriteLine("Exception while reading from " + clientEndpoint + ": " + e);
       }
     }
 
@@ -463,8 +461,10 @@ namespace Aegis_DVL.Communication {
             Console.WriteLine("Maximum number of retries reached, recording absent host " + target);
           }
           if (Parent.IsManager && Parent.Peers.ContainsKey(target)) {
+            Console.WriteLine("I am manager, alerting other peers of absent host.");
             Parent.AnnounceRemovePeer(target);
           } else if (target.Equals(Parent.Manager)) {
+            Console.WriteLine("Absent host was manager, attempting to elect new manager.");
             Parent.StartNewManagerElection();
           } else if (Parent.Peers.ContainsKey(target)) {
             Parent.RemovePeer(target);

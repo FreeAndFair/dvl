@@ -38,10 +38,5 @@ namespace Aegis_DVL.Data_Types {
     public bool Connected() {
       return !ConnectionState.Equals("Not Connected");
     }
-
-    public bool Ready() {
-      return ConnectionState.Equals("Ready");
-    }
-
   }
 }

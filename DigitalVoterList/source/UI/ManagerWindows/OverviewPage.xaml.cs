@@ -290,7 +290,7 @@ namespace UI.ManagerWindows {
       UpdateControls();
     }
 
-    private void UpdateControls() {
+    public void UpdateControls() {
       if ((this.stationGrid.SelectedItem != null) &&
           ((StationStatus)this.stationGrid.SelectedItem).Connected()) {
         this.AddButton.IsEnabled = false;

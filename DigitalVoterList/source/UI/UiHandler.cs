@@ -663,7 +663,7 @@ namespace UI {
         this.ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.ManagerOverviewPage.SetPasswordLabel("Enter this password at Station " + name + ": " + password); }));
+            delegate { this.ManagerOverviewPage.SetPasswordLabel("Enter this password at Station " + name + ":\n" + password); }));
       }
     }
 
@@ -748,26 +748,26 @@ namespace UI {
       if (OverviewPage != null) {
         OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { OverviewPage.RefreshGrid(); }));
+          new Action(delegate { OverviewPage.RefreshGrid(); OverviewPage.UpdateControls(); }));
       }
       if (ManagerOverviewPage != null) {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { ManagerOverviewPage.RefreshGrid(); }));
+          new Action(delegate { ManagerOverviewPage.RefreshGrid(); ManagerOverviewPage.UpdateControls(); }));
       }
     }
 
     public void DoneSynchronizing(IPEndPoint ip) {
-      _station.SetPeerStatus(ip, "Ready");
+      _station.SetPeerStatus(ip, "Connected");
       if (OverviewPage != null) {
         OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { OverviewPage.RefreshGrid(); }));
+          new Action(delegate { OverviewPage.RefreshGrid(); OverviewPage.UpdateControls(); }));
       }
       if (ManagerOverviewPage != null) {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { ManagerOverviewPage.RefreshGrid(); }));
+          new Action(delegate { ManagerOverviewPage.RefreshGrid(); ManagerOverviewPage.UpdateControls();  }));
         if (_station.ElectionInProgress) {
           _station.Communicator.Send(new StartElectionCommand(_station.Address), ip);
         }
@@ -805,12 +805,12 @@ namespace UI {
       if (ManagerOverviewPage != null) {
         ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { ManagerOverviewPage.ManagerstationGrid.Items.Refresh(); }));
+          new Action(delegate { ManagerOverviewPage.ManagerstationGrid.Items.Refresh(); ManagerOverviewPage.UpdateControls(); }));
       }
       if (OverviewPage != null) {
         OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { OverviewPage.stationGrid.Items.Refresh(); }));
+          new Action(delegate { OverviewPage.stationGrid.Items.Refresh(); OverviewPage.UpdateControls();  }));
       }
     }
 

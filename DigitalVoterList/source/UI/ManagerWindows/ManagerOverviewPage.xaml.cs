@@ -183,7 +183,7 @@ namespace UI.ManagerWindows {
     /// <param name="content">
     /// the new content of the label
     /// </param>
-    public void SetPasswordLabel(string content) { this.PasswordLabel.Content = content; }
+    public void SetPasswordLabel(string content) { this.PasswordLabel.Text = content; }
 
     /// <summary>
     /// Unmark a connected station in the list
@@ -327,7 +327,7 @@ namespace UI.ManagerWindows {
       UpdateControls();
     }
 
-    private void UpdateControls() {
+    public void UpdateControls() {
       if (this.ManagerstationGrid.SelectedItem != null) {
         if (((StationStatus)this.ManagerstationGrid.SelectedItem).Connected()) {
           this.AddButton.IsEnabled = false;
