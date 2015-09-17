@@ -121,7 +121,7 @@ namespace Tests {
     /// The discover network machines test.
     /// </summary>
     [Test] public void DiscoverNetworkMachinesTest() {
-      IEnumerable<IPEndPoint> machines = this.Sender.Communicator.DiscoverNetworkMachines();
+      IEnumerable<IPEndPoint> machines = this.Sender.Communicator.DiscoverPeers();
       Assert.That(machines != null);
       machines = machines.ToArray();
       int count = 0;

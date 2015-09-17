@@ -110,12 +110,12 @@ namespace Aegis_DVL {
       Contract.Requires(dbName != null);
       Contract.Requires(logName != null);
 
-      this.Crypto = new Crypto(voterDataEncryptionKey);
-      this.MasterPassword =
-        this.Crypto.Hash(Bytes.From(masterPassword));
-      this.Logger = new Logger(this, logName);
-      this.Manager = this.Address;
-      this.Logger.Log("Manager initialized", Level.Info);
+      Crypto = new Crypto(voterDataEncryptionKey);
+      MasterPassword =
+        Crypto.Hash(Bytes.From(masterPassword));
+      Logger = new Logger(this, logName);
+      Manager = Address;
+      Logger.Log("Manager initialized", Level.Info);
     }
 
     /// <summary>
@@ -179,21 +179,21 @@ namespace Aegis_DVL {
       Contract.Requires(ui != null);
       Contract.Requires(databaseFile != null);
 
-      this.Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
-      this.PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
-      this.ElectionInProgress = false;
-      this.Communicator = new LocalhostCommunicator(this);
-      this.Address = Communicator.GetLocalEndPoint(port);
-      this.Database = new VoterListDatabase(this, databaseFile);
-      this.UI = ui;
-      this.Crypto = new Crypto();
-      this.StartListening();
+      Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
+      PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
+      ElectionInProgress = false;
+      Communicator = new LocalhostCommunicator(this);
+      Address = Communicator.GetLocalEndPoint(port);
+      Database = new VoterListDatabase(this, databaseFile);
+      UI = ui;
+      Crypto = new Crypto();
+      StartListening();
     }
 
     /// <summary>
     /// Finalizes an instance of the <see cref="Station"/> class. 
     /// </summary>
-    ~Station() { this.Dispose(false); }
+    ~Station() { Dispose(false); }
 
     #endregion
 
@@ -214,11 +214,11 @@ namespace Aegis_DVL {
     ///   This is how you encrypt messages!
     /// </summary>
     public ICrypto Crypto {
-      [Pure] get { return this._crypto; }
+      [Pure] get { return _crypto; }
       set {
         Contract.Requires(value != null);
-        Contract.Ensures(Equals(this.Crypto, value));
-        this._crypto = value;
+        Contract.Ensures(Equals(Crypto, value));
+        _crypto = value;
       }
     }
 
@@ -240,7 +240,7 @@ namespace Aegis_DVL {
     ///   Is there enough active stations in the group to continue operations?
     /// </summary>
     public bool EnoughStations { [Pure] get {
-      return this.Peers.Keys.Count(this.StationActive) > 0; 
+      return Peers.Keys.Count(StationActive) > 0; 
       // TODO: Correct to '>' when not testing
     }}
 
@@ -248,7 +248,7 @@ namespace Aegis_DVL {
     ///   Am I the manager?
     /// </summary>
     public bool IsManager { [Pure] get {
-      return this.Address.Equals(this.Manager);
+      return Address.Equals(Manager);
     }}
 
     /// <summary>
@@ -261,11 +261,11 @@ namespace Aegis_DVL {
     ///   This is how you log messages!
     /// </summary>
     public ILogger Logger {
-      [Pure] get { return this._logger; }
+      [Pure] get { return _logger; }
       set {
         Contract.Requires(value != null);
-        Contract.Ensures(Equals(this.Logger, value));
-        this._logger = value;
+        Contract.Ensures(Equals(Logger, value));
+        _logger = value;
       }
     }
 
@@ -274,11 +274,11 @@ namespace Aegis_DVL {
     ///   This station is now the manager!
     /// </summary>
     public IPEndPoint Manager {
-      [Pure] get { return this._manager; }
+      [Pure] get { return _manager; }
       set {
         Contract.Requires(value != null);
-        Contract.Ensures(this.Manager.Equals(value));
-        this._manager = value;
+        Contract.Ensures(Manager.Equals(value));
+        _manager = value;
       }
     }
 
@@ -287,12 +287,12 @@ namespace Aegis_DVL {
     ///   The master password is this!
     /// </summary>
     public byte[] MasterPassword {
-      get { return this._masterPassword; }
+      get { return _masterPassword; }
       set {
         Contract.Requires(value != null);
-        Contract.Requires(this.MasterPassword == null);
-        Contract.Ensures(Equals(this.MasterPassword, value));
-        this._masterPassword = value;
+        Contract.Requires(MasterPassword == null);
+        Contract.Ensures(Equals(MasterPassword, value));
+        _masterPassword = value;
         value.ToFile("Master.pw");
       }
     }
@@ -336,8 +336,8 @@ namespace Aegis_DVL {
       } else {
         PeerStatuses.Add(peer, new StationStatus(peer, Communicator.GetIdentifyingStringForStation(peer), "Connected"));
       }
-      if (this.EnoughStations) this.UI.EnoughPeers();
-      if (this.Logger != null) this.Logger.Log("Peer added: " + peer, Level.Info);
+      if (EnoughStations) UI.EnoughPeers();
+      if (Logger != null) Logger.Log("Peer added: " + peer, Level.Info);
     }
 
     /// <summary>
@@ -350,13 +350,13 @@ namespace Aegis_DVL {
     /// The public AsymmetricKey of the station to add.
     /// </param>
     public void AnnounceAddPeer(IPEndPoint newPeer, AsymmetricKey newPeerKey) {
-      Contract.Requires(this.IsManager);
+      Contract.Requires(IsManager);
       Contract.Requires(newPeer != null);
-      this.Peers.Keys.Where(peer => !peer.Equals(newPeer))
+      Peers.Keys.Where(peer => !peer.Equals(newPeer))
           .ForEach(peer => 
-            this.Communicator.Send(new AddPeerCommand(this.Address, newPeer, newPeerKey), peer));
-      if (this.Logger != null) 
-        this.Logger.Log("Announcing that this peer should be added to the peerlist: " + 
+            Communicator.Send(new AddPeerCommand(Address, newPeer, newPeerKey), peer));
+      if (Logger != null) 
+        Logger.Log("Announcing that this peer should be added to the peerlist: " + 
           newPeer, Level.Info);
     }
 
@@ -364,14 +364,14 @@ namespace Aegis_DVL {
     ///   Announce to all stations that the election has ended!
     /// </summary>
     public void AnnounceEndElection() {
-      Contract.Requires(this.ElectionInProgress);
-      Contract.Requires(this.IsManager);
-      Contract.Ensures(!this.ElectionInProgress);
-      this.EndElection();
-      this.Peers.Keys.ForEach(peer => 
-        this.Communicator.Send(new EndElectionCommand(this.Address), peer));
-      if (this.Logger != null) 
-        this.Logger.Log("Announcing that the election should be ended.", 
+      Contract.Requires(ElectionInProgress);
+      Contract.Requires(IsManager);
+      Contract.Ensures(!ElectionInProgress);
+      EndElection();
+      Peers.Keys.ForEach(peer => 
+        Communicator.Send(new EndElectionCommand(Address), peer));
+      if (Logger != null) 
+        Logger.Log("Announcing that the election should be ended.", 
           Level.Info);
     }
 
@@ -382,13 +382,17 @@ namespace Aegis_DVL {
     /// The address of the station to remove.
     /// </param>
     public void AnnounceRemovePeer(IPEndPoint peerToRemove) {
-      Contract.Requires(this.IsManager);
+      Contract.Requires(IsManager);
       Contract.Requires(peerToRemove != null);
-      this.RemovePeer(peerToRemove);
-      this.Peers.Keys.ForEach(peer => 
-        this.Communicator.Send(new RemovePeerCommand(this.Address, peerToRemove), peer));
-      if (this.Logger != null) 
-        this.Logger.Log("Announcing that this peer should be removed from the peerlist: " + 
+      Contract.Requires(Peers.Keys.Contains(peerToRemove));
+      RemovePeer(peerToRemove);
+      foreach (IPEndPoint peer in Peers.Keys) {
+        if (!Address.Equals(peer)) {
+          Communicator.Send(new RemovePeerCommand(Address, peerToRemove), peer);
+        }
+      }
+      if (Logger != null) 
+        Logger.Log("Announcing that this peer should be removed from the peerlist: " + 
           peerToRemove, Level.Info);
     }
 
@@ -402,12 +406,12 @@ namespace Aegis_DVL {
     /// The CPR number to revoke a ballot for.
     /// </param>
     public void AnnounceRevokeBallot(Voter voter, VoterStatus oldStatus) {
-      Contract.Requires(this.IsManager);
-      var cmd = new DemandStatusChangeCommand(this.Address, new VoterNumber(voter.VoterId), oldStatus);
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(cmd, peer));
+      Contract.Requires(IsManager);
+      var cmd = new DemandStatusChangeCommand(Address, new VoterNumber(voter.VoterId), oldStatus);
+      Peers.Keys.ForEach(peer => Communicator.Send(cmd, peer));
       cmd.Execute(this);
-      if (this.Logger != null) 
-        this.Logger.Log("Announcing that this status change should be revoked for voter number " + 
+      if (Logger != null) 
+        Logger.Log("Announcing that this status change should be revoked for voter number " + 
           voter.VoterId, Level.Warn);
     }
 
@@ -415,13 +419,13 @@ namespace Aegis_DVL {
     ///   Announce to all stations that the election has started!
     /// </summary>
     public void AnnounceStartElection() {
-      Contract.Requires(!this.ElectionInProgress);
-      Contract.Requires(this.IsManager);
-      Contract.Ensures(this.ElectionInProgress);
-      this.StartElection();
-      this.Peers.Keys.ForEach(peer => this.Communicator.Send(new StartElectionCommand(this.Address), peer));
-      if (this.Logger != null) 
-        this.Logger.Log("Announcing that the election should be started.", 
+      Contract.Requires(!ElectionInProgress);
+      Contract.Requires(IsManager);
+      Contract.Ensures(ElectionInProgress);
+      StartElection();
+      Peers.Keys.ForEach(peer => Communicator.Send(new StartElectionCommand(Address), peer));
+      if (Logger != null) 
+        Logger.Log("Announcing that the election should be started.", 
           Level.Info);
     }
 
@@ -432,10 +436,10 @@ namespace Aegis_DVL {
     /// The voternumber to request a ballot for.
     /// </param>
     public void BallotReceived(VoterNumber voterNumber, VoterStatus voterStatus) {
-      Contract.Ensures(this.Database[voterNumber] == voterStatus);
-      this.Database[voterNumber] = voterStatus;
-      if (this.Logger != null) 
-        this.Logger.Log("Changed voter number " + voterNumber + 
+      Contract.Ensures(Database[voterNumber] == voterStatus);
+      Database[voterNumber] = voterStatus;
+      if (Logger != null) 
+        Logger.Log("Changed voter number " + voterNumber + 
           " status to " + voterStatus + ".", Level.Info);
       UI.RefreshStatistics();
     }
@@ -447,7 +451,7 @@ namespace Aegis_DVL {
     /// The <see cref="IEnumerable"/>.
     /// </returns>
     [Pure] public void DiscoverPeers() {
-      HashSet<IPEndPoint> potentials = new HashSet<IPEndPoint>(Communicator.DiscoverNetworkMachines().Concat(Peers.Keys));
+      HashSet<IPEndPoint> potentials = new HashSet<IPEndPoint>(Communicator.DiscoverPeers().Concat(Peers.Keys));
 
       foreach (IPEndPoint peer in potentials) {
         bool listening = Communicator.IsListening(peer);
@@ -469,7 +473,7 @@ namespace Aegis_DVL {
     /// The dispose.
     /// </summary>
     public void Dispose() {
-      if (!this._isDisposed) this.Dispose(true);
+      if (!_isDisposed) Dispose(true);
       GC.SuppressFinalize(this);
     }
 
@@ -477,29 +481,29 @@ namespace Aegis_DVL {
     ///   Elect a new manager!
     /// </summary>
     public void ElectNewManager() {
-      Contract.Ensures(this.Manager != null);
-      this.RemovePeer(this.Manager);
-      var candidates = new SortedSet<IPEndPoint>(new IPEndPointComparer()) { this.Address };
-      this.Peers.Keys.Where(this.StationActive).ForEach(candidate => 
+      Contract.Ensures(Manager != null);
+      RemovePeer(Manager);
+      var candidates = new SortedSet<IPEndPoint>(new IPEndPointComparer()) { Address };
+      Peers.Keys.Where(StationActive).ForEach(candidate => 
         candidates.Add(candidate));
-      this.Manager = candidates.First();
-      if (this.IsManager) {
-        this.UI.IsNowManager();
+      Manager = candidates.First();
+      if (IsManager) {
+        UI.IsNowManager();
       } else {
         UI.ResetBallotRequestPage();
       }
-      if (this.Logger != null) 
-        this.Logger.Log("Elected new manager: " + this.Manager, Level.Warn);
+      if (Logger != null) 
+        Logger.Log("Elected new manager: " + Manager, Level.Warn);
     }
 
     /// <summary>
     ///   End the election
     /// </summary>
     public void EndElection() {
-      Contract.Requires(this.ElectionInProgress);
-      Contract.Ensures(!this.ElectionInProgress);
-      this.ElectionInProgress = false;
-      if (this.Logger != null) this.Logger.Log("Election ended", Level.Info);
+      Contract.Requires(ElectionInProgress);
+      Contract.Ensures(!ElectionInProgress);
+      ElectionInProgress = false;
+      if (Logger != null) Logger.Log("Election ended", Level.Info);
     }
 
     /// <summary>
@@ -510,9 +514,9 @@ namespace Aegis_DVL {
     /// </param>
     public void ExchangePublicKeys(IPEndPoint target) {
       Contract.Requires(target != null);
-      this.Communicator.Send(new PublicKeyExchangeCommand(this, target), target);
-      if (this.Logger != null) 
-        this.Logger.Log("Exchanging public keys with " + target, Level.Info);
+      Communicator.Send(new PublicKeyExchangeCommand(this, target), target);
+      if (Logger != null) 
+        Logger.Log("Exchanging public keys with " + target, Level.Info);
     }
 
     /// <summary>
@@ -523,13 +527,13 @@ namespace Aegis_DVL {
     /// </param>
     public void PromoteNewManager(IPEndPoint newManager) {
       Contract.Requires(!PromotionInProgress);
-      Contract.Requires(this.IsManager);
+      Contract.Requires(IsManager);
       Contract.Requires(newManager != null);
       Communicator.Send(new PromoteNewManagerCommand(Address, newManager), newManager);
       PromotedStation = newManager;
       PromotionInProgress = true;
-      if (this.Logger != null) 
-        this.Logger.Log("Promoting " + newManager + " to be the manager", 
+      if (Logger != null) 
+        Logger.Log("Promoting " + newManager + " to be the manager", 
           Level.Warn);
     }
 
@@ -540,13 +544,13 @@ namespace Aegis_DVL {
         PromotedStation = null;
         var others = Peers.Keys.Where(peer => !peer.Equals(newManager));
         others.ForEach(
-          peer => Communicator.Send(new PromoteNewManagerCommand(this.Address, newManager), peer));
+          peer => Communicator.Send(new PromoteNewManagerCommand(Address, newManager), peer));
         UI.ConvertToStation();
         if (Logger != null) {
           Logger.Log("Promotion of " + newManager + " complete", Level.Warn);
         }
       } else {
-        if (this.Logger != null) {
+        if (Logger != null) {
           Logger.Log("Erroneous promotion claim by " + newManager + ", ending election", Level.Fatal);
           ShutDownElection();
         }
@@ -561,20 +565,21 @@ namespace Aegis_DVL {
     /// </param>
     public void RemovePeer(IPEndPoint peer) {
       Contract.Requires(peer != null);
-      Contract.Ensures(!this.Peers.ContainsKey(peer));
-      if (Manager.Equals(Address)) {
-        // only the manager should disconnect stations explicitly
-        this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(Manager.Address, Manager.Port), peer), peer);
-        if (this.Logger != null) this.Logger.Log("Removing station " + peer, Level.Info);
+      Contract.Ensures(!Peers.ContainsKey(peer));
+      if (Peers.Remove(peer)) {
+        PeerStatuses.Remove(peer);
+        if (IsManager) {
+          // only the manager should disconnect stations explicitly
+          Communicator.Send(new DisconnectStationCommand(new IPEndPoint(Manager.Address, Manager.Port), peer), peer);
+          if (!EnoughStations) UI.NotEnoughPeers();
+          if (Logger != null) Logger.Log("Station " + peer + " was removed.", Level.Info);
+        }
       } else if (peer.Equals(Address)) {
         // we are the peer being disconnected
-        if (this.Logger != null) this.Logger.Log("This station has been removed by the manager.", Level.Info);
+        if (Logger != null) Logger.Log("This station has been removed by the manager.", Level.Info);
         UI.StationRemoved();
       } else {
-        Peers.Remove(peer);
-        PeerStatuses.Remove(peer);
-        if (!this.EnoughStations) this.UI.NotEnoughPeers();
-        if (this.Logger != null) this.Logger.Log("Peer " + peer + " was removed.", Level.Info);
+        if (Logger != null) Logger.Log("Attempt to remove nonexistent peer " + peer, Level.Error);
       }
     }
 
@@ -585,9 +590,9 @@ namespace Aegis_DVL {
     /// The voternumber to request a ballot for.
     /// </param>
     public void RequestStatusChange(Voter voter, VoterStatus voterStatus) {
-      this.Communicator.Send(new RequestStatusChangeCommand(this.Address, new VoterNumber(voter.VoterId), (VoterStatus) voter.PollbookStatus, voterStatus), this.Manager);
-      if (this.Logger != null) 
-        this.Logger.Log("Requesting status change for voter number " + 
+      Communicator.Send(new RequestStatusChangeCommand(Address, new VoterNumber(voter.VoterId), (VoterStatus) voter.PollbookStatus, voterStatus), Manager);
+      if (Logger != null) 
+        Logger.Log("Requesting status change for voter number " + 
           voter.VoterId + " to " + voterStatus, Level.Info);
     }
 
@@ -605,12 +610,12 @@ namespace Aegis_DVL {
     ///   The system is compromised, notify everyone and shut down the election!
     /// </summary>
     public void ShutDownElection() {
-      if (this.Logger != null) 
-        this.Logger.Log("Compromised system---shutting down election.", 
+      if (Logger != null) 
+        Logger.Log("Compromised system---shutting down election.", 
           Level.Fatal);
-      this.Peers.Keys.ForEach(peer => 
-        this.Communicator.Send(new ShutDownElectionCommand(this.Address), peer));
-      this.UI.Shutdown();
+      Peers.Keys.ForEach(peer => 
+        Communicator.Send(new ShutDownElectionCommand(Address), peer));
+      UI.Shutdown();
       throw new TheOnlyException();
     }
 
@@ -618,17 +623,17 @@ namespace Aegis_DVL {
     ///   Start the election!
     /// </summary>
     public void StartElection() {
-      Contract.Ensures(this.ElectionInProgress);
-      this.ElectionInProgress = true;
-      if (this.Logger != null) this.Logger.Log("Election started", Level.Info);
+      Contract.Ensures(ElectionInProgress);
+      ElectionInProgress = true;
+      if (Logger != null) Logger.Log("Election started", Level.Info);
     }
 
     /// <summary>
     ///   Start listening to other stations!
     /// </summary>
     public void StartListening() {
-      Contract.Requires(!this.Listening);
-      Contract.Ensures(this.Listening);
+      Contract.Requires(!Listening);
+      Contract.Ensures(Listening);
       Listening = true;
       Communicator.StartThreads();
     }
@@ -637,11 +642,11 @@ namespace Aegis_DVL {
     ///   Start election of a new manager!
     /// </summary>
     public void StartNewManagerElection() {
-      this.ElectNewManager();
-      this.Peers.Keys.ForEach(peer => 
-        this.Communicator.Send(new ElectNewManagerCommand(this.Address), peer));
-      if (this.Logger != null) 
-        this.Logger.Log("Announced that a new manager should be elected", 
+      ElectNewManager();
+      Peers.Keys.ForEach(peer => 
+        Communicator.Send(new ElectNewManagerCommand(Address), peer));
+      if (Logger != null) 
+        Logger.Log("Announced that a new manager should be elected", 
           Level.Warn);
     }
 
@@ -657,19 +662,19 @@ namespace Aegis_DVL {
     [Pure] public bool StationActive(IPEndPoint target) {
       Contract.Requires(target != null);
       Contract.Requires(Listening);
-      return this.Communicator.IsListening(target);
+      return Communicator.IsListening(target);
     }
 
     /// <summary>
     ///   Stop listening to other stations!
     /// </summary>
     public void StopListening() {
-      Contract.Requires(this.Listening);
-      Contract.Ensures(!this.Listening);
+      Contract.Requires(Listening);
+      Contract.Ensures(!Listening);
       Communicator.StopThreads();
-      this.Listening = false;
-      if (this.Logger != null) 
-        this.Logger.Log("Stopped listening", Level.Info);
+      Listening = false;
+      if (Logger != null) 
+        Logger.Log("Stopped listening", Level.Info);
     }
 
     /// <summary>
@@ -683,9 +688,9 @@ namespace Aegis_DVL {
     /// </returns>
     [Pure] public bool ValidMasterPassword(string password) {
       Contract.Requires(password != null);
-      return this._masterPassword != null &&
-             this._masterPassword.SequenceEqual(
-               this.Crypto.Hash(Bytes.From(password)));
+      return _masterPassword != null &&
+             _masterPassword.SequenceEqual(
+               Crypto.Hash(Bytes.From(password)));
     }
 
     #endregion
@@ -702,19 +707,19 @@ namespace Aegis_DVL {
     /// The disposing.
     /// </param>
     private void Dispose(bool disposing) {
-      this._isDisposed = true;
+      _isDisposed = true;
       if (!disposing) return;
-      //if (this.Crypto != null) this.Crypto.Dispose();
-      if (this.Listening) this.StopListening();
-      this.Database.Dispose();
-      if (this.Logger != null) {
-        this.Logger.Log("Disposing self", Level.Info);
-        this.Logger.Dispose();
+      //if (Crypto != null) Crypto.Dispose();
+      if (Listening) StopListening();
+      Database.Dispose();
+      if (Logger != null) {
+        Logger.Log("Disposing self", Level.Info);
+        Logger.Dispose();
       }
 
-      this._logger = null;
-      this._crypto = null;
-      this.Database = null;
+      _logger = null;
+      _crypto = null;
+      Database = null;
       Communicator.StopThreads();
       Communicator = null;
       Console.WriteLine("Station " + this + " disposed."); 
@@ -724,8 +729,8 @@ namespace Aegis_DVL {
     /// The object invariant.
     /// </summary>
     [ContractInvariantMethod] private void ObjectInvariant() {
-      Contract.Invariant(this.Address != null);
-      Contract.Invariant(this.Peers != null);
+      Contract.Invariant(Address != null);
+      Contract.Invariant(Peers != null);
     }
 
     #endregion

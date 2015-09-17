@@ -105,7 +105,7 @@ namespace Aegis_DVL.Communication {
     /// <returns>
     /// The <see cref="IEnumerable"/>.
     /// </returns>
-    [Pure] public IEnumerable<IPEndPoint> DiscoverNetworkMachines() {
+    [Pure] public IEnumerable<IPEndPoint> DiscoverPeers() {
       var cdEvent = new CountdownEvent(1);
 
       // narrow down possible targets
@@ -264,21 +264,37 @@ namespace Aegis_DVL.Communication {
     /// The IPEndPoint representing the local end point.
     /// </returns>
     void DestroyLocalEndPoint() {
+      Contract.Ensures(tcpListener == null);
+      Contract.Ensures(udpSocket == null);
       if (tcpListener != null) {
         try {
           tcpListener.Stop();
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Stopped TCP listener on port " + localPort, Level.Info);
+          } else {
+            Console.WriteLine("Stopped TCP listener on port " + localPort);
+          }
         } catch (Exception) {
           // ignored
         }
+        tcpListener = null;
       }
 
       if (udpSocket != null) {
         try {
           udpSocket.Close();
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Stopped UDP listener on port " + localPort, Level.Info);
+          } else {
+            Console.WriteLine("Stopped UDP listener on port " + localPort);
+          }
         } catch (Exception) {
           // ignored
         }
+        udpSocket = null;
       }
+
+      localPort = 0;
     }
 
     /// <summary>
@@ -319,10 +335,10 @@ namespace Aegis_DVL.Communication {
 
       if (responseTimes.ContainsKey(address) &&
           DateTime.Now.Subtract(responseTimes[address]).TotalSeconds < 30) {
-        // we've heard from this station within the last minute
+        // we've heard from this station within the last 30 seconds
         result = true;
       } else {
-        // we haven't heard from this station in a minute, or ever, let's ping it
+        // we haven't heard from this station in 30 seconds, or ever, let's ping it
         TcpClient client = new TcpClient();
         WaitHandle wh = null;
 

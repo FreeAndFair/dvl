@@ -86,7 +86,7 @@ namespace Aegis_DVL.Communication {
     /// <returns>
     /// The <see cref="IEnumerable"/>.
     /// </returns>
-    [Pure] public IEnumerable<IPEndPoint> DiscoverNetworkMachines() {
+    [Pure] public IEnumerable<IPEndPoint> DiscoverPeers() {
       var cdEvent = new CountdownEvent(1);
       string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
                     ip.AddressFamily == AddressFamily.InterNetwork).ToString();

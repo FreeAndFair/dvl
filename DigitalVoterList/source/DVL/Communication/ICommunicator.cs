@@ -37,7 +37,7 @@ namespace Aegis_DVL.Communication {
     ///   What are the addresses of machines in the local network?
     /// </summary>
     /// <returns>A collection of IPEndPoints containing the addresses of discovered computers.</returns>
-    IEnumerable<IPEndPoint> DiscoverNetworkMachines();
+    IEnumerable<IPEndPoint> DiscoverPeers();
 
     /// <summary>
     /// Gets the local end point for this instance of the pollbook. If 
@@ -132,7 +132,7 @@ namespace Aegis_DVL.Communication {
     /// <returns>
     /// The <see cref="IEnumerable"/>.
     /// </returns>
-    public IEnumerable<IPEndPoint> DiscoverNetworkMachines() {
+    public IEnumerable<IPEndPoint> DiscoverPeers() {
       Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>() != null);
       Contract.Ensures(Contract.ForAll(Contract.Result<IEnumerable<IPEndPoint>>(), x => x != null));
       return default(IEnumerable<IPEndPoint>);
