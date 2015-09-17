@@ -92,38 +92,38 @@ namespace Tests {
     /// The add and remove peer test.
     /// </summary>
     [Test] public void AddAndRemovePeerTest() {
-      Assert.That(!this.Manager.Peers.ContainsKey(this.Peer4.Address));
-      this.Manager.AddPeer(this.Peer4.Address, new AsymmetricKey(this.Peer4.Crypto.KeyPair.Public));
-      Assert.That(this.Manager.Peers.ContainsKey(this.Peer4.Address));
-      this.Manager.RemovePeer(this.Peer4.Address);
-      Assert.That(!this.Manager.Peers.ContainsKey(this.Peer4.Address));
+      Assert.That(!Manager.Peers.ContainsKey(Peer4.Address));
+      Manager.AddPeer(Peer4.Address, new AsymmetricKey(Peer4.Crypto.KeyPair.Public));
+      Assert.That(Manager.Peers.ContainsKey(Peer4.Address));
+      Manager.RemovePeer(Peer4.Address);
+      Assert.That(!Manager.Peers.ContainsKey(Peer4.Address));
     }
 
     /// <summary>
     /// The announce add and remove peer test.
     /// </summary>
     [Test] public void AnnounceAddAndRemovePeerTest() {
-      this.Manager.StartListening();
-      this.Peer1.StartListening();
-      this.Peer2.StartListening();
-      this.Peer3.StartListening();
-      this.Peer4.StartListening();
+      Manager.StartListening();
+      Peer1.StartListening();
+      Peer2.StartListening();
+      Peer3.StartListening();
+      Peer4.StartListening();
       Assert.That(
-        !this.Manager.Peers.ContainsKey(this.Peer4.Address) && !this.Peer1.Peers.ContainsKey(this.Peer4.Address) &&
-        !this.Peer2.Peers.ContainsKey(this.Peer4.Address) && !this.Peer3.Peers.ContainsKey(this.Peer4.Address));
-      this.Manager.AnnounceAddPeer(this.Peer4.Address, 
-        new AsymmetricKey(this.Peer4.Crypto.KeyPair.Public));
-      this.Manager.AddPeer(this.Peer4.Address, 
-        new AsymmetricKey(this.Peer4.Crypto.KeyPair.Public));
+        !Manager.Peers.ContainsKey(Peer4.Address) && !Peer1.Peers.ContainsKey(Peer4.Address) &&
+        !Peer2.Peers.ContainsKey(Peer4.Address) && !Peer3.Peers.ContainsKey(Peer4.Address));
+      Manager.AnnounceAddPeer(Peer4.Address, 
+        new AsymmetricKey(Peer4.Crypto.KeyPair.Public));
+      Manager.AddPeer(Peer4.Address, 
+        new AsymmetricKey(Peer4.Crypto.KeyPair.Public));
       Thread.Sleep(3000);
       Assert.That(
-        this.Manager.Peers.ContainsKey(this.Peer4.Address) && this.Peer1.Peers.ContainsKey(this.Peer4.Address) &&
-        this.Peer2.Peers.ContainsKey(this.Peer4.Address) && this.Peer3.Peers.ContainsKey(this.Peer4.Address));
-      this.Manager.AnnounceRemovePeer(this.Peer4.Address);
+        Manager.Peers.ContainsKey(Peer4.Address) && Peer1.Peers.ContainsKey(Peer4.Address) &&
+        Peer2.Peers.ContainsKey(Peer4.Address) && Peer3.Peers.ContainsKey(Peer4.Address));
+      Manager.AnnounceRemovePeer(Peer4.Address);
       Thread.Sleep(3000);
       Assert.That(
-        !this.Manager.Peers.ContainsKey(this.Peer4.Address) && !this.Peer1.Peers.ContainsKey(this.Peer4.Address) &&
-        !this.Peer2.Peers.ContainsKey(this.Peer4.Address) && !this.Peer3.Peers.ContainsKey(this.Peer4.Address));
+        !Manager.Peers.ContainsKey(Peer4.Address) && !Peer1.Peers.ContainsKey(Peer4.Address) &&
+        !Peer2.Peers.ContainsKey(Peer4.Address) && !Peer3.Peers.ContainsKey(Peer4.Address));
     }
 
     /// <summary>
@@ -131,16 +131,16 @@ namespace Tests {
     /// </summary>
     [Test] public void AnnounceStartAndEndElectionTest() {
       Assert.That(
-        !(this.Manager.ElectionInProgress && this.Peer1.ElectionInProgress && this.Peer2.ElectionInProgress &&
-          this.Peer3.ElectionInProgress));
-      this.AsyncManagerAnnounce(() => this.Manager.AnnounceStartElection());
+        !(Manager.ElectionInProgress && Peer1.ElectionInProgress && Peer2.ElectionInProgress &&
+          Peer3.ElectionInProgress));
+      AsyncManagerAnnounce(() => Manager.AnnounceStartElection());
       Assert.That(
-        this.Manager.ElectionInProgress && this.Peer1.ElectionInProgress && this.Peer2.ElectionInProgress &&
-        this.Peer3.ElectionInProgress);
-      this.AsyncManagerAnnounce(() => this.Manager.AnnounceEndElection());
+        Manager.ElectionInProgress && Peer1.ElectionInProgress && Peer2.ElectionInProgress &&
+        Peer3.ElectionInProgress);
+      AsyncManagerAnnounce(() => Manager.AnnounceEndElection());
       Assert.That(
-        !(this.Manager.ElectionInProgress && this.Peer1.ElectionInProgress && this.Peer2.ElectionInProgress &&
-          this.Peer3.ElectionInProgress));
+        !(Manager.ElectionInProgress && Peer1.ElectionInProgress && Peer2.ElectionInProgress &&
+          Peer3.ElectionInProgress));
     }
 
     /// <summary>
@@ -150,30 +150,30 @@ namespace Tests {
     [Test] public void BallotReceivedAndRevoked() {
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.Unavailable);
-      this.Peer1.Database.Import(
+      Assert.That(Peer1.Database[vn] == BallotStatus.Unavailable);
+      Peer1.Database.Import(
         new List<EncryptedVoterData> {
           new EncryptedVoterData(
             new CipherText(
-              this.Peer1.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), this.Peer1.Crypto.VoterDataEncryptionKey)), 
+              Peer1.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), Peer1.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Peer1.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), this.Peer1.Crypto.VoterDataEncryptionKey)), 
+              Peer1.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), Peer1.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Peer1.Crypto.AsymmetricEncrypt(
-                Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), this.Peer1.Crypto.VoterDataEncryptionKey)))
+              Peer1.Crypto.AsymmetricEncrypt(
+                Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), Peer1.Crypto.VoterDataEncryptionKey)))
         });
 
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.NotReceived);
-      this.Peer1.BallotReceived(vn);
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.Received);
-      this.Peer1.RevokeBallot(vn);
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer1.Database[vn] == BallotStatus.NotReceived);
+      Peer1.BallotReceived(vn);
+      Assert.That(Peer1.Database[vn] == BallotStatus.Received);
+      Peer1.RevokeBallot(vn);
+      Assert.That(Peer1.Database[vn] == BallotStatus.NotReceived);
 
-      Assert.That(this.Peer1.Database[cpr, "yo boii"] == BallotStatus.NotReceived);
-      this.Peer1.BallotReceived(cpr, "yo boii");
-      Assert.That(this.Peer1.Database[cpr, "yo boii"] == BallotStatus.Received);
-      this.Peer1.RevokeBallot(cpr, "yo boii");
-      Assert.That(this.Peer1.Database[cpr, "yo boii"] == BallotStatus.NotReceived);
+      Assert.That(Peer1.Database[cpr, "yo boii"] == BallotStatus.NotReceived);
+      Peer1.BallotReceived(cpr, "yo boii");
+      Assert.That(Peer1.Database[cpr, "yo boii"] == BallotStatus.Received);
+      Peer1.RevokeBallot(cpr, "yo boii");
+      Assert.That(Peer1.Database[cpr, "yo boii"] == BallotStatus.NotReceived);
     }
     */
 
@@ -181,17 +181,17 @@ namespace Tests {
     /// The elect new manager.
     /// </summary>
     [Test] public void ElectNewManager() {
-      Assert.That(this.Peer1.Manager.Equals(this.Manager.Address));
-      this.AsyncManagerAnnounce(
+      Assert.That(Peer1.Manager.Equals(Manager.Address));
+      AsyncManagerAnnounce(
         () => {
           // "Have" to send bogus command to kill the listener.
           // ReSharper disable ReturnValueOfPureMethodIsNotUsed
-          this.Manager.StationActive(this.Peer1.Address);
+          Manager.StationActive(Peer1.Address);
 
           // ReSharper restore ReturnValueOfPureMethodIsNotUsed
-          this.Peer1.ElectNewManager();
+          Peer1.ElectNewManager();
         });
-      Assert.That(!this.Peer1.Manager.Equals(this.Manager.Address));
+      Assert.That(!Peer1.Manager.Equals(Manager.Address));
     }
 
     /// <summary>
@@ -199,7 +199,7 @@ namespace Tests {
     /// </summary>
     [Test]
     public void EnoughStationsTest() {
-      this.AsyncManagerAnnounce(() => Assert.That(this.Manager.EnoughStations));
+      AsyncManagerAnnounce(() => Assert.That(Manager.EnoughStations));
     }
 
     /// <summary>
@@ -236,33 +236,33 @@ namespace Tests {
     /// The listener test.
     /// </summary>
     [Test] public void ListenerTest() {
-      this.Manager.StartListening();
+      Manager.StartListening();
 
       // Waste some CPU time while the thread hopefully starts...
       int c = 0;
       while (c < 500000) c++;
       Console.WriteLine(c);
-      Assert.That(this.Peer1.StationActive(this.Manager.Address));
-      Assert.That(this.Peer1.StationActive(this.Manager.Address));
-      this.Manager.StopListening();
-      Assert.That(!this.Peer1.StationActive(this.Manager.Address));
+      Assert.That(Peer1.StationActive(Manager.Address));
+      Assert.That(Peer1.StationActive(Manager.Address));
+      Manager.StopListening();
+      Assert.That(!Peer1.StationActive(Manager.Address));
     }
 
     /// <summary>
     /// The promote new manager test.
     /// </summary>
     [Test] public void PromoteNewManagerTest() {
-      IPEndPoint oldManager = this.Manager.Address;
-      IPEndPoint newManager = this.Peer1.Address;
+      IPEndPoint oldManager = Manager.Address;
+      IPEndPoint newManager = Peer1.Address;
       Assert.That(
-        this.Manager.Manager.Equals(oldManager) && this.Peer1.Manager.Equals(oldManager) &&
-        this.Peer2.Manager.Equals(oldManager) && this.Peer3.Manager.Equals(oldManager));
-      Assert.That(this.Manager.IsManager && !this.Peer1.IsManager && !this.Peer2.IsManager && !this.Peer3.IsManager);
-      this.AsyncManagerAnnounce(() => this.Manager.PromoteNewManager(newManager));
-      Assert.That(!this.Manager.IsManager && this.Peer1.IsManager && !this.Peer2.IsManager && !this.Peer3.IsManager);
+        Manager.Manager.Equals(oldManager) && Peer1.Manager.Equals(oldManager) &&
+        Peer2.Manager.Equals(oldManager) && Peer3.Manager.Equals(oldManager));
+      Assert.That(Manager.IsManager && !Peer1.IsManager && !Peer2.IsManager && !Peer3.IsManager);
+      AsyncManagerAnnounce(() => Manager.PromoteNewManager(newManager));
+      Assert.That(!Manager.IsManager && Peer1.IsManager && !Peer2.IsManager && !Peer3.IsManager);
       Assert.That(
-        this.Manager.Manager.Equals(newManager) && this.Peer1.Manager.Equals(newManager) &&
-        this.Peer2.Manager.Equals(newManager) && this.Peer3.Manager.Equals(newManager));
+        Manager.Manager.Equals(newManager) && Peer1.Manager.Equals(newManager) &&
+        Peer2.Manager.Equals(newManager) && Peer3.Manager.Equals(newManager));
     }
 
     /// <summary>
@@ -272,55 +272,55 @@ namespace Tests {
     [Test] public void RequestBallotAndAnnounceBallotReceivedAndRevokedTest() {
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.Unavailable);
-      Assert.That(this.Peer2.Database[vn] == BallotStatus.Unavailable);
-      Assert.That(this.Peer3.Database[vn] == BallotStatus.Unavailable);
-      Assert.That(this.Manager.Database[vn] == BallotStatus.Unavailable);
+      Assert.That(Peer1.Database[vn] == BallotStatus.Unavailable);
+      Assert.That(Peer2.Database[vn] == BallotStatus.Unavailable);
+      Assert.That(Peer3.Database[vn] == BallotStatus.Unavailable);
+      Assert.That(Manager.Database[vn] == BallotStatus.Unavailable);
       var data = new List<EncryptedVoterData> {
         new EncryptedVoterData(
           new CipherText(
-            this.Peer1.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), this.Peer1.Crypto.VoterDataEncryptionKey)), 
+            Peer1.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), Peer1.Crypto.VoterDataEncryptionKey)), 
           new CipherText(
-            this.Peer1.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), this.Peer1.Crypto.VoterDataEncryptionKey)), 
+            Peer1.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), Peer1.Crypto.VoterDataEncryptionKey)), 
           new CipherText(
-            this.Peer1.Crypto.AsymmetricEncrypt(
-              Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), this.Peer1.Crypto.VoterDataEncryptionKey)))
+            Peer1.Crypto.AsymmetricEncrypt(
+              Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), Peer1.Crypto.VoterDataEncryptionKey)))
       };
-      this.Peer1.Database.Import(data);
-      this.Peer2.Database.Import(data);
-      this.Peer3.Database.Import(data);
-      this.Manager.Database.Import(data);
+      Peer1.Database.Import(data);
+      Peer2.Database.Import(data);
+      Peer3.Database.Import(data);
+      Manager.Database.Import(data);
 
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Peer2.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Peer3.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Manager.Database[vn] == BallotStatus.NotReceived);
-      IAsyncResult managerListenerResult = this.ManagerListener.BeginInvoke(null, null);
-      this.AsyncManagerAnnounce(() => this.Peer1.RequestBallot(vn));
-      this.ManagerListener.EndInvoke(managerListenerResult);
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.Received);
-      Assert.That(this.Peer2.Database[vn] == BallotStatus.Received);
-      Assert.That(this.Peer3.Database[vn] == BallotStatus.Received);
-      Assert.That(this.Manager.Database[vn] == BallotStatus.Received);
-      this.AsyncManagerAnnounce(() => this.Manager.AnnounceRevokeBallot(vn, cpr));
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Peer2.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Peer3.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Manager.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer1.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer2.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer3.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Manager.Database[vn] == BallotStatus.NotReceived);
+      IAsyncResult managerListenerResult = ManagerListener.BeginInvoke(null, null);
+      AsyncManagerAnnounce(() => Peer1.RequestBallot(vn));
+      ManagerListener.EndInvoke(managerListenerResult);
+      Assert.That(Peer1.Database[vn] == BallotStatus.Received);
+      Assert.That(Peer2.Database[vn] == BallotStatus.Received);
+      Assert.That(Peer3.Database[vn] == BallotStatus.Received);
+      Assert.That(Manager.Database[vn] == BallotStatus.Received);
+      AsyncManagerAnnounce(() => Manager.AnnounceRevokeBallot(vn, cpr));
+      Assert.That(Peer1.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer2.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer3.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Manager.Database[vn] == BallotStatus.NotReceived);
 
-      managerListenerResult = this.ManagerListener.BeginInvoke(null, null);
-      this.AsyncManagerAnnounce(() => this.Peer1.RequestBallot(cpr, "yo boii"));
-      this.ManagerListener.EndInvoke(managerListenerResult);
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.Received);
-      Assert.That(this.Peer2.Database[vn] == BallotStatus.Received);
-      Assert.That(this.Peer3.Database[vn] == BallotStatus.Received);
-      Assert.That(this.Manager.Database[vn] == BallotStatus.Received);
+      managerListenerResult = ManagerListener.BeginInvoke(null, null);
+      AsyncManagerAnnounce(() => Peer1.RequestBallot(cpr, "yo boii"));
+      ManagerListener.EndInvoke(managerListenerResult);
+      Assert.That(Peer1.Database[vn] == BallotStatus.Received);
+      Assert.That(Peer2.Database[vn] == BallotStatus.Received);
+      Assert.That(Peer3.Database[vn] == BallotStatus.Received);
+      Assert.That(Manager.Database[vn] == BallotStatus.Received);
 
-      this.AsyncManagerAnnounce(() => this.Manager.AnnounceRevokeBallot(cpr, "yo boii"));
-      Assert.That(this.Peer1.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Peer2.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Peer3.Database[vn] == BallotStatus.NotReceived);
-      Assert.That(this.Manager.Database[vn] == BallotStatus.NotReceived);
+      AsyncManagerAnnounce(() => Manager.AnnounceRevokeBallot(cpr, "yo boii"));
+      Assert.That(Peer1.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer2.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Peer3.Database[vn] == BallotStatus.NotReceived);
+      Assert.That(Manager.Database[vn] == BallotStatus.NotReceived);
     }
     */
 
@@ -329,68 +329,68 @@ namespace Tests {
     /// </summary>
     [SetUp] public void SetUp() {
       var ui = new TestUi();
-      this.Manager = new Station(
+      Manager = new Station(
         ui, SystemTestData.Key, SystemTestData.Password, SystemTestData.ManagerPort, 
         "StationTestsManagerVoters.sqlite", "StationTestsManagerLog.sqlite");
       byte[] pswd =
-        this.Manager.Crypto.Hash(
+        Manager.Crypto.Hash(
           Bytes.From(SystemTestData.Password));
-      this.Peer1 = new Station(ui, SystemTestData.StationPort, "StationTestsPeer1Voters.sqlite") {
-        Manager = this.Manager.Address, 
+      Peer1 = new Station(ui, SystemTestData.StationPort, "StationTestsPeer1Voters.sqlite") {
+        Manager = Manager.Address, 
         MasterPassword = pswd, 
-        Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
+        Crypto = { VoterDataEncryptionKey = Manager.Crypto.VoterDataEncryptionKey }
       };
-      this.Peer2 = new Station(ui, SystemTestData.StationPort+1, "StationTestsPeer2Voters.sqlite")
+      Peer2 = new Station(ui, SystemTestData.StationPort+1, "StationTestsPeer2Voters.sqlite")
       {
-        Manager = this.Manager.Address, 
+        Manager = Manager.Address, 
         MasterPassword = pswd, 
-        Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
+        Crypto = { VoterDataEncryptionKey = Manager.Crypto.VoterDataEncryptionKey }
       };
-      this.Peer3 = new Station(ui, SystemTestData.StationPort+2, "StationTestsPeer3Voters.sqlite")
+      Peer3 = new Station(ui, SystemTestData.StationPort+2, "StationTestsPeer3Voters.sqlite")
       {
-        Manager = this.Manager.Address, 
+        Manager = Manager.Address, 
         MasterPassword = pswd, 
-        Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
+        Crypto = { VoterDataEncryptionKey = Manager.Crypto.VoterDataEncryptionKey }
       };
-      this.Peer4 = new Station(ui, SystemTestData.StationPort+3, "StationTestsPeer4Voters.sqlite")
+      Peer4 = new Station(ui, SystemTestData.StationPort+3, "StationTestsPeer4Voters.sqlite")
       {
-        Manager = this.Manager.Address, 
+        Manager = Manager.Address, 
         MasterPassword = pswd, 
-        Crypto = { VoterDataEncryptionKey = this.Manager.Crypto.VoterDataEncryptionKey }
+        Crypto = { VoterDataEncryptionKey = Manager.Crypto.VoterDataEncryptionKey }
       };
 
-      this.Manager.StopListening();
-      this.Peer1.StopListening();
-      this.Peer2.StopListening();
-      this.Peer3.StopListening();
-      this.Peer4.StopListening();
+      Manager.StopListening();
+      Peer1.StopListening();
+      Peer2.StopListening();
+      Peer3.StopListening();
+      Peer4.StopListening();
 
-      this.Peer1.Logger = new Logger(this.Peer1, "StationsTestsPeer1Log.sqlite");
-      this.Peer2.Logger = new Logger(this.Peer2, "StationsTestsPeer2Log.sqlite");
-      this.Peer3.Logger = new Logger(this.Peer3, "StationsTestsPeer3Log.sqlite");
-      this.Peer4.Logger = new Logger(this.Peer4, "StationsTestsPeer4Log.sqlite");
+      Peer1.Logger = new Logger(Peer1, "StationsTestsPeer1Log.sqlite");
+      Peer2.Logger = new Logger(Peer2, "StationsTestsPeer2Log.sqlite");
+      Peer3.Logger = new Logger(Peer3, "StationsTestsPeer3Log.sqlite");
+      Peer4.Logger = new Logger(Peer4, "StationsTestsPeer4Log.sqlite");
 
-      this.Manager.AddPeer(this.Peer1.Address, 
-        new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
-      this.Manager.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
-      this.Manager.AddPeer(this.Peer3.Address, new AsymmetricKey(this.Peer3.Crypto.KeyPair.Public));
+      Manager.AddPeer(Peer1.Address, 
+        new AsymmetricKey(Peer1.Crypto.KeyPair.Public));
+      Manager.AddPeer(Peer2.Address, new AsymmetricKey(Peer2.Crypto.KeyPair.Public));
+      Manager.AddPeer(Peer3.Address, new AsymmetricKey(Peer3.Crypto.KeyPair.Public));
 
-      this.Peer1.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
-      this.Peer1.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
-      this.Peer1.AddPeer(this.Peer3.Address, new AsymmetricKey(this.Peer3.Crypto.KeyPair.Public));
+      Peer1.AddPeer(Manager.Address, new AsymmetricKey(Manager.Crypto.KeyPair.Public));
+      Peer1.AddPeer(Peer2.Address, new AsymmetricKey(Peer2.Crypto.KeyPair.Public));
+      Peer1.AddPeer(Peer3.Address, new AsymmetricKey(Peer3.Crypto.KeyPair.Public));
 
-      this.Peer2.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
-      this.Peer2.AddPeer(this.Peer1.Address, new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
-      this.Peer2.AddPeer(this.Peer3.Address, new AsymmetricKey(this.Peer3.Crypto.KeyPair.Public));
+      Peer2.AddPeer(Manager.Address, new AsymmetricKey(Manager.Crypto.KeyPair.Public));
+      Peer2.AddPeer(Peer1.Address, new AsymmetricKey(Peer1.Crypto.KeyPair.Public));
+      Peer2.AddPeer(Peer3.Address, new AsymmetricKey(Peer3.Crypto.KeyPair.Public));
 
-      this.Peer3.AddPeer(this.Manager.Address, new AsymmetricKey(this.Manager.Crypto.KeyPair.Public));
-      this.Peer3.AddPeer(this.Peer1.Address, new AsymmetricKey(this.Peer1.Crypto.KeyPair.Public));
-      this.Peer3.AddPeer(this.Peer2.Address, new AsymmetricKey(this.Peer2.Crypto.KeyPair.Public));
+      Peer3.AddPeer(Manager.Address, new AsymmetricKey(Manager.Crypto.KeyPair.Public));
+      Peer3.AddPeer(Peer1.Address, new AsymmetricKey(Peer1.Crypto.KeyPair.Public));
+      Peer3.AddPeer(Peer2.Address, new AsymmetricKey(Peer2.Crypto.KeyPair.Public));
       /*
-      this.ManagerListener = this.Manager.Communicator.NetworkReceiveThread;
-      this.Peer1Listener = this.Peer1.Communicator.NetworkReceiveThread;
-      this.Peer2Listener = this.Peer2.Communicator.NetworkReceiveThread;
-      this.Peer3Listener = this.Peer3.Communicator.NetworkReceiveThread;
+      ManagerListener = Manager.Communicator.NetworkReceiveThread;
+      Peer1Listener = Peer1.Communicator.NetworkReceiveThread;
+      Peer2Listener = Peer2.Communicator.NetworkReceiveThread;
+      Peer3Listener = Peer3.Communicator.NetworkReceiveThread;
        * */
     }
 
@@ -398,11 +398,11 @@ namespace Tests {
     /// The start and end election test.
     /// </summary>
     [Test] public void StartAndEndElectionTest() {
-      Assert.That(!this.Manager.ElectionInProgress);
-      this.Manager.StartElection();
-      Assert.That(this.Manager.ElectionInProgress);
-      this.Manager.EndElection();
-      Assert.That(!this.Manager.ElectionInProgress);
+      Assert.That(!Manager.ElectionInProgress);
+      Manager.StartElection();
+      Assert.That(Manager.ElectionInProgress);
+      Manager.EndElection();
+      Assert.That(!Manager.ElectionInProgress);
     }
 
     /// <summary>
@@ -465,16 +465,16 @@ namespace Tests {
     /// The tear down.
     /// </summary>
     [TearDown] public void TearDown() {
-      this.Manager.Dispose();
-      this.Peer1.Dispose();
-      this.Peer2.Dispose();
-      this.Peer3.Dispose();
-      this.Peer4.Dispose();
-      this.Manager = null;
-      this.Peer1 = null;
-      this.Peer2 = null;
-      this.Peer3 = null;
-      this.Peer4 = null;
+      Manager.Dispose();
+      Peer1.Dispose();
+      Peer2.Dispose();
+      Peer3.Dispose();
+      Peer4.Dispose();
+      Manager = null;
+      Peer1 = null;
+      Peer2 = null;
+      Peer3 = null;
+      Peer4 = null;
       File.Delete("StationTestsManagerVoters.sqlite");
       File.Delete("StationTestsPeer1Voters.sqlite");
       File.Delete("StationTestsPeer2Voters.sqlite");
@@ -492,8 +492,8 @@ namespace Tests {
     /// The valid master password test.
     /// </summary>
     [Test] public void ValidMasterPasswordTest() {
-      Assert.That(this.Manager.ValidMasterPassword(SystemTestData.Password));
-      Assert.That(!this.Manager.ValidMasterPassword(SystemTestData.Password + "foo"));
+      Assert.That(Manager.ValidMasterPassword(SystemTestData.Password));
+      Assert.That(!Manager.ValidMasterPassword(SystemTestData.Password + "foo"));
     }
 
     #endregion
@@ -507,9 +507,9 @@ namespace Tests {
     /// The invoke.
     /// </param>
     private void AsyncManagerAnnounce(Action invoke) {
-      IAsyncResult peer1ListenerResult = this.Peer1Listener.BeginInvoke(null, null);
-      IAsyncResult peer2ListenerResult = this.Peer2Listener.BeginInvoke(null, null);
-      IAsyncResult peer3ListenerResult = this.Peer3Listener.BeginInvoke(null, null);
+      IAsyncResult peer1ListenerResult = Peer1Listener.BeginInvoke(null, null);
+      IAsyncResult peer2ListenerResult = Peer2Listener.BeginInvoke(null, null);
+      IAsyncResult peer3ListenerResult = Peer3Listener.BeginInvoke(null, null);
 
       // Waste some CPU time while the thread hopefully starts...
       // TODO: ICK!
@@ -518,9 +518,9 @@ namespace Tests {
       Console.WriteLine(c);
       invoke();
 
-      this.Peer1Listener.EndInvoke(peer1ListenerResult);
-      this.Peer2Listener.EndInvoke(peer2ListenerResult);
-      this.Peer3Listener.EndInvoke(peer3ListenerResult);
+      Peer1Listener.EndInvoke(peer1ListenerResult);
+      Peer2Listener.EndInvoke(peer2ListenerResult);
+      Peer3Listener.EndInvoke(peer3ListenerResult);
     }
 
     #endregion

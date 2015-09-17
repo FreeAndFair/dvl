@@ -36,7 +36,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public AcceptedPromotionCommand(IPEndPoint sender) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
+      Sender = sender;
     }
 
     #endregion
@@ -59,7 +59,7 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      receiver.FinishPromotion(this.Sender);
+      receiver.FinishPromotion(Sender);
     }
 
     #endregion

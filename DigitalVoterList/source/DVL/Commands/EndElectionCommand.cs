@@ -29,7 +29,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public EndElectionCommand(IPEndPoint sender) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
+      Sender = sender;
     }
 
     #endregion
@@ -52,7 +52,7 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!receiver.Manager.Equals(this.Sender)) return;
+      if (!receiver.Manager.Equals(Sender)) return;
       receiver.EndElection();
       receiver.UI.ElectionEnded();
     }

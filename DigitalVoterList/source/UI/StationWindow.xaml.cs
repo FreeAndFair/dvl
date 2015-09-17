@@ -51,9 +51,9 @@ namespace UI {
     /// Constructor
     /// </summary>
     public StationWindow() {
-      this.InitializeComponent();
-      this._ui = new UiHandler(this);
-      this.MainFrame.Navigate(new TypeChoicePage(this.MainFrame, this._ui));
+      InitializeComponent();
+      _ui = new UiHandler(this);
+      MainFrame.Navigate(new TypeChoicePage(MainFrame, _ui));
     }
 
     #endregion
@@ -87,7 +87,7 @@ namespace UI {
 
     private bool CheckMasterPasswordForQuit() {
       if (_ui._station != null) {
-        var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to shut down this station.");
+        var d = new CheckMasterPasswordDialog(_ui, "The master password is required to shut down this station.");
         d.Owner = this;
         d.ShowDialog();
 
@@ -121,7 +121,7 @@ namespace UI {
         FlexibleMessageBox.Show("There is no election data to report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
-      var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to export election data.");
+      var d = new CheckMasterPasswordDialog(_ui, "The master password is required to export election data.");
       d.Owner = this;
       d.ShowDialog();
 
@@ -132,7 +132,7 @@ namespace UI {
         var saveDialog = new Microsoft.Win32.SaveFileDialog { Title = "Generate Reports" };
         saveDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
         saveDialog.ShowDialog();
-        if (!saveDialog.FileName.Equals(string.Empty)) this._ui.ExportData(saveDialog.FileName);
+        if (!saveDialog.FileName.Equals(string.Empty)) _ui.ExportData(saveDialog.FileName);
         System.Diagnostics.Process.Start(saveDialog.FileName);
       } else
         FlexibleMessageBox.Show(

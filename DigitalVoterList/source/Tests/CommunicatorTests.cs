@@ -83,7 +83,7 @@ namespace Tests {
         new Tuple<string, string, uint, uint>(
           "Bob Bobbersen nummer " + x, "Køge Sportshal", (uint)x + 250000, (uint)x + 2312881234));
 
-      ICrypto crypto = this.Sender.Crypto;
+      ICrypto crypto = Sender.Crypto;
       AsymmetricKey key = crypto.VoterDataEncryptionKey;
 
       IEnumerable<EncryptedVoterData> encryptedVoters = voters.Select(
@@ -92,22 +92,22 @@ namespace Tests {
           new CipherText(crypto.AsymmetricEncrypt(Bytes.From(v.Item3), key)), 
           new CipherText(crypto.AsymmetricEncrypt(Bytes.From(v.Item4), key)), 
           new CipherText(crypto.AsymmetricEncrypt(Bytes.From((uint)BallotStatus.NotReceived), key))));
-      this.Sender.Database.Import(encryptedVoters);
+      Sender.Database.Import(encryptedVoters);
 
       using (
         var receiver = new Station(new TestUi(), 62347, "BigCommandSendAndReceiveTestVoters.sqlite") {
-          Manager = this.Sender.Address
+          Manager = Sender.Address
         }) {
         receiver.StopListening();
-        this.Sender.AddPeer(receiver.Address, new AsymmetricKey(receiver.Crypto.KeyPair.Public));
-        receiver.AddPeer(this.Sender.Address, new AsymmetricKey(this.Sender.Crypto.KeyPair.Public));
+        Sender.AddPeer(receiver.Address, new AsymmetricKey(receiver.Crypto.KeyPair.Public));
+        receiver.AddPeer(Sender.Address, new AsymmetricKey(Sender.Crypto.KeyPair.Public));
         var receiverListener = new ReceiverListener(receiver.Communicator.ReceiveAndHandle);
         IAsyncResult receiverResult = receiverListener.BeginInvoke(null, null);
 
         Assert.That(!receiver.Database.AllData.Any());
-        var sync = new SyncCommand(this.Sender);
+        var sync = new SyncCommand(Sender);
         Console.WriteLine(Bytes.From(sync).Length);
-        this.Sender.Communicator.Send(sync, receiver.Address);
+        Sender.Communicator.Send(sync, receiver.Address);
         receiverListener.EndInvoke(receiverResult);
 
         Assert.That(receiver.Database.AllData.Count() == 500);
@@ -121,7 +121,7 @@ namespace Tests {
     /// The discover network machines test.
     /// </summary>
     [Test] public void DiscoverNetworkMachinesTest() {
-      IEnumerable<IPEndPoint> machines = this.Sender.Communicator.DiscoverPeers();
+      IEnumerable<IPEndPoint> machines = Sender.Communicator.DiscoverPeers();
       Assert.That(machines != null);
       machines = machines.ToArray();
       int count = 0;
@@ -137,14 +137,14 @@ namespace Tests {
     /// The is listening test.
     /// </summary>
     [Test] public void IsListeningTest() {
-      Assert.That(!this.Sender.Communicator.IsListening(this.Sender.Address));
-      this.Sender.StartListening();
+      Assert.That(!Sender.Communicator.IsListening(Sender.Address));
+      Sender.StartListening();
 
       // Waste some CPU time while the thread hopefully starts...
       int c = 0;
       while (c < 500000) c++;
       Console.WriteLine(c);
-      Assert.That(this.Sender.Communicator.IsListening(this.Sender.Address));
+      Assert.That(Sender.Communicator.IsListening(Sender.Address));
     }
 
     /// <summary>
@@ -230,10 +230,10 @@ namespace Tests {
     ///   Test whether the Send and ReceiveAndHandle methods works.
     /// </summary>
     [Test] public void SendAndReceiveAndHandleTest() {
-      this.Sender.AddPeer(this.Receiver.Address, 
-        new AsymmetricKey(this.Receiver.Crypto.KeyPair.Public));
+      Sender.AddPeer(Receiver.Address, 
+        new AsymmetricKey(Receiver.Crypto.KeyPair.Public));
       /*
-      var receiver = new ReceiverListener(this.Receiver.Communicator.NetworkReceiveThread);
+      var receiver = new ReceiverListener(Receiver.Communicator.NetworkReceiveThread);
 
       // Test whether the system is able to send and receive a basic command
       IAsyncResult receiverResult = receiver.BeginInvoke(null, null);
@@ -242,20 +242,20 @@ namespace Tests {
       int c = 0;
       while (c < 500000) c++;
       Console.WriteLine(c);
-      Assert.That(this.Sender.StationActive(this.Receiver.Address));
+      Assert.That(Sender.StationActive(Receiver.Address));
       receiver.EndInvoke(receiverResult);
 
       receiverResult = receiver.BeginInvoke(null, null);
 
-      this.Sender.Communicator.Send(new EndElectionCommand(this.Sender.Address), this.Receiver.Address);
+      Sender.Communicator.Send(new EndElectionCommand(Sender.Address), Receiver.Address);
       IAsyncResult result = receiverResult;
       Assert.Throws<TheOnlyException>(() => receiver.EndInvoke(result));
 
       receiverResult = receiver.BeginInvoke(null, null);
       using (var client = new TcpClient()) {
-        client.Connect(this.Receiver.Address);
+        client.Connect(Receiver.Address);
         using (NetworkStream stream = client.GetStream()) {
-          byte[] msg = Bytes.From(new EndElectionCommand(this.Sender.Address));
+          byte[] msg = Bytes.From(new EndElectionCommand(Sender.Address));
           stream.Write(msg, 0, msg.Length);
         }
       }
@@ -263,12 +263,12 @@ namespace Tests {
       Assert.Throws<TheOnlyException>(() => receiver.EndInvoke(receiverResult));
 
       // Send a command that will be wrapped in a CryptoCommand that wont be received, and that the receiver is removed from the peer-list
-      Assert.That(this.Sender.Peers.ContainsKey(this.Receiver.Address));
-      this.Sender.Communicator.Send(new ElectNewManagerCommand(this.Sender.Address), this.Receiver.Address);
-      Assert.That(!this.Sender.Peers.ContainsKey(this.Receiver.Address));
+      Assert.That(Sender.Peers.ContainsKey(Receiver.Address));
+      Sender.Communicator.Send(new ElectNewManagerCommand(Sender.Address), Receiver.Address);
+      Assert.That(!Sender.Peers.ContainsKey(Receiver.Address));
 
       // Test bad endpoint
-      Assert.That(!this.Sender.StationActive(this.BadEndPoint));
+      Assert.That(!Sender.StationActive(BadEndPoint));
        * */
     }
 
@@ -277,35 +277,35 @@ namespace Tests {
     /// </summary>
     [SetUp] public void SetUp() {
       var ui = new TestUi();
-      this.Sender = new Station(
+      Sender = new Station(
         ui, SystemTestData.Key, SystemTestData.Password, SystemTestData.StationPort, 
         "CommunicatorTestsSenderVoters.sqlite", "CommunicatorTestsSenderLog.sqlite");
-      this.Receiver = new Station(ui, SystemTestData.PeerPort, "CommunicatorTestsReceiverVoters.sqlite") {
-        Manager = this.Sender.Address, 
-        Crypto = { VoterDataEncryptionKey = this.Sender.Crypto.VoterDataEncryptionKey }, 
+      Receiver = new Station(ui, SystemTestData.PeerPort, "CommunicatorTestsReceiverVoters.sqlite") {
+        Manager = Sender.Address, 
+        Crypto = { VoterDataEncryptionKey = Sender.Crypto.VoterDataEncryptionKey }, 
         MasterPassword =
-          this.Sender.Crypto.Hash(Bytes.From(SystemTestData.Password))
+          Sender.Crypto.Hash(Bytes.From(SystemTestData.Password))
       };
 
       // Receiver.Logger = new Logger(Receiver, "CommunicatorTestsReceiverLog.sqlite");
-      this.Sender.StopListening();
-      this.Receiver.StopListening();
+      Sender.StopListening();
+      Receiver.StopListening();
 
-      this.BadEndPoint = new IPEndPoint(this.Receiver.Address.Address, this.Receiver.Address.Port + 5);
-      this._timer = new Stopwatch();
-      this._timer.Start();
+      BadEndPoint = new IPEndPoint(Receiver.Address.Address, Receiver.Address.Port + 5);
+      _timer = new Stopwatch();
+      _timer.Start();
     }
 
     /// <summary>
     /// The tear down.
     /// </summary>
     [TearDown] public void TearDown() {
-      Console.WriteLine("Test duration: {0}", this._timer.ElapsedMilliseconds);
-      this._timer = null;
-      this.Sender.Dispose();
-      this.Receiver.Dispose();
-      this.Sender = null;
-      this.Receiver = null;
+      Console.WriteLine("Test duration: {0}", _timer.ElapsedMilliseconds);
+      _timer = null;
+      Sender.Dispose();
+      Receiver.Dispose();
+      Sender = null;
+      Receiver = null;
       try {
         File.Delete("CommunicatorTestsSenderVoters.sqlite");
         File.Delete("CommunicatorTestsReceiverVoters.sqlite");

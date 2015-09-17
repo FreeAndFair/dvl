@@ -59,13 +59,13 @@ namespace UI.StationWindows {
     /// The ui.
     /// </param>
     public WaitingForManagerPage(Frame parent, UiHandler ui) {
-      this._parent = parent;
-      this._ui = ui;
-      this.InitializeComponent();
-      Window.GetWindow(this._parent);
-      this.IPLabel.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
-        new Action(delegate { this.IPLabel.Content = "This is Station " + _ui.IdentifyingString(); }));
-      this._ui.WaitingForManagerPage = this;
+      _parent = parent;
+      _ui = ui;
+      InitializeComponent();
+      Window.GetWindow(_parent);
+      IPLabel.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(delegate { IPLabel.Content = "This is Station " + _ui.IdentifyingString(); }));
+      _ui.WaitingForManagerPage = this;
     }
 
     #endregion
@@ -89,16 +89,16 @@ namespace UI.StationWindows {
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action(
           delegate {
-            var amd = new AcceptManagerDialog(this._parent, _ui.IdentifyingStringForStation(ip), this);
+            var amd = new AcceptManagerDialog(_parent, _ui.IdentifyingStringForStation(ip), this);
             amd.Owner = _ui._stationWindow;
             result = (Boolean)amd.ShowDialog();
           }));
 
       if (result) {
-        this.CenterLabel.Dispatcher.Invoke(
+        CenterLabel.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.CenterLabel.Content = "Waiting for election data..."; }));
-        return this.TypedPassword;
+          new Action(delegate { CenterLabel.Content = "Waiting for election data..."; }));
+        return TypedPassword;
       }
 
       return string.Empty;
@@ -110,23 +110,23 @@ namespace UI.StationWindows {
     /// <param name="content">
     /// The content.
     /// </param>
-    public void SetPasswordLabel(string content) { this.PasswordLabel.Content = content; }
+    public void SetPasswordLabel(string content) { PasswordLabel.Content = content; }
 
     /// <summary>
     /// When the manager has connected, entered the password and the station has done the same, we navigate to the next screen.
     /// </summary>
     public void StartElection() {
-      this._ui.WaitingForManagerPage = null;
-      this._parent.Navigate(new BallotRequestPage(this._ui, this._parent));
+      _ui.WaitingForManagerPage = null;
+      _parent.Navigate(new BallotRequestPage(_ui, _parent));
     }
 
     /// <summary>
     /// When the station is told that it has been removed, we navigate to the TypeChoicePage.
     /// </summary>
     public void StationRemoved() {
-      this._ui.WaitingForManagerPage = null;
-      this._ui.DisposeStation();
-      this._parent.Navigate(new TypeChoicePage(this._parent, this._ui));
+      _ui.WaitingForManagerPage = null;
+      _ui.DisposeStation();
+      _parent.Navigate(new TypeChoicePage(_parent, _ui));
     }
 
     #endregion
@@ -143,9 +143,9 @@ namespace UI.StationWindows {
     /// The e.
     /// </param>
     private void BackButtonClick(object sender, RoutedEventArgs e) {
-      this._ui.WaitingForManagerPage = null;
-      this._ui.DisposeStation();
-      this._parent.Navigate(new TypeChoicePage(this._parent, this._ui));
+      _ui.WaitingForManagerPage = null;
+      _ui.DisposeStation();
+      _parent.Navigate(new TypeChoicePage(_parent, _ui));
     }
 
     #endregion

@@ -131,7 +131,7 @@ namespace Aegis_DVL.Database {
     #region Public Indexers
 
     /// <summary>
-    /// The this.
+    /// The 
     /// </summary>
     /// <param name="voternumber">
     /// The voternumber.
@@ -154,7 +154,7 @@ namespace Aegis_DVL.Database {
     }
 
     /// <summary>
-    /// The this.
+    /// The 
     /// </summary>
     /// <param name="cpr">
     /// The cpr.
@@ -169,12 +169,12 @@ namespace Aegis_DVL.Database {
     public BallotStatus this[CPR cpr, string masterPassword] {
       get {
         Contract.Requires(masterPassword != null);
-        Contract.Requires(this.Parent.ValidMasterPassword(masterPassword));
+        Contract.Requires(Parent.ValidMasterPassword(masterPassword));
         return default(BallotStatus);
       }
 
       set {
-        Contract.Requires(this.Parent.ValidMasterPassword(masterPassword));
+        Contract.Requires(Parent.ValidMasterPassword(masterPassword));
 
         // You can't set a ballot as unavailable. If it's in the DB, it's 
         // either received or not received.

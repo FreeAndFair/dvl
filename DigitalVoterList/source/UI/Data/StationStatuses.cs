@@ -22,7 +22,7 @@ namespace UI.Data {
     /// <summary>
     /// Initializes a new instance of the <see cref="StationStatuses"/> class.
     /// </summary>
-    public StationStatuses() { this.AddRange(new DesignTimeStationStatuses()); }
+    public StationStatuses() { AddRange(new DesignTimeStationStatuses()); }
 
     #endregion
   }

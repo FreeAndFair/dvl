@@ -59,7 +59,7 @@ namespace Aegis_DVL.Communication {
     /// </param>
     public InternetCommunicator(Station parent) {
       Contract.Requires(parent != null);
-      this.Parent = parent;
+      Parent = parent;
       incomingQueue = new BlockingCollection<ICommand>(new ConcurrentQueue<ICommand>());
       outgoingQueue = new BlockingCollection<Tuple<IPEndPoint, ICommand, int>>(new ConcurrentQueue<Tuple<IPEndPoint, ICommand, int>>());
     }
@@ -247,8 +247,8 @@ namespace Aegis_DVL.Communication {
           if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2000), false)) throw new SocketException();
           client.EndConnect(ar);
         } catch (SocketException e) {
-          if (this.Parent.Logger != null) {
-            this.Parent.Logger.Log("Could not connect to " + address + ", assuming down. " + e, Level.Error);
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Could not connect to " + address + ", assuming down. " + e, Level.Error);
           } else {
             Console.WriteLine("Could not connect to " + address + ", assuming down. " + e);
           }
@@ -267,8 +267,8 @@ namespace Aegis_DVL.Communication {
               stream.Write(lengthBytes, 0, lengthBytes.Count());
               stream.Write(bytes, 0, bytes.Count());
             } catch (Exception e) {
-              if (this.Parent.Logger != null) {
-                this.Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down." + e, Level.Error);
+              if (Parent.Logger != null) {
+                Parent.Logger.Log("Could not send IsAlive command to " + address + ", assuming down." + e, Level.Error);
               } else {
                 Console.WriteLine("Could not send IsAlive command to " + address + ", assuming down." + e);
               }
@@ -310,9 +310,9 @@ namespace Aegis_DVL.Communication {
             Console.WriteLine("pinged by " + ips.Address);
           }
         } catch (SocketException e) {
-          if (this.Parent.Logger != null)
+          if (Parent.Logger != null)
           {
-            this.Parent.Logger.Log("Ping listener encountered recoverable exception " + e, Level.Error);
+            Parent.Logger.Log("Ping listener encountered recoverable exception " + e, Level.Error);
           }
           else
           {
@@ -324,7 +324,7 @@ namespace Aegis_DVL.Communication {
 
     public void AcceptConnectionThread() {
       if (tcpListener == null) {
-        tcpListener = new TcpListener(this.Parent.Address);
+        tcpListener = new TcpListener(Parent.Address);
         tcpListener.Start();
       }
 
@@ -399,8 +399,8 @@ namespace Aegis_DVL.Communication {
               cmd is CryptoCommand ||
               cmd is IsAliveCommand ||
               cmd is DisconnectStationCommand) {
-            if (this.Parent.Logger != null && !(cmd is IsAliveCommand)) {
-              this.Parent.Logger.Log("Received " + cmdType + " from " + cmd.Sender, Level.Info);
+            if (Parent.Logger != null && !(cmd is IsAliveCommand)) {
+              Parent.Logger.Log("Received " + cmdType + " from " + cmd.Sender, Level.Info);
             } else {
               Console.WriteLine("Received " + cmdType + " from " + cmd.Sender);
             }
@@ -408,8 +408,8 @@ namespace Aegis_DVL.Communication {
             incomingQueue.Add(cmd);
             responseTimes[cmd.Sender] = DateTime.Now;
           } else {
-            if (this.Parent.Logger != null) {
-              this.Parent.Logger.Log(
+            if (Parent.Logger != null) {
+              Parent.Logger.Log(
                 "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.",
                 Level.Fatal);
             } else {
@@ -417,7 +417,7 @@ namespace Aegis_DVL.Communication {
                 "Received " + cmdType + " from " + clientEndpoint + ". Shutting down.");
             }
 
-            this.Parent.ShutDownElection();
+            Parent.ShutDownElection();
           }
         }
       } catch (Exception e) {
@@ -486,15 +486,15 @@ namespace Aegis_DVL.Communication {
         }
 
         if (tries > 0) {
-          if (this.Parent.Logger != null && !(command is IsAliveCommand)) {
-            this.Parent.Logger.Log("Attempt #" + attempt + " to send " + commandType + " to " + target, Level.Info);
+          if (Parent.Logger != null && !(command is IsAliveCommand)) {
+            Parent.Logger.Log("Attempt #" + attempt + " to send " + commandType + " to " + target, Level.Info);
           }
           if (!(command is PublicKeyExchangeCommand || command is IsAliveCommand ||
                 command is CryptoCommand || command is DisconnectStationCommand)) {
             if (Parent.Peers.ContainsKey(target)) {
-              command = new CryptoCommand(this.Parent, target, command);
+              command = new CryptoCommand(Parent, target, command);
             } else {
-              if (this.Parent.Logger != null) this.Parent.Logger.Log("Attempt to send a message to non-peer " + target, Level.Error);
+              if (Parent.Logger != null) Parent.Logger.Log("Attempt to send a message to non-peer " + target, Level.Error);
               return;
             }
           }
@@ -510,8 +510,8 @@ namespace Aegis_DVL.Communication {
             if (!ar.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(2000), false)) throw new SocketException();
             client.EndConnect(ar);
           } catch (SocketException e) {
-            if (this.Parent.Logger != null) {
-              this.Parent.Logger.Log("Problem sending due to SocketException " + e + ", retrying.", Level.Error);
+            if (Parent.Logger != null) {
+              Parent.Logger.Log("Problem sending due to SocketException " + e + ", retrying.", Level.Error);
             } else {
               Console.WriteLine("Problem sending due to SocketException " + e + ", retrying.");
             }

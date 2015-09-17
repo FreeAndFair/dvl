@@ -190,15 +190,15 @@ namespace Aegis_DVL.Cryptography {
     }
 
     public void NewIv() {
-      Contract.Ensures(!this.Iv.Equals(Contract.OldValue(this.Iv)));
+      Contract.Ensures(!Iv.Equals(Contract.OldValue(Iv)));
     }
 
     #endregion
 
     [ContractInvariantMethod]
     private void ObjectInvariant() {
-      Contract.Invariant(this.Iv != null);
-      Contract.Invariant(0 < this.Iv.Length);
+      Contract.Invariant(Iv != null);
+      Contract.Invariant(0 < Iv.Length);
       Contract.Invariant(KeyPair != null);
     }
   }

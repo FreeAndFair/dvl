@@ -54,9 +54,9 @@ namespace Aegis_DVL.Commands {
       Contract.Requires(sender != null);
       Contract.Requires(peer != null);
 
-      this._peer = peer;
-      this._peerPublicAsymmetricKey = peerPublicAsymmetricKey.Value.ToBytes();
-      this.Sender = sender;
+      _peer = peer;
+      _peerPublicAsymmetricKey = peerPublicAsymmetricKey.Value.ToBytes();
+      Sender = sender;
     }
 
     #endregion
@@ -78,7 +78,7 @@ namespace Aegis_DVL.Commands {
     /// <param name="receiver">
     /// The receiver.
     /// </param>
-    public void Execute(Station receiver) { if (receiver.Manager.Equals(this.Sender)) receiver.AddPeer(this._peer, new AsymmetricKey(this._peerPublicAsymmetricKey.ToKey())); }
+    public void Execute(Station receiver) { if (receiver.Manager.Equals(Sender)) receiver.AddPeer(_peer, new AsymmetricKey(_peerPublicAsymmetricKey.ToKey())); }
 
     #endregion
   }

@@ -47,9 +47,9 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public DemandStatusChangeCommand(IPEndPoint sender, VoterNumber voternumber, VoterStatus newstatus) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
-      this._voternumber = voternumber;
-      this._newstatus = newstatus;
+      Sender = sender;
+      _voternumber = voternumber;
+      _newstatus = newstatus;
     }
 
     #endregion

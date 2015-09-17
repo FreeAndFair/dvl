@@ -42,26 +42,26 @@ namespace Tests {
     ///   Test all the various byte and enumerable utility methods
     /// </summary>
     [Test] public void BytesAndEnumerableTest() {
-      Assert.That(this.TestByteArray.AsBase64().Equals("AQIDBAU="));
-      Assert.That(this.TestByteArray.AsString().Equals("[1] [2] [3] [4] [5] "));
+      Assert.That(TestByteArray.AsBase64().Equals("AQIDBAU="));
+      Assert.That(TestByteArray.AsString().Equals("[1] [2] [3] [4] [5] "));
       int sum = 0;
-      this.TestByteArray.ForEach(x => sum += x);
+      TestByteArray.ForEach(x => sum += x);
       Assert.That(sum == 15);
-      Assert.That(this.TestByteArray.IsIdenticalTo(this.TestByteArray));
+      Assert.That(TestByteArray.IsIdenticalTo(TestByteArray));
 
-      byte[] mergeArray = this.TestByteArray.Merge(this.TestByteArray);
+      byte[] mergeArray = TestByteArray.Merge(TestByteArray);
       Assert.That(mergeArray.Length == 10);
 
-      byte[] xorArray = this.TestByteArray.Xor(new byte[] { 5, 4, 3 });
-      Assert.That(!xorArray.IsIdenticalTo(this.TestByteArray));
+      byte[] xorArray = TestByteArray.Xor(new byte[] { 5, 4, 3 });
+      Assert.That(!xorArray.IsIdenticalTo(TestByteArray));
 
       const string str = "Test string";
       byte[] strBytes = Bytes.From(str);
       Assert.That(strBytes.To<string>().Equals(str));
 
-      using (var stream = new MemoryStream(this.TestByteArray)) {
+      using (var stream = new MemoryStream(TestByteArray)) {
         byte[] bytes = Bytes.FromStream(stream);
-        Assert.That(bytes.IsIdenticalTo(this.TestByteArray));
+        Assert.That(bytes.IsIdenticalTo(TestByteArray));
 
         Assert.That(bytes.IsIdenticalTo(Bytes.From(bytes)));
       }
@@ -111,7 +111,7 @@ namespace Tests {
     /// <summary>
     ///   SetUp test helper properties.
     /// </summary>
-    [SetUp] public void SetUp() { this.TestByteArray = new byte[] { 1, 2, 3, 4, 5 }; }
+    [SetUp] public void SetUp() { TestByteArray = new byte[] { 1, 2, 3, 4, 5 }; }
 
     #endregion
   }

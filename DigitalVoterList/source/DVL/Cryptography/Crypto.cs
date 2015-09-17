@@ -54,7 +54,7 @@ namespace Aegis_DVL.Cryptography {
     /// </summary>
     public Crypto(AsymmetricKey encryptionAsymmetricKey) : this() {
       Contract.Ensures(VoterDataEncryptionKey.Equals(encryptionAsymmetricKey));
-      this.VoterDataEncryptionKey = encryptionAsymmetricKey;
+      VoterDataEncryptionKey = encryptionAsymmetricKey;
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ namespace Aegis_DVL.Cryptography {
       //new PaddedBufferedBlockCipher(new CbcBlockCipher(new AesEngine()));
 
       Iv = new byte[_cipher.GetBlockSize()];
-      _random.NextBytes(this.Iv);
+      _random.NextBytes(Iv);
 
       _hasher = new Sha256Digest();
 
@@ -189,7 +189,7 @@ namespace Aegis_DVL.Cryptography {
                                            AsymmetricKey asymmetricKey) {
       //_aCipher.Init(false, asymmetricKey.Value);
       byte[] plainText = 
-        this.AsymmetricProcessBuffer(cipher.Value, asymmetricKey);
+        AsymmetricProcessBuffer(cipher.Value, asymmetricKey);
       return new CipherText(plainText);
 
       /* int outputLength = 
@@ -204,7 +204,7 @@ namespace Aegis_DVL.Cryptography {
     public CipherText AsymmetricEncrypt(byte[] input, 
                                         AsymmetricKey asymmetricKey) {
       //_aCipher.Init(true, asymmetricKey.Value);
-      byte[] cipherText = this.AsymmetricProcessBuffer(input, asymmetricKey);
+      byte[] cipherText = AsymmetricProcessBuffer(input, asymmetricKey);
       return new CipherText(cipherText);
       
       /* int outputLength = 
@@ -217,7 +217,7 @@ namespace Aegis_DVL.Cryptography {
 
     public byte[] GenerateSymmetricKey() {
       var key = new byte[32];
-      this._random.NextBytes(key);
+      _random.NextBytes(key);
       return key;
     }
 
@@ -230,25 +230,25 @@ namespace Aegis_DVL.Cryptography {
     }
 
     public byte[] SymmetricDecrypt(CipherText cipher, SymmetricKey symmetricKey) {
-      this._cipher.Init(
+      _cipher.Init(
         false, 
         new ParametersWithIV(
-          new KeyParameter(symmetricKey), this.Iv));
-      return this._cipher.DoFinal(cipher);
+          new KeyParameter(symmetricKey), Iv));
+      return _cipher.DoFinal(cipher);
     }
 
     public CipherText SymmetricEncrypt(byte[] bytes, SymmetricKey symmetricKey) {
-      this._cipher.Init(
+      _cipher.Init(
         true, 
         new ParametersWithIV(
-          new KeyParameter(symmetricKey), this.Iv));
-      return new CipherText(this._cipher.DoFinal(bytes));
+          new KeyParameter(symmetricKey), Iv));
+      return new CipherText(_cipher.DoFinal(bytes));
     }
 
     public void NewIv() {
       var oldIv = _iv;
       do {
-        _iv = new byte[this._cipher.GetBlockSize()];
+        _iv = new byte[_cipher.GetBlockSize()];
         _random.NextBytes(Iv);
         oldIv = oldIv ?? _iv;
       } while (oldIv.SequenceEqual(_iv));

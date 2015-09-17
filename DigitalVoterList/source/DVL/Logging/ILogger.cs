@@ -83,7 +83,7 @@ namespace Aegis_DVL.Logging {
     public void Log(object message, Level level) {
       Contract.Requires(message != null);
       //Contract.Ensures(
-      //  this.Export.Any(
+      //  Export.Any(
       //    entry => entry.Message.Equals(message) &&
       //             entry.Level == level));
     }

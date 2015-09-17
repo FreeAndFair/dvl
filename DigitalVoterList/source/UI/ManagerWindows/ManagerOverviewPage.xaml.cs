@@ -78,23 +78,23 @@ namespace UI.ManagerWindows {
     /// the UIHandler for this UI
     /// </param>
     public ManagerOverviewPage(Frame parent, UiHandler ui) {
-      this.InitializeComponent();
-      this._parent = parent;
-      this._ui = ui;
-      this._ui.ManagerOverviewPage = this;
+      InitializeComponent();
+      _parent = parent;
+      _ui = ui;
+      _ui.ManagerOverviewPage = this;
 
-      this.LoadingBar.Visibility = System.Windows.Visibility.Hidden;
-      this.LoadingBar.Value = 100;
-      this.RemoveButton.IsEnabled = false;
-      this.AddButton.IsEnabled = false;
-      this.EndElectionButton.IsEnabled = false;
+      LoadingBar.Visibility = System.Windows.Visibility.Hidden;
+      LoadingBar.Value = 100;
+      RemoveButton.IsEnabled = false;
+      AddButton.IsEnabled = false;
+      EndElectionButton.IsEnabled = false;
       IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", ui._station.Communicator.GetIdentifyingString());
       ManagerstationGrid.ItemsSource = _ui._station.PeerStatuses.Values;
 
       // Change the width of the window
-      var wnd = Window.GetWindow(this._parent);
+      var wnd = Window.GetWindow(_parent);
       if (wnd != null) wnd.Width = 1000;
-      this.PopulateList();
+      PopulateList();
       RefreshStatistics();
     }
 
@@ -120,7 +120,7 @@ namespace UI.ManagerWindows {
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action (
           delegate {
-            acd = new AcceptStationDialog(ip, this._ui);
+            acd = new AcceptStationDialog(ip, _ui);
             acd.Owner = _ui._stationWindow;
             result = (Boolean) acd.ShowDialog();
           }));
@@ -145,11 +145,11 @@ namespace UI.ManagerWindows {
     /// Populates the list with the appropiate machines
     /// </summary>
     public void PopulateList() {
-      if (this._activeUpdateThread != null) return;
-      this.EndElectionButton.IsEnabled = false;
-      this.RefreshButton.IsEnabled = false;
+      if (_activeUpdateThread != null) return;
+      EndElectionButton.IsEnabled = false;
+      RefreshButton.IsEnabled = false;
       Thread oThread = new Thread(PopulateListThread);
-      this._activeUpdateThread = oThread;
+      _activeUpdateThread = oThread;
       oThread.Start();
     }
 
@@ -162,26 +162,26 @@ namespace UI.ManagerWindows {
     public void PopulateListThread() {
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.UpdateLabel.Content = "Scanning..."; }));
+        new Action(delegate { UpdateLabel.Content = "Scanning..."; }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.LoadingBar.Visibility = System.Windows.Visibility.Visible; }));
+        new Action(delegate { LoadingBar.Visibility = System.Windows.Visibility.Visible; }));
 
       _ui.DiscoverPeers();
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal,
-        new Action(delegate { this.ManagerstationGrid.Items.Refresh(); }));
+        new Action(delegate { ManagerstationGrid.Items.Refresh(); }));
       Dispatcher.Invoke(
-        System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { this.UpdateLabel.Content = string.Empty; }));
-      Dispatcher.Invoke(
-        System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.LoadingBar.Visibility = System.Windows.Visibility.Hidden; }));
+        System.Windows.Threading.DispatcherPriority.Normal, new Action(delegate { UpdateLabel.Content = string.Empty; }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.RefreshButton.IsEnabled = true; }));
+        new Action(delegate { LoadingBar.Visibility = System.Windows.Visibility.Hidden; }));
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal, 
-        new Action(delegate { this.EndElectionButton.IsEnabled = true; }));
+        new Action(delegate { RefreshButton.IsEnabled = true; }));
+      Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal, 
+        new Action(delegate { EndElectionButton.IsEnabled = true; }));
       _activeUpdateThread = null;
     }
 
@@ -191,24 +191,24 @@ namespace UI.ManagerWindows {
     /// <param name="content">
     /// the new content of the label
     /// </param>
-    public void SetPasswordLabel(string content) { this.PasswordLabel.Text = content; }
+    public void SetPasswordLabel(string content) { PasswordLabel.Text = content; }
 
     /// <summary>
     /// Unmark a connected station in the list
     /// </summary>
     /// <param name="ip">the IP address of the station to unmark</param>
     public void UnmarkSelectedStation() {
-      ((StationStatus)this.ManagerstationGrid.SelectedItem).ConnectionState = "Not Connected";
-      this.ManagerstationGrid.Items.Refresh();
+      ((StationStatus)ManagerstationGrid.SelectedItem).ConnectionState = "Not Connected";
+      ManagerstationGrid.Items.Refresh();
     }
 
     public void ConvertToStation() {
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action(delegate {
-        if (this._activeUpdateThread != null) this._activeUpdateThread.Abort();
-        this._ui.ManagerOverviewPage = null;
-        this._parent.Navigate(new BallotRequestPage(this._ui, this._parent));
+        if (_activeUpdateThread != null) _activeUpdateThread.Abort();
+        _ui.ManagerOverviewPage = null;
+        _parent.Navigate(new BallotRequestPage(_ui, _parent));
       }));
     }
 
@@ -256,8 +256,8 @@ namespace UI.ManagerWindows {
     /// autogenerated
     /// </param>
     private void AddButtonClick(object sender, RoutedEventArgs e) {
-      if (this.ManagerstationGrid.SelectedCells.Count != 0) {
-        this._ui.ExchangeKeys(((StationStatus)this.ManagerstationGrid.SelectedItem).Address);
+      if (ManagerstationGrid.SelectedCells.Count != 0) {
+        _ui.ExchangeKeys(((StationStatus)ManagerstationGrid.SelectedItem).Address);
       }
     }
 
@@ -277,7 +277,7 @@ namespace UI.ManagerWindows {
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action(
           delegate {
-            var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to end the election.");
+            var d = new CheckMasterPasswordDialog(_ui, "The master password is required to end the election.");
             d.Owner = _ui._stationWindow;
             result = (Boolean)d.ShowDialog();
             cancel = d.IsCancel;
@@ -286,11 +286,11 @@ namespace UI.ManagerWindows {
       if (cancel) return;
 
       if (result) {
-        if (this._activeUpdateThread != null) this._activeUpdateThread.Abort();
+        if (_activeUpdateThread != null) _activeUpdateThread.Abort();
 
-        this._ui.AnnounceEndElection();
-        this._ui.ManagerOverviewPage = null;
-        this._parent.Navigate(new EndedElectionPage(this._parent, this._ui));
+        _ui.AnnounceEndElection();
+        _ui.ManagerOverviewPage = null;
+        _parent.Navigate(new EndedElectionPage(_parent, _ui));
       } else {
         FlexibleMessageBox.Show(
           "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
@@ -313,7 +313,7 @@ namespace UI.ManagerWindows {
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action(
           delegate {
-            var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to promote a check-in station to a manager.");
+            var d = new CheckMasterPasswordDialog(_ui, "The master password is required to promote a check-in station to a manager.");
             d.Owner = _ui._stationWindow;
             result = (Boolean)d.ShowDialog();
             cancel = d.IsCancel;
@@ -322,8 +322,8 @@ namespace UI.ManagerWindows {
       if (cancel) return;
 
       if (result) {
-        if (this.ManagerstationGrid.SelectedItem != null &&
-            this._ui.MakeManager(((StationStatus)this.ManagerstationGrid.SelectedItem).Address)) {
+        if (ManagerstationGrid.SelectedItem != null &&
+            _ui.MakeManager(((StationStatus)ManagerstationGrid.SelectedItem).Address)) {
         } else {
           FlexibleMessageBox.Show("Could not connect to the specified station", "No Connection", MessageBoxButtons.OK);
         }
@@ -350,13 +350,13 @@ namespace UI.ManagerWindows {
     }
 
     public void UpdateControls() {
-      if (this.ManagerstationGrid.SelectedItem != null) {
-        if (((StationStatus)this.ManagerstationGrid.SelectedItem).Connected()) {
-          this.AddButton.IsEnabled = false;
-          this.RemoveButton.IsEnabled = true;
+      if (ManagerstationGrid.SelectedItem != null) {
+        if (((StationStatus)ManagerstationGrid.SelectedItem).Connected()) {
+          AddButton.IsEnabled = false;
+          RemoveButton.IsEnabled = true;
         } else {
-          this.AddButton.IsEnabled = true;
-          this.RemoveButton.IsEnabled = false;
+          AddButton.IsEnabled = true;
+          RemoveButton.IsEnabled = false;
         }
       }
     }
@@ -397,7 +397,7 @@ namespace UI.ManagerWindows {
     /// <param name="e">
     /// autogenerated
     /// </param>
-    private void RefreshButtonClick(object sender, RoutedEventArgs e) { this.PopulateList(); }
+    private void RefreshButtonClick(object sender, RoutedEventArgs e) { PopulateList(); }
 
     /// <summary>
     /// Called when the remove button is clicked
@@ -409,10 +409,10 @@ namespace UI.ManagerWindows {
     /// autogenerated
     /// </param>
     private void RemoveButtonClick(object sender, RoutedEventArgs e) {
-      if (((StationStatus)this.ManagerstationGrid.SelectedItem).Connected()) {
-        this._ui.RemoveStation(((StationStatus)this.ManagerstationGrid.SelectedItem).Address);
-        this.UnmarkSelectedStation();
-        this.PopulateList();
+      if (((StationStatus)ManagerstationGrid.SelectedItem).Connected()) {
+        _ui.RemoveStation(((StationStatus)ManagerstationGrid.SelectedItem).Address);
+        UnmarkSelectedStation();
+        PopulateList();
       }
     }
 

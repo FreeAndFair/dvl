@@ -39,7 +39,7 @@ namespace Tests {
     /// The set up.
     /// </summary>
     [SetUp] public void SetUp() {
-      this.Station = new Station(
+      Station = new Station(
         new TestUi(), SystemTestData.Key, SystemTestData.Password, SystemTestData.StationPort, 
           "LoggingTestsVoters.sqlite", "LoggingTestsLog.sqlite");
     }
@@ -48,8 +48,8 @@ namespace Tests {
     /// The tear down.
     /// </summary>
     [TearDown] public void TearDown() {
-      this.Station.Dispose();
-      this.Station = null;
+      Station.Dispose();
+      Station = null;
       File.Delete("LoggingTestsVoters.sqlite");
       File.Delete("LoggingTestsLog.sqlite");
     }
@@ -59,13 +59,13 @@ namespace Tests {
     /// </summary>
     [Test] public void Test() {
       Assert.That(
-        !this.Station.Logger.Export.Any(
+        !Station.Logger.Export.Any(
           entry => entry.Message.ToString() == "Testing testing" && entry.Level == Level.Info));
-      this.Station.Logger.Log("Testing testing", Level.Info);
+      Station.Logger.Log("Testing testing", Level.Info);
       Assert.That(
-        this.Station.Logger.Export.Any(
+        Station.Logger.Export.Any(
           entry => entry.Message.ToString() == "Testing testing" && entry.Level == Level.Info));
-      this.Station.Logger.Export.ForEach(logentry => Console.WriteLine(logentry));
+      Station.Logger.Export.ForEach(logentry => Console.WriteLine(logentry));
     }
 
     #endregion

@@ -42,8 +42,8 @@ namespace Aegis_DVL.Commands {
     public PromoteNewManagerCommand(IPEndPoint sender, IPEndPoint newManager) {
       Contract.Requires(sender != null);
       Contract.Requires(newManager != null);
-      this._newManager = newManager;
-      this.Sender = sender;
+      _newManager = newManager;
+      Sender = sender;
     }
 
     #endregion
@@ -66,8 +66,8 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!receiver.Manager.Equals(this.Sender)) return;
-      receiver.Manager = this._newManager;
+      if (!receiver.Manager.Equals(Sender)) return;
+      receiver.Manager = _newManager;
       if (_newManager.Equals(receiver.Address)) {
         receiver.UI.IsNowManager();
         receiver.Communicator.Send(new AcceptedPromotionCommand(receiver.Address), Sender);

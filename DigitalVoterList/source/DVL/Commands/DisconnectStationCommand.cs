@@ -41,8 +41,8 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public DisconnectStationCommand(IPEndPoint sender, IPEndPoint peer) {
       Contract.Requires(sender != null);
-      this._peer = peer;
-      this.Sender = sender;
+      _peer = peer;
+      Sender = sender;
     }
 
     #endregion
@@ -65,7 +65,7 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!receiver.Manager.Equals(this.Sender)) return;
+      if (!receiver.Manager.Equals(Sender)) return;
       Console.WriteLine("calling removePeer for peer " + _peer);
       receiver.RemovePeer(_peer);
     }

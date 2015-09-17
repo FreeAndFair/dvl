@@ -31,7 +31,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public ShutDownElectionCommand(IPEndPoint sender) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
+      Sender = sender;
     }
 
     #endregion

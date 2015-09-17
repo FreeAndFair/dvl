@@ -29,7 +29,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public ElectNewManagerCommand(IPEndPoint sender) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
+      Sender = sender;
     }
 
     #endregion

@@ -69,13 +69,13 @@ namespace UI.StationWindows {
     /// the frame in which this page is displayed
     /// </param>
     public BallotRequestPage(UiHandler ui, Frame parent) {
-      this._ui = ui;
-      this._parent = parent;
-      this._ui.BallotRequestPage = this;
-      this.InitializeComponent();
-      this.checkValidityButton.IsEnabled = false;
-      this.WaitingLabel.Content = string.Empty;
-      this.StateId.Focus();
+      _ui = ui;
+      _parent = parent;
+      _ui.BallotRequestPage = this;
+      InitializeComponent();
+      checkValidityButton.IsEnabled = false;
+      WaitingLabel.Content = string.Empty;
+      StateId.Focus();
       Blocked = false;
       Waiting = false;
       IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", _ui.IdentifyingString());
@@ -176,9 +176,9 @@ namespace UI.StationWindows {
         }
       }
 
-      this.EnableFields(true);
-      this.ClearFields();
-      this.WaitingLabel.Content = string.Empty;
+      EnableFields(true);
+      ClearFields();
+      WaitingLabel.Content = string.Empty;
       Waiting = false;
     }
 
@@ -186,17 +186,17 @@ namespace UI.StationWindows {
     /// Called when this station is promoted
     /// </summary>
     public void BecomeManager() {
-      this._ui.BallotRequestPage = null;
-      this._parent.Navigate(new ManagerOverviewPage(this._parent, this._ui));
-      if (this._ui.EnoughStations()) this._ui.EnoughPeers();
-      else this._ui.NotEnoughPeers();
+      _ui.BallotRequestPage = null;
+      _parent.Navigate(new ManagerOverviewPage(_parent, _ui));
+      if (_ui.EnoughStations()) _ui.EnoughPeers();
+      else _ui.NotEnoughPeers();
     }
 
     /// <summary>
     /// Called when the election is ended
     /// </summary>
     public void EndElection() {
-      this._ui.BallotRequestPage = null;
+      _ui.BallotRequestPage = null;
       FlexibleMessageBox.Show("The election has ended. This station is shutting down.");
       Environment.Exit(0);
     }
@@ -205,9 +205,9 @@ namespace UI.StationWindows {
     /// When the station is told that it has been removed, we navigate to the TypeChoicePage.
     /// </summary>
     public void StationRemoved() {
-      this._ui.BallotRequestPage = null;
-      this._ui.DisposeStation();
-      this._parent.Navigate(new TypeChoicePage(this._parent, this._ui));
+      _ui.BallotRequestPage = null;
+      _ui.DisposeStation();
+      _parent.Navigate(new TypeChoicePage(_parent, _ui));
     }
 
     public void RecoverFromManagerChange() {
@@ -421,8 +421,8 @@ namespace UI.StationWindows {
     }
 
     private void UpdateButtonState() {
-      if (!this.Blocked && !this.Waiting) this.checkValidityButton.IsEnabled = true;
-      else this.checkValidityButton.IsEnabled = false;
+      if (!Blocked && !Waiting) checkValidityButton.IsEnabled = true;
+      else checkValidityButton.IsEnabled = false;
     }
 
     private string GetFormattedName(Voter voter) {

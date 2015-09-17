@@ -29,17 +29,17 @@ namespace Aegis_DVL.Data_Types {
                      String middlename, String suffix, DateTime dateofbirth,
                      DateTime eligibledate, Boolean absentee, Boolean voted,
                      String returnstatus, Int32 ballotstyle) : this() {
-      this.VoterId = voterid;
-      this.LastName = lastname;
-      this.FirstName = firstname;
-      this.MiddleName = middlename;
-      this.Suffix = suffix;
-      this.DateOfBirth = dateofbirth;
-      this.EligibleDate = eligibledate;
-      this.Absentee = absentee;
-      this.Voted = voted;
-      this.ReturnStatus = returnstatus;
-      this.BallotStyle = ballotstyle;
+      VoterId = voterid;
+      LastName = lastname;
+      FirstName = firstname;
+      MiddleName = middlename;
+      Suffix = suffix;
+      DateOfBirth = dateofbirth;
+      EligibleDate = eligibledate;
+      Absentee = absentee;
+      Voted = voted;
+      ReturnStatus = returnstatus;
+      BallotStyle = ballotstyle;
     }
 
     #endregion
@@ -90,14 +90,14 @@ namespace Aegis_DVL.Data_Types {
     [ContractInvariantMethod]
     private void ObjectInvariant()
     {
-      Contract.Invariant(!Equals(this.VoterId, null));
-      Contract.Invariant(!Equals(this.LastName, null));
-      Contract.Invariant(!Equals(this.FirstName, null));
-      Contract.Invariant(!Equals(this.DateOfBirth, null));
-      Contract.Invariant(!Equals(this.EligibleDate, null));
-      Contract.Invariant(!Equals(this.Absentee, null));
-      Contract.Invariant(!Equals(this.Voted, null));
-      Contract.Invariant(!Equals(this.BallotStyle, null));
+      Contract.Invariant(!Equals(VoterId, null));
+      Contract.Invariant(!Equals(LastName, null));
+      Contract.Invariant(!Equals(FirstName, null));
+      Contract.Invariant(!Equals(DateOfBirth, null));
+      Contract.Invariant(!Equals(EligibleDate, null));
+      Contract.Invariant(!Equals(Absentee, null));
+      Contract.Invariant(!Equals(Voted, null));
+      Contract.Invariant(!Equals(BallotStyle, null));
     }
 
     #endregion
@@ -125,9 +125,9 @@ namespace Aegis_DVL.Data_Types {
     public EncryptedVoterData(CipherText voternumber, 
                               CipherText cpr, 
                               CipherText ballotstatus) : this() {
-      this.VoterNumber = voternumber;
-      this.CPR = cpr;
-      this.BallotStatus = ballotstatus;
+      VoterNumber = voternumber;
+      CPR = cpr;
+      BallotStatus = ballotstatus;
     }
 
     #endregion
@@ -161,7 +161,7 @@ namespace Aegis_DVL.Data_Types {
     /// </returns>
     public override string ToString() {
       return string.Format("VoterNumber: {0}; CPR: {1}; Ballot: {2}", 
-        this.VoterNumber, this.CPR, this.BallotStatus);
+        VoterNumber, CPR, BallotStatus);
     }
 
     #endregion
@@ -172,9 +172,9 @@ namespace Aegis_DVL.Data_Types {
     /// The object invariant.
     /// </summary>
     [ContractInvariantMethod] private void ObjectInvariant() {
-      Contract.Invariant(!Equals(this.CPR, null));
-      Contract.Invariant(!Equals(this.VoterNumber, null));
-      Contract.Invariant(!Equals(this.BallotStatus, null));
+      Contract.Invariant(!Equals(CPR, null));
+      Contract.Invariant(!Equals(VoterNumber, null));
+      Contract.Invariant(!Equals(BallotStatus, null));
     }
 
     #endregion
@@ -196,7 +196,7 @@ namespace Aegis_DVL.Data_Types {
     /// </param>
     public CipherText(byte[] cipher) : this() {
       Contract.Requires(cipher != null);
-      this.Value = cipher;
+      Value = cipher;
     }
 
     #endregion
@@ -228,7 +228,7 @@ namespace Aegis_DVL.Data_Types {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public override string ToString() { return this.Value.AsBase64(); }
+    public override string ToString() { return Value.AsBase64(); }
 
     #endregion
 
@@ -238,7 +238,7 @@ namespace Aegis_DVL.Data_Types {
     /// The object invariant.
     /// </summary>
     [ContractInvariantMethod] private void ObjectInvariant() {
-      Contract.Invariant(this.Value != null);
+      Contract.Invariant(Value != null);
     }
 
     #endregion
@@ -260,7 +260,7 @@ namespace Aegis_DVL.Data_Types {
     public AsymmetricKey(AsymmetricKeyParameter key)
       : this() {
       Contract.Requires(key != null);
-      this.Value = key;
+      Value = key;
     }
 
     #endregion
@@ -293,7 +293,7 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     /// The object invariant.
     /// </summary>
-    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(this.Value != null); }
+    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(Value != null); }
 
     #endregion
   }
@@ -314,7 +314,7 @@ namespace Aegis_DVL.Data_Types {
     public SymmetricKey(byte[] key)
       : this() {
       Contract.Requires(key != null);
-      this.Value = key;
+      Value = key;
     }
 
     #endregion
@@ -347,7 +347,7 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     /// The object invariant.
     /// </summary>
-    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(this.Value != null); }
+    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(Value != null); }
 
     #endregion
   }
@@ -384,10 +384,10 @@ namespace Aegis_DVL.Data_Types {
                    byte[] iv) : this() {
       Contract.Requires(iv != null);
 
-      this.SymmetricKey = symmetricKey;
-      this.Command = content;
-      this.SenderHash = senderHash;
-      this.Iv = iv;
+      SymmetricKey = symmetricKey;
+      Command = content;
+      SenderHash = senderHash;
+      Iv = iv;
     }
 
     #endregion
@@ -427,10 +427,10 @@ namespace Aegis_DVL.Data_Types {
     public override string ToString() {
       return string.Format(
         "Symmetric key: {0}\nValue: {1}\nSenderHash: {2}\nIv: {3}", 
-        this.SymmetricKey, 
-        this.Command, 
-        this.SenderHash, 
-        this.Iv.AsString());
+        SymmetricKey, 
+        Command, 
+        SenderHash, 
+        Iv.AsString());
     }
 
     #endregion
@@ -441,10 +441,10 @@ namespace Aegis_DVL.Data_Types {
     /// The object invariant.
     /// </summary>
     [ContractInvariantMethod] private void ObjectInvariant() {
-      Contract.Invariant(!Equals(this.SymmetricKey, null));
-      Contract.Invariant(!Equals(this.Iv, null));
-      Contract.Invariant(!Equals(this.Command, null));
-      Contract.Invariant(!Equals(this.SenderHash, null));
+      Contract.Invariant(!Equals(SymmetricKey, null));
+      Contract.Invariant(!Equals(Iv, null));
+      Contract.Invariant(!Equals(Command, null));
+      Contract.Invariant(!Equals(SenderHash, null));
     }
 
     #endregion
@@ -467,7 +467,7 @@ namespace Aegis_DVL.Data_Types {
     /// The value of the voternumber.
     /// </param>
     public VoterNumber(Int32 value)
-      : this() { this.Value = value; }
+      : this() { Value = value; }
 
     #endregion
 
@@ -501,7 +501,7 @@ namespace Aegis_DVL.Data_Types {
     /// The <see cref="string"/>.
     /// </returns>
     public override string ToString() {
-      return this.Value.ToString(CultureInfo.InvariantCulture);
+      return Value.ToString(CultureInfo.InvariantCulture);
     }
 
     #endregion
@@ -521,7 +521,7 @@ namespace Aegis_DVL.Data_Types {
     /// The value of the CPR-number.
     /// </param>
     public VoterId(Int32 value)
-      : this() { this.Value = value; }
+      : this() { Value = value; }
 
     #endregion
 
@@ -552,7 +552,7 @@ namespace Aegis_DVL.Data_Types {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public override string ToString() { return this.Value.ToString(CultureInfo.InvariantCulture); }
+    public override string ToString() { return Value.ToString(CultureInfo.InvariantCulture); }
 
     #endregion
 
@@ -561,7 +561,7 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     /// The object invariant.
     /// </summary>
-    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(this.Value > 0); }
+    [ContractInvariantMethod] private void ObjectInvariant() { Contract.Invariant(Value > 0); }
 
     #endregion
   }

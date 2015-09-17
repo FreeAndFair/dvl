@@ -42,7 +42,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public BallotRequestDeniedCommand(IPEndPoint sender, VoterNumber vn, VoterStatus oldStatus, VoterStatus newStatus) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
+      Sender = sender;
       _voternumber = vn;
       _oldStatus = oldStatus;
       _newStatus = newStatus;
@@ -68,7 +68,7 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (!this.Sender.Equals(receiver.Manager)) return;
+      if (!Sender.Equals(receiver.Manager)) return;
       receiver.UI.BallotRequestReply(_voternumber, false, _oldStatus, _newStatus);
     }
 

@@ -33,7 +33,7 @@ namespace Aegis_DVL.Logging
         /// </summary>
         public Entities() : base("name=Entities", "Entities")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
@@ -42,7 +42,7 @@ namespace Aegis_DVL.Logging
         /// </summary>
         public Entities(string connectionString) : base(connectionString, "Entities")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
@@ -51,7 +51,7 @@ namespace Aegis_DVL.Logging
         /// </summary>
         public Entities(EntityConnection connection) : base(connection, "Entities")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     

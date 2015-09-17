@@ -46,8 +46,8 @@
     }
 
     private void SelectClick(object sender, RoutedEventArgs e) {
-      this._ui._station.PollingPlace = (PollingPlace) PrecinctGrid.SelectedItem;
-      this._parent.Navigate(new OverviewPage(this._parent, this._ui));
+      _ui._station.PollingPlace = (PollingPlace) PrecinctGrid.SelectedItem;
+      _parent.Navigate(new OverviewPage(_parent, _ui));
     }
 
     private void VoteCenterClick(object sender, RoutedEventArgs e) {
@@ -59,16 +59,16 @@
       foreach (string s in allPrecincts) {
         _ui._station.PollingPlace.PrecinctIds.Add(s);
       }
-      this._parent.Navigate(new OverviewPage(this._parent, this._ui));
+      _parent.Navigate(new OverviewPage(_parent, _ui));
     }
 
     private void BackClick(object sender, RoutedEventArgs e) {
-      this._parent.Navigate(new TypeChoicePage(this._parent, this._ui));
-      this._ui.DisposeStation();
+      _parent.Navigate(new TypeChoicePage(_parent, _ui));
+      _ui.DisposeStation();
     }
 
     private void PrecinctGridSelectionChanged(object sender, SelectionChangedEventArgs e) {
-      this.SelectButton.IsEnabled = (this.PrecinctGrid.SelectedItem != null);
+      SelectButton.IsEnabled = (PrecinctGrid.SelectedItem != null);
     }
   }
 }

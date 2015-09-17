@@ -68,7 +68,7 @@ namespace Aegis_DVL.Database {
       Contract.Requires(parent != null);
       Contract.Requires(filename != null);
 
-      this.Parent = parent;
+      Parent = parent;
       string password = "";
       if (PasswordProtectDb)
         password = Crypto.GeneratePassword();
@@ -84,14 +84,14 @@ namespace Aegis_DVL.Database {
           filename);
       if (PasswordProtectDb) conStr += string.Format(";Password={0}'", password);
       else conStr += "'";
-      this._db = new Entities(conStr);
-      this._db.Connection.Open();
+      _db = new Entities(conStr);
+      _db.Connection.Open();
     }
 
     /// <summary>
     /// Finalizes an instance of the <see cref="VoterListDatabase"/> class. 
     /// </summary>
-    ~VoterListDatabase() { this.Dispose(false); }
+    ~VoterListDatabase() { Dispose(false); }
 
     #endregion
 
@@ -103,14 +103,14 @@ namespace Aegis_DVL.Database {
     public IEnumerable<Voter> AllVoters {
       get {
         return
-          this._db.Voters.ToArray();
+          _db.Voters.ToArray();
       }
     }
 
     public IEnumerable<Precinct> AllPrecincts {
       get {
         return
-          this._db.Precincts.ToArray();
+          _db.Precincts.ToArray();
       }
     }
 
@@ -124,7 +124,7 @@ namespace Aegis_DVL.Database {
     #region Public Indexers
 
     /// <summary>
-    /// The this.
+    /// The 
     /// </summary>
     /// <param name="voternumber">
     /// The voternumber.
@@ -142,8 +142,8 @@ namespace Aegis_DVL.Database {
       }
 
       set {
-        if (this.Parent.Logger != null) {
-          this.Parent.Logger.Log(
+        if (Parent.Logger != null) {
+          Parent.Logger.Log(
             "Setting status for voter number " +
             voternumber + " to " + value, 
             Level.Info);
@@ -151,12 +151,12 @@ namespace Aegis_DVL.Database {
 
         Voter voter = GetVoterByVoterId(voternumber.Value);
         voter.PollbookStatus = (int) value;
-        this._db.SaveChanges();
+        _db.SaveChanges();
       }
     }
 
     /// <summary>
-    /// The this.
+    /// The 
     /// </summary>
     /// <param name="cpr">
     /// The cpr.
@@ -171,25 +171,25 @@ namespace Aegis_DVL.Database {
     /*
     public BallotStatus this[CPR cpr, string masterPassword] {
       get {
-        CipherText encBallotReceived = this.Parent.Crypto.AsymmetricEncrypt(
-          Bytes.From((uint)BallotStatus.Received), this.Parent.Crypto.VoterDataEncryptionKey);
+        CipherText encBallotReceived = Parent.Crypto.AsymmetricEncrypt(
+          Bytes.From((uint)BallotStatus.Received), Parent.Crypto.VoterDataEncryptionKey);
         Voter voter = GetVoter(cpr);
         if (voter == null) return BallotStatus.Unavailable;
         return voter.BallotStatus.IsIdenticalTo(encBallotReceived) ? BallotStatus.Received : BallotStatus.NotReceived;
       }
 
       set {
-        if (this.Parent.Logger != null) {
-          this.Parent.Logger.Log(
+        if (Parent.Logger != null) {
+          Parent.Logger.Log(
             "Setting ballotstatus for CPR " + cpr +
             " with master password to " + value, 
             Level.Info);
         }
 
         Voter voter = GetVoter(cpr);
-        voter.BallotStatus = this.Parent.Crypto.AsymmetricEncrypt(
-          Bytes.From((uint)value), this.Parent.Crypto.VoterDataEncryptionKey);
-        this._db.SaveChanges();
+        voter.BallotStatus = Parent.Crypto.AsymmetricEncrypt(
+          Bytes.From((uint)value), Parent.Crypto.VoterDataEncryptionKey);
+        _db.SaveChanges();
       }
     }
       */
@@ -201,7 +201,7 @@ namespace Aegis_DVL.Database {
     /// The dispose.
     /// </summary>
     public void Dispose() {
-      if (!this._isDisposed) this.Dispose(true);
+      if (!_isDisposed) Dispose(true);
       GC.SuppressFinalize(this);
     }
 
@@ -213,30 +213,30 @@ namespace Aegis_DVL.Database {
     /// </param>
     public void Import(IEnumerable<Voter> data) {
       int c = 0;
-      using (DbTransaction transaction = this._db.Connection.BeginTransaction()) {
+      using (DbTransaction transaction = _db.Connection.BeginTransaction()) {
         data.ForEach(
           row => {
-            this.Add(row);
+            Add(row);
             c++;
           });
         transaction.Commit();
       }
 
-      if (this.Parent.Logger != null) this.Parent.Logger.Log("Importing voters. " + c + " entries.", Level.Info);
+      if (Parent.Logger != null) Parent.Logger.Log("Importing voters. " + c + " entries.", Level.Info);
     }
 
     public void Import(IEnumerable<Precinct> data) {
       int c = 0;
-      using (DbTransaction transaction = this._db.Connection.BeginTransaction()) {
+      using (DbTransaction transaction = _db.Connection.BeginTransaction()) {
         data.ForEach(
           row => {
-            this.Add(row);
+            Add(row);
             c++;
           });
         transaction.Commit();
       }
 
-      if (this.Parent.Logger != null) this.Parent.Logger.Log("Importing precincts. " + c + " entries.", Level.Info);
+      if (Parent.Logger != null) Parent.Logger.Log("Importing precincts. " + c + " entries.", Level.Info);
     }
 
     #endregion
@@ -290,14 +290,14 @@ namespace Aegis_DVL.Database {
       Contract.Requires(!Equals(data, null));
 
       // Contract.Requires(Contract.ForAll(AllData, row => !row.CPR.Value.IsIdenticalTo(data.CPR.Value) && !row.VoterNumber.Value.IsIdenticalTo(data.VoterNumber.Value)));
-      this._db.Voters.AddObject(data);
-      this._db.SaveChanges();
+      _db.Voters.AddObject(data);
+      _db.SaveChanges();
     }
 
     private void Add(Precinct data) {
       Contract.Requires(!Equals(data, null));
-      this._db.Precincts.AddObject(data);
-      this._db.SaveChanges();
+      _db.Precincts.AddObject(data);
+      _db.SaveChanges();
     }
 
     /// <summary>
@@ -307,12 +307,12 @@ namespace Aegis_DVL.Database {
     /// The disposing.
     /// </param>
     private void Dispose(bool disposing) {
-      this._isDisposed = true;
-      if (disposing) this._db.Dispose();
+      _isDisposed = true;
+      if (disposing) _db.Dispose();
     }
 
     public Precinct GetPrecinctBySplitId(string sid) {
-      IQueryable<Precinct> res = this._db.Precincts.Where(data => data.PrecinctSplitId.Equals(sid));
+      IQueryable<Precinct> res = _db.Precincts.Where(data => data.PrecinctSplitId.Equals(sid));
       return !res.Any() ? null : res.Single();
     }
 
@@ -326,7 +326,7 @@ namespace Aegis_DVL.Database {
     /// The <see cref="Voter"/>.
     /// </returns>
     public Voter GetVoterByVoterId(Int32 vid) {
-      IQueryable<Voter> res = this._db.Voters.Where(data => data.VoterId == vid);
+      IQueryable<Voter> res = _db.Voters.Where(data => data.VoterId == vid);
       return !res.Any() ? null : res.Single();
     }
 
@@ -335,13 +335,13 @@ namespace Aegis_DVL.Database {
     }
 
     public Voter GetVoterByStateId(Int64 sid) {
-      IQueryable<Voter> res = this._db.Voters.Where(data => data.StateId == sid);
+      IQueryable<Voter> res = _db.Voters.Where(data => data.StateId == sid);
       return !res.Any() ? null : res.Single();
     }
 
     public Voter GetVoterByDLNumber(string dlnumber) {
       dlnumber = dlnumber.ToLower();
-      IQueryable <Voter> res = this._db.Voters.Where(
+      IQueryable <Voter> res = _db.Voters.Where(
         data => data.DriversLicense.Equals(dlnumber, StringComparison.CurrentCulture));
       return !res.Any() ? null : res.Single();
     }
@@ -349,7 +349,7 @@ namespace Aegis_DVL.Database {
     public List<Voter> GetVotersBySearchStrings(string lastname, string firstname, string middlename,
                                          string address, string municipality, string zipcode) {
       IQueryable<Voter> res = 
-        this._db.Voters.Where(data => data.LastName.Like(lastname + "%") &&
+        _db.Voters.Where(data => data.LastName.Like(lastname + "%") &&
                                       data.FirstName.Like(firstname + "%") &&
                                       data.MiddleName.Like(middlename + "%") &&
                                       data.Address.Like(address + "%") &&

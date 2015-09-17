@@ -29,7 +29,7 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public IsAliveCommand(IPEndPoint sender) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
+      Sender = sender;
     }
 
     #endregion

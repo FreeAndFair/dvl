@@ -65,11 +65,11 @@ namespace Aegis_DVL.Logging {
     public Logger(Station parent, string logName = "Log.sqlite") {
       Contract.Requires(parent != null);
       Contract.Requires(logName != null);
-      Contract.Ensures(this._db != null);
-      Contract.Ensures(this._stationAddress == parent.Address);
-      Contract.Ensures(this._db.Connection.State == ConnectionState.Open);
+      Contract.Ensures(_db != null);
+      Contract.Ensures(_stationAddress == parent.Address);
+      Contract.Ensures(_db.Connection.State == ConnectionState.Open);
 
-      this._stationAddress = parent.Address;
+      _stationAddress = parent.Address;
       string password = parent.MasterPassword.AsBase64();
 
       InitDb(parent, logName, password);
@@ -82,16 +82,16 @@ namespace Aegis_DVL.Logging {
         logName);
       if (parent.IsMasterPasswordInUse) conStr += string.Format(";Password={0}'", password);
       else conStr += "'";
-      this._db = new Entities(conStr);
-      this._db.Connection.Open();
+      _db = new Entities(conStr);
+      _db.Connection.Open();
         
-      this.Log("Logger created", Level.Info);
+      Log("Logger created", Level.Info);
     }
 
     /// <summary>
     /// Finalizes an instance of the <see cref="Logger"/> class. 
     /// </summary>
-    ~Logger() { this.Dispose(false); }
+    ~Logger() { Dispose(false); }
 
     #endregion
 
@@ -100,7 +100,7 @@ namespace Aegis_DVL.Logging {
     /// <summary>
     /// Gets the export.
     /// </summary>
-    public IEnumerable<LogEntry> Export { get { return this._db.Logs.ToArray().Select(data => data.LogEntry.To<LogEntry>()); } }
+    public IEnumerable<LogEntry> Export { get { return _db.Logs.ToArray().Select(data => data.LogEntry.To<LogEntry>()); } }
 
     #endregion
 
@@ -110,7 +110,7 @@ namespace Aegis_DVL.Logging {
     /// The dispose.
     /// </summary>
     public void Dispose() {
-      if (!this._isDisposed) this.Dispose(true);
+      if (!_isDisposed) Dispose(true);
       GC.SuppressFinalize(this);
     }
 
@@ -126,10 +126,10 @@ namespace Aegis_DVL.Logging {
     public void Log(object message, Level level) {
       Console.WriteLine(message);
         /*
-      lock (this._db) {
-        this._db.Logs.AddObject(
-          Logging.Log.CreateLog(++this._i, Bytes.From(new LogEntry(message, level, this._stationAddress))));
-        this._db.SaveChanges();
+      lock (_db) {
+        _db.Logs.AddObject(
+          Logging.Log.CreateLog(++_i, Bytes.From(new LogEntry(message, level, _stationAddress))));
+        _db.SaveChanges();
       }*/
     }
 
@@ -179,9 +179,9 @@ namespace Aegis_DVL.Logging {
     /// The disposing.
     /// </param>
     private void Dispose(bool disposing) {
-      this._isDisposed = true;
-      this._db.SaveChanges();
-      if (disposing) this._db.Dispose();
+      _isDisposed = true;
+      _db.SaveChanges();
+      if (disposing) _db.Dispose();
     }
 
     #endregion

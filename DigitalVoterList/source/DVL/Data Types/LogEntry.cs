@@ -39,10 +39,10 @@ namespace Aegis_DVL.Data_Types {
       Contract.Requires(message != null);
       Contract.Requires(stationAddress != null);
 
-      this.StationAddress = stationAddress;
-      this.Message = message;
-      this.Level = level;
-      this.Timestamp = DateTime.Now;
+      StationAddress = stationAddress;
+      Message = message;
+      Level = level;
+      Timestamp = DateTime.Now;
     }
 
     #endregion
@@ -79,7 +79,7 @@ namespace Aegis_DVL.Data_Types {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public override string ToString() { return this.Timestamp + "; " + this.Level + "; " + this.Message + "; " + this.StationAddress; }
+    public override string ToString() { return Timestamp + "; " + Level + "; " + Message + "; " + StationAddress; }
 
     #endregion
 
@@ -89,9 +89,9 @@ namespace Aegis_DVL.Data_Types {
     /// The object invariant.
     /// </summary>
     [ContractInvariantMethod] private void ObjectInvariant() {
-      Contract.Invariant(this.Message != null);
-      Contract.Invariant(!Equals(this.Level, null));
-      Contract.Invariant(!Equals(this.Timestamp, null));
+      Contract.Invariant(Message != null);
+      Contract.Invariant(!Equals(Level, null));
+      Contract.Invariant(!Equals(Timestamp, null));
     }
 
     #endregion

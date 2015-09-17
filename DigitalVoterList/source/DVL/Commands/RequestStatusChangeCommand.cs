@@ -48,10 +48,10 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public RequestStatusChangeCommand(IPEndPoint sender, VoterNumber voternumber, VoterStatus oldstatus, VoterStatus newstatus) {
       Contract.Requires(sender != null);
-      this.Sender = sender;
-      this._voternumber = voternumber;
-      this._oldstatus = oldstatus;
-      this._newstatus = newstatus;
+      Sender = sender;
+      _voternumber = voternumber;
+      _oldstatus = oldstatus;
+      _newstatus = newstatus;
     }
 
     #endregion
@@ -75,23 +75,23 @@ namespace Aegis_DVL.Commands {
     /// </param>
     public void Execute(Station receiver) {
       if (!receiver.IsManager) return;
-      if (receiver.Database[this._voternumber] != _oldstatus) {
-        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address, this._voternumber, _oldstatus, _newstatus), this.Sender);
+      if (receiver.Database[_voternumber] != _oldstatus) {
+        receiver.Communicator.Send(new BallotRequestDeniedCommand(receiver.Address, _voternumber, _oldstatus, _newstatus), Sender);
         receiver.Logger.Log(
           "Attempted to change a voter's status incorrectly", Level.Info);
         return;
       }
 
-      receiver.BallotReceived(this._voternumber, this._newstatus);
+      receiver.BallotReceived(_voternumber, _newstatus);
 
       // Send to all but requester
       receiver.Peers.Keys
               .ForEach(
                 peer =>
                 receiver.Communicator.Send(
-                  new StatusChangedCommand(receiver.Address, this.Sender, this._voternumber, this._oldstatus, this._newstatus), peer));
+                  new StatusChangedCommand(receiver.Address, Sender, _voternumber, _oldstatus, _newstatus), peer));
 
-      if (this.Sender.Equals(receiver.Manager)) {
+      if (Sender.Equals(receiver.Manager)) {
         receiver.UI.BallotRequestReply(_voternumber, true, _oldstatus, _newstatus);
         return;
       }

@@ -85,7 +85,7 @@ namespace UI {
     /// The station window.
     /// </param>
     public UiHandler(StationWindow stationWindow) { 
-      this._stationWindow = stationWindow;
+      _stationWindow = stationWindow;
     }
 
     #endregion
@@ -96,10 +96,10 @@ namespace UI {
     /// When a manager want to end the election this method should be called
     /// to announce the end to all stations.
     /// </summary>
-    public void AnnounceEndElection() { this._station.AnnounceEndElection(); }
+    public void AnnounceEndElection() { _station.AnnounceEndElection(); }
 
     public void BallotRequestReply(VoterNumber vn, bool success, VoterStatus oldStatus, VoterStatus newStatus) {
-      this.BallotRequestReply(this._station.Database.GetVoterByVoterNumber(vn), success, oldStatus, newStatus);
+      BallotRequestReply(_station.Database.GetVoterByVoterNumber(vn), success, oldStatus, newStatus);
     }
 
     /// <summary>
@@ -109,17 +109,17 @@ namespace UI {
     /// The hand out ballot.
     /// </param>
     public void BallotRequestReply(Voter voter, bool success, VoterStatus oldStatus, VoterStatus newStatus) {
-      if (this.BallotRequestPage != null) {
-        this.BallotRequestPage.Dispatcher.Invoke(
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.BallotResponse(voter, success, oldStatus, newStatus); }));
+          new Action(delegate { BallotRequestPage.BallotResponse(voter, success, oldStatus, newStatus); }));
       }
     }
 
     /// <summary>
     /// Creates a new station and makes it start listening
     /// </summary>
-    public void CreateNewStation() { this._station = new Station(this); }
+    public void CreateNewStation() { _station = new Station(this); }
 
     /// <summary>
     /// Gets he IP adresses of the machines in the local network running this application
@@ -131,18 +131,18 @@ namespace UI {
     /// disposes the current station
     /// </summary>
     public void DisposeStation() {
-      if (this._station != null) this._station.Dispose();
-      this._station = null;
+      if (_station != null) _station.Dispose();
+      _station = null;
     }
 
     /// <summary>
     /// The election ended.
     /// </summary>
     public void ElectionEnded() {
-      if (this.BallotRequestPage != null) {
-        this.BallotRequestPage.Dispatcher.Invoke(
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.EndElection(); }));
+          new Action(delegate { BallotRequestPage.EndElection(); }));
       }
     }
 
@@ -150,10 +150,10 @@ namespace UI {
     /// The election started.
     /// </summary>
     public void ElectionStarted() {
-      if (this.WaitingForManagerPage != null) {
-        this.WaitingForManagerPage.Dispatcher.Invoke(
+      if (WaitingForManagerPage != null) {
+        WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.WaitingForManagerPage.StartElection(); }));
+          new Action(delegate { WaitingForManagerPage.StartElection(); }));
       }
     }
 
@@ -161,18 +161,18 @@ namespace UI {
     /// The enough peers.
     /// </summary>
     public void EnoughPeers() {
-      if (this.BallotRequestPage != null) {
-        this.BallotRequestPage.Dispatcher.Invoke(
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.Blocked = false;
+          new Action(delegate { BallotRequestPage.Blocked = false;
           BallotRequestPage.WaitingLabel.Content = ""; 
         }));
       }
 
-      if (this.ManagerOverviewPage != null) {
-        this.ManagerOverviewPage.Dispatcher.Invoke(
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.Blocked = false; }));
+          new Action(delegate { ManagerOverviewPage.Blocked = false; }));
       }
     }
 
@@ -180,7 +180,7 @@ namespace UI {
     /// Checks if there are enough stations in the peerlist
     /// </summary>
     /// <returns>wheter there are enough stations is hte peerlist</returns>
-    public bool EnoughStations() { return this._station.EnoughStations; }
+    public bool EnoughStations() { return _station.EnoughStations; }
 
     /// <summary>
     /// When a manager wants to connect to a station, this is called to exchange the public keys
@@ -188,7 +188,7 @@ namespace UI {
     /// <param name="ip">
     /// The IP address of the station
     /// </param>
-    public void ExchangeKeys(IPEndPoint ip) { this._station.ExchangePublicKeys(ip); }
+    public void ExchangeKeys(IPEndPoint ip) { _station.ExchangePublicKeys(ip); }
 
     /// <summary>
     /// Export data in the format IEnumerable of EncryptedVoterData to a file
@@ -293,7 +293,7 @@ namespace UI {
     /// the destination filepath
     /// </param>
     public void ExportData(string filePath) {
-      if (this._station != null) this.ExportData(this._station.Database.AllVoters, filePath);
+      if (_station != null) ExportData(_station.Database.AllVoters, filePath);
       else FlexibleMessageBox.Show("You can not export data at this time.", "Operation Not Allowed", MessageBoxButtons.OK);
     }
 
@@ -302,15 +302,15 @@ namespace UI {
     /// </summary>
     /// <returns>the master password</returns>
     public string GeneratePassword() {
-      this._masterPassword = Crypto.GeneratePassword();
-      return this._masterPassword;
+      _masterPassword = Crypto.GeneratePassword();
+      return _masterPassword;
     }
 
     /// <summary>
     /// Asks the _station for the list of peers as IPEndpoints
     /// </summary>
     /// <returns>the list of peers as IPEndpoints</returns>
-    public IEnumerable<IPEndPoint> GetPeerlist() { return this._station.Peers.Keys; }
+    public IEnumerable<IPEndPoint> GetPeerlist() { return _station.Peers.Keys; }
 
     /// <summary>
     /// When a manager wants to import voter data this is called
@@ -338,11 +338,11 @@ namespace UI {
           0xDA, 0xD6, 0x80, 0x72, 0x93, 0xE1, 0x7D, 0x2E, 0xB7, 0xFD, 0xC3, 0x40, 0x0A, 0xAE, 
           0x52, 0x44, 0xC1, 0x3D, 0x7F, 0x6A, 0x77, 0x59, 0x72, 0xA4, 0xD1, 0x77, 0x93, 0x17, 
           0x1F, 0xAB, 0x99, 0xB1, 0x26, 0x81, 0xD5, 0x02, 0x03, 0x01, 0x00, 0x01 }));
-      this._station = this._station ?? new Station(this, key, this._masterPassword);
+      _station = _station ?? new Station(this, key, _masterPassword);
 
       try {
-        this._station.Database.Import(this.ImportVoterData(voterDataPath));
-        this._station.Database.Import(this.ImportPrecinctData(precinctDataPath));
+        _station.Database.Import(ImportVoterData(voterDataPath));
+        _station.Database.Import(ImportPrecinctData(precinctDataPath));
         _hasData = true;
         return true;
       } catch (Exception) {
@@ -545,18 +545,18 @@ namespace UI {
     /// <returns>
     /// whether or not it matches the master password
     /// </returns>
-    public bool IsMasterPWCorrect(string typedPassword) { return this._station != null && this._station.ValidMasterPassword(typedPassword); }
+    public bool IsMasterPWCorrect(string typedPassword) { return _station != null && _station.ValidMasterPassword(typedPassword); }
 
     /// <summary>
     /// The is now manager.
     /// </summary>
     public void IsNowManager() {
-      if (this.BallotRequestPage != null) {
-        this.BallotRequestPage.Dispatcher.Invoke(
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate {
             FlexibleMessageBox.Show("This station will now become the manager.");
-            this.BallotRequestPage.BecomeManager(); 
+            BallotRequestPage.BecomeManager(); 
           }));
       }
     }
@@ -570,7 +570,7 @@ namespace UI {
     /// <returns>
     /// whether or not the machine is active
     /// </returns>
-    public bool IsStationActive(IPEndPoint ip) { return this._station.StationActive(ip); }
+    public bool IsStationActive(IPEndPoint ip) { return _station.StationActive(ip); }
 
     /// <summary>
     /// When a manager wants to promot another station to be the new manager this is called
@@ -582,8 +582,8 @@ namespace UI {
     /// whether or not the promotion was succesful
     /// </returns>
     public bool MakeManager(IPEndPoint ip) {
-      if (this._station.StationActive(ip)) {
-        this._station.PromoteNewManager(ip);
+      if (_station.StationActive(ip)) {
+        _station.PromoteNewManager(ip);
         return true;
       }
 
@@ -600,7 +600,7 @@ namespace UI {
     /// When a manager want to start the election this method should be called
     /// to announce the start to all stations.
     /// </summary>
-    public void ManagerAnnounceStartElection() { this._station.AnnounceStartElection(); }
+    public void ManagerAnnounceStartElection() { _station.AnnounceStartElection(); }
 
     /// <summary>
     /// The manager exchanging key.
@@ -611,7 +611,7 @@ namespace UI {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public string ManagerExchangingKey(IPEndPoint ip) { return this.WaitingForManagerPage != null ? this.WaitingForManagerPage.IncomingConnection(ip) : string.Empty; }
+    public string ManagerExchangingKey(IPEndPoint ip) { return WaitingForManagerPage != null ? WaitingForManagerPage.IncomingConnection(ip) : string.Empty; }
 
     /// <summary>
     /// Marks a station as connnected in the list
@@ -621,16 +621,16 @@ namespace UI {
     /// </param>
     public void MarkAsConnected(IPEndPoint ip) {
       _station.SetPeerStatus(ip, "Connected");
-      if (this.OverviewPage != null) {
-        this.OverviewPage.Dispatcher.Invoke(
+      if (OverviewPage != null) {
+        OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.OverviewPage.RefreshGrid(); }));
+          new Action(delegate { OverviewPage.RefreshGrid(); }));
       }
 
-      if (this.ManagerOverviewPage != null) {
-        this.ManagerOverviewPage.Dispatcher.Invoke(
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.RefreshGrid(); }));
+          new Action(delegate { ManagerOverviewPage.RefreshGrid(); }));
       }
     }
 
@@ -638,19 +638,19 @@ namespace UI {
     /// The not enough peers.
     /// </summary>
     public void NotEnoughPeers() {
-      if (this.BallotRequestPage != null) {
-        this.BallotRequestPage.Dispatcher.Invoke(
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate { this.BallotRequestPage.Blocked = true; BallotRequestPage.WaitingLabel.Content = "Not Enough Stations"; }));
-        this.BallotRequestPage.Dispatcher.Invoke(
+          new Action(delegate { BallotRequestPage.Blocked = true; BallotRequestPage.WaitingLabel.Content = "Not Enough Stations"; }));
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.checkValidityButton.IsEnabled = false; }));
+          new Action(delegate { BallotRequestPage.checkValidityButton.IsEnabled = false; }));
       }
 
-      if (this.ManagerOverviewPage != null) {
-        this.ManagerOverviewPage.Dispatcher.Invoke(
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.Blocked = true; }));
+          new Action(delegate { ManagerOverviewPage.Blocked = true; }));
       }
     }
 
@@ -669,7 +669,7 @@ namespace UI {
     /// the voternumber of the voter
     /// </param>
     public void RequestStatusChange(Voter voter, VoterStatus voterStatus) {
-      this._station.RequestStatusChange(voter, voterStatus);
+      _station.RequestStatusChange(voter, voterStatus);
     }
 
     /// <summary>
@@ -680,18 +680,18 @@ namespace UI {
     /// </param>
     public void ShowPasswordOnManager(string password, IPEndPoint station) {
       string name = IdentifyingStringForStation(station);
-      if (this.OverviewPage != null) {
-        this.OverviewPage.Dispatcher.Invoke(
+      if (OverviewPage != null) {
+        OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.OverviewPage.SetPasswordLabel("Enter this password at Station " + name +": " + password); }));
+            delegate { OverviewPage.SetPasswordLabel("Enter this password at Station " + name +": " + password); }));
       }
 
-      if (this.ManagerOverviewPage != null) {
-        this.ManagerOverviewPage.Dispatcher.Invoke(
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.ManagerOverviewPage.SetPasswordLabel("Enter this password at Station " + name + ":\n" + password); }));
+            delegate { ManagerOverviewPage.SetPasswordLabel("Enter this password at Station " + name + ":\n" + password); }));
       }
     }
 
@@ -702,11 +702,11 @@ namespace UI {
     /// The password.
     /// </param>
     public void ShowPasswordOnStation(string password, IPEndPoint manager) {
-      if (this.WaitingForManagerPage != null) {
-        this.WaitingForManagerPage.Dispatcher.Invoke(
+      if (WaitingForManagerPage != null) {
+        WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.WaitingForManagerPage.SetPasswordLabel("Enter this password at Manager " + IdentifyingStringForStation(manager) + ": " + password); }));
+            delegate { WaitingForManagerPage.SetPasswordLabel("Enter this password at Manager " + IdentifyingStringForStation(manager) + ": " + password); }));
       }
     }
 
@@ -732,18 +732,18 @@ namespace UI {
     /// The <see cref="string"/>.
     /// </returns>
     public string StationExchangingKey(IPEndPoint ip) {
-      if (this.OverviewPage != null) {
-        this.OverviewPage.Dispatcher.Invoke(
+      if (OverviewPage != null) {
+        OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.OverviewPage.SetPasswordLabel(string.Empty); }));
-        return this.OverviewPage.IncomingReply(ip);
+          new Action(delegate { OverviewPage.SetPasswordLabel(string.Empty); }));
+        return OverviewPage.IncomingReply(ip);
       }
 
-      if (this.ManagerOverviewPage != null) {
-        this.ManagerOverviewPage.Dispatcher.Invoke(
+      if (ManagerOverviewPage != null) {
+        ManagerOverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.ManagerOverviewPage.SetPasswordLabel(string.Empty); }));
-        return this.ManagerOverviewPage.IncomingReply(ip);
+          new Action(delegate { ManagerOverviewPage.SetPasswordLabel(string.Empty); }));
+        return ManagerOverviewPage.IncomingReply(ip);
       }
 
       return string.Empty;
@@ -758,16 +758,16 @@ namespace UI {
         "Station Shut Down", 
         MessageBoxButtons.OK, 
         MessageBoxIcon.Warning);
-      if (this.WaitingForManagerPage != null) {
-        this.WaitingForManagerPage.Dispatcher.Invoke(
+      if (WaitingForManagerPage != null) {
+        WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.WaitingForManagerPage.StationRemoved(); }));
+          new Action(delegate { WaitingForManagerPage.StationRemoved(); }));
       }
 
-      if (this.BallotRequestPage != null) {
-        this.BallotRequestPage.Dispatcher.Invoke(
+      if (BallotRequestPage != null) {
+        BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
-          new Action(delegate { this.BallotRequestPage.StationRemoved(); }));
+          new Action(delegate { BallotRequestPage.StationRemoved(); }));
       }
     }
 

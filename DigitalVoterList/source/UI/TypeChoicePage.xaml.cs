@@ -57,9 +57,9 @@ namespace UI {
     /// the UIhandler of this UI
     /// </param>
     public TypeChoicePage(Frame parent, UiHandler ui) {
-      this._parent = parent;
-      this._ui = ui;
-      this.InitializeComponent();
+      _parent = parent;
+      _ui = ui;
+      InitializeComponent();
     }
 
     #endregion
@@ -70,9 +70,9 @@ namespace UI {
     /// The remove station.
     /// </summary>
     public void RemoveStation() {
-      this._ui.BallotRequestPage = null;
-      this._ui.WaitingForManagerPage = null;
-      this._ui.WaitingForManagerPage = new WaitingForManagerPage(this._parent, this._ui);
+      _ui.BallotRequestPage = null;
+      _ui.WaitingForManagerPage = null;
+      _ui.WaitingForManagerPage = new WaitingForManagerPage(_parent, _ui);
     }
 
     #endregion
@@ -99,7 +99,7 @@ namespace UI {
     /// <param name="e">
     /// auto generated
     /// </param>
-    private void ManagerButtonClick(object sender, RoutedEventArgs e) { this._parent.Navigate(new MasterPasswordPage(this._parent, this._ui)); }
+    private void ManagerButtonClick(object sender, RoutedEventArgs e) { _parent.Navigate(new MasterPasswordPage(_parent, _ui)); }
 
     /// <summary>
     /// Called when the station option is chosen
@@ -111,8 +111,8 @@ namespace UI {
     /// auto generated
     /// </param>
     private void StationButtonClick(object sender, RoutedEventArgs e) {
-      this._ui.CreateNewStation();
-      this._parent.Navigate(new WaitingForManagerPage(this._parent, this._ui));
+      _ui.CreateNewStation();
+      _parent.Navigate(new WaitingForManagerPage(_parent, _ui));
     }
 
     #endregion

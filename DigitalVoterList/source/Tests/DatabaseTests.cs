@@ -42,21 +42,21 @@ namespace Tests {
     ///   Create the test database and station for database testing.
     /// </summary>
     [SetUp] public void SetUp() {
-      this.Station = new Station(
+      Station = new Station(
         new TestUi(), 
         SystemTestData.Key, 
         SystemTestData.Password, 
         SystemTestData.ManagerPort,
         "DatabaseTestsManagerVoters.sqlite");
-      Assert.That(this.Station.ValidMasterPassword(SystemTestData.Password));
+      Assert.That(Station.ValidMasterPassword(SystemTestData.Password));
     }
 
     /// <summary>
     /// The tear down.
     /// </summary>
     [TearDown] public void TearDown() {
-      if (this.Station != null) this.Station.Dispose();
-      this.Station = null;
+      if (Station != null) Station.Dispose();
+      Station = null;
       File.Delete("DatabaseTestsManagerVoters.sqlite");
     }
 
@@ -66,7 +66,7 @@ namespace Tests {
     /// </summary>
     /*
     [Test] public void Test() {
-      IDatabase db = this.Station.Database;
+      IDatabase db = Station.Database;
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
 
@@ -78,15 +78,15 @@ namespace Tests {
         new List<EncryptedVoterData> {
           new EncryptedVoterData(
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+              Station.Crypto.AsymmetricEncrypt(Bytes.From(vn.Value), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+              Station.Crypto.AsymmetricEncrypt(Bytes.From(cpr.Value), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
-                  this.Station.Crypto.VoterDataEncryptionKey)))
+                  Station.Crypto.VoterDataEncryptionKey)))
         });
 
       Assert.That(db.AllData != null);
@@ -115,7 +115,7 @@ namespace Tests {
     /// </summary>
     [Test] public void TestCreateDatafile() {
       const string FileName = "TEST_VOTERDATA.data";
-      IDatabase db = this.Station.Database;
+      IDatabase db = Station.Database;
 
       var vn0 = new VoterNumber(000000);
       var cpr0 = new CPR(1111222200);
@@ -184,17 +184,17 @@ namespace Tests {
         new List<EncryptedVoterData> {
           new EncryptedVoterData(
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(vn0.Value), 
-                this.Station.Crypto.VoterDataEncryptionKey)),
+                Station.Crypto.VoterDataEncryptionKey)),
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr0.Value), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr0.Value + (uint)BallotStatus.NotReceived), 
-                this.Station.Crypto.VoterDataEncryptionKey)))
+                Station.Crypto.VoterDataEncryptionKey)))
         };
       db.Import(encData);
 
@@ -204,9 +204,9 @@ namespace Tests {
       // Check if file is created
       Assert.That(File.Exists(FileName));
 
-      byte[] decVData = this.Station.Crypto.AsymmetricDecrypt(
+      byte[] decVData = Station.Crypto.AsymmetricDecrypt(
         new CipherText(Bytes.From(db.AllData)), 
-        this.Station.Crypto.VoterDataEncryptionKey);
+        Station.Crypto.VoterDataEncryptionKey);
       Debug.WriteLine("Decrypted voter data: " + decVData);
 
       Bytes.From(db.AllData.ToString()).ToFile("DECRYPTED_VOTERDATA");
@@ -218,7 +218,7 @@ namespace Tests {
     /// </summary>
     /*
     [Test] public void TestMasterPasswordDb() {
-      IDatabase db = this.Station.Database;
+      IDatabase db = Station.Database;
       var vn = new VoterNumber(250000);
       var cpr = new CPR(2312881234);
 
@@ -228,30 +228,30 @@ namespace Tests {
         new List<EncryptedVoterData> {
           new EncryptedVoterData(
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(vn.Value), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr.Value), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived), 
-                this.Station.Crypto.VoterDataEncryptionKey))), 
+                Station.Crypto.VoterDataEncryptionKey))), 
           new EncryptedVoterData(
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(vn.Value + 5), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr.Value + 5), 
-                this.Station.Crypto.VoterDataEncryptionKey)), 
+                Station.Crypto.VoterDataEncryptionKey)), 
             new CipherText(
-              this.Station.Crypto.AsymmetricEncrypt(
+              Station.Crypto.AsymmetricEncrypt(
                 Bytes.From(cpr.Value + (uint)BallotStatus.NotReceived + 5), 
-                this.Station.Crypto.VoterDataEncryptionKey)))
+                Station.Crypto.VoterDataEncryptionKey)))
         });
 
       Assert.That(db.AllData != null);

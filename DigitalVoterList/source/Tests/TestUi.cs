@@ -76,8 +76,8 @@ namespace Tests {
     /// <param name="handOutBallot">
     /// The hand out ballot.
     /// </param>
-    public void BallotRequestReply(VoterNumber vn, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { this.HandOutBallot = handOutBallot; }
-    public void BallotRequestReply(Voter v, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { this.HandOutBallot = handOutBallot; }
+    public void BallotRequestReply(VoterNumber vn, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { HandOutBallot = handOutBallot; }
+    public void BallotRequestReply(Voter v, bool handOutBallot, VoterStatus oldStatus, VoterStatus newStatus) { HandOutBallot = handOutBallot; }
     public void ConvertToStation() { }
     public void RefreshStatistics() { }
     public void RefreshPeers() { }
@@ -85,22 +85,22 @@ namespace Tests {
     /// <summary>
     ///   The election ended.
     /// </summary>
-    public void ElectionEnded() { this.OngoingElection = false; }
+    public void ElectionEnded() { OngoingElection = false; }
 
     /// <summary>
     ///   The election started.
     /// </summary>
-    public void ElectionStarted() { this.OngoingElection = true; }
+    public void ElectionStarted() { OngoingElection = true; }
 
     /// <summary>
     ///   The enough peers.
     /// </summary>
-    public void EnoughPeers() { this.UIHasEnoughPeers = true; }
+    public void EnoughPeers() { UIHasEnoughPeers = true; }
 
     /// <summary>
     ///   The is now manager.
     /// </summary>
-    public void IsNowManager() { this.IsManager = true; }
+    public void IsNowManager() { IsManager = true; }
 
     /// <summary>
     /// The manager exchanging key.
@@ -111,12 +111,12 @@ namespace Tests {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public string ManagerExchangingKey(IPEndPoint ip) { return this.PasswordFromManager; }
+    public string ManagerExchangingKey(IPEndPoint ip) { return PasswordFromManager; }
 
     /// <summary>
     ///   The not enough peers.
     /// </summary>
-    public void NotEnoughPeers() { this.UIHasEnoughPeers = false; }
+    public void NotEnoughPeers() { UIHasEnoughPeers = false; }
 
     /// <summary>
     /// The show password on manager.
@@ -124,7 +124,7 @@ namespace Tests {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnManager(string password, IPEndPoint station) { this.PasswordFromManager = password; }
+    public void ShowPasswordOnManager(string password, IPEndPoint station) { PasswordFromManager = password; }
 
     /// <summary>
     /// The show password on station.
@@ -132,12 +132,12 @@ namespace Tests {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnStation(string password, IPEndPoint manager) { this.PasswordFromStation = password; }
+    public void ShowPasswordOnStation(string password, IPEndPoint manager) { PasswordFromStation = password; }
 
     /// <summary>
     ///   The shutdown.
     /// </summary>
-    public void Shutdown() { this.UIShutDown = true; }
+    public void Shutdown() { UIShutDown = true; }
 
     /// <summary>
     /// The station exchanging key.
@@ -148,12 +148,12 @@ namespace Tests {
     /// <returns>
     /// The <see cref="string"/>.
     /// </returns>
-    public string StationExchangingKey(IPEndPoint ip) { return this.PasswordFromStation; }
+    public string StationExchangingKey(IPEndPoint ip) { return PasswordFromStation; }
 
     /// <summary>
     ///   The station removed.
     /// </summary>
-    public void StationRemoved() { this.UIRemovePeer = true; }
+    public void StationRemoved() { UIRemovePeer = true; }
 
     public void SyncComplete() { }
 
