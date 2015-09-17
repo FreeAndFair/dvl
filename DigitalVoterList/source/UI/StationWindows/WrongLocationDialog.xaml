@@ -1,7 +1,7 @@
 ﻿<Window x:Name="Wrong_Location" x:Class="UI.StationWindows.WrongLocationDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Wrong Location" Height="600" Width="600" WindowStartupLocation="CenterScreen">
+        Title="Wrong Location" Height="600" Width="600" WindowStartupLocation="CenterOwner">
     <Grid>
         <Label Name="VoterName" Content="Voter Name" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" FontSize="22"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22" TextAlignment="Center"><Run Text="is at the incorrect polling location. "/><LineBreak/><Run Text="The correct location is:"/></TextBlock>

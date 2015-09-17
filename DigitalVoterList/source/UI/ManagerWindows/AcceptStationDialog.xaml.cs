@@ -19,6 +19,7 @@
 #endregion
 
 namespace UI.ManagerWindows {
+  using System;
   using System.Net;
   using System.Windows;
 
@@ -61,7 +62,7 @@ namespace UI.ManagerWindows {
       this._ui = ui;
       this._ip = ip;
       this.InitializeComponent();
-      this.StationLabel.Content = ip.Address.ToString();
+      this.StationLabel.Content = StationLabel.Content.ToString().Replace("NAME", _ui.IdentifyingStringForStation(ip));
       this.Activate();
       this.PwTextbox.Focus();
       this.OKButton.IsEnabled = false;

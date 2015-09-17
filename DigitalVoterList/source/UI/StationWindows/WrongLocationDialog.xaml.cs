@@ -21,6 +21,7 @@ namespace UI.StationWindows {
   public partial class WrongLocationDialog : Window {
     public WrongLocationDialog(Voter voter, Precinct place) {
       InitializeComponent();
+      this.Owner = Application.Current.MainWindow;
       VoterName.Content = GetFormattedName(voter);
       StringBuilder sb = new StringBuilder();
       sb.Append(place.Address);

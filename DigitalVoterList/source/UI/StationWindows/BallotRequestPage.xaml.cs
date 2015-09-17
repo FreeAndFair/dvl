@@ -78,7 +78,7 @@ namespace UI.StationWindows {
       this.StateId.Focus();
       Blocked = false;
       Waiting = false;
-      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", _ui._station.Address.Address.ToString());
+      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", _ui.IdentifyingString());
     }
 
     #endregion
@@ -117,9 +117,17 @@ namespace UI.StationWindows {
         case VoterStatus.WrongLocation:
           Precinct p = _ui._station.Database.GetPrecinctBySplitId(voter.PrecinctSub);
           if (p.Address.Trim().Length > 0) {
-            var wrd = new WrongLocationDialog(voter, p);
-            var result = wrd.ShowDialog();
-            if (result.HasValue && result == true) {
+            WrongLocationDialog wrd = null;
+            Boolean result = false;
+            _ui._stationWindow.Dispatcher.Invoke(
+              System.Windows.Threading.DispatcherPriority.Normal,
+              new Action(
+                delegate {
+                  wrd = new WrongLocationDialog(voter, p);
+                  wrd.Owner = _ui._stationWindow;
+                  result = (Boolean)wrd.ShowDialog();
+                }));
+            if (result == true) {
               string here = _ui._station.PollingPlace.Address + ", " + _ui._station.PollingPlace.CityStateZIP;
               string there = p.Address + ", " + p.CityStateZIP;
               string url = "https://maps.google.com/maps/dir/" + here.Replace(" ", "+") + "/" + there.Replace(" ", "+");
@@ -153,8 +161,14 @@ namespace UI.StationWindows {
           case VoterStatus.MailBallotNotReturned:
           case VoterStatus.ActiveVoter:
           case VoterStatus.Provisional:
-            var bd = new GiveBallotDialog(voter);
-            bd.ShowDialog();
+            _ui._stationWindow.Dispatcher.Invoke(
+              System.Windows.Threading.DispatcherPriority.Normal,
+              new Action(
+                delegate {
+                  var bd = new GiveBallotDialog(voter);
+                  bd.Owner = _ui._stationWindow;
+                  bd.ShowDialog();
+                }));
             break;
 
           default:
@@ -265,35 +279,58 @@ namespace UI.StationWindows {
       } else if (results.Count == 1) {
         vs = GetNewVoterStatus(results[0]);
         Window dialog;
-        if (((int) vs != results[0].PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) || 
-                                                      (vs == VoterStatus.MailBallotNotReturned) ||  
-                                                      (vs == VoterStatus.OutOfCounty))) {
-          dialog = new ConfirmSingleVoterWithConditionsDialog(results[0], vs);
-        } else {
-          dialog = new ConfirmSingleVoterDialog(results[0]);
-        }
-        var result = dialog.ShowDialog();
-
-        if (result.HasValue && result == true) {
+        Boolean result = false;
+        _ui._stationWindow.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(
+            delegate {
+              if (((int)vs != results[0].PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) ||
+                                                            (vs == VoterStatus.MailBallotNotReturned) ||
+                                                            (vs == VoterStatus.OutOfCounty))) {
+                dialog = new ConfirmSingleVoterWithConditionsDialog(results[0], vs);
+              } else {
+                dialog = new ConfirmSingleVoterDialog(results[0]);
+              }
+              dialog.Owner = _ui._stationWindow;
+              result = (Boolean)dialog.ShowDialog();
+            }));
+        if (result) {
           choice = results[0];
         }
       } else {
-        var dialog = new ConfirmMultiVoterDialog(results);
-        var result = dialog.ShowDialog();
+        ConfirmMultiVoterDialog dialog = null;
+        Boolean result = false;
 
-        if (result.HasValue && result == true) {
+        _ui._stationWindow.Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(
+            delegate {
+              dialog = new ConfirmMultiVoterDialog(results);
+              dialog.Owner = _ui._stationWindow;
+              result = (Boolean)dialog.ShowDialog();
+            }));
+
+        if (result) {
           choice = dialog.SelectedVoter;
           vs = GetNewVoterStatus(choice);
           Window dialog2;
-          if (((int) vs != choice.PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) || 
-                                                      (vs == VoterStatus.MailBallotNotReturned) ||  
-                                                      (vs == VoterStatus.OutOfCounty))) {
-            dialog2 = new ConfirmSingleVoterWithConditionsDialog(choice, vs);
-          } else {
-            dialog2 = new ConfirmSingleVoterDialog(choice);
-          }
-          var result2 = dialog2.ShowDialog();
-          if (!(result2.HasValue && result2 == true)) {
+          Boolean result2 = false;
+
+          _ui._stationWindow.Dispatcher.Invoke(
+            System.Windows.Threading.DispatcherPriority.Normal,
+            new Action(
+              delegate {
+                if (((int)vs != choice.PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) ||
+                                                                      (vs == VoterStatus.MailBallotNotReturned) ||
+                                                                      (vs == VoterStatus.OutOfCounty))) {
+                  dialog2 = new ConfirmSingleVoterWithConditionsDialog(choice, vs);
+                } else {
+                  dialog2 = new ConfirmSingleVoterDialog(choice);
+                }
+                dialog2.Owner = _ui._stationWindow;
+                result2 = (Boolean)dialog2.ShowDialog();
+              }));
+          if (!result2) {
             choice = null;
             vs = VoterStatus.Unavailable;
           }

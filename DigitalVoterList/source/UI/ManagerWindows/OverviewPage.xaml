@@ -15,7 +15,7 @@
                 <DataGridTemplateColumn Header="Station Name" Width="*" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding IpAddress}" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding DisplayName}" TextAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

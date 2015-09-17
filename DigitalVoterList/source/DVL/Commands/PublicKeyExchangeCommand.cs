@@ -56,8 +56,8 @@ namespace Aegis_DVL.Commands {
       this._isReply = isReply;
       this.Sender = parent.Address;
       var pswd = Crypto.GeneratePassword();
-      if (isReply) parent.UI.ShowPasswordOnStation(pswd, destination.Address.ToString());
-      else parent.UI.ShowPasswordOnManager(pswd, destination.Address.ToString());
+      if (isReply) parent.UI.ShowPasswordOnStation(pswd, destination);
+      else parent.UI.ShowPasswordOnManager(pswd, destination);
       this._wrapper = new PublicKeyWrapper(parent.Crypto, pswd);
     }
 
@@ -116,6 +116,7 @@ namespace Aegis_DVL.Commands {
     /// <exception cref="TaskCanceledException">
     /// </exception>
     public void GetPassword(Station receiver) {
+      Console.WriteLine("GetPassword called on " + receiver.Address + " by " + Sender);
       var deObfuscationPassword = this._isReply
                                     ? receiver.UI.StationExchangingKey(this.Sender)
                                     : receiver.UI.ManagerExchangingKey(this.Sender);

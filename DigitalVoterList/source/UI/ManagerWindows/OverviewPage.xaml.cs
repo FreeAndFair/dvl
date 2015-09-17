@@ -76,7 +76,7 @@ namespace UI.ManagerWindows {
       this.RemoveButton.IsEnabled = false;
       this.AddButton.IsEnabled = false;
       this.StartEndElectionButton.IsEnabled = false;
-      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", ui._station.Address.Address.ToString());
+      IPLabel.Content = IPLabel.Content.ToString().Replace("255.255.255.255", ui._station.Communicator.GetIdentifyingString());
       stationGrid.ItemsSource = _ui._station.PeerStatuses.Values;
       this.PopulateList();
     }
@@ -96,11 +96,19 @@ namespace UI.ManagerWindows {
     /// the password the user has typed in the AcceptStationDialog
     /// </returns>
     public string IncomingReply(IPEndPoint ip) {
-      var acd = new AcceptStationDialog(ip, this._ui);
-      var result = acd.ShowDialog();
+      AcceptStationDialog acd = null;
+      Boolean result = false;
 
-      if (result.HasValue &&
-          result == true) return acd.TypedPassword;
+      _ui._stationWindow.Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(
+          delegate {
+            acd = new AcceptStationDialog(ip, this._ui);
+            acd.Owner = _ui._stationWindow;
+            result = (Boolean)acd.ShowDialog();
+          }));
+
+      if (result == true) return acd.TypedPassword;
 
       return string.Empty;
     }
@@ -186,7 +194,7 @@ namespace UI.ManagerWindows {
     /// </param>
     private void AddButtonClick(object sender, RoutedEventArgs e) {
       if (this.stationGrid.SelectedCells.Count != 0) {
-        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(((StationStatus)this.stationGrid.SelectedItem).IpAddress), 62000);
+        IPEndPoint ipep = ((StationStatus)this.stationGrid.SelectedItem).Address;
         if (!_ui.GetPeerlist().Contains(ipep)) {
           this._ui.ExchangeKeys(ipep);
         }
@@ -234,7 +242,7 @@ namespace UI.ManagerWindows {
     private void RemoveButtonClick(object sender, RoutedEventArgs e) {
       if (this.stationGrid.SelectedItem != null) {
         if (((StationStatus)this.stationGrid.SelectedItem).Connected()) {
-          this._ui.RemoveStation(((StationStatus)this.stationGrid.SelectedItem).IpAddress);
+          this._ui.RemoveStation(((StationStatus)this.stationGrid.SelectedItem).Address);
           this.PopulateList();
         }
       }
@@ -260,12 +268,20 @@ namespace UI.ManagerWindows {
         return;
       }
 
-      var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to start the election.");
-      d.ShowDialog();
+      Boolean result = false;
+      Boolean cancel = false;
+      _ui._stationWindow.Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(
+          delegate {
+            var d = new CheckMasterPasswordDialog(this._ui, "The master password is required to start the election.");
+            d.Owner = _ui._stationWindow;
+            result = (Boolean)d.ShowDialog();
+            cancel = d.IsCancel;
+          }));
 
-      if (d.DialogResult.HasValue &&
-          d.DialogResult == true) {
-        if (d.IsCancel) return;
+      if (result) {
+        if (cancel) return;
 
         if (this._activeUpdateThread != null) this._activeUpdateThread.Abort();
 

@@ -40,6 +40,39 @@ namespace Aegis_DVL.Communication {
     IEnumerable<IPEndPoint> DiscoverNetworkMachines();
 
     /// <summary>
+    /// Gets the local end point for this instance of the pollbook. If 
+    /// one does not exist, it is created. Note that depending on the
+    /// implementation, the supplied port number may be ignored.
+    /// </summary>
+    /// <param name="port">
+    /// the port number on which to create the local end point
+    /// </param>
+    /// <returns>
+    /// The IPEndPoint representing the local end point.
+    /// </returns>
+    IPEndPoint GetLocalEndPoint(int port = 0);
+
+    /// <summary>
+    /// Gets a string (like an IP address or port number) that can identify this DVL.
+    /// </summary>
+    /// <returns>
+    /// A string identifying this DVL.
+    /// </returns>
+    string GetIdentifyingString();
+
+    /// <summary>
+    /// Gets a string (like an IP address or port number) that can identify the DVL
+    /// at the specified address.
+    /// </summary>
+    /// <param name="address">
+    /// The IPEndPoint representing the address of the DVL
+    /// </param>
+    /// <returns>
+    /// A string identifying the DVL represented by the specified address
+    /// </returns>
+    string GetIdentifyingStringForStation(IPEndPoint address);
+
+    /// <summary>
     /// Is this machine listening on this port?
     /// </summary>
     /// <param name="address">
@@ -103,6 +136,52 @@ namespace Aegis_DVL.Communication {
       Contract.Ensures(Contract.Result<IEnumerable<IPEndPoint>>() != null);
       Contract.Ensures(Contract.ForAll(Contract.Result<IEnumerable<IPEndPoint>>(), x => x != null));
       return default(IEnumerable<IPEndPoint>);
+    }
+
+    /// <summary>
+    /// Gets the local end point for this instance of the pollbook. If 
+    /// one does not exist, it is created.
+    /// </summary>
+    /// <returns>
+    /// The IPEndPoint representing the local end point.
+    /// </returns>
+    public IPEndPoint GetLocalEndPoint(int port) {
+      Contract.Ensures(Contract.Result<IPEndPoint>() != null);
+      return default(IPEndPoint);
+    }
+
+    /// <summary>
+    /// Destroys the local end point for this instance of the pollbook. 
+    /// </summary>
+    public void DestroyLocalEndPoint() {
+      return;
+    }
+
+    /// <summary>
+    /// Gets a string (like an IP address or port number) that can identify this DVL.
+    /// </summary>
+    /// <returns>
+    /// A string identifying this DVL.
+    /// </returns>
+    public string GetIdentifyingString() {
+      Contract.Ensures(Contract.Result<string>() != null);
+      return default(string);
+    }
+
+    /// <summary>
+    /// Gets a string (like an IP address or port number) that can identify the DVL
+    /// at the specified address.
+    /// </summary>
+    /// <param name="address">
+    /// The IPEndPoint representing the address of the DVL
+    /// </param>
+    /// <returns>
+    /// A string identifying the DVL represented by the specified address
+    /// </returns>
+    public string GetIdentifyingStringForStation(IPEndPoint address) {
+      Contract.Requires(address != null);
+      Contract.Ensures(Contract.Result<string>() != null);
+      return default(string);
     }
 
     /// <summary>

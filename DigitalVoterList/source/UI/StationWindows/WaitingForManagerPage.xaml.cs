@@ -64,7 +64,7 @@ namespace UI.StationWindows {
       this.InitializeComponent();
       Window.GetWindow(this._parent);
       this.IPLabel.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
-        new Action(delegate { this.IPLabel.Content = "This is Station " + _ui.IPAddressString; }));
+        new Action(delegate { this.IPLabel.Content = "This is Station " + _ui.IdentifyingString(); }));
       this._ui.WaitingForManagerPage = this;
     }
 
@@ -83,11 +83,18 @@ namespace UI.StationWindows {
     /// the password typed on the station
     /// </returns>
     public string IncomingConnection(IPEndPoint ip) {
-      var amd = new AcceptManagerDialog(this._parent, ip, this);
-      var result = amd.ShowDialog();
+      Boolean result = false;
 
-      if (result.HasValue &&
-          result == true) {
+      _ui._stationWindow.Dispatcher.Invoke(
+        System.Windows.Threading.DispatcherPriority.Normal,
+        new Action(
+          delegate {
+            var amd = new AcceptManagerDialog(this._parent, _ui.IdentifyingStringForStation(ip), this);
+            amd.Owner = _ui._stationWindow;
+            result = (Boolean)amd.ShowDialog();
+          }));
+
+      if (result) {
         this.CenterLabel.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate { this.CenterLabel.Content = "Waiting for election data..."; }));

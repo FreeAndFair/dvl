@@ -57,8 +57,6 @@ namespace UI {
     /// </summary>
     public WaitingForManagerPage WaitingForManagerPage;
 
-    public readonly string IPAddressString;
-
     /// <summary>
     /// The _station window.
     /// </summary>
@@ -88,8 +86,6 @@ namespace UI {
     /// </param>
     public UiHandler(StationWindow stationWindow) { 
       this._stationWindow = stationWindow;
-      IPAddressString = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
-        ip.AddressFamily == AddressFamily.InterNetwork).ToString();
     }
 
     #endregion
@@ -510,6 +506,37 @@ namespace UI {
     }
 
     /// <summary>
+    /// An identifying string for this DVL.
+    /// </summary>
+    /// <returns>
+    /// An identifying string for this DVL.
+    /// </returns>
+    public string IdentifyingString() {
+      string result = "UNKNOWN";
+      if (_station != null) {
+        result = _station.Communicator.GetIdentifyingString();
+      }
+      return result;
+    }
+
+    /// <summary>
+    /// An identifying string for another DVL.
+    /// </summary>
+    /// <param name="station">
+    /// The IP end point of the other DVL.
+    /// </param>
+    /// <returns>
+    /// An identifying string for another DVL.
+    /// </returns>    
+    public string IdentifyingStringForStation(IPEndPoint station) {
+      string result = "UNKNOWN";
+      if (_station != null) {
+        result = _station.Communicator.GetIdentifyingStringForStation(station);
+      }
+      return result;
+    }
+
+    /// <summary>
     /// Checks if a entered password matches the master password
     /// </summary>
     /// <param name="typedPassword">
@@ -633,7 +660,7 @@ namespace UI {
     /// <param name="ip">
     /// the IP adress of the station to be removed
     /// </param>
-    public void RemoveStation(string ip) { this._station.AnnounceRemovePeer(new IPEndPoint(IPAddress.Parse(ip), 62000)); }
+    public void RemoveStation(IPEndPoint ip) { _station.AnnounceRemovePeer(ip); }
 
     /// <summary>
     /// This method is called when a voter wants to request a ballot after entering their voternumber and CPR number
@@ -651,7 +678,8 @@ namespace UI {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnManager(string password, string name) {
+    public void ShowPasswordOnManager(string password, IPEndPoint station) {
+      string name = IdentifyingStringForStation(station);
       if (this.OverviewPage != null) {
         this.OverviewPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
@@ -673,12 +701,12 @@ namespace UI {
     /// <param name="password">
     /// The password.
     /// </param>
-    public void ShowPasswordOnStation(string password, string name) {
+    public void ShowPasswordOnStation(string password, IPEndPoint manager) {
       if (this.WaitingForManagerPage != null) {
         this.WaitingForManagerPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(
-            delegate { this.WaitingForManagerPage.SetPasswordLabel("Enter this password at Manager " + name + ": " + password); }));
+            delegate { this.WaitingForManagerPage.SetPasswordLabel("Enter this password at Manager " + IdentifyingStringForStation(manager) + ": " + password); }));
       }
     }
 

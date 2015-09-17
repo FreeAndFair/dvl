@@ -80,7 +80,7 @@ namespace Aegis_DVL {
     /// <param name="password">
     /// The password to display.
     /// </param>
-    void ShowPasswordOnManager(string password, string name);
+    void ShowPasswordOnManager(string password, IPEndPoint station);
 
     /// <summary>
     /// Show this password on a station machine!
@@ -88,7 +88,7 @@ namespace Aegis_DVL {
     /// <param name="password">
     /// The password to display.
     /// </param>
-    void ShowPasswordOnStation(string password, string name);
+    void ShowPasswordOnStation(string password, IPEndPoint manager);
 
     /// <summary>
     ///   Let the UI know that it needs to shut down!

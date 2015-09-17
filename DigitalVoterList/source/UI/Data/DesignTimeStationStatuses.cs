@@ -23,10 +23,12 @@ namespace UI.Data {
     /// Initializes a new instance of the <see cref="DesignTimeStationStatuses"/> class.
     /// </summary>
     public DesignTimeStationStatuses() {
+      /*
       this.Add(new StationStatus("127.0.0.1", "Ready"));
       this.Add(new StationStatus("127.0.0.2", "Ready"));
       this.Add(new StationStatus("127.0.0.3", "Not Connected"));
       this.Add(new StationStatus("127.0.0.4", "Not Connected"));
+      */
     }
 
     #endregion

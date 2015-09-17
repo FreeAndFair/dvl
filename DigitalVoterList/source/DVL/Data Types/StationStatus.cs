@@ -11,12 +11,15 @@
 
 namespace Aegis_DVL.Data_Types {
   using System.Collections.Generic;
+  using System.Net;
 
   /// <summary>
   /// The station status.
   /// </summary>
   public class StationStatus {
     #region Public Properties
+
+    public IPEndPoint Address { get; private set;  }
 
     /// <summary>
     /// Gets or sets a value indicating whether connected.
@@ -26,12 +29,13 @@ namespace Aegis_DVL.Data_Types {
     /// <summary>
     /// Gets or sets the ip adress.
     /// </summary>
-    public string IpAddress { get; set; }
+    public string DisplayName { get; private set; }
 
     #endregion
 
-    public StationStatus(string station, string status) {
-      IpAddress = station;
+    public StationStatus(IPEndPoint address, string displayName, string status) {
+      Address = address;
+      DisplayName = displayName;
       ConnectionState = status;
     }
 

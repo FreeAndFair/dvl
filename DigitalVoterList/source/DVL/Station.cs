@@ -182,13 +182,9 @@ namespace Aegis_DVL {
       this.Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
       this.PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
       this.ElectionInProgress = false;
-      this.Address =
-        new IPEndPoint(
-          Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip => 
-            ip.AddressFamily == AddressFamily.InterNetwork), 
-          port);
+      this.Communicator = new LocalhostCommunicator(this);
+      this.Address = Communicator.GetLocalEndPoint(port);
       this.Database = new VoterListDatabase(this, databaseFile);
-      this.Communicator = new Communicator(this);
       this.UI = ui;
       this.Crypto = new Crypto();
       this.StartListening();
@@ -338,7 +334,7 @@ namespace Aegis_DVL {
       if (PeerStatuses.ContainsKey(peer)) {
         PeerStatuses[peer].ConnectionState = "Connected";
       } else {
-        PeerStatuses.Add(peer, new StationStatus(peer.Address.ToString(), "Connected"));
+        PeerStatuses.Add(peer, new StationStatus(peer, Communicator.GetIdentifyingStringForStation(peer), "Connected"));
       }
       if (this.EnoughStations) this.UI.EnoughPeers();
       if (this.Logger != null) this.Logger.Log("Peer added: " + peer, Level.Info);
@@ -459,7 +455,7 @@ namespace Aegis_DVL {
           if (PeerStatuses.Keys.Contains(peer)) {
             PeerStatuses[peer].ConnectionState = "Not Connected";
           } else {
-            PeerStatuses[peer] = new StationStatus(peer.Address.ToString(), "Not Connected");
+            PeerStatuses[peer] = new StationStatus(peer, Communicator.GetIdentifyingStringForStation(peer), "Not Connected");
           }
         } else if (!listening) {
           RemovePeer(peer);
@@ -568,12 +564,18 @@ namespace Aegis_DVL {
       Contract.Ensures(!this.Peers.ContainsKey(peer));
       if (Manager.Equals(Address)) {
         // only the manager should disconnect stations explicitly
-        this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(this.Manager.Address, 62000), peer), peer);
+        this.Communicator.Send(new DisconnectStationCommand(new IPEndPoint(Manager.Address, Manager.Port), peer), peer);
+        if (this.Logger != null) this.Logger.Log("Removing station " + peer, Level.Info);
+      } else if (peer.Equals(Address)) {
+        // we are the peer being disconnected
+        if (this.Logger != null) this.Logger.Log("This station has been removed by the manager.", Level.Info);
+        UI.StationRemoved();
+      } else {
+        Peers.Remove(peer);
+        PeerStatuses.Remove(peer);
+        if (!this.EnoughStations) this.UI.NotEnoughPeers();
+        if (this.Logger != null) this.Logger.Log("Peer " + peer + " was removed.", Level.Info);
       }
-      this.Peers.Remove(peer);
-      PeerStatuses.Remove(peer);
-      if (!this.EnoughStations) this.UI.NotEnoughPeers();
-      if (this.Logger != null) this.Logger.Log("Peer removed: " + peer, Level.Info);
     }
 
     /// <summary>

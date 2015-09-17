@@ -56,11 +56,11 @@ namespace UI.StationWindows {
     /// <param name="waitingForManagerPage">
     /// the Page this dialog was shown over
     /// </param>
-    public AcceptManagerDialog(Frame parent, IPEndPoint ip, WaitingForManagerPage waitingForManagerPage) {
+    public AcceptManagerDialog(Frame parent, string name, WaitingForManagerPage waitingForManagerPage) {
       this.InitializeComponent();
       this._parent = parent;
       this._waitingForManagerPage = waitingForManagerPage;
-      this.ManagerLabel.Content = ip.Address.ToString();
+      this.ManagerLabel.Content = ManagerLabel.Content.ToString().Replace("NAME", name);
       this.Activate();
       this.PwTextbox.Focus();
       this.OKButton.IsEnabled = false;
