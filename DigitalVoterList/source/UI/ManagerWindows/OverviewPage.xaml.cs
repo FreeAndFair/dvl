@@ -260,7 +260,7 @@ namespace UI.ManagerWindows {
     /// </param>
     private void StartEndElectionButtonClick(object sender, RoutedEventArgs e) {
       if (!_ui.EnoughStations()) {
-        FlexibleMessageBox.Show(
+        FlexibleMessageBox.Show(_ui._stationNativeWindow,
           "You are not connected to enough stations to start the election.", 
           "Not Enough Stations", 
           MessageBoxButtons.OK, 
@@ -289,7 +289,7 @@ namespace UI.ManagerWindows {
         _ui.ManagerAnnounceStartElection();
         _parent.Navigate(new ManagerOverviewPage(_parent, _ui));
       } else
-        FlexibleMessageBox.Show(
+        FlexibleMessageBox.Show(_ui._stationNativeWindow,
           "Incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
     }
 

@@ -59,20 +59,23 @@ namespace Aegis_DVL.Logging {
     /// <param name="parent">
     /// The parent-station who the Logger belongs to.
     /// </param>
-    /// <param name="logName">
-    /// The name of the file where the log should be saved.
+    /// <param name="logPrefix">
+    /// The prefix of the file where the log should be saved.
     /// </param>
-    public Logger(Station parent, string logName = "Log.sqlite") {
+    public Logger(Station parent, string logPrefix = "Log") {
       Contract.Requires(parent != null);
-      Contract.Requires(logName != null);
+      Contract.Requires(logPrefix != null);
       Contract.Ensures(_db != null);
       Contract.Ensures(_stationAddress == parent.Address);
       Contract.Ensures(_db.Connection.State == ConnectionState.Open);
 
       _stationAddress = parent.Address;
       string password = parent.MasterPassword.AsBase64();
+      if (parent.Communicator != null) {
+        logPrefix = logPrefix + "_" + parent.Communicator.GetIdentifyingString();
+      }
 
-      InitDb(parent, logName, password);
+      string logName = InitDb(parent, logPrefix, password);
       string conStr = string.Format(
         "metadata=res://*/Logging.LogModel.csdl|" +
         "res://*/Logging.LogModel.ssdl|" +
@@ -142,19 +145,20 @@ namespace Aegis_DVL.Logging {
     ///   archive it with a suffix of the current time.  Only create a password-
     /// protected DB if theStation tells us to.
     /// </summary>
-    /// <param name="logName">
+    /// <param name="logPrefix">
     /// the proposed log database name
     /// </param>
     /// <param name="password">
     /// the database password
     /// </param>
-    private static void InitDb(Station theStation, string logName, string password) {
+    private static string InitDb(Station theStation, string logPrefix, string password) {
+      string logName = logPrefix + ".sqlite";
       if (File.Exists(logName)) {
         DateTime now = DateTime.Now;
         File.Move(
           logName, 
           string.Format(
-            "Log{0}.sqlite", 
+            logPrefix + "_{0}.sqlite", 
             now.Date.Day + "." + now.Date.Month + "." + now.Date.Year +
             "-" + now.Hour + "." + now.Minute + "." + now.Second + "." + now.Millisecond));
       }
@@ -170,6 +174,8 @@ namespace Aegis_DVL.Logging {
           cmd.ExecuteNonQuery();
         }
       }
+
+      return logName;
     }
 
     /// <summary>

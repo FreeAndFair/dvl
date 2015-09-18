@@ -560,7 +560,8 @@ namespace Aegis_DVL.Communication {
             Console.WriteLine("Absent host was manager, attempting to elect new manager.");
             Parent.StartNewManagerElection();
           } else if (Parent.Peers.ContainsKey(target)) {
-            Parent.RemovePeer(target);
+            Parent.PeerStatuses[target].ConnectionState = "Not Connected";
+            Parent.RemovePeer(target, false);
           }
         }
 

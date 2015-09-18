@@ -198,7 +198,10 @@ namespace UI.ManagerWindows {
     /// </summary>
     /// <param name="ip">the IP address of the station to unmark</param>
     public void UnmarkSelectedStation() {
-      ((StationStatus)ManagerstationGrid.SelectedItem).ConnectionState = "Not Connected";
+      StationStatus ss = (StationStatus)ManagerstationGrid.SelectedItem;
+      if (ss != null) {
+        ss.ConnectionState = "Not Connected";
+      }
       ManagerstationGrid.Items.Refresh();
     }
 
@@ -292,7 +295,7 @@ namespace UI.ManagerWindows {
         _ui.ManagerOverviewPage = null;
         _parent.Navigate(new EndedElectionPage(_parent, _ui));
       } else {
-        FlexibleMessageBox.Show(
+        FlexibleMessageBox.Show(_ui._stationNativeWindow,
           "You have entered an incorrect master password, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
       }
     }
@@ -325,10 +328,10 @@ namespace UI.ManagerWindows {
         if (ManagerstationGrid.SelectedItem != null &&
             _ui.MakeManager(((StationStatus)ManagerstationGrid.SelectedItem).Address)) {
         } else {
-          FlexibleMessageBox.Show("Could not connect to the specified station", "No Connection", MessageBoxButtons.OK);
+          FlexibleMessageBox.Show(_ui._stationNativeWindow, "Could not connect to the specified station", "No Connection", MessageBoxButtons.OK);
         }
       } else {
-        FlexibleMessageBox.Show(
+        FlexibleMessageBox.Show(_ui._stationNativeWindow,
           "You have entered an incorrect master password, please try again.", 
           "Incorrect Master Password", 
           MessageBoxButtons.OK, 
@@ -350,13 +353,24 @@ namespace UI.ManagerWindows {
     }
 
     public void UpdateControls() {
+      AddButton.IsEnabled = false;
+      RemoveButton.IsEnabled = false;
+      MakeManagerButton.IsEnabled = false;
+
       if (ManagerstationGrid.SelectedItem != null) {
-        if (((StationStatus)ManagerstationGrid.SelectedItem).Connected()) {
+        StationStatus ss = (StationStatus)ManagerstationGrid.SelectedItem;
+        if (ss.Connected()) {
           AddButton.IsEnabled = false;
           RemoveButton.IsEnabled = true;
+          MakeManagerButton.IsEnabled = true;
+        } else if (ss.Synchronizing()) {
+          AddButton.IsEnabled = false;
+          RemoveButton.IsEnabled = false;
+          MakeManagerButton.IsEnabled = false;
         } else {
           AddButton.IsEnabled = true;
           RemoveButton.IsEnabled = false;
+          MakeManagerButton.IsEnabled = false;
         }
       }
     }

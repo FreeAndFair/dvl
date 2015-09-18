@@ -61,17 +61,21 @@ namespace Aegis_DVL.Database {
     /// <param name="parent">
     /// The parent station of the database.
     /// </param>
-    /// <param name="filename">
-    /// The name of the file where the data is stored. Defaults to Voters.sqlite.
+    /// <param name="prefix">
+    /// The prefix of the filename where the data is stored. Defaults to Voters.
     /// </param>
-    public VoterListDatabase(Station parent, string filename = "Voters.sqlite") {
+    public VoterListDatabase(Station parent, string prefix = "Voters") {
       Contract.Requires(parent != null);
-      Contract.Requires(filename != null);
+      Contract.Requires(prefix != null);
 
       Parent = parent;
       string password = "";
+      string filename = prefix + ".sqlite";
       if (PasswordProtectDb)
         password = Crypto.GeneratePassword();
+      if (Parent.Communicator != null && Parent.Address != null) {
+        filename = prefix + "_" + Parent.Communicator.GetIdentifyingString() + ".sqlite";
+      }
       InitDb(filename, password);
 
       string conStr =

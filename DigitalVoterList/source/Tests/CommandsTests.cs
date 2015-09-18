@@ -141,7 +141,7 @@ namespace Tests
       Assert.That(Station.ElectionInProgress);
 
       // Station sending to NewPeer
-      NewPeer.RemovePeer(Manager.Address);
+      NewPeer.RemovePeer(Manager.Address, false);
       cmd = new CryptoCommand(Station, 
         NewPeer.Address, new StartElectionCommand(Station.Address));
       Assert.That(!NewPeer.ElectionInProgress);

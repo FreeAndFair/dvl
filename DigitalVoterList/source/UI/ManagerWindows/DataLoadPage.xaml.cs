@@ -188,9 +188,10 @@ namespace UI.ManagerWindows {
       } else {
         Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
-          new Action(delegate {
-          FlexibleMessageBox.Show("Could not import data from specified files.", "Import Failed", MessageBoxButtons.OK);
-        }));
+          new Action(
+            delegate {
+              FlexibleMessageBox.Show(_ui._stationNativeWindow, "Could not import data from specified files.", "Import Failed", MessageBoxButtons.OK);
+            }));
       }
       t.Abort();
       Dispatcher.Invoke(

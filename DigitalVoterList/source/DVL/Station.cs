@@ -92,28 +92,28 @@ namespace Aegis_DVL {
     /// <param name="port">
     /// The network port the station is communicating over. Defaults to 62000.
     /// </param>
-    /// <param name="dbName">
-    /// The name of the voter database. Defaults to Voters.sqlite.
+    /// <param name="dbPrefix">
+    /// The prefix of the voter database prefix. Defaults to Voters.
     /// </param>
-    /// <param name="logName">
-    /// The name of the logging database. Defaults to Log.sqlite.
+    /// <param name="logPrefix">
+    /// The prefix of the logging database prefix. Defaults to Log.
     /// </param>
     public Station(IDvlUi ui, 
                    AsymmetricKey voterDataEncryptionKey, 
                    string masterPassword, 
                    int port = 62000, 
-                   string dbName = "ElectionData.sqlite", 
-                   string logName = "Log.sqlite")
-      : this(ui, port, dbName) {
+                   string dbPrefix = "Voters", 
+                   string logPrefix = "Log")
+      : this(ui, port, dbPrefix) {
       Contract.Requires(ui != null);
       Contract.Requires(masterPassword != null);
-      Contract.Requires(dbName != null);
-      Contract.Requires(logName != null);
+      Contract.Requires(dbPrefix != null);
+      Contract.Requires(logPrefix != null);
 
       Crypto = new Crypto(voterDataEncryptionKey);
       MasterPassword =
         Crypto.Hash(Bytes.From(masterPassword));
-      Logger = new Logger(this, logName);
+      Logger = new Logger(this, logPrefix);
       Manager = Address;
       Logger.Log("Manager initialized", Level.Info);
     }
@@ -134,30 +134,30 @@ namespace Aegis_DVL {
     /// <param name="port">
     /// The network port the station is communicating over. Defaults to 62000.
     /// </param>
-    /// <param name="voterDbName">
-    /// The name of the voter database. Defaults to Voters.sqlite.
+    /// <param name="dbPrefix">
+    /// The prefix of the voter database prefix. Defaults to Voters.
     /// </param>
-    /// <param name="logName">
-    /// The name of the logging database. Defaults to Log.sqlite.
+    /// <param name="logPrefix">
+    /// The prefix of the logging database prefix. Defaults to Log.
     /// </param>
     
     public Station(IDvlUi ui, 
                    string keyPath, 
                    string masterPassword, 
                    int port = 62000, 
-                   string voterDbName = "Voters.sqlite", 
-                   string logName = "Log.sqlite")
+                   string dbPrefix = "Voters", 
+                   string logPrefix = "Log")
       : this(ui, 
         new AsymmetricKey(Bytes.FromFile(keyPath).ToKey()), 
         masterPassword, 
         port, 
-        voterDbName, 
-        logName) {
+        dbPrefix, 
+        logPrefix) {
       Contract.Requires(ui != null);
       Contract.Requires(keyPath != null);
       Contract.Requires(File.Exists(keyPath));
-      Contract.Requires(voterDbName != null);
-      Contract.Requires(logName != null);
+      Contract.Requires(dbPrefix != null);
+      Contract.Requires(logPrefix != null);
     }
     
     /// <summary>
@@ -170,21 +170,21 @@ namespace Aegis_DVL {
     /// <param name="port">
     /// The port the station should listen to. Defaults to 62000.
     /// </param>
-    /// <param name="databaseFile">
-    /// The name of the database file.
+    /// <param name="dbPrefix">
+    /// The prefix of the voter database prefix.
     /// </param>
     public Station(IDvlUi ui, 
                    int port = 62000, 
-                   string databaseFile = "Voters.sqlite") {
+                   string dbPrefix = "Voters") {
       Contract.Requires(ui != null);
-      Contract.Requires(databaseFile != null);
+      Contract.Requires(dbPrefix != null);
 
       Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
       PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
       ElectionInProgress = false;
       Communicator = new LocalhostCommunicator(this);
       Address = Communicator.GetLocalEndPoint(port);
-      Database = new VoterListDatabase(this, databaseFile);
+      Database = new VoterListDatabase(this, dbPrefix);
       UI = ui;
       Crypto = new Crypto();
       StartListening();
@@ -385,9 +385,9 @@ namespace Aegis_DVL {
       Contract.Requires(IsManager);
       Contract.Requires(peerToRemove != null);
       Contract.Requires(Peers.Keys.Contains(peerToRemove));
-      RemovePeer(peerToRemove);
+      RemovePeer(peerToRemove, false);
       foreach (IPEndPoint peer in Peers.Keys) {
-        if (!Address.Equals(peer)) {
+        if (!Address.Equals(peer) && !peer.Equals(peerToRemove)) {
           Communicator.Send(new RemovePeerCommand(Address, peerToRemove), peer);
         }
       }
@@ -462,7 +462,7 @@ namespace Aegis_DVL {
             PeerStatuses[peer] = new StationStatus(peer, Communicator.GetIdentifyingStringForStation(peer), "Not Connected");
           }
         } else if (!listening) {
-          RemovePeer(peer);
+          RemovePeer(peer, false);
         }
       }
 
@@ -482,7 +482,7 @@ namespace Aegis_DVL {
     /// </summary>
     public void ElectNewManager() {
       Contract.Ensures(Manager != null);
-      RemovePeer(Manager);
+      RemovePeer(Manager, false);
       var candidates = new SortedSet<IPEndPoint>(new IPEndPointComparer()) { Address };
       Peers.Keys.Where(StationActive).ForEach(candidate => 
         candidates.Add(candidate));
@@ -558,29 +558,43 @@ namespace Aegis_DVL {
     }
 
     /// <summary>
+    /// Removes this station from the system
+    /// </summary>
+    public void RemoveSelf() {
+      Contract.Requires(Manager != null);
+      Contract.Requires(!Manager.Equals(Address));
+
+      if (Logger != null) Logger.Log("Station " + Address + " notifying manager of departure.", Level.Info);
+      Communicator.Send(new RemovePeerCommand(Address, Address), Manager);
+    }
+
+    /// <summary>
     /// Remove this station from the group!
     /// </summary>
     /// <param name="peer">
     /// The address of the station to remove.
     /// </param>
-    public void RemovePeer(IPEndPoint peer) {
+    public void RemovePeer(IPEndPoint peer, Boolean disconnect) {
       Contract.Requires(peer != null);
       Contract.Ensures(!Peers.ContainsKey(peer));
       if (Peers.Remove(peer)) {
         PeerStatuses.Remove(peer);
-        if (IsManager) {
-          // only the manager should disconnect stations explicitly
+        if (Logger != null) Logger.Log("Station " + peer + " removed from peer list.", Level.Info);
+        if (IsManager && disconnect) {
+          // only the manager should send disconnect messages
+          if (Logger != null) Logger.Log("Sending disconnect command to station " + peer, Level.Info);
           Communicator.Send(new DisconnectStationCommand(new IPEndPoint(Manager.Address, Manager.Port), peer), peer);
-          if (!EnoughStations) UI.NotEnoughPeers();
-          if (Logger != null) Logger.Log("Station " + peer + " was removed.", Level.Info);
         }
+        if (!EnoughStations) UI.NotEnoughPeers();
+        UI.RefreshPeers();
       } else if (peer.Equals(Address)) {
         // we are the peer being disconnected
-        if (Logger != null) Logger.Log("This station has been removed by the manager.", Level.Info);
+        if (Logger != null) Logger.Log("This station has been disconnected by the manager.", Level.Info);
         UI.StationRemoved();
       } else {
         if (Logger != null) Logger.Log("Attempt to remove nonexistent peer " + peer, Level.Error);
       }
+      
     }
 
     /// <summary>

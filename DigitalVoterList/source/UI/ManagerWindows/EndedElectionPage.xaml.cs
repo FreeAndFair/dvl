@@ -88,7 +88,7 @@ namespace UI.ManagerWindows {
         _ui.ExportData(filePathTextbox.Text);
         Thread.Sleep(10000);
         Environment.Exit(0);
-      } else FlexibleMessageBox.Show("You have not selected an output file path.", "No File Path", MessageBoxButtons.OK);
+      } else FlexibleMessageBox.Show(_ui._stationNativeWindow, "You have not selected an output file path.", "No File Path", MessageBoxButtons.OK);
     }
 
     /// <summary>

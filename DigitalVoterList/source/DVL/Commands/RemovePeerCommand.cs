@@ -65,8 +65,8 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
-      if (receiver.Manager.Equals(Sender)) {
-        receiver.RemovePeer(_peer);
+      if (receiver.Manager.Equals(Sender) || _peer.Equals(Sender)) {
+        receiver.RemovePeer(_peer, !_peer.Equals(Sender));
       }
     }
 

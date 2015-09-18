@@ -18,6 +18,7 @@ namespace UI {
   using System.Net.Sockets;
   using System.Text;
   using System.Windows.Forms;
+  using System.Windows.Interop;
 
   using Aegis_DVL;
   using Aegis_DVL.Commands;
@@ -63,6 +64,11 @@ namespace UI {
     public readonly StationWindow _stationWindow;
 
     /// <summary>
+    /// The _station window as a NativeWindow.
+    /// </summary>
+    public readonly NativeWindow _stationNativeWindow;
+
+    /// <summary>
     /// The _master password.
     /// </summary>
     private string _masterPassword;
@@ -71,8 +77,6 @@ namespace UI {
     /// The _station.
     /// </summary>
     public Station _station;
-
-    private bool _hasData = false;
 
     #endregion
 
@@ -86,6 +90,8 @@ namespace UI {
     /// </param>
     public UiHandler(StationWindow stationWindow) { 
       _stationWindow = stationWindow;
+      NativeWindow win32Window = new NativeWindow();
+      win32Window.AssignHandle(new WindowInteropHelper(stationWindow).Handle);
     }
 
     #endregion
@@ -128,10 +134,19 @@ namespace UI {
     public void DiscoverPeers() { _station.DiscoverPeers(); }
 
     /// <summary>
+    /// Closes the current station (in response to window closure or close button or quit).
+    /// </summary>
+    public void CloseStation() {
+      _station.RemoveSelf();
+    }
+
+    /// <summary>
     /// disposes the current station
     /// </summary>
     public void DisposeStation() {
-      if (_station != null) _station.Dispose();
+      if (_station != null) {
+        _station.Dispose();
+      }
       _station = null;
     }
 
@@ -294,7 +309,7 @@ namespace UI {
     /// </param>
     public void ExportData(string filePath) {
       if (_station != null) ExportData(_station.Database.AllVoters, filePath);
-      else FlexibleMessageBox.Show("You can not export data at this time.", "Operation Not Allowed", MessageBoxButtons.OK);
+      else FlexibleMessageBox.Show(_stationNativeWindow, "You can not export data at this time.", "Operation Not Allowed", MessageBoxButtons.OK);
     }
 
     /// <summary>
@@ -343,7 +358,6 @@ namespace UI {
       try {
         _station.Database.Import(ImportVoterData(voterDataPath));
         _station.Database.Import(ImportPrecinctData(precinctDataPath));
-        _hasData = true;
         return true;
       } catch (Exception) {
         return false;
@@ -555,7 +569,7 @@ namespace UI {
         BallotRequestPage.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal, 
           new Action(delegate {
-            FlexibleMessageBox.Show("This station will now become the manager.");
+            FlexibleMessageBox.Show(_stationNativeWindow, "This station will now become the manager.");
             BallotRequestPage.BecomeManager(); 
           }));
       }
@@ -660,7 +674,7 @@ namespace UI {
     /// <param name="ip">
     /// the IP adress of the station to be removed
     /// </param>
-    public void RemoveStation(IPEndPoint ip) { _station.AnnounceRemovePeer(ip); }
+    public void RemoveStation(IPEndPoint ip) { _station.AnnounceRemovePeer(ip); _station.RemovePeer(ip, true); }
 
     /// <summary>
     /// This method is called when a voter wants to request a ballot after entering their voternumber and CPR number
@@ -714,7 +728,7 @@ namespace UI {
     /// The shutdown.
     /// </summary>
     public void Shutdown() {
-      FlexibleMessageBox.Show(
+      FlexibleMessageBox.Show(_stationNativeWindow,
         "Something has gone wrong with the system, shutting down", 
         "Shutting Down", 
         MessageBoxButtons.OK, 
@@ -753,7 +767,7 @@ namespace UI {
     /// The station removed.
     /// </summary>
     public void StationRemoved() {
-      FlexibleMessageBox.Show(
+      FlexibleMessageBox.Show(_stationNativeWindow,
         "This station has been shut down by the manager", 
         "Station Shut Down", 
         MessageBoxButtons.OK, 
@@ -804,7 +818,6 @@ namespace UI {
     }
 
     public void SyncComplete() {
-      _hasData = true;
       if (WaitingForManagerPage != null) {
         WaitingForManagerPage.CenterLabel.Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,

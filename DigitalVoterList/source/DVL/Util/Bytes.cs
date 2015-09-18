@@ -84,7 +84,7 @@ namespace Aegis_DVL.Util {
     /// <summary>
     /// What are the bytes from this file?
     /// </summary>
-    /// <param name="filename">
+    /// <param name="prefix">
     /// The name of the file to read bytes from.
     /// </param>
     /// <param name="bufferSize">
@@ -248,7 +248,7 @@ namespace Aegis_DVL.Util {
     /// <param name="bytes">
     /// The bytes to write.
     /// </param>
-    /// <param name="filename">
+    /// <param name="prefix">
     /// The name of the file where the bytes should be saved.
     /// </param>
     public static void ToFile(this byte[] bytes, string filename) { using (FileStream file = File.Create(filename)) file.Write(bytes, 0, bytes.Length); }

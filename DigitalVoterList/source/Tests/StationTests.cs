@@ -95,7 +95,7 @@ namespace Tests {
       Assert.That(!Manager.Peers.ContainsKey(Peer4.Address));
       Manager.AddPeer(Peer4.Address, new AsymmetricKey(Peer4.Crypto.KeyPair.Public));
       Assert.That(Manager.Peers.ContainsKey(Peer4.Address));
-      Manager.RemovePeer(Peer4.Address);
+      Manager.RemovePeer(Peer4.Address, true);
       Assert.That(!Manager.Peers.ContainsKey(Peer4.Address));
     }
 

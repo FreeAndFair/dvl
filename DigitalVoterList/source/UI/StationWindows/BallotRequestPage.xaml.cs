@@ -102,7 +102,7 @@ namespace UI.StationWindows {
           message = GetFormattedName(voter) + "\nhas already checked in and did not receive a ballot\n" +
             "at this location today.";
         }
-        FlexibleMessageBox.Show(
+        FlexibleMessageBox.Show(_ui._stationNativeWindow,
           message,
           "Already Checked In",
           MessageBoxButtons.OK,
@@ -111,7 +111,7 @@ namespace UI.StationWindows {
 
       switch (newStatus) {
         case VoterStatus.Ineligible:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+          FlexibleMessageBox.Show(_ui._stationNativeWindow, "According to our records,\n" + GetFormattedName(voter) +
             "\nis not eligible to vote until " + voter.EligibleDate.Date.ToString("MM/dd/yyyy"));
           break;
         case VoterStatus.WrongLocation:
@@ -134,20 +134,20 @@ namespace UI.StationWindows {
               System.Diagnostics.Process.Start(url);
             }
           } else {
-            FlexibleMessageBox.Show("The precinct where\n" + GetFormattedName(voter) + "\nis registered is" +
+            FlexibleMessageBox.Show(_ui._stationNativeWindow, "The precinct where\n" + GetFormattedName(voter) + "\nis registered is" +
               " not participating\nin this election.");
           }
           break;
         case VoterStatus.VotedByMail:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+          FlexibleMessageBox.Show(_ui._stationNativeWindow, "According to our records,\n" + GetFormattedName(voter) +
             "\nhas already submitted a vote by mail\nand should not receive a ballot.");
           break;
         case VoterStatus.EarlyVotedInPerson:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+          FlexibleMessageBox.Show(_ui._stationNativeWindow, "According to our records,\n" + GetFormattedName(voter) +
             "\nhas already voted at an early voting location.");
           break;
         case VoterStatus.AbsenteeVotedInPerson:
-          FlexibleMessageBox.Show("According to our records,\n" + GetFormattedName(voter) +
+          FlexibleMessageBox.Show(_ui._stationNativeWindow, "According to our records,\n" + GetFormattedName(voter) +
             "\nregistered as an absentee voter but did not receive their ballot.");
           break;
         default:
@@ -197,7 +197,7 @@ namespace UI.StationWindows {
     /// </summary>
     public void EndElection() {
       _ui.BallotRequestPage = null;
-      FlexibleMessageBox.Show("The election has ended. This station is shutting down.");
+      FlexibleMessageBox.Show(_ui._stationNativeWindow, "The election has ended. This station is shutting down.");
       Environment.Exit(0);
     }
 
@@ -275,7 +275,7 @@ namespace UI.StationWindows {
       VoterStatus vs = VoterStatus.Unavailable;
 
       if (results == null || results.Count == 0) {
-        FlexibleMessageBox.Show("No voters match your search. Please try again\nor have the voter register for a provisional ballot.");
+        FlexibleMessageBox.Show(_ui._stationNativeWindow, "No voters match your search. Please try again\nor have the voter register for a provisional ballot.");
       } else if (results.Count == 1) {
         vs = GetNewVoterStatus(results[0]);
         Window dialog;

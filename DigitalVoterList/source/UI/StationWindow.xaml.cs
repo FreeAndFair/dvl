@@ -95,9 +95,10 @@ namespace UI {
           return false;
         } else if (d.DialogResult.HasValue &&
                    d.DialogResult == true) {
+          _ui.CloseStation();
           Environment.Exit(0);
         } else {
-          FlexibleMessageBox.Show(
+          FlexibleMessageBox.Show(_ui._stationNativeWindow,
             "Master password entered incorrctly, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
           return false;
         }
@@ -118,7 +119,7 @@ namespace UI {
     /// </param>
     private void ExportDataClick(object sender, RoutedEventArgs e) {
       if (_ui._station == null) {
-        FlexibleMessageBox.Show("There is no election data to report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        FlexibleMessageBox.Show(_ui._stationNativeWindow, "There is no election data to report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
       var d = new CheckMasterPasswordDialog(_ui, "The master password is required to export election data.");
@@ -135,7 +136,7 @@ namespace UI {
         if (!saveDialog.FileName.Equals(string.Empty)) _ui.ExportData(saveDialog.FileName);
         System.Diagnostics.Process.Start(saveDialog.FileName);
       } else
-        FlexibleMessageBox.Show(
+        FlexibleMessageBox.Show(_ui._stationNativeWindow,
           "Master password entered incorrectly, please try again.", "Incorrect Master Password", MessageBoxButtons.OK);
     }
 
@@ -150,25 +151,25 @@ namespace UI {
     /// </param>
     private void PollWorkerManualClick(object sender, RoutedEventArgs e) { 
       // System.Diagnostics.Process.Start(@"Manual.pdf"); 
-      FlexibleMessageBox.Show("The poll worker manual is not included in this demo,\nbut will automatically open in a new window in the final product.");
+      FlexibleMessageBox.Show(_ui._stationNativeWindow, "The poll worker manual is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
 
     private void SetupManualClick(object sender, RoutedEventArgs e)
     {
       // System.Diagnostics.Process.Start(@"Manual.pdf"); 
-      FlexibleMessageBox.Show("The setup manual is not included in this demo,\nbut will automatically open in a new window in the final product.");
+      FlexibleMessageBox.Show(_ui._stationNativeWindow, "The setup manual is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
 
     private void VideoClick(object sender, RoutedEventArgs e) {
       try {
         System.Diagnostics.Process.Start("Clip.mp4");
       } catch (Exception) { }
-      FlexibleMessageBox.Show("Actual training videos are not available in this demo,\nbut will be listed in and playable from this window in the final product.");
+      FlexibleMessageBox.Show(_ui._stationNativeWindow, "Actual training videos are not available in this demo,\nbut will be listed in and playable from this window in the final product.");
     }
 
     private void FAQClick(object sender, RoutedEventArgs e) {
       // System.Diagnostics.Process.Start(@"Manual.pdf"); 
-      FlexibleMessageBox.Show("The FAQ is not included in this demo,\nbut will automatically open in a new window in the final product.");
+      FlexibleMessageBox.Show(_ui._stationNativeWindow, "The FAQ is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
     #endregion
   }

@@ -40,7 +40,11 @@ namespace Aegis_DVL.Data_Types {
     }
 
     public bool Connected() {
-      return !ConnectionState.Equals("Not Connected");
+      return ConnectionState.Equals("Connected");
+    }
+
+    public bool Synchronizing() {
+      return ConnectionState.Equals("Synchronizing Election Data");
     }
   }
 }

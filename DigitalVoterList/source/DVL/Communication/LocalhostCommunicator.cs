@@ -573,7 +573,8 @@ namespace Aegis_DVL.Communication {
           else
           {
             Console.WriteLine("Dequeue thread died with exception " + e);
-          } running = false;
+          } 
+          running = false;
         }
         if (command != null) {
           command.Execute(Parent);
@@ -671,8 +672,8 @@ namespace Aegis_DVL.Communication {
           } else if (target.Equals(Parent.Manager)) {
             Console.WriteLine("Absent host was manager, attempting to elect new manager.");
             Parent.StartNewManagerElection();
-          } else if (Parent.Peers.ContainsKey(target)) {
-            Parent.RemovePeer(target);
+          } else {
+            Parent.RemovePeer(target, false);
           }
         }
 
@@ -686,8 +687,20 @@ namespace Aegis_DVL.Communication {
       if (ThreadsStarted) {
         receiveThread.Abort();
         dequeueThread.Abort();
-        sendThread.Abort();
         pingThread.Abort();
+
+        // don't abort the send thread until the sending queue is empty
+        outgoingQueue.CompleteAdding();
+        while (outgoingQueue.Count > 0) {
+          // this busy wait is bad, but fixing the entire system would likely be much harder
+          Thread.Sleep(1000);
+          if (Parent.Logger != null) {
+            Parent.Logger.Log("Waiting for " + outgoingQueue.Count + " messages to be sent.", Level.Info);
+          } else {
+            Console.WriteLine("Waiting for " + outgoingQueue.Count + " messages to be sent.");
+          }          
+        }
+        sendThread.Abort();
 
         DestroyLocalEndPoint();
         receiveThread = null;
