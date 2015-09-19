@@ -669,6 +669,7 @@ namespace Aegis_DVL.Communication {
           if (Parent.IsManager && Parent.Peers.ContainsKey(target)) {
             Console.WriteLine("I am manager, alerting other peers of absent host.");
             Parent.AnnounceRemovePeer(target);
+            Parent.RemovePeer(target, false);
           } else if (target.Equals(Parent.Manager)) {
             Console.WriteLine("Absent host was manager, attempting to elect new manager.");
             Parent.StartNewManagerElection();

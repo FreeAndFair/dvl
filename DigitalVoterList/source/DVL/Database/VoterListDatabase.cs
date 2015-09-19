@@ -16,6 +16,7 @@ namespace Aegis_DVL.Database {
   using System.Data.SQLite;
   using System.Data.Objects;
   using System.Data.Objects.DataClasses;
+  using System.IO;
   using System.Linq;
   using System.Linq.Expressions;
   using System.Reflection;
@@ -70,13 +71,13 @@ namespace Aegis_DVL.Database {
 
       Parent = parent;
       string password = "";
-      string filename = prefix + ".sqlite";
       if (PasswordProtectDb)
         password = Crypto.GeneratePassword();
       if (Parent.Communicator != null && Parent.Address != null) {
-        filename = prefix + "_" + Parent.Communicator.GetIdentifyingString() + ".sqlite";
+        prefix = prefix + "_" + Parent.Communicator.GetIdentifyingString();
       }
-      InitDb(filename, password);
+
+      string filename = InitDb(prefix, password);
 
       string conStr =
         string.Format(
@@ -215,7 +216,7 @@ namespace Aegis_DVL.Database {
     /// <param name="data">
     /// The data.
     /// </param>
-    public void Import(IEnumerable<Voter> data) {
+    public bool Import(IEnumerable<Voter> data) {
       int c = 0;
       using (DbTransaction transaction = _db.Connection.BeginTransaction()) {
         data.ForEach(
@@ -227,9 +228,10 @@ namespace Aegis_DVL.Database {
       }
 
       if (Parent.Logger != null) Parent.Logger.Log("Importing voters. " + c + " entries.", Level.Info);
+      return true;
     }
 
-    public void Import(IEnumerable<Precinct> data) {
+    public bool Import(IEnumerable<Precinct> data) {
       int c = 0;
       using (DbTransaction transaction = _db.Connection.BeginTransaction()) {
         data.ForEach(
@@ -241,6 +243,7 @@ namespace Aegis_DVL.Database {
       }
 
       if (Parent.Logger != null) Parent.Logger.Log("Importing precincts. " + c + " entries.", Level.Info);
+      return true;
     }
 
     #endregion
@@ -256,7 +259,17 @@ namespace Aegis_DVL.Database {
     /// <param name="password">
     /// The password; if password is null, do not password-protect the DB.
     /// </param>
-    private static void InitDb(string fileName, string password) {
+    private static string InitDb(string filePrefix, string password) {
+      string fileName = filePrefix + ".sqlite";
+/*      if (File.Exists(fileName)) {
+        DateTime now = DateTime.Now;
+        File.Move(
+          fileName,
+          string.Format(
+            filePrefix + "_{0}.sqlite",
+            now.Date.Day + "." + now.Date.Month + "." + now.Date.Year +
+            "-" + now.Hour + "." + now.Minute + "." + now.Second + "." + now.Millisecond));
+      }*/
       SQLiteConnection.CreateFile(fileName);
       string connString = string.Format("Data Source={0}", fileName);
       if (password != null)
@@ -266,12 +279,12 @@ namespace Aegis_DVL.Database {
         using (SQLiteCommand cmd = db.CreateCommand()) {
           cmd.CommandText =
             "CREATE TABLE Voters(VoterId int not null primary key desc, " +
-            "Status nvarchar not null, LastName nvarchar not null, FirstName nvarchar not null, " +
-            "MiddleName nvarchar, Suffix nvarchar, DateOfBirth datetime not null, " +
-            "EligibleDate datetime not null, MustShowId bit not null, Absentee bit not null, " +
-            "ProtectedAddress bit not null, DriversLicense nvarchar, Voted bit not null, ReturnStatus nvarchar, " + 
-            "BallotStyle int not null, PrecinctSub nvarchar not null, Address nvarchar not null, " +
-            "Municipality nvarchar not null, ZipCode nvarchar not null, StateId bigint not null, PollbookStatus int not null)";
+            "LastName nvarchar not null, FirstName nvarchar not null, MiddleName nvarchar not null, Suffix nvarchar not null, " +
+            "DateOfBirth datetime not null, ProtectedAddress bit not null, Address nvarchar not null, " +
+            "Municipality nvarchar not null, ZipCode nvarchar not null, Status nvarchar not null, " +
+            "EligibleDate datetime not null, MustShowId bit not null, DriversLicense nvarchar, " +
+            "StateId bigint not null, PrecinctSub nvarchar not null, BallotStyle nvarchar not null, " +
+            "Voted bit not null, Absentee bit not null, ReturnStatus nvarchar, PollbookStatus int not null)";
           cmd.ExecuteNonQuery();
         }
         using (SQLiteCommand cmd = db.CreateCommand()) {
@@ -282,6 +295,7 @@ namespace Aegis_DVL.Database {
         }
 
       }
+      return fileName;
     }
 
     /// <summary>

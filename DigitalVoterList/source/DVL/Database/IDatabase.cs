@@ -79,8 +79,8 @@ namespace Aegis_DVL.Database {
     /// <param name="data">
     /// A dataset to be imported.
     /// </param>
-    void Import(IEnumerable<Voter> data);
-    void Import(IEnumerable<Precinct> data);
+    bool Import(IEnumerable<Voter> data);
+    bool Import(IEnumerable<Precinct> data);
 
     Voter GetVoterByVoterNumber(VoterNumber voternumber);
     Voter GetVoterByDLNumber(string dlnumber);
@@ -209,8 +209,8 @@ namespace Aegis_DVL.Database {
     /// <param name="data">
     /// The data.
     /// </param>
-    public void Import(IEnumerable<Voter> data) { Contract.Requires(data != null); }
-    public void Import(IEnumerable<Precinct> data) { Contract.Requires(data != null); }
+    public bool Import(IEnumerable<Voter> data) { Contract.Requires(data != null); return default(bool); }
+    public bool Import(IEnumerable<Precinct> data) { Contract.Requires(data != null); return default(bool); }
 
     public Voter GetVoterByVoterNumber(VoterNumber vn) { return default(Voter);  }
     public Voter GetVoterByDLNumber(string dlnumber) { Contract.Requires(dlnumber != null); return default(Voter); }

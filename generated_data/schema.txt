@@ -1,0 +1,32 @@
+Voter Database Fields:
+
+int32 ID, 
+string lastName, 
+string firstName, 
+string middleName, 
+string suffix, 
+DateTime dateOfBirth,
+bool protectedAddress,
+string streetAddress,
+string municipality,
+string zipCode,
+char status, 
+DateTime eligibleDate,
+bool mustShowId,
+string driversLicense,
+string stateId,
+string precinct,
+string ballotStyle,
+bool voted,
+bool absentee, 
+string returnStatus
+
+
+Precinct Database Fields:
+
+string precinct,
+string locationName,
+string address,
+string city,
+string state,
+string zipCode

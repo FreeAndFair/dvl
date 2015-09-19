@@ -243,7 +243,12 @@ namespace UI.ManagerWindows {
       if (stationGrid.SelectedItem != null) {
         if (((StationStatus)stationGrid.SelectedItem).Connected()) {
           _ui.RemoveStation(((StationStatus)stationGrid.SelectedItem).Address);
-          PopulateList();
+          Dispatcher.Invoke(
+            System.Windows.Threading.DispatcherPriority.Normal, 
+            new Action(
+              delegate { 
+                stationGrid.Items.Refresh(); 
+              }));
         }
       }
       UpdateControls();
@@ -307,13 +312,22 @@ namespace UI.ManagerWindows {
     }
 
     public void UpdateControls() {
-      if ((stationGrid.SelectedItem != null) &&
-          ((StationStatus)stationGrid.SelectedItem).Connected()) {
-        AddButton.IsEnabled = false;
-        RemoveButton.IsEnabled = true;
-      } else {
-        AddButton.IsEnabled = true;
-        RemoveButton.IsEnabled = false;
+
+      AddButton.IsEnabled = false;
+      RemoveButton.IsEnabled = false;
+
+      if (stationGrid.SelectedItem != null) {
+        StationStatus ss = (StationStatus)stationGrid.SelectedItem;
+        if (ss.Connected()) {
+          AddButton.IsEnabled = false;
+          RemoveButton.IsEnabled = true;
+        } else if (ss.Synchronizing()) {
+          AddButton.IsEnabled = false;
+          RemoveButton.IsEnabled = false;
+        } else {
+          AddButton.IsEnabled = true;
+          RemoveButton.IsEnabled = false;
+        }
       }
 
       StartEndElectionButton.IsEnabled = false;

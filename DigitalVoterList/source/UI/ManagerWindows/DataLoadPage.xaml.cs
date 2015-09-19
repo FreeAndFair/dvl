@@ -92,8 +92,8 @@ namespace UI.ManagerWindows {
     private void FileBrowseButtonClick(object sender, RoutedEventArgs e) {
       // Create OpenFileDialog
       var dlg = new Microsoft.Win32.OpenFileDialog {
-        DefaultExt = ".txt",
-        Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*", 
+        DefaultExt = ".csv",
+        Filter = "CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt|All files (*.*)|*.*", 
       };
 
       // Display OpenFileDialog by calling ShowDialog method
@@ -121,8 +121,8 @@ namespace UI.ManagerWindows {
     private void KeyBrowseButtonClick(object sender, RoutedEventArgs e) {
       // Create OpenFileDialog
       var dlg = new Microsoft.Win32.OpenFileDialog {
-        DefaultExt = ".txt",
-        Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+        DefaultExt = ".csv",
+        Filter = "CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt|All files (*.*)|*.*",
       };
 
       // Display OpenFileDialog by calling ShowDialog method
@@ -185,7 +185,9 @@ namespace UI.ManagerWindows {
           new Action(delegate {
           _parent.Navigate(new PrecinctChoicePage(_parent, _ui));
         }));
+        t.Abort();
       } else {
+        t.Abort();
         Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
           new Action(
@@ -193,7 +195,6 @@ namespace UI.ManagerWindows {
               FlexibleMessageBox.Show(_ui._stationNativeWindow, "Could not import data from specified files.", "Import Failed", MessageBoxButtons.OK);
             }));
       }
-      t.Abort();
       Dispatcher.Invoke(
         System.Windows.Threading.DispatcherPriority.Normal,
         new Action(delegate {

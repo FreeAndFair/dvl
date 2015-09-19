@@ -290,7 +290,7 @@ namespace Aegis_DVL.Database
         /// <param name="municipality">Initial value of the Municipality property.</param>
         /// <param name="zipCode">Initial value of the ZipCode property.</param>
         /// <param name="pollbookStatus">Initial value of the PollbookStatus property.</param>
-        public static Voter CreateVoter(global::System.Int32 voterId, global::System.String status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean mustShowId, global::System.Boolean absentee, global::System.Boolean protectedAddress, global::System.Boolean voted, global::System.String returnStatus, global::System.Int32 ballotStyle, global::System.String precinctSub, global::System.String address, global::System.String municipality, global::System.String zipCode, global::System.Int32 pollbookStatus)
+        public static Voter CreateVoter(global::System.Int32 voterId, global::System.String status, global::System.String lastName, global::System.String firstName, global::System.DateTime dateOfBirth, global::System.DateTime eligibleDate, global::System.Boolean mustShowId, global::System.Boolean absentee, global::System.Boolean protectedAddress, global::System.Boolean voted, global::System.String returnStatus, global::System.String ballotStyle, global::System.String precinctSub, global::System.String address, global::System.String municipality, global::System.String zipCode, global::System.Int32 pollbookStatus)
         {
             Voter voter = new Voter();
             voter.VoterId = voterId;
@@ -661,7 +661,7 @@ namespace Aegis_DVL.Database
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BallotStyle
+        public global::System.String BallotStyle
         {
             get
             {
@@ -671,13 +671,13 @@ namespace Aegis_DVL.Database
             {
                 OnBallotStyleChanging(value);
                 ReportPropertyChanging("BallotStyle");
-                _BallotStyle = StructuralObject.SetValidValue(value);
+                _BallotStyle = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("BallotStyle");
                 OnBallotStyleChanged();
             }
         }
-        private global::System.Int32 _BallotStyle;
-        partial void OnBallotStyleChanging(global::System.Int32 value);
+        private global::System.String _BallotStyle;
+        partial void OnBallotStyleChanging(global::System.String value);
         partial void OnBallotStyleChanged();
     
         /// <summary>

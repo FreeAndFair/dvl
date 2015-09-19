@@ -66,6 +66,11 @@ namespace Aegis_DVL {
     private byte[] _masterPassword;
 
     /// <summary>
+    /// The database prefix.
+    /// </summary>
+    private string _dbPrefix;
+
+    /// <summary>
     /// Are we currently using a master password at all?
     /// </summary>
     internal bool IsMasterPasswordInUse = false;
@@ -114,6 +119,7 @@ namespace Aegis_DVL {
       MasterPassword =
         Crypto.Hash(Bytes.From(masterPassword));
       Logger = new Logger(this, logPrefix);
+      Database = new VoterListDatabase(this, _dbPrefix);
       Manager = Address;
       Logger.Log("Manager initialized", Level.Info);
     }
@@ -184,7 +190,7 @@ namespace Aegis_DVL {
       ElectionInProgress = false;
       Communicator = new LocalhostCommunicator(this);
       Address = Communicator.GetLocalEndPoint(port);
-      Database = new VoterListDatabase(this, dbPrefix);
+      _dbPrefix = dbPrefix;
       UI = ui;
       Crypto = new Crypto();
       StartListening();
@@ -385,7 +391,6 @@ namespace Aegis_DVL {
       Contract.Requires(IsManager);
       Contract.Requires(peerToRemove != null);
       Contract.Requires(Peers.Keys.Contains(peerToRemove));
-      RemovePeer(peerToRemove, false);
       foreach (IPEndPoint peer in Peers.Keys) {
         if (!Address.Equals(peer) && !peer.Equals(peerToRemove)) {
           Communicator.Send(new RemovePeerCommand(Address, peerToRemove), peer);
@@ -519,6 +524,25 @@ namespace Aegis_DVL {
         Logger.Log("Exchanging public keys with " + target, Level.Info);
     }
 
+    public bool ImportData(IEnumerable<Voter> voterData, IEnumerable<Precinct> precinctData) {
+      bool result = false;
+      try {
+        if (Database == null) {
+          Console.WriteLine("null database!");
+          Database = new VoterListDatabase(this, _dbPrefix);
+        }
+        result = Database.Import(voterData);
+        result &= Database.Import(precinctData);
+        if (!result) {
+          Database.Dispose();
+          Database = new VoterListDatabase(this, _dbPrefix);
+        }
+      } catch (Exception e) {
+        Console.WriteLine("Exception when loading data: " + e);
+      }
+      return result;
+    }
+
     /// <summary>
     /// Make this station the new manager!
     /// </summary>
@@ -578,13 +602,14 @@ namespace Aegis_DVL {
       Contract.Requires(peer != null);
       Contract.Ensures(!Peers.ContainsKey(peer));
       if (Peers.Remove(peer)) {
-        PeerStatuses.Remove(peer);
-        if (Logger != null) Logger.Log("Station " + peer + " removed from peer list.", Level.Info);
         if (IsManager && disconnect) {
           // only the manager should send disconnect messages
           if (Logger != null) Logger.Log("Sending disconnect command to station " + peer, Level.Info);
           Communicator.Send(new DisconnectStationCommand(new IPEndPoint(Manager.Address, Manager.Port), peer), peer);
+          AnnounceRemovePeer(peer);
         }
+        PeerStatuses.Remove(peer);
+        if (Logger != null) Logger.Log("Station " + peer + " removed from peer list.", Level.Info);
         if (!EnoughStations) UI.NotEnoughPeers();
         UI.RefreshPeers();
       } else if (peer.Equals(Address)) {
@@ -594,7 +619,6 @@ namespace Aegis_DVL {
       } else {
         if (Logger != null) Logger.Log("Attempt to remove nonexistent peer " + peer, Level.Error);
       }
-      
     }
 
     /// <summary>

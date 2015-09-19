@@ -123,8 +123,7 @@ namespace Aegis_DVL.Commands {
         if (!receiver.Address.Equals(endPoint)) receiver.AddPeer(endPoint, new AsymmetricKey(_publicKeys[i].ToKey()));
       }
 
-      receiver.Database.Import(_voterData);
-      receiver.Database.Import(_precinctData);
+      receiver.ImportData(_voterData, _precinctData);
       receiver.PollingPlace = _pollingplace;
       receiver.Logger.Log("Synchronized by " + Sender, Level.Info);
       receiver.Communicator.Send(new StationAvailable(receiver.Address), receiver.Manager);

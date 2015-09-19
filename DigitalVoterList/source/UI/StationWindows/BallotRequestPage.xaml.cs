@@ -116,7 +116,7 @@ namespace UI.StationWindows {
           break;
         case VoterStatus.WrongLocation:
           Precinct p = _ui._station.Database.GetPrecinctBySplitId(voter.PrecinctSub);
-          if (p.Address.Trim().Length > 0) {
+          if (p != null && p.Address.Trim().Length > 0) {
             WrongLocationDialog wrd = null;
             Boolean result = false;
             _ui._stationWindow.Dispatcher.Invoke(
@@ -321,8 +321,8 @@ namespace UI.StationWindows {
             new Action(
               delegate {
                 if (((int)vs != choice.PollbookStatus) && ((vs == VoterStatus.SuspendedVoter) ||
-                                                                      (vs == VoterStatus.MailBallotNotReturned) ||
-                                                                      (vs == VoterStatus.OutOfCounty))) {
+                                                           (vs == VoterStatus.MailBallotNotReturned) ||
+                                                           (vs == VoterStatus.OutOfCounty))) {
                   dialog2 = new ConfirmSingleVoterWithConditionsDialog(choice, vs);
                 } else {
                   dialog2 = new ConfirmSingleVoterDialog(choice);
@@ -392,7 +392,7 @@ namespace UI.StationWindows {
           result = VoterStatus.MailBallotNotReturned;
         } else if (voter.Absentee) {
           result = VoterStatus.AbsenteeVotedInPerson;
-        } else if (voter.PrecinctSub.StartsWith("0")) {
+        } else if (voter.StateId >= 1900000000) {
           result = VoterStatus.OutOfCounty;
         } else {
           result = VoterStatus.ActiveVoter;

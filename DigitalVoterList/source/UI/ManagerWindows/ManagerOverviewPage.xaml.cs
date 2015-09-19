@@ -262,6 +262,7 @@ namespace UI.ManagerWindows {
       if (ManagerstationGrid.SelectedCells.Count != 0) {
         _ui.ExchangeKeys(((StationStatus)ManagerstationGrid.SelectedItem).Address);
       }
+      UpdateControls();
     }
 
     /// <summary>
@@ -426,7 +427,12 @@ namespace UI.ManagerWindows {
       if (((StationStatus)ManagerstationGrid.SelectedItem).Connected()) {
         _ui.RemoveStation(((StationStatus)ManagerstationGrid.SelectedItem).Address);
         UnmarkSelectedStation();
-        PopulateList();
+        Dispatcher.Invoke(
+          System.Windows.Threading.DispatcherPriority.Normal,
+          new Action(
+            delegate { 
+              ManagerstationGrid.Items.Refresh(); 
+            }));
       }
     }
 

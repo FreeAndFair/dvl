@@ -143,6 +143,7 @@
     <Compile Include="ManagerWindows\PrecinctChoicePage.xaml.cs">
       <DependentUpon>PrecinctChoicePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageBoxCentering.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="StationWindows\AcceptManagerDialog.xaml.cs">
       <DependentUpon>AcceptManagerDialog.xaml</DependentUpon>

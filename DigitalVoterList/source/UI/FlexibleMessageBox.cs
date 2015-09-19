@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace UI {
     public class FlexibleMessageBox {
@@ -736,7 +738,10 @@ namespace UI {
           SetDialogStartPosition(flexibleMessageBoxForm, owner);
 
           //Show the dialog
-          return flexibleMessageBoxForm.ShowDialog(owner);
+          CenterWindow centerWindow = new CenterWindow(owner.Handle);
+          DialogResult dlgResult = flexibleMessageBoxForm.ShowDialog(owner);
+          centerWindow.Dispose();
+          return dlgResult;
         }
 
         #endregion
@@ -744,4 +749,576 @@ namespace UI {
 
       #endregion
     }
+
+    // Code below this point is from CodeProject's 
+    // "Centering MessageBox, Common DialogBox or Form on applications"
+    // Copyright (C) Jean-Claude Lanz, 2005
+
+    ///////////////////////////////////////////////////////////////////////
+    #region CenterWindow class
+
+    public class CenterWindow {
+      public IntPtr hOwner = IntPtr.Zero;
+      private Rectangle rect;
+
+      public CbtHook cbtHook = null;
+      public WndProcRetHook wndProcRetHook = null;
+
+      public CenterWindow(IntPtr hOwner) {
+        this.hOwner = hOwner;
+        this.cbtHook = new CbtHook();
+        cbtHook.WindowActivate += new CbtHook.CbtEventHandler(WndActivate);
+        cbtHook.Install();
+      }
+
+      public void Dispose() {
+        if (wndProcRetHook != null) {
+          wndProcRetHook.Uninstall();
+          wndProcRetHook = null;
+        }
+        if (cbtHook != null) {
+          cbtHook.Uninstall();
+          cbtHook = null;
+        }
+      }
+
+      public void WndActivate(object sender, CbtEventArgs e) {
+        IntPtr hMsgBox = e.wParam;
+
+        // try to find a howner for this message box
+        if (hOwner == IntPtr.Zero) {
+          Console.WriteLine("Using active window as hOwner because hOwner is Zero");
+          hOwner = USER32.GetActiveWindow();
+        }
+        // get the MessageBox window rect
+        RECT rectDlg = new RECT();
+        USER32.GetWindowRect(hMsgBox, ref rectDlg);
+
+        // get the owner window rect
+        RECT rectForm = new RECT();
+        USER32.GetWindowRect(hOwner, ref rectForm);
+
+        Console.WriteLine("Rectangle Coordinates: " + rectForm.left + " " + rectForm.right + " " + rectForm.top + " " + rectForm.bottom);
+        // get the biggest screen area
+        Rectangle rectScreen = API.TrueScreenRect;
+
+        // if no parent window, center on the primary screen
+        if (rectForm.right == rectForm.left)
+          rectForm.right = rectForm.left = Screen.PrimaryScreen.WorkingArea.Width / 2;
+        if (rectForm.bottom == rectForm.top)
+          rectForm.bottom = rectForm.top = Screen.PrimaryScreen.WorkingArea.Height / 2;
+
+        // center on parent
+        int dx = ((rectDlg.left + rectDlg.right) - (rectForm.left + rectForm.right)) / 2;
+        int dy = ((rectDlg.top + rectDlg.bottom) - (rectForm.top + rectForm.bottom)) / 2;
+
+        rect = new Rectangle(
+          rectDlg.left - dx,
+          rectDlg.top - dy,
+          rectDlg.right - rectDlg.left,
+          rectDlg.bottom - rectDlg.top);
+
+        // place in the screen
+        if (rect.Right > rectScreen.Right) rect.Offset(rectScreen.Right - rect.Right, 0);
+        if (rect.Bottom > rectScreen.Bottom) rect.Offset(0, rectScreen.Bottom - rect.Bottom);
+        if (rect.Left < rectScreen.Left) rect.Offset(rectScreen.Left - rect.Left, 0);
+        if (rect.Top < rectScreen.Top) rect.Offset(0, rectScreen.Top - rect.Top);
+
+        if (e.IsDialog) {
+          // do the job when the WM_INITDIALOG message returns
+          wndProcRetHook = new WndProcRetHook(hMsgBox);
+          wndProcRetHook.WndProcRet += new WndProcRetHook.WndProcEventHandler(WndProcRet);
+          wndProcRetHook.Install();
+        } else
+          USER32.MoveWindow(hMsgBox, rect.Left, rect.Top, rect.Width, rect.Height, 1);
+
+        // uninstall this hook
+        WindowsHook wndHook = (WindowsHook)sender;
+        Debug.Assert(cbtHook == wndHook);
+        cbtHook.Uninstall();
+        cbtHook = null;
+      }
+
+      public void WndProcRet(object sender, WndProcRetEventArgs e) {
+        if (e.cw.message == WndMessage.WM_INITDIALOG ||
+          e.cw.message == WndMessage.WM_UNKNOWINIT) {
+          USER32.MoveWindow(e.cw.hwnd, rect.Left, rect.Top, rect.Width, rect.Height, 1);
+
+          // uninstall this hook
+          WindowsHook wndHook = (WindowsHook)sender;
+          Debug.Assert(wndProcRetHook == wndHook);
+          wndProcRetHook.Uninstall();
+          wndProcRetHook = null;
+        }
+      }
+    }
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Generic declarations
+
+    /// <summary>
+    /// Rectangle parameters exposed as a structure.
+    /// </summary>
+    public struct RECT {
+      /// <summary>
+      /// Rectangle members.
+      /// </summary>
+      public int left, top, right, bottom;
+    }
+
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Util class
+
+    /// <summary>
+    /// Utility functions.
+    /// </summary>
+    public sealed class API {
+      private API() { }	// To remove the constructor from the documentation!
+
+      /// <summary>
+      /// Get true multiscreen size.
+      /// </summary>
+      public static Rectangle TrueScreenRect {
+        get {
+          // get the biggest screen area
+          Rectangle rectScreen = Screen.PrimaryScreen.WorkingArea;
+          int left = rectScreen.Left;
+          int top = rectScreen.Top;
+          int right = rectScreen.Right;
+          int bottom = rectScreen.Bottom;
+          foreach (Screen screen in Screen.AllScreens) {
+            left = Math.Min(left, screen.WorkingArea.Left);
+            right = Math.Max(right, screen.WorkingArea.Right);
+            top = Math.Min(top, screen.WorkingArea.Top);
+            bottom = Math.Max(bottom, screen.WorkingArea.Bottom);
+          }
+          return new Rectangle(left, top, right - left, bottom - top);
+        }
+      }
+    }
+
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region USER32 class
+
+    /// <summary>
+    /// Class to expose USER32 API functions.
+    /// </summary>
+    public sealed class USER32 {
+      private USER32() { }	// To remove the constructor from the documentation!
+
+      [DllImport("user32", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+      internal static extern int GetWindowRect(IntPtr hWnd, ref RECT rect);
+
+      [DllImport("user32", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+      internal static extern int MoveWindow(IntPtr hWnd, int x, int y, int w, int h, int repaint);
+
+      [DllImport("user32", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+      internal static extern IntPtr GetActiveWindow();
+
+      [DllImport("user32", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+      internal static extern int GetClassName(IntPtr hwnd, StringBuilder lpClassName, int nMaxCount);
+    }
+    #endregion
+
+    #region Class HookEventArgs
+
+    /// Class used for hook event arguments.
+    public class HookEventArgs : EventArgs {
+      /// Event code parameter.
+      public int code;
+      /// wParam parameter.
+      public IntPtr wParam;
+      /// lParam parameter.
+      public IntPtr lParam;
+
+      internal HookEventArgs(int code, IntPtr wParam, IntPtr lParam) {
+        this.code = code;
+        this.wParam = wParam;
+        this.lParam = lParam;
+      }
+    }
+
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Enum HookType
+
+    /// Hook Types.
+    public enum HookType : int {
+      /// <value>0</value>
+      WH_JOURNALRECORD = 0,
+      /// <value>1</value>
+      WH_JOURNALPLAYBACK = 1,
+      /// <value>2</value>
+      WH_KEYBOARD = 2,
+      /// <value>3</value>
+      WH_GETMESSAGE = 3,
+      /// <value>4</value>
+      WH_CALLWNDPROC = 4,
+      /// <value>5</value>
+      WH_CBT = 5,
+      /// <value>6</value>
+      WH_SYSMSGFILTER = 6,
+      /// <value>7</value>
+      WH_MOUSE = 7,
+      /// <value>8</value>
+      WH_HARDWARE = 8,
+      /// <value>9</value>
+      WH_DEBUG = 9,
+      /// <value>10</value>
+      WH_SHELL = 10,
+      /// <value>11</value>
+      WH_FOREGROUNDIDLE = 11,
+      /// <value>12</value>
+      WH_CALLWNDPROCRET = 12,
+      /// <value>13</value>
+      WH_KEYBOARD_LL = 13,
+      /// <value>14</value>
+      WH_MOUSE_LL = 14
+    }
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Class WindowsHook
+
+    /// <summary>
+    /// Class to expose the windows hook mechanism.
+    /// </summary>
+    public class WindowsHook {
+      /// <summary>
+      /// Hook delegate method.
+      /// </summary>
+      public delegate int HookProc(int code, IntPtr wParam, IntPtr lParam);
+
+      // internal properties
+      internal IntPtr hHook = IntPtr.Zero;
+      internal HookProc filterFunc = null;
+      internal HookType hookType;
+
+      /// <summary>
+      /// Hook delegate method.
+      /// </summary>
+      public delegate void HookEventHandler(object sender, HookEventArgs e);
+
+      /// <summary>
+      /// Hook invoke event.
+      /// </summary>
+      public event HookEventHandler HookInvoke;
+
+      internal void OnHookInvoke(HookEventArgs e) {
+        if (HookInvoke != null)
+          HookInvoke(this, e);
+      }
+
+      /// <summary>
+      /// Construct a HookType hook.
+      /// </summary>
+      /// <param name="hook">Hook type.</param>
+      public WindowsHook(HookType hook) {
+        hookType = hook;
+        filterFunc = new HookProc(this.CoreHookProc);
+      }
+      /// <summary>
+      /// Construct a HookType hook giving a hook filter delegate method.
+      /// </summary>
+      /// <param name="hook">Hook type</param>
+      /// <param name="func">Hook filter event.</param>
+      public WindowsHook(HookType hook, HookProc func) {
+        hookType = hook;
+        filterFunc = func;
+      }
+
+      // default hook filter function
+      internal int CoreHookProc(int code, IntPtr wParam, IntPtr lParam) {
+        if (code < 0)
+          return CallNextHookEx(hHook, code, wParam, lParam);
+
+        // let clients determine what to do
+        HookEventArgs e = new HookEventArgs(code, wParam, lParam);
+        OnHookInvoke(e);
+
+        // yield to the next hook in the chain
+        return CallNextHookEx(hHook, code, wParam, lParam);
+      }
+
+      /// <summary>
+      /// Install the hook. 
+      /// </summary>
+      public void Install() {
+        hHook = SetWindowsHookEx(hookType, filterFunc, IntPtr.Zero, (int)AppDomain.GetCurrentThreadId());
+      }
+
+
+      /// <summary>
+      /// Uninstall the hook.
+      /// </summary>
+      public void Uninstall() {
+        if (hHook != IntPtr.Zero) {
+          UnhookWindowsHookEx(hHook);
+          hHook = IntPtr.Zero;
+        }
+      }
+
+      #region Win32 Imports
+
+      [DllImport("user32.dll")]
+      internal static extern IntPtr SetWindowsHookEx(HookType code, HookProc func, IntPtr hInstance, int threadID);
+
+      [DllImport("user32.dll")]
+      internal static extern int UnhookWindowsHookEx(IntPtr hhook);
+
+      [DllImport("user32.dll")]
+      internal static extern int CallNextHookEx(IntPtr hhook, int code, IntPtr wParam, IntPtr lParam);
+
+      #endregion
+    }
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Enum WndMessage
+
+    /// <summary>
+    /// windows message.
+    /// </summary>
+    public enum WndMessage : int {
+      /// Sent to the dialog procedure immediately before the dialog is displayed.
+      WM_INITDIALOG = 0x0110,
+      /// Sent to the dialog procedure immediately before the dialog is displayed.
+      WM_UNKNOWINIT = 0x0127
+    }
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Class WndProcRetEventArgs
+
+    /// Class used for WH_CALLWNDPROCRET hook event arguments.
+    public class WndProcRetEventArgs : EventArgs {
+      /// wParam parameter.
+      public IntPtr wParam;
+      /// lParam parameter.
+      public IntPtr lParam;
+      /// CWPRETSTRUCT structure.
+      public CwPRetStruct cw;
+
+      internal WndProcRetEventArgs(IntPtr wParam, IntPtr lParam) {
+        this.wParam = wParam;
+        this.lParam = lParam;
+        cw = new CwPRetStruct();
+        Marshal.PtrToStructure(lParam, cw);
+      }
+    }
+
+    /// <summary>
+    /// CWPRETSTRUCT structure.
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public class CwPRetStruct {
+      /// Return value.
+      public int lResult;
+      /// lParam parameter.
+      public int lParam;
+      /// wParam parameter.
+      public int wParam;
+      /// Specifies the message.
+      public WndMessage message;
+      /// Handle to the window that processed the message.
+      public IntPtr hwnd;
+    }
+
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Class WndProcRetHook
+
+    /// <summary>
+    /// Class to expose the windows WH_CALLWNDPROCRET hook mechanism.
+    /// </summary>
+    public class WndProcRetHook : WindowsHook {
+      /// <summary>
+      /// WH_CALLWNDPROCRET hook delegate method.
+      /// </summary>
+      public delegate void WndProcEventHandler(object sender, WndProcRetEventArgs e);
+
+      private IntPtr hWndHooked;
+
+      /// <summary>
+      /// Window procedure event.
+      /// </summary>
+      public event WndProcEventHandler WndProcRet;
+
+      /// <summary>
+      /// Construct a WH_CALLWNDPROCRET hook.
+      /// </summary>
+      /// <param name="hWndHooked">
+      /// Handle of the window to be hooked. IntPtr.Zero to hook all window.
+      /// </param>
+      public WndProcRetHook(IntPtr hWndHooked)
+        : base(HookType.WH_CALLWNDPROCRET) {
+        this.hWndHooked = hWndHooked;
+        this.HookInvoke += new HookEventHandler(WndProcRetHookInvoked);
+      }
+      /// <summary>
+      /// Construct a WH_CALLWNDPROCRET hook giving a hook filter delegate method.
+      /// </summary>
+      /// <param name="hWndHooked">
+      /// Handle of the window to be hooked. IntPtr.Zero to hook all window.
+      /// </param>
+      /// <param name="func">Hook filter event.</param>
+      public WndProcRetHook(IntPtr hWndHooked, HookProc func)
+        : base(HookType.WH_CALLWNDPROCRET, func) {
+        this.hWndHooked = hWndHooked;
+        this.HookInvoke += new HookEventHandler(WndProcRetHookInvoked);
+      }
+
+      // handles the hook event
+      private void WndProcRetHookInvoked(object sender, HookEventArgs e) {
+        WndProcRetEventArgs wpe = new WndProcRetEventArgs(e.wParam, e.lParam);
+        if ((hWndHooked == IntPtr.Zero || wpe.cw.hwnd == hWndHooked) && WndProcRet != null)
+          WndProcRet(this, wpe);
+        return;
+      }
+    }
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Enum CbtHookAction
+
+    /// <summary>
+    /// CBT hook actions.
+    /// </summary>
+    internal enum CbtHookAction : int {
+      HCBT_MOVESIZE = 0,
+      HCBT_MINMAX = 1,
+      HCBT_QS = 2,
+      HCBT_CREATEWND = 3,
+      HCBT_DESTROYWND = 4,
+      HCBT_ACTIVATE = 5,
+      HCBT_CLICKSKIPPED = 6,
+      HCBT_KEYSKIPPED = 7,
+      HCBT_SYSCOMMAND = 8,
+      HCBT_SETFOCUS = 9
+    }
+
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Class CbtEventArgs
+
+    /// <summary>
+    /// Class used for WH_CBT hook event arguments.
+    /// </summary>
+    public class CbtEventArgs : EventArgs {
+      /// wParam parameter.
+      public IntPtr wParam;
+      /// lParam parameter.
+      public IntPtr lParam;
+      /// Window class name.
+      public string className;
+      /// True if it is a dialog window.
+      public bool IsDialog;
+
+      internal CbtEventArgs(IntPtr wParam, IntPtr lParam) {
+        // cache the parameters
+        this.wParam = wParam;
+        this.lParam = lParam;
+
+        // cache the window's class name
+        StringBuilder sb = new StringBuilder();
+        sb.Capacity = 256;
+        USER32.GetClassName(wParam, sb, 256);
+        className = sb.ToString();
+        IsDialog = (className == "#32770");
+      }
+    }
+
+    #endregion
+
+    ///////////////////////////////////////////////////////////////////////
+    #region Class CbtHook
+
+    /// <summary>
+    /// Class to expose the windows WH_CBT hook mechanism.
+    /// </summary>
+    public class CbtHook : WindowsHook {
+      /// <summary>
+      /// WH_CBT hook delegate method.
+      /// </summary>
+      public delegate void CbtEventHandler(object sender, CbtEventArgs e);
+
+      /// <summary>
+      /// WH_CBT create event.
+      /// </summary>
+      public event CbtEventHandler WindowCreate;
+      /// <summary>
+      /// WH_CBT destroy event.
+      /// </summary>
+      public event CbtEventHandler WindowDestroye;
+      /// <summary>
+      /// WH_CBT activate event.
+      /// </summary>
+      public event CbtEventHandler WindowActivate;
+
+      /// <summary>
+      /// Construct a WH_CBT hook.
+      /// </summary>
+      public CbtHook()
+        : base(HookType.WH_CBT) {
+        this.HookInvoke += new HookEventHandler(CbtHookInvoked);
+      }
+      /// <summary>
+      /// Construct a WH_CBT hook giving a hook filter delegate method.
+      /// </summary>
+      /// <param name="func">Hook filter event.</param>
+      public CbtHook(HookProc func)
+        : base(HookType.WH_CBT, func) {
+        this.HookInvoke += new HookEventHandler(CbtHookInvoked);
+      }
+
+      // handles the hook event
+      private void CbtHookInvoked(object sender, HookEventArgs e) {
+        // handle hook events (only a few of available actions)
+        switch ((CbtHookAction)e.code) {
+          case CbtHookAction.HCBT_CREATEWND:
+            HandleCreateWndEvent(e.wParam, e.lParam);
+            break;
+          case CbtHookAction.HCBT_DESTROYWND:
+            HandleDestroyWndEvent(e.wParam, e.lParam);
+            break;
+          case CbtHookAction.HCBT_ACTIVATE:
+            HandleActivateEvent(e.wParam, e.lParam);
+            break;
+        }
+        return;
+      }
+
+      // handle the CREATEWND hook event
+      private void HandleCreateWndEvent(IntPtr wParam, IntPtr lParam) {
+        if (WindowCreate != null) {
+          CbtEventArgs e = new CbtEventArgs(wParam, lParam);
+          WindowCreate(this, e);
+        }
+      }
+
+      // handle the DESTROYWND hook event
+      private void HandleDestroyWndEvent(IntPtr wParam, IntPtr lParam) {
+        if (WindowDestroye != null) {
+          CbtEventArgs e = new CbtEventArgs(wParam, lParam);
+          WindowDestroye(this, e);
+        }
+      }
+
+      // handle the ACTIVATE hook event
+      private void HandleActivateEvent(IntPtr wParam, IntPtr lParam) {
+        if (WindowActivate != null) {
+          CbtEventArgs e = new CbtEventArgs(wParam, lParam);
+          WindowActivate(this, e);
+        }
+      }
+    }
+    #endregion
 }

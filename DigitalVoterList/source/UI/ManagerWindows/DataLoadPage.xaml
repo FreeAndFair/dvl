@@ -16,7 +16,7 @@
         <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,640,0,0" Name="backButton" VerticalAlignment="Top" Width="100" Click="BackButtonClick" FontSize="24" Focusable="False" />
         <TextBox HorizontalAlignment="Left" AcceptsReturn="False" Margin="212,280,0,0" Name="keyPathTextBox" VerticalAlignment="Top" Width="612" FontSize="24" />
         <Button Content="Browse" HorizontalAlignment="Left" Margin="847,280,0,0" Name="keyBrowseButton" VerticalAlignment="Top" Width="100" Click="KeyBrowseButtonClick" FontSize="24" Focusable="False" />
-        <Label Content="Vendor data"  HorizontalAlignment="Left" Margin="56,270,0,0" Name="keyBrowseLabel" VerticalAlignment="Top" FontSize="24" />
+        <Label Content="Precinct data"  HorizontalAlignment="Left" Margin="47,270,0,0" Name="keyBrowseLabel" VerticalAlignment="Top" FontSize="24" />
         <Label HorizontalAlignment="Center" Name="LoadingLabel" Margin="0,446,0,0" Content="Loading Data..." VerticalAlignment="Top" FontSize="36" HorizontalContentAlignment="Center"/>
         <Label HorizontalAlignment="Center" x:Name="SelectData" Margin="0,85,0,634" Content="Choose Election Data Files" FontSize="36" HorizontalContentAlignment="Center"/>
     </Grid>

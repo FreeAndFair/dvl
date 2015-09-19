@@ -90,8 +90,11 @@ namespace UI {
     /// </param>
     public UiHandler(StationWindow stationWindow) { 
       _stationWindow = stationWindow;
-      NativeWindow win32Window = new NativeWindow();
-      win32Window.AssignHandle(new WindowInteropHelper(stationWindow).Handle);
+      _stationNativeWindow = new NativeWindow();
+      _stationNativeWindow.AssignHandle(new WindowInteropHelper(_stationWindow).EnsureHandle());
+      if (_stationNativeWindow.Handle == IntPtr.Zero) {
+        Console.WriteLine("STATION NATIVE WINDOW HAS INT PTR ZERO!");
+      }
     }
 
     #endregion
@@ -356,17 +359,16 @@ namespace UI {
       _station = _station ?? new Station(this, key, _masterPassword);
 
       try {
-        _station.Database.Import(ImportVoterData(voterDataPath));
-        _station.Database.Import(ImportPrecinctData(precinctDataPath));
-        return true;
-      } catch (Exception) {
+        return _station.ImportData(ImportVoterData(voterDataPath), ImportPrecinctData(precinctDataPath));
+      } catch (Exception e) {
+        Console.WriteLine("Data import exception: " + e);
         return false;
       }
     }
 
     /// <summary>
-    /// Import the election data from a |-delimited "CSV" file (note that this is
-    /// specific to the Dallas demo and will not work in general).
+    /// Import the election data from a CSV file (note that this is
+    /// specific to the demo version and will not work in general).
     /// </summary>
     /// <param name="filePath">
     /// the file path of the voter data
@@ -379,7 +381,7 @@ namespace UI {
       using (StreamReader sr = new StreamReader(filePath))
       {
         string line;
-        char[] delimiters = new char[] { '|' };
+        char[] delimiters = new char[] { ',' };
         int count = 0;
         line = sr.ReadLine(); // throw out the first line
         try
@@ -392,82 +394,28 @@ namespace UI {
             }
             string[] parts = line.Split(delimiters);
             Voter v = new Voter();
-            // part 0 is "ID", skip it
-            v.VoterId = Int32.Parse(parts[1]);
-            // part 2 is "address_id"
-            v.Status = parts[3];
-            v.LastName = parts[4];
-            v.FirstName = parts[5];
-            v.MiddleName = parts[6];
-            v.Suffix = parts[7];
-            v.DateOfBirth = DateTime.Parse(parts[8]);
-            // part 9 is "dateofreg"
+            v.VoterId = Int32.Parse(parts[0]);
+            v.LastName = parts[1];
+            v.FirstName = parts[2];
+            v.MiddleName = parts[3];
+            v.Suffix = parts[4];
+            v.DateOfBirth = DateTime.Parse(parts[5]);
+            v.ProtectedAddress = Boolean.Parse(parts[6]);
+            v.Address = parts[7];
+            v.Municipality = parts[8];
+            v.ZipCode = parts[9];
+            v.Status = parts[10];
             DateTime dt;
-            DateTime.TryParse(parts[10], out dt);
+            DateTime.TryParse(parts[11], out dt);
             v.EligibleDate = dt;
-            // part 11 is "unit"
-            // part 12 is "unitno"
-            v.MustShowId = Boolean.Parse(parts[13]); // actually "registeredbymail"
-            v.Absentee = Boolean.Parse(parts[14]);
-            v.ProtectedAddress = Boolean.Parse(parts[15]);
-            // part 16 is "party"
-            // part 17 is "ssn"
-            // part 18 is "ssnrev"
-            v.DriversLicense = parts[19];
-            // part 20 is "dlrev"
-            Int32 house;
-            StringBuilder address = new StringBuilder();
-            if (Int32.TryParse(parts[21], out house)) {
-              address.Append(house.ToString());
-            }
-            // part 22 is "signature"
-            // part 23 is "signaturefilename"
-            v.Voted = Boolean.Parse(parts[24]);
-            // part 25 is "maildate"
-            // part 26 is "returndate"
-            v.ReturnStatus = parts[27];
-            Int32 bs;
-            if (Int32.TryParse(parts[28], out bs)) {
-              v.BallotStyle = bs;
-            } else {
-              v.BallotStyle = -1;
-            }
-            v.PrecinctSub = parts[29];
-            // part 30 is precinct
-            // part 31 is precsub
-            string bldg = parts[32];
-            string predir = parts[33];
-            string streetname = parts[34];
-            string streettype = parts[35];
-            string postdir = parts[36];
-            // now we can make the address
-            if (bldg.Length > 0) {
-              if (address.Length > 0) { address.Append(" "); }
-              address.Append(bldg);
-            }
-            if (predir.Length > 0) {
-              if (address.Length > 0) { address.Append(" "); }
-              address.Append(predir);
-            }
-            if (streetname.Length > 0) {
-              if (address.Length > 0) { address.Append(" "); }
-              address.Append(streetname);
-            }
-            if (streettype.Length > 0) {
-              if (address.Length > 0) { address.Append(" "); }
-              address.Append(streettype);
-            }
-            if (postdir.Length > 0) {
-              if (address.Length > 0) { address.Append(" "); }
-              address.Append(postdir);
-            }
-            v.Address = address.ToString();
-            v.Municipality = parts[37];
-            v.ZipCode = parts[38];
-            // part 39 is parcel_address
-            // part 40 is poll_code
-            // part 41 is election_code-sub
-            v.StateId = Int32.Parse(parts[42]);
+            v.MustShowId = Boolean.Parse(parts[12]); 
+            v.DriversLicense = parts[13];
+            v.StateId = Int32.Parse(parts[14]);
+            v.PrecinctSub = parts[15];
+            v.BallotStyle = parts[16];
+            v.Voted = Boolean.Parse(parts[17]);
+            v.Absentee = Boolean.Parse(parts[18]);
+            v.ReturnStatus = parts[19];
             v.PollbookStatus = 0;
             result.Add(v);
           }
@@ -486,7 +434,7 @@ namespace UI {
       List<Precinct> result = new List<Precinct>();
       using (StreamReader sr = new StreamReader(filePath)) {
         string line;
-        char[] delimiters = new char[] { '|' };
+        char[] delimiters = new char[] { ',' };
         int count = 0;
         line = sr.ReadLine(); // throw out the first line
         try {
@@ -497,16 +445,10 @@ namespace UI {
             }
             string[] parts = line.Split(delimiters);
             Precinct p = new Precinct();
-            // part 0 is "Index", skip it
-            // part 1 is "ElectionID", skip it
-            p.PrecinctSplitId = parts[2];
-            // part 3 is "Precinct", skip it
-            // part 4 is "SubGroup", skip it
-            // part 5 is "MPCT", skip it
-            p.LocationName = parts[6];
-            p.Address = parts[7];
-            p.CityStateZIP = parts[8] + ", " + parts[9] + "  " + parts[10];
-            // everything else gets skipped
+            p.PrecinctSplitId = parts[0];
+            p.LocationName = parts[1];
+            p.Address = parts[2];
+            p.CityStateZIP = parts[3] + ", " + parts[4] + "  " + parts[5];
 
             result.Add(p);
           }
@@ -674,7 +616,7 @@ namespace UI {
     /// <param name="ip">
     /// the IP adress of the station to be removed
     /// </param>
-    public void RemoveStation(IPEndPoint ip) { _station.AnnounceRemovePeer(ip); _station.RemovePeer(ip, true); }
+    public void RemoveStation(IPEndPoint ip) {_station.RemovePeer(ip, true); }
 
     /// <summary>
     /// This method is called when a voter wants to request a ballot after entering their voternumber and CPR number
