@@ -440,10 +440,17 @@ namespace UI {
         /// <param name="flexibleMessageBoxForm">The FlexibleMessageBox dialog.</param>
         /// <param name="text">The text (the longest text row is used to calculate the dialog width).</param>
         /// <param name="text">The caption (this can also affect the dialog width).</param>
-        private static void SetDialogSizes(FlexibleMessageBoxForm flexibleMessageBoxForm, string text, string caption) {
+        private static void SetDialogSizes(FlexibleMessageBoxForm flexibleMessageBoxForm, string text, string caption, IWin32Window owner) {
           //First set the bounds for the maximum dialog size
           flexibleMessageBoxForm.MaximumSize = new Size(Convert.ToInt32(SystemInformation.WorkingArea.Width * FlexibleMessageBoxForm.GetCorrectedWorkingAreaFactor(MAX_WIDTH_FACTOR)),
                                                         Convert.ToInt32(SystemInformation.WorkingArea.Height * FlexibleMessageBoxForm.GetCorrectedWorkingAreaFactor(MAX_HEIGHT_FACTOR)));
+          // maximum size as big as owner window
+          //RECT rectForm = new RECT();
+          //IntPtr ownerPtr = owner.Handle;
+          //if (ownerPtr == null) ownerPtr = USER32.GetActiveWindow();
+          //USER32.GetWindowRect(ownerPtr, ref rectForm); 
+          //flexibleMessageBoxForm.MaximumSize = new Size(Convert.ToInt32((rectForm.right - rectForm.left)*FlexibleMessageBoxForm.GetCorrectedWorkingAreaFactor(MAX_WIDTH_FACTOR)),
+          //                                    Convert.ToInt32((rectForm.bottom - rectForm.top * FlexibleMessageBoxForm.GetCorrectedWorkingAreaFactor(MAX_HEIGHT_FACTOR)));
 
           //Get rows. Exit if there are no rows to render...
           var stringRows = GetStringRows(text);
@@ -732,7 +739,7 @@ namespace UI {
           flexibleMessageBoxForm.richTextBoxMessage.Font = FONT;
 
           //Calculate the dialogs start size (Try to auto-size width to show longest text row). Also set the maximum dialog size. 
-          SetDialogSizes(flexibleMessageBoxForm, text, caption);
+          SetDialogSizes(flexibleMessageBoxForm, text, caption, owner);
 
           //Set the dialogs start position when given. Otherwise center the dialog on the current screen.
           SetDialogStartPosition(flexibleMessageBoxForm, owner);

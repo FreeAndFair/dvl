@@ -214,7 +214,8 @@ namespace UI.StationWindows {
       if (Waiting) {
         // we were in the middle of a query to which an answer is not going to come
         EnableFields(true);
-        WaitingLabel.Content = "Manager changed to " + _ui._station.Manager.Address + ", please try again.";
+        WaitingLabel.Content = "Station " + _ui._station.Communicator.GetIdentifyingStringForStation(_ui._station.Manager) + 
+          " is now the manager, please try again.";
         Waiting = false;
         UpdateButtonState();
       }

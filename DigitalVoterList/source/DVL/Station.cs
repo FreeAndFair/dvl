@@ -188,7 +188,7 @@ namespace Aegis_DVL {
       Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
       PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
       ElectionInProgress = false;
-      Communicator = new LocalhostCommunicator(this);
+      Communicator = new InternetCommunicator(this);
       Address = Communicator.GetLocalEndPoint(port);
       _dbPrefix = dbPrefix;
       UI = ui;
@@ -749,7 +749,7 @@ namespace Aegis_DVL {
       if (!disposing) return;
       //if (Crypto != null) Crypto.Dispose();
       if (Listening) StopListening();
-      Database.Dispose();
+      if (Database != null) Database.Dispose();
       if (Logger != null) {
         Logger.Log("Disposing self", Level.Info);
         Logger.Dispose();

@@ -182,6 +182,7 @@
     <Compile Include="Commands\StatusChangedCommand.cs" />
     <Compile Include="Commands\StationAvailableCommand.cs" />
     <Compile Include="Commands\SyncCommand.cs" />
+    <Compile Include="Communication\IPCommunicator.cs" />
     <Compile Include="Communication\LocalhostCommunicator.cs" />
     <Compile Include="Communication\InternetCommunicator.cs" />
     <Compile Include="Communication\ICommunicator.cs" />

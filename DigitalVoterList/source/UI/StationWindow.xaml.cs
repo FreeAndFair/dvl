@@ -38,6 +38,11 @@ namespace UI {
     #region Fields
 
     /// <summary>
+    /// This window should have an aspect ratio of 1.25.
+    /// </summary>
+    private const double ASPECT_RATIO = 1.25;
+
+    /// <summary>
     /// The _ui.
     /// </summary>
     private readonly UiHandler _ui;
@@ -69,6 +74,20 @@ namespace UI {
     protected override void OnClosing(CancelEventArgs e) {
       if (!CheckMasterPasswordForQuit()) {
         e.Cancel = true;
+      }
+    }
+
+    /// <summary>
+    /// Make sure that the window stays at the correct aspect ratio.
+    /// </summary>
+    /// <param name="sizeInfo">
+    /// the information about the size change
+    /// </param>
+    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo) {
+      if (sizeInfo.WidthChanged) {
+        this.Width = sizeInfo.NewSize.Height * ASPECT_RATIO;
+      } else {
+        this.Height = sizeInfo.NewSize.Width * ASPECT_RATIO;
       }
     }
 
@@ -171,6 +190,7 @@ namespace UI {
       // System.Diagnostics.Process.Start(@"Manual.pdf"); 
       FlexibleMessageBox.Show(_ui._stationNativeWindow, "The FAQ is not included in this demo,\nbut will automatically open in a new window in the final product.");
     }
+
     #endregion
   }
 }

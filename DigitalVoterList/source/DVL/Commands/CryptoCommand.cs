@@ -29,6 +29,8 @@ namespace Aegis_DVL.Commands {
 
     private Type _type;
 
+    private ICommand _innerCommand;
+
     #endregion
 
     #region Constructors and Destructors
@@ -55,6 +57,11 @@ namespace Aegis_DVL.Commands {
       _type = innerCommand.GetType();
 
       Sender = parent.Address;
+
+      // no crypto
+      _innerCommand = innerCommand;
+
+      /*
       var crypto = parent.Crypto;
 
       var cmdBytes = Bytes.From(innerCommand);
@@ -79,6 +86,7 @@ namespace Aegis_DVL.Commands {
       var iv = crypto.Iv;
 
       _content = new Message(symmetricKeyCipher, commandCipher, senderHash, iv);
+      */
     }
 
     #endregion
@@ -101,6 +109,7 @@ namespace Aegis_DVL.Commands {
     /// The receiver.
     /// </param>
     public void Execute(Station receiver) {
+      /*
       var crypto = receiver.Crypto;
       var symmetricKey = crypto.AsymmetricDecrypt(_content.SymmetricKey,
         new AsymmetricKey(crypto.KeyPair.Private));
@@ -124,6 +133,9 @@ namespace Aegis_DVL.Commands {
       } catch (Exception e) {
         Console.WriteLine("Exception when decrypting message from " + Sender + ": " + e);
       }
+      */
+      // no crypto
+      _innerCommand.Execute(receiver);
     }
 
     public Type GetEncapsulatedType() {
