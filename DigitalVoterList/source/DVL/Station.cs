@@ -188,7 +188,7 @@ namespace Aegis_DVL {
       Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
       PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
       ElectionInProgress = false;
-      Communicator = new InternetCommunicator(this);
+      Communicator = new LocalhostCommunicator(this);
       Address = Communicator.GetLocalEndPoint(port);
       _dbPrefix = dbPrefix;
       UI = ui;
