@@ -5,7 +5,13 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>ie.ucd.bon.plugin.boncbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>ie.ucd.bon.plugin.boncnature</nature>
 	</natures>
 </projectDescription>

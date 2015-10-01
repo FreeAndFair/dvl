@@ -120,7 +120,7 @@ class_chart STATION
     "Only voters with status 'not checked in' at this station's precinct may \
    \ be checked in.",
     "Once a voter has been checked in, their status at this station's precinct \
-   \ must be 'checked in'."
+   \ must be 'checked in'.",
     "Only voters with status that entitles them to an in-person ballot may be \
    \ given a ballot.",
     "Once a voter is given a ballot, their status must reflect that they have \

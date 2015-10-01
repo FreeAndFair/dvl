@@ -25,8 +25,6 @@ system_chart DVL
 end
 
 cluster_chart COMMUNICATION
-  indexing
-    author "Daniel M. Zimmerman <dmz@galois.com>";
   explanation "Data types and entities used for communication."
   class ADDRESS
     description "The address of an entity on the network."
@@ -59,8 +57,6 @@ cluster_chart CRYPTOGRAPHY
 end
 
 cluster_chart LOGGING
-  indexing
-    author "Daniel M. Zimmerman <dmz@galois.com>";
   explanation "Data types and entities used for tamper-evident logging."
   class LOG 
     description "An append-only sequence of log entries."
@@ -69,8 +65,6 @@ cluster_chart LOGGING
 end
 
 cluster_chart POLLBOOK
-  indexing
-    author "Daniel M. Zimmerman <dmz@galois.com>";
   explanation "Core data types used by the DVL system."
   class BALLOT_DATA
     description "Data about a ballot that is relevant to the functioning of the poll book."
