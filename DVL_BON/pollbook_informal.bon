@@ -1,0 +1,224 @@
+-- Verifiable Elections Electronic Pollbook System (Digital Voter List)
+-- Copyright (C) 2015 Verifiable Elections
+
+-- ===================================================================
+-- Cluster POLLBOOK
+-- ===================================================================
+
+class_chart BALLOT_DATA
+  explanation 
+    "Data about a ballot that is relevant to the functioning of the poll book. This \
+   \ is primarily useful for on-demand ballot printing. Ballot data is immutable."
+  query
+    "What is your style?",
+    "What is your printed representation?"
+  command
+    "Your style and printed representation are the_style and \
+   \ the_printed_representation!"
+  constraint
+    "The style must not be Void."
+end
+
+class_chart DATA_QUERY
+  explanation
+    "Search parameters used to attempt to retrieve data from the data store."
+  query
+    "What type of data are you a query for?",
+    "What is your matching string for the_field?",
+    "Must the_field be matched exactly or approximately?"
+  command
+    "You are a query for the_type of data!",
+    "Your matching string for the_field is the_string!",
+    "You must match the_field exactly!",
+    "You must match the_field approximately!"
+end
+
+class_chart DATA_STORE
+  explanation 
+    "The collection of all data relevant to the functioning of the poll book, and \
+   \ operations that retrieve and update the data."
+  query
+    "What are the data items that match the_query?"
+  command
+    "Add the_data_item!",
+    "Delete the_data_item!",
+    "Update the_data_item!"  
+end
+
+class_chart PRECINCT_DATA
+  explanation 
+    "Data about a precinct that is relevant to the functioning of the poll book."
+  query
+    "What is your precinct identifier?",
+    "What is your polling place information?"
+  command
+    "Your precinct identifier and polling place information are \
+   \ the_identifier and the_information!"
+  constraint
+    "The precinct identifier and polling place information must not be Void."
+end
+  
+class_chart SCANNER
+  explanation 
+    "A device that reads and decodes a physical data encoding (bar code, \
+   \ magnetic strip)."
+  query
+    "What is the data encoded on the_physical_token?"
+end
+
+class_chart STATION 
+  explanation 
+    "A node of the electronic pollbook system."
+  query
+    "What is your identifier?",
+    "What is your Internet address?",
+    "What is your communicator?",
+    "What is your data store?",
+    "What is your logger?",
+    "What is your precinct?",
+    "What stations are your peers?",
+    "What stations exist on the local network?",
+    "What station is the local manager?",
+    "What voter data matches the_criteria?", 
+    "How many voters have attempted to check in at this station?",
+    "What are the voter data for voters who have checked in at this station?",
+    "How many ballots have been distributed by this station?",
+    "What is the address of the polling place for the_precinct?",
+    "Is the_string the master password for this polling place?",
+    "Are the polls open?"
+  command
+    "Your identifier is the_identifier!",
+    "Your Internet address is the_ip_address!",
+    "Your communicator is the_communicator!",
+    "Your data store is the_data_store!",
+    "Your logger is the_logger!",
+    "Your precinct is the_precinct!",
+    "Update the peers and stations on the local network!",
+    "the_station is the local manager!",
+    "Exchange public keys with the_station!",
+    "Remove the_station as a peer!",
+    "Announce to all peers that the_station has been removed as a peer!",
+    "Add the_station as a peer!",
+    "Announce to all peers that the_station has been added as a peer!",
+    "Open the polls!",
+    "Announce to all peers that the polls have been opened!",
+    "Close the polls!",
+    "Announce to all peers that the polls have been closed!",
+    "Promote the_station to local manager!",
+    "Announce to all peers that the_station has been promoted to manager!",
+    "Attempt to check the_voter in at this station!",
+    "Distribute a ballot to the_voter!",
+    "Attempt to update data for the_voter!"
+  constraint
+    "All station identifiers are unique.",
+    "A station's communicator, data store, logger, and precinct are non-Void.",
+    "The master password for a polling place is non-Void.",
+    "The local manager is non-Void.",
+    "If there are no peers, this station is the local manager.",
+    "To announce to all peers, or to promote a station to local manager, a \
+   \ station must be the local manager.",
+    "Only voters with status 'not checked in' at this station's precinct may \
+   \ be checked in.",
+    "Once a voter has been checked in, their status at this station's precinct \
+   \ must be 'checked in'."
+    "Only voters with status that entitles them to an in-person ballot may be \
+   \ given a ballot.",
+    "Once a voter is given a ballot, their status must reflect that they have \
+   \ been given a ballot."
+end
+
+class_chart STATION_UI
+  explanation 
+    "The user interface that controls a station. The commands described here are \
+   \ triggered by user interface actions on the part of the user and by actions on \
+   \ the part of the station (in response to remote messages or prompted by local \
+   \ computation."
+  command
+    "Become the local manager!",
+    "Wait for a local manager!",
+    "Make the_station the local manager!",
+    "Attempt to check in the_voter!",
+    "Open the polls!",
+    "Close the polls!",
+    "Shut down for the_reason!",
+    "Generate a report of the_type!"
+  constraint
+    "Only the UI for the local manager may make another station the local manager, \
+   \ open the polls, or close the polls."
+end
+
+class_chart VOTER_DATA
+  explanation 
+    "Data about a voter that is relevant to the functioning of the poll book."
+  query
+    "What is your last name?",
+    "What is your first name?",
+    "What is your middle name?",
+    "What is the suffix of your name?",
+    "What is your date of birth?", 
+    "What is your street address?",
+    "What is your municipality?",
+    "What is your ZIP code?",
+    "What is your driver's license/state ID card number?",
+    "What is your voter identification number?",
+    "What is the precinct identifier of the precinct in which you are registered to vote?",
+    "Are you eligible to vote in this election?",
+    "Have you requested an absentee ballot for this election?",
+    "Have you returned an absentee ballot for this election?",
+    "Are you required to show your ID at the polling place?",
+    "Must your address be hidden for privacy reasons?",
+    "What is your status for this election?",
+    "What is your status at precinct the_precinct?",
+    "Does your status entitle you to an in-person ballot?"
+  command
+    "Your last name is the_name!",
+    "Your first name is the_name!",
+    "Your middle name is the_name!",
+    "The suffix of your name is the_suffix!",
+    "Your date of birth is the_date!",
+    "Your street address is the_address!",
+    "Your municipality is the_municipality!",
+    "Your ZIP code is the_zip_code!",
+    "Your driver's license/state ID card number is the_number!",
+    "Your voter identification number is the_number!",
+    "You are registered to vote in precinct number the_precinct_number!",
+    "Your eligibility to vote in this election is the_eligibility!",
+    "Your absentee ballot request status for this election is the_status!",
+    "Your absentee ballot return status for this election is the_status!",
+    "Your requirement to show your ID at the polling place is the_requirement!",
+    "Your address hiding for privacy reasons is the_hiding!",
+    "Your status for this election is the_status!",
+    "Your status at precinct the_precinct is the_status!"
+  constraint
+    "The first and last names must not be Void.",
+    "The date of birth must not be Void.",
+    "The street address must not be Void.",
+    "The municipality must not be Void.",
+    "The voter identification number must not be Void.",
+    "The status for this election must be 'active', 'suspended', 'voted in person', \
+   \ 'early voted in person', 'absentee voted in person', 'voted by mail', \
+   \ 'mail ballot not returned', 'out of county', 'provisional', 'wrong location', \
+   \ 'ineligible', 'unavailable', or another status as defined by the jurisdiction.",
+    "The status at each precinct must be either 'not checked in' or 'checked in'.",
+    "The status values that entitle a voter to an in-person ballot are \
+   \ jurisdiction-dependent."
+end
+
+class_chart WORKER_DATA
+  explanation 
+    "Data about a poll worker that is relevant to the functioning of the poll book."
+  query
+    "What is your name?",
+    "What is your address?", 
+    "What is your social security number?",
+    "What shifts have you worked?",
+    "How many total hours have you worked?"
+  command
+    "Your name, address, and social security number are the_name, the_address, \
+   \ and the_social_security_number!", 
+    "You have worked the shift from start_time to end_time!"
+  constraint
+    "The total hours worked is the sum of (end_time - start_time) over all \ 
+   \ the shifts worked."
+end
+

@@ -1,0 +1,93 @@
+-- Verifiable Elections Electronic Pollbook System (Digital Voter List)
+-- Copyright (C) 2015 Verifiable Elections
+
+-- ===================================================================
+-- Cluster COMMUNICATION
+-- ===================================================================
+
+class_chart ADDRESS
+  explanation 
+    "The address of a communicator on the network."
+  query
+    "What is your IPv4 address?",
+    "What is your IPv6 address?",
+    "What is your port number?"
+  command
+    "Your IPv4 address is the_address!",
+    "Your IPv6 address is the_address!",
+    "Your port number is the_port!",
+  constraint
+    "The port number is between 1 and 65535, inclusive.",
+    "Either the IPv4 address or the IPv6 address is non-Void."
+end
+
+class_chart MESSAGE
+  explanation 
+    "A piece of information that can be communicated within the system. \
+   \ The content of a message may be anything that can be serialized, \
+   \ including another message."
+  query
+    "What is your message type?",
+    "What is your content?",
+    "What is your destination?",
+    "What communicator originally sent you?",
+    "What is the sequence of communicators that have relayed you?"
+  command
+    "Your message type is the_type!",
+    "Your content is the_content!",
+    "Your destination is the_destination!",
+    "Your original sender is the_communicator!",
+    "Add the_communicator to the sequence of communicators that have relayed you!"
+  constraint
+    "The communicator that sent a message is non-Void.",
+    "The destination of a message is non-Void.",
+    "The message type is non-Void.",
+    "The sequence of communicators that have relayed a message is non-Void \
+   \ and append-only."
+end
+
+class_chart SECURE_MESSAGE 
+  explanation 
+    "A message that is encrypted using one or more keys. The actual encryption \
+   \ and decryption is handled elsewhere."
+  query
+    "Which communicator encrypted you?",
+    "To which communicator were you encrypted?",
+    "What is your ciphertext?"
+  command
+    "the_communicator encrypted you!",
+    "You were encrypted to the_communicator!",
+    "Your ciphertext is the_ciphertext!"
+  constraint
+    "The communicator that encrypted a secure message is non-Void.",
+    "The communicator to which a secure message was encrypted is non-Void.",
+    "The ciphertext of a secure message, when correctly decrypted, yields a \
+   \ message or a secure message."
+end
+
+class_chart COMMUNICATOR
+  explanation 
+    "An entity that is responsible for communication on a network."
+  query
+    "What is your address?",
+    "What is your public key?",
+    "Is there a communicator listening at the_address?",
+    "Can you communicate securely with the communicator at the_address?",
+    "Are there incoming messages waiting to be processed?",
+    "What is the next incoming message waiting to be processed?"
+  command
+    "Process the next incoming message!",
+    "Send the_message to the communicator at the_address!",
+    "Securely send the_message to the communicator at the_address!",
+    "The public key for the communicator at the_address is the_key!",
+    "Your private and public keys are the_private_key and the_public_key!"
+  constraint
+    "A communicator's address is non-Void.",
+    "A communicator can communicate securely with the communicator at \
+   \ an_address iff it knows the public key for the communicator at \
+   \ an_address and its own public key is non-Void.",
+    "A communicator's private and public keys correspond to each other.",
+    "All communicators in the system have unique private keys.",
+    "Messages are processed in the order in which they are received from the \
+   \ network."
+end

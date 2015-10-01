@@ -1,0 +1,47 @@
+-- Verifiable Elections Electronic Pollbook System (Digital Voter List)
+-- Copyright (C) 2015 Verifiable Elections
+
+-- ===================================================================
+-- Cluster LOGGING
+-- ===================================================================
+
+class_chart LOG 
+  explanation 
+    "An append-only sequence of log entries."
+  query
+    "What entity created you?",
+    "Is your hash chain valid?",
+    "What is the sequence of log entries recorded between start_time and end_time?",
+    "What are the log entries that match the_search_criteria?",
+    "Are new log entries required to have digital signatures?"
+  command
+    "Add the_new_entry to the log!",
+    "Your digital signature requirement for new log entries is the_requirement!"
+  constraint
+    "Entries can never be removed from the log, and the ordering of entries \
+   \ already in the log never changes.",
+    "If the hash chain is ever found to be invalid, it remains invalid thereafter.",
+    "Only log entries that have valid digital signatures, or no digital signatures, \
+   \ may be added to the log.",
+    "If new log entries are required to have digital signatures, log entries with \
+   \ no digital signatures may not be added to the log."
+end
+
+class_chart LOG_ENTRY 
+  explanation 
+    "A description of something that has happened, including a timestamp."
+  query
+    "What entity created you?", 
+    "What is your timestamp?",
+    "What is your level?",
+    "What is your content?",
+    "What is your content's digital signature?"
+  command
+    "You were created by the_entity!",
+    "Your timestamp is the_timestamp!",
+    "Your level is the_level!", 
+    "Your content is the_content!",
+    "Your content's digital signature is the_signature!"
+  constraint
+    "None of the data in a log entry can be changed after initialization."
+end

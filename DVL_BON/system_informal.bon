@@ -1,0 +1,93 @@
+-- Verifiable Elections Electronic Pollbook System (Digital Voter List)
+-- Copyright (C) 2015 Verifiable Elections
+
+-- ===================================================================
+-- System Chart
+-- ===================================================================
+
+system_chart DVL
+  indexing
+    author: "Daniel M. Zimmerman <dmz@galois.com>";
+    based_on: "DVL Prototype by Nikolaj Aaes <niaa@itu.dk> & Nicolai Skovvart <nbsk@itu.dk>";
+    module: "Digital Voter List (DVL)";
+    creation_date: "September 2015";
+    last_updated_date: "September 2015";
+    keywords: "electronic pollbook", "pollbook", "voter list";
+  explanation "An electronic pollbook system for public elections."
+  cluster COMMUNICATION 
+    description "Data types and entities used for communication."
+  cluster CRYPTOGRAPHY 
+    description "Cryptographic primitives and entities."
+  cluster LOGGING 
+    description "Data types and entities used for tamper-evident logging."
+  cluster POLLBOOK 
+    description "Entities that comprise the electronic pollbook."
+end
+
+cluster_chart COMMUNICATION
+  indexing
+    author "Daniel M. Zimmerman <dmz@galois.com>";
+  explanation "Data types and entities used for communication."
+  class ADDRESS
+    description "The address of an entity on the network."
+  class MESSAGE 
+    description "A piece of information that can be communicated within the system."
+  class SECURE_MESSAGE 
+    description "A message that is encrypted using one or more keys."
+  class COMMUNICATOR 
+    description "An entity that is responsible for communication on a network."
+end
+
+cluster_chart CRYPTOGRAPHY
+  explanation "Cryptographic entities and primitives."
+  class CIPHER 
+    description "An entity that encrypts and decrypts data."
+  class CIPHERTEXT 
+    description "Encrypted data."
+  class HASH_FUNCTION 
+    description "A function that generates a hash code from provided data."
+  class KEY 
+    description "A piece of information used to encrypt, decrypt, or hash data."
+  class PLAINTEXT 
+    description "Unencrypted data."
+  class PRIVATE_KEY 
+    description "A cryptographic key that is assumed to be secret."
+  class PUBLIC_KEY 
+    description "A cryptographic key that is assumed to be publicly known."
+  class SIGNATURE
+    description "An entity that handles digital signature generation and verification."
+end
+
+cluster_chart LOGGING
+  indexing
+    author "Daniel M. Zimmerman <dmz@galois.com>";
+  explanation "Data types and entities used for tamper-evident logging."
+  class LOG 
+    description "An append-only sequence of log entries."
+  class LOG_ENTRY 
+    description "A description of something that has happened, including a timestamp."
+end
+
+cluster_chart POLLBOOK
+  indexing
+    author "Daniel M. Zimmerman <dmz@galois.com>";
+  explanation "Core data types used by the DVL system."
+  class BALLOT_DATA
+    description "Data about a ballot that is relevant to the functioning of the poll book."
+  class DATA_QUERY
+    description "Search parameters used to attempt to retrieve data from the data store."
+  class DATA_STORE
+    description "The collection of all data relevant to the functioning of the poll book." 
+  class PRECINCT_DATA
+    description "Data about a precinct that is relevant to the functioning of the poll book."
+  class SCANNER
+    description "A device that reads and decodes a physical data encoding (bar code, magnetic strip)."
+  class STATION 
+    description "A node of the electronic pollbook system."
+  class STATION_UI
+    description "The user interface that controls a station."
+  class VOTER_DATA
+    description "Data about a voter that is relevant to the functioning of the poll book."
+  class WORKER_DATA
+    description "Data about a poll worker that is relevant to the functioning of the poll book."
+end
