@@ -37,12 +37,16 @@ class_chart DATA_STORE
   explanation 
     "The collection of all data relevant to the functioning of the poll book, and \
    \ operations that retrieve and update the data."
+  -- note: some kind of modeling of causality/data versioning should be in here
+  -- but isn't yet
   query
-    "What are the data items that match the_query?"
+    "What are the data items that match the_query?",
+    "Is the_item of type the_type in the data store?",
+    "Is the_item of type the_type different from the matching item in the data store?"
   command
-    "Add the_data_item!",
-    "Delete the_data_item!",
-    "Update the_data_item!"  
+    "Attempt to add the_item of type the_type!",
+    "Attempt to delete the_item of type the_type!",
+    "Attempt to update the_item of type the_type!"  
 end
 
 class_chart PRECINCT_DATA
@@ -79,7 +83,8 @@ class_chart STATION
     "What stations are your peers?",
     "What stations exist on the local network?",
     "What station is the local manager?",
-    "What voter data matches the_criteria?", 
+    "What voter data matches the_criteria?",
+    "What poll worker data matches the_criteria?",
     "How many voters have attempted to check in at this station?",
     "What are the voter data for voters who have checked in at this station?",
     "How many ballots have been distributed by this station?",
@@ -108,7 +113,9 @@ class_chart STATION
     "Announce to all peers that the_station has been promoted to manager!",
     "Attempt to check the_voter in at this station!",
     "Distribute a ballot to the_voter!",
-    "Attempt to update data for the_voter!"
+    "Attempt to update data for the_voter!",
+    "the_poll_worker is starting a shift now!",
+    "the_poll_worker is finishing a shift now!"
   constraint
     "All station identifiers are unique.",
     "A station's communicator, data store, logger, and precinct are non-Void.",
@@ -124,23 +131,27 @@ class_chart STATION
     "Only voters with status that entitles them to an in-person ballot may be \
    \ given a ballot.",
     "Once a voter is given a ballot, their status must reflect that they have \
-   \ been given a ballot."
+   \ been given a ballot.",
+    "Only a poll worker who has started a shift may finish a shift.",
+    "When a poll worker starts or finishes a shift, their data is updated appropriately."
 end
 
 class_chart STATION_UI
   explanation 
-    "The user interface that controls a station. The commands described here are \
+    "The user interface that controls a station. Most of the commands described here are \
    \ triggered by user interface actions on the part of the user and by actions on \
    \ the part of the station (in response to remote messages or prompted by local \
    \ computation."
   command
-    "Become the local manager!",
-    "Wait for a local manager!",
+    "Your station is the_station!",
+    "Your scanner is the_scanner!",
+    "Make your station the local manager!",
+    "Make your station wait for a local manager!",
     "Make the_station the local manager!",
     "Attempt to check in the_voter!",
     "Open the polls!",
     "Close the polls!",
-    "Shut down for the_reason!",
+    "Shut down your station for the_reason!",
     "Generate a report of the_type!"
   constraint
     "Only the UI for the local manager may make another station the local manager, \
@@ -212,13 +223,41 @@ class_chart WORKER_DATA
     "What is your address?", 
     "What is your social security number?",
     "What shifts have you worked?",
-    "How many total hours have you worked?"
+    "How many total hours have you worked?",
+    "Are you working now?",
+    "Where are you currently working?",
+    "When did your current shift start?"
   command
     "Your name, address, and social security number are the_name, the_address, \
    \ and the_social_security_number!", 
-    "You have worked the shift from start_time to end_time!"
+    "You are starting a shift at the_location!",
+    "You are finishing a shift!"
   constraint
     "The total hours worked is the sum of (end_time - start_time) over all \ 
-   \ the shifts worked."
+   \ the shifts worked.",
+    "A poll worker can only start a shift when they are not working.",
+    "A poll worker can only finish a shift when they are working.",
+    "A poll worker only has a valid shift start time when they are working.",
+    "When a poll worker starts working, the start time is saved.",
+    "When a poll worker finishes working, a shift is recorded from the saved \
+   \ start time to the time at which the poll worker finished working."
 end
 
+class_chart WORKER_SHIFT
+  explanation
+    "Data about a single shift."
+  query
+    "Where are you occurring?",
+    "When did you start?",
+    "Have you ended yet?",
+    "When did you end?"
+  command
+    "You are occurring at the_location!", 
+    "You started at the_date_and_time!",
+    "You ended at the_date_and_time!"
+  constraint
+    "The location may only be set once.",
+    "The start time may only be set once.",
+    "The end time may only be set once.",
+    "A shift has not ended if and only if it has no end time set."
+end

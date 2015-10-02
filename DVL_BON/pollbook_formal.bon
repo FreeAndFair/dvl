@@ -1,0 +1,457 @@
+-- Verifiable Elections Electronic Pollbook System (Digital Voter List)
+-- Copyright (C) 2015 Verifiable Elections
+
+-- ===================================================================
+-- Cluster POLLBOOK
+-- ===================================================================
+
+static_diagram DVL
+component
+  cluster POLLBOOK
+  component
+    class BALLOT_DATA
+      feature
+        -- query
+        
+        -- What is your style? 
+        style : VALUE  -- ballot type represented as a value for now
+        
+        -- What is your printed representation?
+        printed_representation : PDF 
+        
+        -- creation routine
+        
+        create
+          -> the_style : VALUE
+          -> the_printed_representation : PDF
+          require the_style /= Void
+          ensure style = the_style;
+                 printed_representation = the_printed_representation
+          end
+                 
+      invariant
+        -- The style must not be Void.
+        style /= Void
+      end
+      
+  class DATA_QUERY
+    feature
+      -- query
+      
+      -- What type of data are you a query for?
+      data_type : VALUE -- data type represented as a value for now
+      
+      -- What is your matching string for the_field?
+      matching_string : STRING
+        -> the_field : STRING
+        require the_field /= Void
+        end
+        
+      -- Must the_field be matched exactly or approximately?
+      exact_match : BOOLEAN 
+        -> the_field : STRING
+        require the_field /= Void
+        end
+        
+      -- command
+      
+      -- Your matching string for the_field is the_string!   
+      set_matching_string : Void
+        -> the_field : STRING
+        -> the_match : STRING
+        require the_field /= Void and the_match /= Void
+        ensure delta matching_string;
+               matching_string(the_field) = the_match
+        end
+      
+      set_exact_match : Void
+        -> the_field : STRING
+        -> the_exact_match : BOOLEAN 
+        require the_field /= Void and the_match /= Void
+        ensure delta exact_match;
+               exact_match(the_field) = the_exact_match
+        end
+        
+      -- creation routine
+      
+      create
+        -> the_data_type : VALUE
+        require the_data_type /= Void
+        ensure data_type = the_data_type;
+               for_all f : STRING it_holds matching_string(f) = Void;
+               for_all f : STRING it_holds exact_match(f) = false;
+        end
+        
+    invariant
+      data_type /= Void
+    end
+  
+  class DATA_STORE
+    -- note: some kind of modeling of causality/data versioning should be
+    -- in here but isn't yet
+    feature
+      -- query
+      
+      -- What are the data items that match the_query? 
+      execute_query : SET[VALUE]
+        -> the_query : DATA_QUERY
+        ensure Result /= Void
+        end
+      
+      -- What is your stored matching item for the_item of the_type?
+      -- "matching" is type-dependent; for example, two voter records "match" if 
+      -- their unique voter IDs match, regardless of the values of the other fields
+      matching_item : VALUE
+        -> the_type : VALUE
+        -> the_item : VALUE
+          -- ensure Result = (the matching item in the store for the_item of the_type,
+          --                  or Void if no such item is in the store)
+                
+      -- Is the_item of type the_type different from the matching item in the data store?
+      is_item_changed : BOOLEAN
+        -> the_type : VALUE
+        -> the_item : VALUE
+        ensure Result = (the_item /= matching_item(the_type, the_item))
+        end
+        
+      -- command
+      
+      -- Attempt to add the_item of type the_type!
+      add_item : BOOLEAN
+        -> the_type : VALUE
+        -> the_item : VALUE
+        require matching_item(the_item_type, the_item) = Void
+        ensure delta matching_item(the_item_type, the_item);
+               matching_item(the_item_type, the_item) = the_item
+        end
+      
+      -- Attempt to delete the_item of type the_type!
+      delete_item : Void
+        -> the_type : VALUE
+        -> the_item : VALUE
+        require matching_item(the_item_type, the_item) = the_item
+        ensure delta matching_item(the_item_type, the_item);
+               matching_item(the_item_type, the_item) = Void
+        end
+        
+      -- Attempt to update the_item of type the_type!
+      update_item : Void
+        -> the_type : VALUE
+        -> the_item : VALUE
+        require matching_item(the_item_type, the_item)
+        ensure delta matching_item(the_item_type, the_item);
+               matching_item(the_item_type, the_item) = the_item
+        end
+      
+      -- creation routine
+      
+      create
+        ensure for_all i, j : VALUE it_holds matching_item(i, j) = Void
+        end
+      
+    -- invariant: something about not violating causality
+      
+    end
+  
+  class PRECINCT_DATA
+    feature
+      -- query
+      
+      -- What is your precinct identifier?
+      precinct_id : VALUE
+    
+      -- What is your polling place information?
+      polling_place_info : VALUE
+    
+      -- creation routine
+      
+      create
+        -> the_precinct_id : VALUE
+        -> the_polling_place_info : VALUE
+        require the_precinct_id /= Void;
+                the_polling_place_info /= Void
+        ensure precinct_id = the_precinct_id;
+               polling_place_info = the_polling_place_info
+        end
+        
+    invariant
+      precinct_id /= Void;
+      polling_place_info /= Void
+    end
+    
+  class SCANNER
+    feature
+      -- query
+      
+      read : VALUE
+        -> the_token : VALUE
+        require the_token /= Void; 
+                ensure Result /= Void
+        end
+    end
+    
+  class STATION 
+--      explanation 
+--        "A node of the electronic pollbook system."
+--      query
+--        "What is your identifier?",
+--        "What is your Internet address?",
+--        "What is your communicator?",
+--        "What is your data store?",
+--        "What is your logger?",
+--        "What is your precinct?",
+--        "What stations are your peers?",
+--        "What stations exist on the local network?",
+--        "What station is the local manager?",
+--        "What voter data matches the_criteria?",
+--        "What poll worker data matches the_criteria?",
+--        "How many voters have attempted to check in at this station?",
+--        "What are the voter data for voters who have checked in at this station?",
+--        "How many ballots have been distributed by this station?",
+--        "What is the address of the polling place for the_precinct?",
+--        "Is the_string the master password for this polling place?",
+--        "Are the polls open?"
+--      command
+--        "Your identifier is the_identifier!",
+--        "Your Internet address is the_ip_address!",
+--        "Your communicator is the_communicator!",
+--        "Your data store is the_data_store!",
+--        "Your logger is the_logger!",
+--        "Your precinct is the_precinct!",
+--        "Update the peers and stations on the local network!",
+--        "the_station is the local manager!",
+--        "Exchange public keys with the_station!",
+--        "Remove the_station as a peer!",
+--        "Announce to all peers that the_station has been removed as a peer!",
+--        "Add the_station as a peer!",
+--        "Announce to all peers that the_station has been added as a peer!",
+--        "Open the polls!",
+--        "Announce to all peers that the polls have been opened!",
+--        "Close the polls!",
+--        "Announce to all peers that the polls have been closed!",
+--        "Promote the_station to local manager!",
+--        "Announce to all peers that the_station has been promoted to manager!",
+--        "Attempt to check the_voter in at this station!",
+--        "Distribute a ballot to the_voter!",
+--        "Attempt to update data for the_voter!",
+--        "the_poll_worker is starting a shift now!",
+--        "the_poll_worker is finishing a shift now!"
+--      constraint
+--        "All station identifiers are unique.",
+--        "A station's communicator, data store, logger, and precinct are non-Void.",
+--        "The master password for a polling place is non-Void.",
+--        "The local manager is non-Void.",
+--        "If there are no peers, this station is the local manager.",
+--        "To announce to all peers, or to promote a station to local manager, a \
+--       \ station must be the local manager.",
+--        "Only voters with status 'not checked in' at this station's precinct may \
+--       \ be checked in.",
+--        "Once a voter has been checked in, their status at this station's precinct \
+--       \ must be 'checked in'.",
+--        "Only voters with status that entitles them to an in-person ballot may be \
+--       \ given a ballot.",
+--        "Once a voter is given a ballot, their status must reflect that they have \
+--       \ been given a ballot.",
+--        "Only a poll worker who has started a shift may finish a shift.",
+--        "When a poll worker starts or finishes a shift, their data is updated appropriately."
+  
+  class STATION_UI
+--      explanation 
+--      "The user interface that controls a station. Most of the commands described here are \
+--       \ triggered by user interface actions on the part of the user and by actions on \
+--       \ the part of the station (in response to remote messages or prompted by local \
+--       \ computation."
+--      command
+--      "Your station is the_station!",
+--      "Your scanner is the_scanner!",
+--      "Make your station the local manager!",
+--      "Make your station wait for a local manager!",
+--      "Make the_station the local manager!",
+--      "Attempt to check in the_voter!",
+--      "Open the polls!",
+--      "Close the polls!",
+--      "Shut down your station for the_reason!",
+--      "Generate a report of the_type!"
+--      constraint
+--        "Only the UI for the local manager may make another station the local manager, \
+--       \ open the polls, or close the polls."
+  
+  class VOTER_DATA
+--      explanation 
+--        "Data about a voter that is relevant to the functioning of the poll book."
+--      query
+--        "What is your last name?",
+--        "What is your first name?",
+--        "What is your middle name?",
+--        "What is the suffix of your name?",
+--        "What is your date of birth?", 
+--        "What is your street address?",
+--        "What is your municipality?",
+--        "What is your ZIP code?",
+--        "What is your driver's license/state ID card number?",
+--        "What is your voter identification number?",
+--        "What is the precinct identifier of the precinct in which you are registered to vote?",
+--        "Are you eligible to vote in this election?",
+--        "Have you requested an absentee ballot for this election?",
+--        "Have you returned an absentee ballot for this election?",
+--        "Are you required to show your ID at the polling place?",
+--        "Must your address be hidden for privacy reasons?",
+--        "What is your status for this election?",
+--        "What is your status at precinct the_precinct?",
+--        "Does your status entitle you to an in-person ballot?"
+--      command
+--        "Your last name is the_name!",
+--        "Your first name is the_name!",
+--        "Your middle name is the_name!",
+--        "The suffix of your name is the_suffix!",
+--        "Your date of birth is the_date!",
+--        "Your street address is the_address!",
+--        "Your municipality is the_municipality!",
+--        "Your ZIP code is the_zip_code!",
+--        "Your driver's license/state ID card number is the_number!",
+--        "Your voter identification number is the_number!",
+--        "You are registered to vote in precinct number the_precinct_number!",
+--        "Your eligibility to vote in this election is the_eligibility!",
+--        "Your absentee ballot request status for this election is the_status!",
+--        "Your absentee ballot return status for this election is the_status!",
+--        "Your requirement to show your ID at the polling place is the_requirement!",
+--        "Your address hiding for privacy reasons is the_hiding!",
+--          "Your status for this election is the_status!",
+--          "Your status at precinct the_precinct is the_status!"
+--      constraint
+--          "The first and last names must not be Void.",
+--          "The date of birth must not be Void.",
+--          "The street address must not be Void.",
+--          "The municipality must not be Void.",
+--          "The voter identification number must not be Void.",
+--          "The status for this election must be 'active', 'suspended', 'voted in person', \
+--         \ 'early voted in person', 'absentee voted in person', 'voted by mail', \
+--         \ 'mail ballot not returned', 'out of county', 'provisional', 'wrong location', \
+--         \ 'ineligible', 'unavailable', or another status as defined by the jurisdiction.",
+--          "The status at each precinct must be either 'not checked in' or 'checked in'.",
+--          "The status values that entitle a voter to an in-person ballot are \
+--         \ jurisdiction-dependent."
+    
+    class WORKER_DATA
+      feature
+        -- query
+        
+        -- What is your name?
+        name : STRING
+        
+        -- What is your address?
+        address : STRING
+        
+        -- What is your social security number?
+        ssn : STRING
+        
+        -- What shifts have you worked?
+        shifts : SET[WORKER_SHIFT]
+        
+        -- How many total hours have you worked?
+        hours : NUMERIC
+        
+        -- Are you working now?
+        working_now : BOOLEAN
+        
+        -- Where are you currently working?
+        current_shift_location : VALUE
+          
+        -- When did your current shift start?
+        current_shift_start : DATE_TIME
+                
+        -- command
+        
+        -- You are starting a shift!
+        start_shift : Void 
+          -> the_start : DATE_TIME
+          -> the_polling_place : VALUE
+          require not working_now;
+                  the_start <= Now
+          ensure delta current_shift_start;
+                 current_shift_start = the_start
+          end
+          
+        -- You are finishing a shift!
+        finish_shift : Void
+          -> the_finish : DATE_TIME
+          require working_now;
+                  current_shift_start < the_finish;
+                  the_finish <= Now; -- assume Now is the current date/time
+          ensure {current_shift_location, current_shift_start, the_finish} member_of shifts;
+                 hours = old hours + (the_finish - current_shift_start);
+                 current_shift_start = Void
+          end
+          
+        -- creation routine
+        
+        create
+          -> the_name : STRING
+          -> the_address : STRING
+          -> the_ssn : STRING
+          ensure name = the_name;
+                 address = the_address;
+                 ssn = the_ssn;
+                 hours = 0;
+                 shifts.size = 0;
+                 current_shift_location = Void;
+                 current_shift_start = Void;
+          end
+          
+      invariant
+        name /= Void;
+        address /= Void;
+        ssn /= Void;
+        shifts /= Void;
+        0 <= hours;
+        working_now = (current_shift_start /= Void);
+        current_shift_start <= Now; -- assume Now is the current date/time
+        current_shift_start /= Void -> current_shift_location /= Void;
+        hours <= old hours;
+        for_all s : WORKER_SHIFT such_that s member_of old shifts it_holds s member_of shifts
+      end
+      
+--        explanation 
+--          "Data about a poll worker that is relevant to the functioning of the poll book."
+--        query
+--          "What is your name?",
+--          "What is your address?", 
+--          "What is your social security number?",
+--          "What shifts have you worked?",
+--          "How many total hours have you worked?",
+--          "Are you working now?",
+--          "When did your current shift start?"
+--        command
+--          "Your name, address, and social security number are the_name, the_address, \
+--       \ and the_social_security_number!", 
+--        "You are starting a shift!",
+--        "You are finishing a shift!"
+--      constraint
+--        "The total hours worked is the sum of (end_time - start_time) over all \ 
+--       \ the shifts worked.",
+--        "A poll worker can only start a shift when they are not working.",
+--        "A poll worker can only finish a shift when they are working.",
+--        "A poll worker only has a valid shift start time when they are working.",
+--        "When a poll worker starts working, the start time is saved.",
+--        "When a poll worker finishes working, a shift is recorded from the saved \
+--       \ start time to the time at which the poll worker finished working."
+
+--  explanation
+--    "Data about a single shift."
+--  query
+--    "Where are you occurring?",
+--    "When did you start?",
+--    "Have you ended yet?",
+--    "When did you end?"
+--  command
+--    "You are occurring at the_location!",
+--    "You started at the_date_and_time!",
+--    "You ended at the_date_and_time!"
+--  constraint
+--    "The location may only be set once.",
+--    "The start time may only be set once.",
+--    "The end time may only be set once.",
+--    "A shift has not ended if and only if it has no end time set."
+
+  end
+end
