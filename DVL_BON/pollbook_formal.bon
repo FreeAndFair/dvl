@@ -53,6 +53,13 @@ component
         require the_field /= Void
         end
         
+      -- Does the_data match you?
+      matches : BOOLEAN
+        -> the_data : VALUE
+        require the_data /= Void
+        -- ensure Result if and only if the_data matches this query
+        end
+         
       -- command
       
       -- Your matching string for the_field is the_string!   
@@ -183,154 +190,559 @@ component
     feature
       -- query
       
+      -- What is the data encoded on the_token?
       read : VALUE
         -> the_token : VALUE
-        require the_token /= Void; 
-                ensure Result /= Void
+        require the_token /= Void
+        -- ensure Result accurately reflects the data on the token
         end
     end
     
   class STATION 
---      explanation 
---        "A node of the electronic pollbook system."
---      query
---        "What is your identifier?",
---        "What is your Internet address?",
---        "What is your communicator?",
---        "What is your data store?",
---        "What is your logger?",
---        "What is your precinct?",
---        "What stations are your peers?",
---        "What stations exist on the local network?",
---        "What station is the local manager?",
---        "What voter data matches the_criteria?",
---        "What poll worker data matches the_criteria?",
---        "How many voters have attempted to check in at this station?",
---        "What are the voter data for voters who have checked in at this station?",
---        "How many ballots have been distributed by this station?",
---        "What is the address of the polling place for the_precinct?",
---        "Is the_string the master password for this polling place?",
---        "Are the polls open?"
---      command
---        "Your identifier is the_identifier!",
---        "Your Internet address is the_ip_address!",
---        "Your communicator is the_communicator!",
---        "Your data store is the_data_store!",
---        "Your logger is the_logger!",
---        "Your precinct is the_precinct!",
---        "Update the peers and stations on the local network!",
---        "the_station is the local manager!",
---        "Exchange public keys with the_station!",
---        "Remove the_station as a peer!",
---        "Announce to all peers that the_station has been removed as a peer!",
---        "Add the_station as a peer!",
---        "Announce to all peers that the_station has been added as a peer!",
---        "Open the polls!",
---        "Announce to all peers that the polls have been opened!",
---        "Close the polls!",
---        "Announce to all peers that the polls have been closed!",
---        "Promote the_station to local manager!",
---        "Announce to all peers that the_station has been promoted to manager!",
---        "Attempt to check the_voter in at this station!",
---        "Distribute a ballot to the_voter!",
---        "Attempt to update data for the_voter!",
---        "the_poll_worker is starting a shift now!",
---        "the_poll_worker is finishing a shift now!"
---      constraint
---        "All station identifiers are unique.",
---        "A station's communicator, data store, logger, and precinct are non-Void.",
---        "The master password for a polling place is non-Void.",
---        "The local manager is non-Void.",
---        "If there are no peers, this station is the local manager.",
---        "To announce to all peers, or to promote a station to local manager, a \
---       \ station must be the local manager.",
---        "Only voters with status 'not checked in' at this station's precinct may \
---       \ be checked in.",
---        "Once a voter has been checked in, their status at this station's precinct \
---       \ must be 'checked in'.",
---        "Only voters with status that entitles them to an in-person ballot may be \
---       \ given a ballot.",
---        "Once a voter is given a ballot, their status must reflect that they have \
---       \ been given a ballot.",
---        "Only a poll worker who has started a shift may finish a shift.",
---        "When a poll worker starts or finishes a shift, their data is updated appropriately."
-  
+    feature
+      -- query
+      
+      -- What is your identifier?
+      identifier : VALUE
+      
+      -- What is your Internet address?
+      address : INTERNET_ADDRESS
+        ensure Result = communicator.address()
+        end
+        
+      -- What is your communicator?
+      communicator : COMMUNICATOR
+      
+      -- What is your data store?
+      data_store : DATA_STORE
+      
+      -- What is your logger?
+      logger : LOGGER
+      
+      -- What is your precinct information?
+      precinct : PRECINCT_DATA
+      
+      -- What is the master password for this polling place?
+      master_password : STRING 
+      
+      -- What stations are your peers?
+      peers : SET[INTERNET_ADDRESS]
+      
+      -- What stations exist on the local network?
+      local_stations : SET[INTERNET_ADDRESS]
+      
+      -- What station is the local manager?
+      local_manager : INTERNET_ADDRESS
+      
+      -- Is a local manager election in progress?
+      local_manager_election_in_progress : BOOLEAN 
+        ensure Result -> local_manager = Void
+        end
+        
+      -- What voter data matches the_criteria?
+      matching_voters : SET[VOTER_DATA]
+        -> the_criteria : DATA_QUERY
+        require the_criteria /= Void;
+                the_criteria.data_type = VOTER_DATA; 
+        ensure Result /= Void;
+               for_all v : VOTER_DATA such_that v member_of Result 
+                 it_holds the_criteria.matches(v)
+        end
+        
+      -- What poll worker data matches the_criteria?
+      matching_poll_workers : SET[WORKER_DATA]
+        -> the_criteria : DATA_QUERY
+        require the_criteria /= Void;
+                the_criteria.data_type = WORKER_DATA;
+        ensure Result /= Void;
+               for_all w : WORKER_DATA such_that w member_of Result
+                 it_holds the_criteria.matches(w)
+        end
+        
+      -- How many voters have checked in at this station?
+      checked_in_count : NATURAL
+      
+      -- What are the voter data for voters who have checked in at this station?
+      checked_in_voters : SET[VOTER_DATA]
+        ensure Result /= Void;
+               Result.size = checked_in_count;
+               for_all v : VOTER_DATA such_that v member_of Result
+                 it_holds v.precinct_status(precinct) member_of { GivenBallot, NotGivenBallot }
+        end
+        
+      -- How many ballots have been distributed by this station?
+      ballots_distributed : NATURAL
+      
+      -- What is the polling place information for the_precinct?
+      polling_place_info : VALUE
+        -> the_precinct : VALUE
+        -- ensure Result is correct based on data store query of the_precinct
+      
+      -- Are the polls open?
+      are_polls_open : BOOLEAN 
+      
+      -- command
+      
+      -- Update the peers and stations on the local network!
+      scan_local_network : Void
+        -- ensure the list of local stations and peers is appropriately updated
+        
+      -- the_station is the local manager!
+      set_manager : Void
+        -> the_station : INTERNET_ADDRESS
+        require the_station /= Void;
+                the_station member_of local_stations
+        ensure delta local_manager;
+               delta local_manager_election_in_progress;
+               delta peers;
+               local_manager = the_station;
+               local_manager member_of peers;
+               not local_manager_election_in_progress
+        end
+        
+      -- Start a local manager election!
+      start_local_manager_election : Void
+        require local_manager = Void
+        ensure delta local_manager_election_in_progress;
+               local_manager_election_in_progress
+        end
+        
+      -- Exchange public keys with the_station!
+      exchange_keys : Void
+        -> the_station : INTERNET_ADDRESS
+        require the_station /= Void;
+        -- ensure the communicator attempts a key exchange; this needs work/design/clarification
+        end
+        
+      -- Remove the_station as a peer!
+      remove_peer : Void
+        -> the_station : INTERNET_ADDRESS
+        require the_station /= Void;
+                the_station member_of peers
+        ensure delta local_manager;
+               delta peers;
+               not (the_station member_of peers);
+               old local_manager = the_station -> local_manager_election_in_progress
+               -- local manager elections still need work/design/clarification
+        end
+       
+      -- Announce to all peers that the_station has been removed as a peer!" 
+      announce_remove_peer : Void
+        -> the_station : INTERNET_ADDRESS
+        require the_station /= Void;
+                local_manager = Current;
+                not the_station member_of peers
+        -- ensure messages are sent to all remaining peers informing them of the removal
+        end
+      
+      -- Add the_station as a peer!
+      add_peer : Void
+        -> the_station : INTERNET_ADDRESS
+        require the_station /= Void;
+                not the_station member_of peers
+        ensure delta peers;
+               the_station member_of peers
+        end
+      
+      -- Announce to all peers that the station has been added as a peer!
+      announce_add_peer : Void
+        -> the_station : INTERNET_ADDRESS
+        require local_manager = Current;
+                the_station member_of peers
+        -- ensure messages are sent to all pre-existing peers informing them of the addition
+        end
+      
+      -- Open the polls!
+      open_polls : Void
+        require not are_polls_open
+        ensure delta are_polls_open;
+               are_polls_open
+        end
+      
+      -- Announce to all peers that the polls have been opened!
+      announce_open_polls : Void
+        require local_manager = Current;
+                are_polls_open
+        -- ensure messages are sent to all peers informing them of the polls opening
+        end
+      
+      -- Close the polls!
+      close_polls : Void
+        require are_polls_open
+        ensure delta are_polls_open;
+               not are_polls_open
+        end
+      
+      -- Announce to all peers that the polls have been closed!
+      announce_close_polls : Void
+        require local_manager = Current;
+                not are_polls_open
+        -- ensure messages are sent to all peers informing them of the polls closing
+        end
+        
+      -- Promote the_station to local manager!
+      promote_to_manager : Void
+        -> the_station : INTERNET_ADDRESS
+        require local_manager = Current; 
+                the_station member_of peers
+        ensure delta local_manager;
+               local_manager = the_station
+        end
+      
+      -- Announce to all peers that the_station has been promoted to manager!
+      announce_promotion_to_manager : Void
+        -> the_station : INTERNET_ADDRESS
+        require the_station /= Void;
+                local_manager = the_station
+        -- ensure messages are sent to all peers informing them of the promotion
+        end 
+        
+      -- Attempt to check the_voter in!
+      check_in : Void
+        -> the_voter : VOTER_DATA
+        require the_voter /= Void
+        ensure not (the_voter member_of old checked_in_voters) -> 
+                     delta the_voter.precinct_status(precinct) 
+                 and delta checked_in_count
+                 and delta checked_in_voters
+                 and the_voter.precinct_status(precinct) = NotGivenBallot
+                 and the_voter member_of checked_in_voters 
+                 and checked_in_count = old checked_in_count + 1;
+        end
+                
+      -- Distribute a ballot to the_voter! 
+      distribute_ballot : Void
+        -> the_voter : VOTER_DATA
+        require the_voter /= Void;
+                the_voter.precinct_status(precinct) = NotGivenBallot;
+                the_voter.entitled_to_ballot
+        ensure delta the_voter;
+               delta ballots_distributed;
+               the_voter.precinct_status(precinct) = GivenBallot;
+               the_voter.voted;
+               -- the voter is given the appropriate ballot
+               ballots_distributed = old ballots_distributed + 1
+        end
+        
+      -- creation routine
+      create
+        -> the_identifier : VALUE
+        -> the_data_store : DATA_STORE
+        -> the_logger : LOGGER
+        -> the_precinct : PRECINCT_DATA
+        -> the_master_password : STRING
+        -> the_manager_flag : BOOLEAN
+        require the_identifier /= Void;
+                the_data_store /= Void;
+                the_logger /= Void;
+                the_precinct /= Void;
+                the_master_password /= Void
+        ensure identifier = the_identifier;
+               data_store = the_data_store;
+               logger = the_logger;
+               precinct = the_precinct;
+               master_password = the_master_password;
+               communicator /= Void;
+               peers /= Void;
+               peers.size = 0;
+               the_manager_flag -> local_manager = Current;
+               not the_manager_flag -> local_manager = Void;
+               checked_in_count = 0;
+               checked_in_voters /= Void;
+               checked_in_voters.size = 0;
+               ballots_distributed = 0;
+               not are_polls_open
+        end      
+        
+        invariant
+          for_all s, t : STATION it_holds s /= t <-> s.identifier /= t.identifier;
+          communicator /= Void;
+          data_store /= Void;
+          logger /= Void;
+          precinct /= Void
+    end
+
   class STATION_UI
---      explanation 
---      "The user interface that controls a station. Most of the commands described here are \
---       \ triggered by user interface actions on the part of the user and by actions on \
---       \ the part of the station (in response to remote messages or prompted by local \
---       \ computation."
---      command
---      "Your station is the_station!",
---      "Your scanner is the_scanner!",
---      "Make your station the local manager!",
---      "Make your station wait for a local manager!",
---      "Make the_station the local manager!",
---      "Attempt to check in the_voter!",
---      "Open the polls!",
---      "Close the polls!",
---      "Shut down your station for the_reason!",
---      "Generate a report of the_type!"
---      constraint
---        "Only the UI for the local manager may make another station the local manager, \
---       \ open the polls, or close the polls."
+    feature
+      data_store : DATA_STORE
+      precinct : PRECINCT_DATA
+      station : STATION
+            
+      -- query
+      
+      -- "What is a report of the_type?"
+      generate_report : VALUE 
+        -> the_type : VALUE
+        -- constraints are jurisdiction-dependent
+        
+      -- command
+      
+      -- "Create a local manager!"
+      create_local_manager : Void
+        require station = Void
+        ensure delta station;
+               station /= Void;
+               station.local_manager = station
+        end
+      
+      -- "Create a station that waits for a local manager!"
+      create_station : Void
+        require station = Void
+        ensure delta station;
+               station /= Void;
+               station.local_manager /= station;
+               station.data_store = data_store;
+               station.precinct = precinct
+        end
+        
+      -- "Make the_station the local manager!"
+      make_manager : Void
+        -> the_station : STATION
+        require station.manager = station;
+                not station.manager_election_in_progress;
+                the_station member_of station.peers
+        ensure delta station.manager;
+               station.manager = the_station
+        end
+        
+      -- "Attempt to check in the_voter!"
+      check_in : Void
+        -> the_voter : VOTER_DATA
+        require the_voter /= Void;
+        ensure not (the_voter member_of old station.checked_in_voters) -> 
+                     delta the_voter.precinct_status(station.precinct) 
+                 and delta station.checked_in_count
+                 and delta station.checked_in_voters
+                 and the_voter.precinct_status(station.precinct) /= NotSeen
+                 and the_voter member_of station.checked_in_voters 
+                 and station.checked_in_count = old station.checked_in_count + 1
+                 and the_voter.precinct_status(station.precinct) = GivenBallot ->
+                       station.ballots_distributed = old station.ballots_distributed + 1;
+        end
+      
+      -- "Open the polls!"
+      open_polls : VOID
+        require station.local_manager = station;
+                not station.are_polls_open;
+        ensure delta station.are_polls_open;
+               station.are_polls_open
+        end
+        
+      -- "Close the polls!"
+      close_polls : VOID
+        require station.local_manager = station;
+                station.are_polls_open
+        ensure delta station.are_polls_open;
+               not station.are_polls_open
+        end
+            
+      -- "Shut down your station for the_reason!"
+      shutdown : VOID
+        -> the_reason : VALUE
+        require the_reason /= Void
+        -- ensure the station is no longer running - needs further thought
+        end
+      
+      -- "the_poll_worker is starting a shift now!"
+      start_shift : VOID
+        -> the_poll_worker : WORKER_DATA
+        require the_poll_worker /= Void;
+                not the_poll_worker.working_now
+        ensure delta the_poll_worker.current_shift_location;
+               delta the_poll_worker.current_shift_start;
+               CallTime <= the_poll_worker.current_shift_start; -- assume CallTime is the time of feature call
+               the_poll_worker.current_shift_start <= Now;
+               the_poll_worker.current_shift_location = precinct
+        end
+      
+      -- "the_poll_worker is ending a shift now!"
+      end_shift : VOID
+        -> the_poll_worker : WORKER_DATA
+        require the_poll_worker /= Void;
+                the_poll_worker.working_now;
+                the_poll_worker.current_shift_location = precinct
+        ensure delta the_poll_worker.current_shift_location;
+               delta the_poll_worker.current_shift_start;
+               delta the_poll_worker.shifts;
+               delta the_poll_worker.hours;
+               the_poll_worker.current_shift_location = Void;
+               the_poll_worker.current_shift_start = Void;
+               the_poll_worker.shifts.last.location = old the_poll_worker.current_shift_location;
+               the_poll_worker.shifts.last.start_time = old the_poll_worker.current_shift_start;
+               CallTime <= the_poll_worker.shifts.last.end_time;
+               the_poll_worker.shifts.last.end_time <= Now
+        end
+        
+      -- creation routine
+      create
+        -> the_data_store : DATA_STORE
+        -> the_precinct : PRECINCT
+        require the_data_store /= Void;
+                the_precinct /= Void
+        ensure data_store = the_data_store;
+               precinct = the_precinct;
+               station /= Void;
+               station.data_store = the_data_store;
+               station.precinct = the_precinct
+        end
+    end
   
   class VOTER_DATA
---      explanation 
---        "Data about a voter that is relevant to the functioning of the poll book."
---      query
---        "What is your last name?",
---        "What is your first name?",
---        "What is your middle name?",
---        "What is the suffix of your name?",
---        "What is your date of birth?", 
---        "What is your street address?",
---        "What is your municipality?",
---        "What is your ZIP code?",
---        "What is your driver's license/state ID card number?",
---        "What is your voter identification number?",
---        "What is the precinct identifier of the precinct in which you are registered to vote?",
---        "Are you eligible to vote in this election?",
---        "Have you requested an absentee ballot for this election?",
---        "Have you returned an absentee ballot for this election?",
---        "Are you required to show your ID at the polling place?",
---        "Must your address be hidden for privacy reasons?",
---        "What is your status for this election?",
---        "What is your status at precinct the_precinct?",
---        "Does your status entitle you to an in-person ballot?"
---      command
---        "Your last name is the_name!",
---        "Your first name is the_name!",
---        "Your middle name is the_name!",
---        "The suffix of your name is the_suffix!",
---        "Your date of birth is the_date!",
---        "Your street address is the_address!",
---        "Your municipality is the_municipality!",
---        "Your ZIP code is the_zip_code!",
---        "Your driver's license/state ID card number is the_number!",
---        "Your voter identification number is the_number!",
---        "You are registered to vote in precinct number the_precinct_number!",
---        "Your eligibility to vote in this election is the_eligibility!",
---        "Your absentee ballot request status for this election is the_status!",
---        "Your absentee ballot return status for this election is the_status!",
---        "Your requirement to show your ID at the polling place is the_requirement!",
---        "Your address hiding for privacy reasons is the_hiding!",
---          "Your status for this election is the_status!",
---          "Your status at precinct the_precinct is the_status!"
---      constraint
---          "The first and last names must not be Void.",
---          "The date of birth must not be Void.",
---          "The street address must not be Void.",
---          "The municipality must not be Void.",
---          "The voter identification number must not be Void.",
---          "The status for this election must be 'active', 'suspended', 'voted in person', \
---         \ 'early voted in person', 'absentee voted in person', 'voted by mail', \
---         \ 'mail ballot not returned', 'out of county', 'provisional', 'wrong location', \
---         \ 'ineligible', 'unavailable', or another status as defined by the jurisdiction.",
---          "The status at each precinct must be either 'not checked in' or 'checked in'.",
---          "The status values that entitle a voter to an in-person ballot are \
---         \ jurisdiction-dependent."
+    feature
+      valid_election_statuses : SET[VALUE]
+        ensure Result = {Active, Suspended, Provisional, VotedInPerson, 
+                         EarlyVotedInPerson, AbsenteeVotedInPerson, 
+                         VotedByMail, VotedProvisionally, MailBallotNotReturned,
+                         Ineligible, Unavailable}
+        end
+        
+      voted_statuses : SET[VALUE]
+        ensure Result = {VotedInPerson, EarlyVotedInPerson, AbsenteeVotedInPerson,
+                         VotedByMail, VotedProvisionally}
+        end
+        
+      valid_precinct_statuses : SET[VALUE]
+        ensure Result = {NotSeen, NotGivenBallot, GivenBallot}
+        end
+        
+      -- query
+      
+      -- "What is your last name?"
+      last_name : STRING
+      
+      -- "What is your first name?"
+      first_name : STRING
+      
+      -- "What is your middle name?"
+      middle_name : STRING
+      
+      -- "What is the suffix of your name?"
+      name_suffix : STRING
+      
+      -- "What is your date of birth?"
+      date_of_birth : DATE
+      
+      -- "What is your street address?"
+      street_address : STRING
+      
+      -- "What is your municipality?"
+      municipality : STRING
+      
+      -- "What is your ZIP code?"
+      zip_code : STRING
+        
+      -- "What is your driver's license/state ID card number?"
+      dl_state_id : STRING
+      
+      -- "What is your voter identification number?"
+      voter_id : STRING
+      
+      -- "What is the precinct identifier of the precinct in which you are registered to vote?"
+      precinct_id : VALUE
+      
+      -- "Are you eligible to vote in this election?"
+      eligible_to_vote : BOOLEAN 
+      
+      -- "Have you voted in this election?"
+      voted : BOOLEAN
+        ensure Result = election_status member_of voted_statuses
+        end
+        
+      -- "Have you requested an absentee ballot for this election?"
+      requested_absentee_ballot : BOOLEAN
+        ensure Result = election_status member_of 
+                        {AbsenteeVotedInPerson, VotedByMail, MailBallotNotReturned}
+        end
+        
+      -- "Have you returned an absentee ballot for this election?"
+      returned_absentee_ballot : BOOLEAN 
+        ensure Result = election_status member_of
+                        {AbsenteeVotedInPerson, VotedByMail}
+        end
+        
+      -- "Are you required to show your ID at the polling place?"
+      id_required : BOOLEAN
+      
+      -- "Must your address be hidden for privacy reasons?"
+      address_privacy : BOOLEAN
+      
+      -- "What is your status for this election?"
+      election_status : VALUE
+        ensure Result member_of valid_election_statuses
+        end
+        
+      -- "What is your status at precinct the_precinct?"
+      precinct_status : VALUE
+        -> the_precinct : PRECINCT_DATA
+        ensure Result member_of valid_precinct_statuses
+        end
+        
+      -- "Does your status entitle you to an in-person ballot?"
+      eligible_for_ballot : BOOLEAN
+        -- ensure result is jurisdiction-dependent but correct
+        
+      -- command
+      
+      -- "Your status for this election is the_status!"
+      set_election_status : Void
+        -> the_status : VALUE
+        require the_status member_of valid_election_statuses
+        ensure delta election_status;
+               election_status = the_status
+        end
+      
+      -- "Your status at precinct the_precinct is the_status!"
+      set_precinct_status : Void
+        -> the_precinct : PRECINCT_DATA
+        -> the_status : VALUE
+        require the_status member_of valid_precinct_statuses
+        ensure delta precinct_status(the_precinct);
+               precinct_status(the_precinct) = the_status
+        end
+        
+      -- creation routine
+      create
+        -> the_last_name : STRING
+        -> the_first_name : STRING
+        -> the_middle_name : STRING 
+        -> the_name_suffix : STRING
+        -> the_date_of_birth : DATE
+        -> the_street_address : STRING
+        -> the_municipality : STRING
+        -> the_zip_code : STRING
+        -> the_dl_state_id : STRING
+        -> the_voter_id : STRING
+        -> the_precinct_id : VALUE
+        -> the_id_required : BOOLEAN 
+        -> the_address_privacy : BOOLEAN
+        -> the_election_status : VALUE
+        require the_last_name /= Void; -- note that names can be the empty string
+                the_first_name /= Void;
+                the_middle_name /= Void;
+                the_name_suffix /= Void;
+                the_date_of_birth /= Void;
+                the_street_address /= Void;
+                the_municipality /= Void;
+                the_zip_code /= Void;
+                the_dl_state_id /= Void;
+                the_voter_id /= Void;
+                the_precinct_id /= Void;
+                the_election_status member_of valid_election_statuses
+        ensure last_name = the_last_name;
+               first_name = the_first_name;
+               middle_name = the_middle_name;
+               name_suffix = the_name_suffix;
+               date_of_birth = the_date_of_birth;
+               street_address = the_street_address;
+               municipality = the_municipality;
+               zip_code = the_zip_code;
+               dl_state_id = the_dl_state_id;
+               voter_id = the_voter_id;
+               precinct_id = the_precinct_id;
+               election_status = the_election_status;
+               for_all p : PRECINCT_DATA it_holds precinct_status(p) = NotSeen
+        end
+    end
     
     class WORKER_DATA
       feature
@@ -346,7 +758,7 @@ component
         ssn : STRING
         
         -- What shifts have you worked?
-        shifts : SET[WORKER_SHIFT]
+        shifts : SEQUENCE[WORKER_SHIFT]
         
         -- How many total hours have you worked?
         hours : NUMERIC

@@ -5,7 +5,7 @@
 -- Cluster COMMUNICATION
 -- ===================================================================
 
-class_chart ADDRESS
+class_chart INTERNET_ADDRESS
   explanation 
     "The address of a communicator on the network."
   query

@@ -67,7 +67,7 @@ class_chart SCANNER
     "A device that reads and decodes a physical data encoding (bar code, \
    \ magnetic strip)."
   query
-    "What is the data encoded on the_physical_token?"
+    "What is the data encoded on the_token?"
 end
 
 class_chart STATION 
@@ -79,17 +79,18 @@ class_chart STATION
     "What is your communicator?",
     "What is your data store?",
     "What is your logger?",
-    "What is your precinct?",
+    "What is your precinct information?",
+    "What is the master password for this polling place?",
     "What stations are your peers?",
     "What stations exist on the local network?",
     "What station is the local manager?",
+    "Is a local manager election in progress?",
     "What voter data matches the_criteria?",
     "What poll worker data matches the_criteria?",
-    "How many voters have attempted to check in at this station?",
+    "How many voters have checked in at this station?",
     "What are the voter data for voters who have checked in at this station?",
     "How many ballots have been distributed by this station?",
-    "What is the address of the polling place for the_precinct?",
-    "Is the_string the master password for this polling place?",
+    "What is the polling place information for the_precinct?",
     "Are the polls open?"
   command
     "Your identifier is the_identifier!",
@@ -100,6 +101,7 @@ class_chart STATION
     "Your precinct is the_precinct!",
     "Update the peers and stations on the local network!",
     "the_station is the local manager!",
+    "Start a local manager election!",
     "Exchange public keys with the_station!",
     "Remove the_station as a peer!",
     "Announce to all peers that the_station has been removed as a peer!",
@@ -111,29 +113,22 @@ class_chart STATION
     "Announce to all peers that the polls have been closed!",
     "Promote the_station to local manager!",
     "Announce to all peers that the_station has been promoted to manager!",
-    "Attempt to check the_voter in at this station!",
-    "Distribute a ballot to the_voter!",
-    "Attempt to update data for the_voter!",
-    "the_poll_worker is starting a shift now!",
-    "the_poll_worker is finishing a shift now!"
+    "Attempt to check the_voter in!",
+    "Distribute a ballot to the_voter!"
   constraint
     "All station identifiers are unique.",
     "A station's communicator, data store, logger, and precinct are non-Void.",
     "The master password for a polling place is non-Void.",
-    "The local manager is non-Void.",
-    "If there are no peers, this station is the local manager.",
     "To announce to all peers, or to promote a station to local manager, a \
    \ station must be the local manager.",
-    "Only voters with status 'not checked in' at this station's precinct may \
+    "Only voters with status 'not seen' at this station's precinct may \
    \ be checked in.",
     "Once a voter has been checked in, their status at this station's precinct \
-   \ must be 'checked in'.",
+   \ must be 'given ballot' or 'not given ballot'.",
     "Only voters with status that entitles them to an in-person ballot may be \
    \ given a ballot.",
     "Once a voter is given a ballot, their status must reflect that they have \
-   \ been given a ballot.",
-    "Only a poll worker who has started a shift may finish a shift.",
-    "When a poll worker starts or finishes a shift, their data is updated appropriately."
+   \ been given a ballot."
 end
 
 class_chart STATION_UI
@@ -142,20 +137,25 @@ class_chart STATION_UI
    \ triggered by user interface actions on the part of the user and by actions on \
    \ the part of the station (in response to remote messages or prompted by local \
    \ computation."
+  query
+    "What is a report of the_type?",
   command
     "Your station is the_station!",
     "Your scanner is the_scanner!",
-    "Make your station the local manager!",
-    "Make your station wait for a local manager!",
+    "Create a local manager!",
+    "Create a station that waits for a local manager!",
     "Make the_station the local manager!",
     "Attempt to check in the_voter!",
     "Open the polls!",
     "Close the polls!",
     "Shut down your station for the_reason!",
-    "Generate a report of the_type!"
+    "the_poll_worker is starting a shift now!",
+    "the_poll_worker is finishing a shift now!"
   constraint
     "Only the UI for the local manager may make another station the local manager, \
-   \ open the polls, or close the polls."
+   \ open the polls, or close the polls.",
+    "Only a poll worker who has started a shift may finish a shift.",
+    "When a poll worker starts or finishes a shift, their data is updated appropriately."
 end
 
 class_chart VOTER_DATA
@@ -174,13 +174,15 @@ class_chart VOTER_DATA
     "What is your voter identification number?",
     "What is the precinct identifier of the precinct in which you are registered to vote?",
     "Are you eligible to vote in this election?",
+    "Have you voted in this election?",
     "Have you requested an absentee ballot for this election?",
     "Have you returned an absentee ballot for this election?",
     "Are you required to show your ID at the polling place?",
     "Must your address be hidden for privacy reasons?",
     "What is your status for this election?",
     "What is your status at precinct the_precinct?",
-    "Does your status entitle you to an in-person ballot?"
+    "Does your status entitle you to a ballot at a polling place?",
+    "Have you voted in this election?"
   command
     "Your last name is the_name!",
     "Your first name is the_name!",
@@ -208,11 +210,14 @@ class_chart VOTER_DATA
     "The voter identification number must not be Void.",
     "The status for this election must be 'active', 'suspended', 'voted in person', \
    \ 'early voted in person', 'absentee voted in person', 'voted by mail', \
-   \ 'mail ballot not returned', 'out of county', 'provisional', 'wrong location', \
-   \ 'ineligible', 'unavailable', or another status as defined by the jurisdiction.",
-    "The status at each precinct must be either 'not checked in' or 'checked in'.",
+   \ 'mail ballot not returned', 'provisional', 'ineligible', 'unavailable', \
+   \ or another status as defined by the jurisdiction.",
+    "The status at each precinct must be either 'not seen', 'given ballot', or \
+   \ 'not given ballot'.",
     "The status values that entitle a voter to an in-person ballot are \
-   \ jurisdiction-dependent."
+   \ jurisdiction-dependent.",
+    "A voter can have status 'voted in person' only if, at some precinct, \
+   \ they have the status 'given ballot'."
 end
 
 class_chart WORKER_DATA
