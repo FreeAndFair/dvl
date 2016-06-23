@@ -186,8 +186,10 @@ namespace Aegis_DVL.Logging {
     /// </param>
     private void Dispose(bool disposing) {
       _isDisposed = true;
-      _db.SaveChanges();
-      if (disposing) _db.Dispose();
+      if (_db != null) {
+        _db.SaveChanges();
+        if (disposing) _db.Dispose();
+      }
     }
 
     #endregion

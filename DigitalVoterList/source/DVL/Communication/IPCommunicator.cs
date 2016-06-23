@@ -18,6 +18,7 @@ namespace Aegis_DVL.Communication
     private static readonly uint IOC_VENDOR = 0x18000000;
     protected static readonly uint SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
 
+    private CancellationTokenSource _cancel = new CancellationTokenSource();
     private BlockingCollection<ICommand> _incomingQueue;
     private BlockingCollection<Tuple<IPEndPoint, ICommand, int>> _outgoingQueue;
     private int _maxTries = 5;
@@ -31,7 +32,8 @@ namespace Aegis_DVL.Communication
 
     protected TcpListener TcpListener;
     protected Socket UdpSocket;
-    protected int LocalPort; protected readonly Dictionary<int, string> StationNames = new Dictionary<int, string>();
+    protected int LocalPort; 
+    protected readonly Dictionary<int, string> StationNames = new Dictionary<int, string>();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ICommunicator"/> class. 
@@ -167,7 +169,7 @@ namespace Aegis_DVL.Communication
       byte[] buffer = new byte[32];
       byte[] portBytes = System.Text.Encoding.ASCII.GetBytes(Parent.Address.Port.ToString());
       EndPoint server = new IPEndPoint(IPAddress.Any, 0);
-      while (true) {
+      while (!_cancel.IsCancellationRequested) {
         int remotePort = 0;
         try {
           int length = UdpSocket.ReceiveFrom(buffer, ref server);
@@ -180,24 +182,26 @@ namespace Aegis_DVL.Communication
             }
             continue;
           } else {
-            Console.WriteLine("pinged by port " + remotePort);
+            Console.WriteLine("pinged by " + ((IPEndPoint) server).Address.ToString() + ":" + remotePort);
           }
         } catch (SocketException e) {
-          // the socket was closed, or some other problem happened that we can't survive
-          if (Parent.Logger != null)
-          {
-            Parent.Logger.Log("Ping listener died with exception " + e, Level.Info);
+          if (e.SocketErrorCode == SocketError.TimedOut) {
+            break;
+          } else {
+            // the socket was closed, or some other problem happened that we can't survive
+            if (Parent.Logger != null)
+            {
+              Parent.Logger.Log("Ping listener died with exception " + e, Level.Info);
+            }
+            else
+            {
+              Console.WriteLine("Ping listener died with exception " + e);
+            } 
+            return;
           }
-          else
-          {
-            Console.WriteLine("Ping listener died with exception " + e);
-          } 
-          return;
-        }
-        if (remotePort == 0) {
         }
         try {
-          UdpSocket.SendTo(portBytes, new IPEndPoint(IPAddress.Loopback, remotePort));
+          UdpSocket.SendTo(portBytes, new IPEndPoint(((IPEndPoint) server).Address, remotePort));
         } catch (SocketException e) {
           if (Parent.Logger != null)
           {
@@ -216,7 +220,7 @@ namespace Aegis_DVL.Communication
         throw new Exception("Local endpoint has not yet been constructed.");
       }
 
-      while (true) {
+      while (!_cancel.IsCancellationRequested) {
         try {
           TcpClient client = TcpListener.AcceptTcpClient();
           if (Parent.Logger != null) {
@@ -249,8 +253,7 @@ namespace Aegis_DVL.Communication
       IPEndPoint clientEndpoint = null;
       try {
         using (NetworkStream stream = client.GetStream()) {
-          IPEndPoint origEndpoint = (IPEndPoint)client.Client.RemoteEndPoint;
-          clientEndpoint = new IPEndPoint(IPAddress.Loopback, origEndpoint.Port);
+          clientEndpoint = (IPEndPoint)client.Client.RemoteEndPoint;
           if (Parent.Logger != null) {
             Parent.Logger.Log("Handling connection from " + clientEndpoint, Level.Info);
           } else {
@@ -340,9 +343,9 @@ namespace Aegis_DVL.Communication
       while (running) {
         ICommand command = null;
         try {
-          command = _incomingQueue.Take();
+          command = _incomingQueue.Take(_cancel.Token);
         } catch (Exception e) {
-          // the only way this can happen is if something has gone wrong
+          // the only way this can happen is if something has gone wrong or we were cancelled
           if (Parent.Logger != null)
           {
             Parent.Logger.Log("Dequeue thread died with exception " + e, Level.Info);
@@ -360,8 +363,18 @@ namespace Aegis_DVL.Communication
     }
 
     public void MessageSendThread() {
-      while (true) {
-        Tuple<IPEndPoint, ICommand, int> message = _outgoingQueue.Take();
+      while (!_cancel.IsCancellationRequested || _outgoingQueue.Count > 0) {
+        Tuple<IPEndPoint, ICommand, int> message;
+        try {
+          message = _outgoingQueue.Take(_cancel.Token);
+        } catch (Exception e) {
+          // we still send messages until we are done
+          if (_outgoingQueue.Count > 0) {
+            message = _outgoingQueue.Take();
+          } else {
+            break;
+          }
+        }
         IPEndPoint target = message.Item1;
         ICommand command = message.Item2;
         int tries = message.Item3;
@@ -462,9 +475,7 @@ namespace Aegis_DVL.Communication
 
     public void StopThreads() {
       if (ThreadsStarted) {
-        _receiveThread.Abort();
-        _dequeueThread.Abort();
-        _pingThread.Abort();
+        _cancel.Cancel();
 
         // don't abort the send thread until the sending queue is empty
         _outgoingQueue.CompleteAdding();
@@ -477,13 +488,17 @@ namespace Aegis_DVL.Communication
             Console.WriteLine("Waiting for " + _outgoingQueue.Count + " messages to be sent.");
           }          
         }
-        _sendThread.Abort();
 
         DestroyLocalEndPoint();
+        _receiveThread.Join();
         _receiveThread = null;
+        _dequeueThread.Join();
         _dequeueThread = null;
+        _sendThread.Join();
         _sendThread = null;
+        _pingThread.Join();
         _pingThread = null;
+        _cancel = new CancellationTokenSource();
       }
 
       ThreadsStarted = false;

@@ -17,6 +17,7 @@ namespace Aegis_DVL.Communication {
   using System.IO;
   using System.Linq;
   using System.Net;
+  using System.Net.NetworkInformation;
   using System.Net.Sockets;
   using System.Threading;
   using System.Threading.Tasks;
@@ -64,6 +65,39 @@ namespace Aegis_DVL.Communication {
       }
     }
 
+    private string[] GetAllLocalIPv4() {
+      List<string> ipAddrList = new List<string>();
+      foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces()) {
+        if (item.OperationalStatus == OperationalStatus.Up) {
+          foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses) {
+            if (ip.Address.AddressFamily == AddressFamily.InterNetwork) {
+              string ipaddr = ip.Address.ToString();
+              if (!ipaddr.Equals("127.0.0.1")) {
+                ipAddrList.Add(ip.Address.ToString());
+              }
+            }
+          }
+        }
+      }
+      return ipAddrList.ToArray();
+    }
+
+    private string GetMyLocalAddress() {
+      string[] myips = GetAllLocalIPv4();
+      Console.WriteLine("my ip addresses: " + string.Join(" ", myips));
+      string myip = null;
+      foreach (string m in myips) {
+        myip = m;
+        var bytes = IPAddress.Parse(myip).GetAddressBytes();
+        if ((bytes[0] == 10) ||
+            ((bytes[0] == 192) && bytes[1] == 168) ||
+            ((bytes[0] == 172) && ((bytes[1] & 0xf0) == 16))) {
+          break;
+        }
+      }
+      Console.WriteLine("using address " + myip);
+      return myip;
+    }
     #endregion
 
     // TODO: review for problems with complexity
@@ -77,41 +111,45 @@ namespace Aegis_DVL.Communication {
     /// </returns>
     [Pure] public override IEnumerable<IPEndPoint> DiscoverPeers() {
       var cdEvent = new CountdownEvent(1);
-      string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
-                    ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-      string myipprefix = myip.Substring(0, myip.LastIndexOf('.') + 1);
-      Console.WriteLine("my ip address is " + myip);
+      string myip = GetMyLocalAddress();
 
       // narrow down possible targets
       var potentials = new List<IPEndPoint>();
-
+      
+      string myipprefix = myip.Substring(0, myip.LastIndexOf('.') + 1);
       using (var localSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)) {
         try {
           bool done = false;
           byte[] buffer = new byte[32];
+          localSocket.Bind(new IPEndPoint(IPAddress.Any, 0));
           IPEndPoint server = new IPEndPoint(IPAddress.Any, 0);
           EndPoint serverRemote = (EndPoint) server;
           localSocket.ReceiveTimeout = 2000;
-          localSocket.SendTo(new byte[] { 0 }, new IPEndPoint(IPAddress.Parse(myipprefix + "255"), 62000));
+//            Console.WriteLine("sending broadcast packet to " + myipprefix + "255:62000");
+//            localSocket.SendTo(new byte[] { 0 }, new IPEndPoint(IPAddress.Parse(myipprefix + "255"), 62000));
+          byte[] port_bytes = System.Text.Encoding.ASCII.GetBytes(((IPEndPoint) localSocket.LocalEndPoint).Port.ToString());
+          Console.WriteLine("Sending individual packets to all IPs in " + myipprefix + "0/24");
+          for (int i = 1; i < 255; i++) {
+            localSocket.SendTo(port_bytes, new IPEndPoint(IPAddress.Parse(myipprefix + i), 62000));
+          }
           while (!done) {
             try {
               int length = localSocket.ReceiveFrom(buffer, ref serverRemote);
-              IPEndPoint responder = new IPEndPoint(IPAddress.Parse(System.Text.Encoding.ASCII.GetString(buffer, 0, length)), 62000);
+              IPEndPoint responder = new IPEndPoint(((IPEndPoint) serverRemote).Address, 62000);
               potentials.Add(responder);
               Console.WriteLine("got response from " + responder.Address);
             } catch (Exception) {
+              Console.WriteLine("no more responses");
               done = true;
             }
           }
-        } catch (Exception) {
-          // something went wrong so fall back to the old way of doing things
-          for (int i = 1; i < 255; i++) {
-            potentials.Add(new IPEndPoint(IPAddress.Parse(myipprefix + i), 62000));
-          }
+        } catch (Exception e) {
+          Console.WriteLine("Exception when seaching for peers:" + e);
         }
       }
 
       potentials.Remove(new IPEndPoint(IPAddress.Parse(myip), 62000));
+      
       Console.WriteLine("Found a total of " + potentials.Count() + " possible stations.");
       return potentials;
     }
@@ -125,9 +163,15 @@ namespace Aegis_DVL.Communication {
     /// The IPEndPoint representing the local end point.
     /// </returns>
     public override IPEndPoint GetLocalEndPoint(int port) {
+      LocalPort = port;
+      string myip = GetMyLocalAddress();
+      if (Parent.Logger != null) {
+        Parent.Logger.Log("Creating network endpoint at " + myip + ":" + LocalPort, Level.Info);
+      } else {
+        Console.WriteLine("Creating network endpoint at " + myip + ":" + LocalPort);
+      }
       IPEndPoint ipep = new IPEndPoint(
-          Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(ip =>
-            ip.AddressFamily == AddressFamily.InterNetwork),
+          IPAddress.Parse(myip),
           port);
       try {
         if (TcpListener == null) {
