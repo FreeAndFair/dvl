@@ -41,6 +41,8 @@ namespace UI.ManagerWindows {
     /// </summary>
     private readonly UiHandler _ui;
 
+    private readonly bool _local;
+
     #endregion
 
     #region Constructors and Destructors
@@ -55,10 +57,11 @@ namespace UI.ManagerWindows {
     /// <param name="ui">
     /// the UIHandler for this UI
     /// </param>
-    public DataLoadPage(Frame parent, UiHandler ui) {
+    public DataLoadPage(Frame parent, UiHandler ui, bool local = false) {
       InitializeComponent();
       _parent = parent;
       _ui = ui;
+      _local = local;
       LoadingLabel.Visibility = System.Windows.Visibility.Hidden;
     }
 
@@ -179,7 +182,7 @@ namespace UI.ManagerWindows {
       t.Name = "Blinker";
       t.SetApartmentState(ApartmentState.STA);
       t.Start();
-      if (_ui.ImportData(filePath, keyPath)) {
+      if (_ui.ImportData(filePath, keyPath, _local)) {
         Dispatcher.Invoke(
           System.Windows.Threading.DispatcherPriority.Normal,
           new Action(delegate {

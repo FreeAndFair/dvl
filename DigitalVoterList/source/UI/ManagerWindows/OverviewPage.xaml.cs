@@ -214,7 +214,7 @@ namespace UI.ManagerWindows {
     private void BackButtonClick(object sender, RoutedEventArgs e) {
       if (_activeUpdateThread != null) _activeUpdateThread.Abort();
 
-      _parent.Navigate(new DataLoadPage(_parent, _ui));
+      _parent.Navigate(new TypeChoicePage(_parent, _ui));
       _ui.DisposeStation();
       _ui.OverviewPage = null;
     }

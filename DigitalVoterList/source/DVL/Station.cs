@@ -106,10 +106,11 @@ namespace Aegis_DVL {
     public Station(IDvlUi ui, 
                    AsymmetricKey voterDataEncryptionKey, 
                    string masterPassword, 
+                   bool local = false,
                    int port = 62000, 
                    string dbPrefix = "Voters", 
                    string logPrefix = "Log")
-      : this(ui, port, dbPrefix) {
+      : this(ui, local, port, dbPrefix) {
       Contract.Requires(ui != null);
       Contract.Requires(masterPassword != null);
       Contract.Requires(dbPrefix != null);
@@ -150,12 +151,14 @@ namespace Aegis_DVL {
     public Station(IDvlUi ui, 
                    string keyPath, 
                    string masterPassword, 
+                   bool local,
                    int port = 62000, 
                    string dbPrefix = "Voters", 
                    string logPrefix = "Log")
       : this(ui, 
         new AsymmetricKey(Bytes.FromFile(keyPath).ToKey()), 
         masterPassword, 
+        local,
         port, 
         dbPrefix, 
         logPrefix) {
@@ -180,6 +183,7 @@ namespace Aegis_DVL {
     /// The prefix of the voter database prefix.
     /// </param>
     public Station(IDvlUi ui, 
+                   bool local = false,
                    int port = 62000, 
                    string dbPrefix = "Voters") {
       Contract.Requires(ui != null);
@@ -188,7 +192,11 @@ namespace Aegis_DVL {
       Peers = new SortedDictionary<IPEndPoint, AsymmetricKey>(new IPEndPointComparer());
       PeerStatuses = new SortedDictionary<IPEndPoint, StationStatus>(new IPEndPointComparer());
       ElectionInProgress = false;
-      Communicator = new InternetCommunicator(this);
+      if (local) {
+        Communicator = new LocalhostCommunicator(this);
+      } else {
+        Communicator = new InternetCommunicator(this);
+      }
       Address = Communicator.GetLocalEndPoint(port);
       _dbPrefix = dbPrefix;
       UI = ui;

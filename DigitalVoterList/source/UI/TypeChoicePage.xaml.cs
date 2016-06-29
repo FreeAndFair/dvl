@@ -99,7 +99,13 @@ namespace UI {
     /// <param name="e">
     /// auto generated
     /// </param>
-    private void ManagerButtonClick(object sender, RoutedEventArgs e) { _parent.Navigate(new MasterPasswordPage(_parent, _ui)); }
+    private void ManagerButtonClick(object sender, RoutedEventArgs e) {
+      bool local = false;
+      if (((Button)e.Source).Name.StartsWith("Local")) {
+        local = true;
+      }
+      _parent.Navigate(new MasterPasswordPage(_parent, _ui, local)); 
+    }
 
     /// <summary>
     /// Called when the station option is chosen
@@ -111,7 +117,11 @@ namespace UI {
     /// auto generated
     /// </param>
     private void StationButtonClick(object sender, RoutedEventArgs e) {
-      _ui.CreateNewStation();
+      bool local = false;
+      if (((Button)e.Source).Name.StartsWith("Local")) {
+        local = true;
+      }
+      _ui.CreateNewStation(local);
       _parent.Navigate(new WaitingForManagerPage(_parent, _ui));
     }
 

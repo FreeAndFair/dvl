@@ -128,7 +128,7 @@ namespace UI {
     /// <summary>
     /// Creates a new station and makes it start listening
     /// </summary>
-    public void CreateNewStation() { _station = new Station(this); }
+    public void CreateNewStation(bool local = false) { _station = new Station(this, local); }
 
     /// <summary>
     /// Gets he IP adresses of the machines in the local network running this application
@@ -342,7 +342,7 @@ namespace UI {
     /// <returns>
     /// whether or not the import was succesful
     /// </returns>
-    public bool ImportData(string voterDataPath, string precinctDataPath) {
+    public bool ImportData(string voterDataPath, string precinctDataPath, bool local = false) {
       AsymmetricKey key = new AsymmetricKey(
         KeyUtil.ToKey(new byte[] {0x30, 0x81, 0x9F, 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 
           0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x81, 0x8D, 0x00, 0x30, 0x81, 
@@ -356,7 +356,7 @@ namespace UI {
           0xDA, 0xD6, 0x80, 0x72, 0x93, 0xE1, 0x7D, 0x2E, 0xB7, 0xFD, 0xC3, 0x40, 0x0A, 0xAE, 
           0x52, 0x44, 0xC1, 0x3D, 0x7F, 0x6A, 0x77, 0x59, 0x72, 0xA4, 0xD1, 0x77, 0x93, 0x17, 
           0x1F, 0xAB, 0x99, 0xB1, 0x26, 0x81, 0xD5, 0x02, 0x03, 0x01, 0x00, 0x01 }));
-      _station = _station ?? new Station(this, key, _masterPassword);
+      _station = _station ?? new Station(this, key, _masterPassword, local);
 
       try {
         return _station.ImportData(ImportVoterData(voterDataPath), ImportPrecinctData(precinctDataPath));
