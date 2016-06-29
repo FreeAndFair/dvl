@@ -82,21 +82,33 @@ namespace Aegis_DVL.Communication {
       return ipAddrList.ToArray();
     }
 
+    /// <summary>
+    /// Gets the local IP address. This method prefers IP addresses on unroutable networks to
+    /// IP addresses on routable networks, and will use the first such address it finds in 
+    /// lexicographic order; if it finds no unroutable address, it will use the first
+    /// routable address it finds in lexicographic order.
+    /// </summary>
+    /// <returns>The local IP address.</returns>
     private string GetMyLocalAddress() {
       string[] myips = GetAllLocalIPv4();
       Console.WriteLine("my ip addresses: " + string.Join(" ", myips));
       string myip = null;
+      string chosen = null;
+      Array.Sort(myips);
       foreach (string m in myips) {
-        myip = m;
-        var bytes = IPAddress.Parse(myip).GetAddressBytes();
+        var bytes = IPAddress.Parse(m).GetAddressBytes();
         if ((bytes[0] == 10) ||
             ((bytes[0] == 192) && bytes[1] == 168) ||
             ((bytes[0] == 172) && ((bytes[1] & 0xf0) == 16))) {
+          chosen = m;
           break;
         }
       }
-      Console.WriteLine("using address " + myip);
-      return myip;
+      if (chosen == null) {
+        chosen = myips[0];
+      }
+      Console.WriteLine("using address " + chosen);
+      return chosen;
     }
     #endregion
 
