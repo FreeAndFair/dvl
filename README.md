@@ -2,7 +2,7 @@ The Digital Poll Book system
 ===
 
 This project is part of the Verifiable Elections software
-infrastructure, developed by Verified Elections, Inc. It is a *Digital
+infrastructure, developed by Free & Fair. It is a *Digital
 Poll Book System*, consisting of two main components: (1) a data
 management application, which maintains voter lists, candidate lists,
 and ballot design information and provisions digital poll books before
