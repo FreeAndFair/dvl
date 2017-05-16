@@ -1,11 +1,14 @@
 The Digital Poll Book System
 ===
 
-*DVL* or the Digital Voter List is a part of the Verifiable Elections software suite of products, developed by Verifiable Elections, Inc. It is a *Digital Poll Book System*, consisting of two main components: (1) a data management application that imports voter and ballot data,provisions digital poll books before and during Election Day, and
-outputs voter roll updates after Election Day; and (2) a digital poll
-book application that runs on commodity laptop or tablet devices to
-enable voters to be checked in and presented with the appropriate
-ballots on Election Day.
+This project is part of the Verifiable Elections software
+infrastructure, developed by Free & Fair. It is a *Digital
+Poll Book System*, consisting of two main components: (1) a data
+management application, which maintains voter lists, candidate lists,
+and ballot design information and provisions digital poll books before
+and during Election Day; and (2) a digital poll book application that
+runs on commodity laptop or tablet devices to enable poll workers to
+check in voters on Election Day.
 
 Correctness of these software components, and security guarantees with
 respect to the voter data they handle, are critical aspects of this
