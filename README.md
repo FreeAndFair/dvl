@@ -31,8 +31,9 @@ The *DVL*, including all prototypes and the current system, has been
 developed using the Trust-by-Design (TBD) software engineering
 methodology.
 
-The TBD methodology is documented in several papers published by Joe
-Kiniry and his coauthors, available via http://www.kindsoftware.com/.
+The methodology used to develop the DVL is documented in several
+papers published by Joe Kiniry and his coauthors, available via
+[the-now-archived KindSoftware Research Group website](https://web.archive.org/web/20240726051543/https://www.kindsoftware.com/).
 
 In general, a system is comprised of:
 
